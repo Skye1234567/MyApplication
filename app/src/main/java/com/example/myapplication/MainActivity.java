@@ -1,5 +1,6 @@
 package com.example.myapplication;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -27,6 +28,9 @@ public class MainActivity extends AppCompatActivity {
                 String name = id.getText().toString();
                 FirebaseDatabase fb = FirebaseDatabase.getInstance();
                 fb.getReference("Players").child(name).setValue(new Player(name));
+                Intent intent = new Intent(getBaseContext(), Manager_Instructions.class);
+                intent.putExtra("PLAYER_ID", name);
+                startActivity(intent);
 
             }
         });
