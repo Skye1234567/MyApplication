@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
                 EditText id = (EditText) findViewById(R.id.name);
                 String name = id.getText().toString();
                 FirebaseDatabase fb = FirebaseDatabase.getInstance();
-                fb.getReference("Players").child(name).setValue(new Player(name));
+                fb.getReference().child("players").child(name).setValue(new Player(name));
                 Intent intent = new Intent(getBaseContext(), Manager_Instructions.class);
                 intent.putExtra("PLAYER_ID", name);
                 startActivity(intent);
