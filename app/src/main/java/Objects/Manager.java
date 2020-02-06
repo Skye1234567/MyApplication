@@ -3,9 +3,47 @@ package Objects;
 
 public class Manager extends Player {
     private Integer salary;
-    private boolean good_performance;
-    private boolean dividend;
-    private boolean audit;
+
+    private int performance;
+    private int profit;
+
+    public int getProfit() {
+        return profit;
+    }
+
+    public void setProfit(int profit) {
+        this.profit = profit;
+    }
+
+    public int getReport_performance() {
+        return report_performance;
+    }
+
+    public void setReport_performance(int report_performance) {
+        this.report_performance = report_performance;
+    }
+
+    public int getAudit_report() {
+        return audit_report;
+    }
+
+    public void setAudit_report(int audit_report) {
+        this.audit_report = audit_report;
+    }
+
+    public int getAccept_audit() {
+        return accept_audit;
+    }
+
+    public void setAccept_audit(int accept_audit) {
+        this.accept_audit = accept_audit;
+    }
+
+    private int report_performance;
+    private int report_dividend;
+    private int audit_choice;
+    private int audit_report;
+    private int accept_audit;
     private int num_shares;
 
     public int getNum_shares() {
@@ -19,7 +57,8 @@ public class Manager extends Player {
     public Manager(String ID) {
         super(ID);
         super.setType("M");
-        this.good_performance = true;
+
+
 
 
     }
@@ -32,27 +71,27 @@ public class Manager extends Player {
         this.salary = salary;
     }
 
-    public boolean isGood_performance() {
-        return good_performance;
+    public int getPerformance() {
+        return performance;
     }
 
-    public void setGood_performance(boolean good_performance) {
-        this.good_performance = good_performance;
+    public void setPerformance(int performance) {
+        this.performance = performance;
     }
 
-    public boolean isDividend() {
-        return dividend;
+    public int getReport_dividend() {
+        return report_dividend;
     }
 
-    public void setDividend(boolean dividend) {
-        this.dividend = dividend;
+    public void setReport_dividend(int report_dividend) {
+        this.report_dividend = report_dividend;
     }
 
-    public boolean isAudit() {
-        return audit;
+    public int getAudit_choice() {
+        return audit_choice;
     }
 
-    public void setAudit(boolean audit) {
-        this.audit = audit;
+    public void setAudit_choice(int audit_choice) {
+        this.audit_choice = audit_choice;
     }
 }

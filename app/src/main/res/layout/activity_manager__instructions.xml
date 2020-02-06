@@ -124,16 +124,17 @@
     </TableLayout>
 
     <TextView
+        android:id="@+id/question"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/question"
-        app:layout_constraintTop_toBottomOf="@id/info_company"
-       app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/yes_audit"
+        android:gravity="right|center"
         android:text="Would you like to pay to generate an independent auditor's report?"
         android:textSize="20dp"
-        android:gravity="right|center"/>
+        app:layout_constraintBottom_toTopOf="@id/yes_audit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/info_company" />
 
     <Button
         android:id="@+id/yes_audit"
