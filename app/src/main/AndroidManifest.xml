@@ -9,7 +9,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Wait_Page"></activity>
+        <activity
+            android:name=".Login_Admin"
+            android:label="@string/title_activity_login__admin"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".Admin_Sign_in"
+            android:label="@string/title_activity_admin__sign_in"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".Wait_Page" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
