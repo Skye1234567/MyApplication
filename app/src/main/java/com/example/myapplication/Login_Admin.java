@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 
 
@@ -18,7 +19,8 @@ public class Login_Admin extends AppCompatActivity {
         setContentView(R.layout.activity_login__admin);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        FirebaseDatabase db;
+
+        FirebaseAuth admin_Auth;
 
 
 
