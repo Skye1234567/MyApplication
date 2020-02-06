@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
            public void onClick(View v) {
 
                //put admin auth stuff
-               Intent intent = new Intent(getBaseContext(), Manager_Instructions.class);
+               Intent intent = new Intent(getBaseContext(), Login_Admin.class);
         //intent.putExtra("PLAYER_ID", name);
         //startActivity(intent);
                }});
@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //put stuff for player auth
+                Intent intent = new Intent(getBaseContext(), Player_Sign_in.class);
             }
         });
 

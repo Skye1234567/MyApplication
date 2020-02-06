@@ -2,4 +2,5 @@
     <string name="app_name">My Application</string>
     <string name="title_activity_admin__sign_in">Admin_Sign_in</string>
     <string name="title_activity_login__admin">Login_Admin</string>
+    <string name="title_activity_player__sign_in">Player_Sign_in</string>
 </resources>
