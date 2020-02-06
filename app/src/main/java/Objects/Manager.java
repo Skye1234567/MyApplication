@@ -15,6 +15,13 @@ public class Manager extends Player {
         this.profit = profit;
     }
 
+    void setAccept_audit(int accept_audit) {
+        this.accept_audit = accept_audit;
+    }
+
+    private int report_performance;
+    private int report_dividend;
+
     public int getReport_performance() {
         return report_performance;
     }
@@ -35,12 +42,7 @@ public class Manager extends Player {
         return accept_audit;
     }
 
-    public void setAccept_audit(int accept_audit) {
-        this.accept_audit = accept_audit;
-    }
 
-    private int report_performance;
-    private int report_dividend;
     private int audit_choice;
     private int audit_report;
     private int accept_audit;
