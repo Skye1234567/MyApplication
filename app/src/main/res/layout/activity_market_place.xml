@@ -6,4 +6,77 @@
     android:layout_height="match_parent"
     tools:context=".MarketPlace">
 
+
+
+
+
+    <LinearLayout
+        android:id="@+id/stock_exchange"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        app:layout_constraintEnd_toStartOf="@id/investor_account"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:orientation="vertical">
+
+        <TextView
+
+            android:text="Order Stock"
+            android:layout_gravity="left"
+            android:padding="3dip"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:textSize="40dp"
+            android:textAllCaps ="true"
+            android:textColor="@color/colorPrimaryDark"
+            />
+
+        
+
+        <Spinner
+            android:id="@+id/spinner1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:entries="@array/buy_or_sell"
+            android:prompt="Select Buy or Sell"/>
+
+
+
+    </LinearLayout>
+
+
+
+
+
+
+
+
+    <LinearLayout
+        android:id="@+id/investor_account"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/stock_exchange"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+
+        android:orientation="vertical"
+        >
+
+        <TextView
+        android:text="Account Details"
+        android:gravity="right"
+        android:padding="3dip"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:textAllCaps="true"
+            android:id="@+id/title_account"
+            android:textSize="40dp"
+            android:textColor="@color/colorPrimaryDark"/>
+    </LinearLayout>
+
+
+
+
 </android.support.constraint.ConstraintLayout>
