@@ -2,4 +2,5 @@
     <dimen name="fab_margin">16dp</dimen>
 
     <dimen name="textSizeTitle">40dp</dimen>
+    <dimen name="textSizeNormal">25dp</dimen>
 </resources>
