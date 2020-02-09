@@ -7,6 +7,7 @@
     tools:context=".MarketPlace">
 
     <LinearLayout
+
         android:orientation="vertical"
         android:id="@+id/company_report"
         android:layout_width="match_parent"
@@ -17,6 +18,46 @@
         app:layout_constraintTop_toBottomOf="@+id/stock_exchange"
 
         >
+        <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Company Report"
+        android:layout_gravity="center"
+        android:textAllCaps="true"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="@dimen/textSizeTitle"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Performance"
+            android:layout_gravity="start"
+            android:textAllCaps="true"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/textSizeNormal"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:textAllCaps="true"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/textSizeNormal"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Dividend"
+            android:layout_gravity="start"
+            android:textAllCaps="true"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/textSizeNormal"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:textAllCaps="true"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/textSizeNormal"/>
+
     </LinearLayout>
 
 
@@ -28,8 +69,7 @@
         app:layout_constraintBottom_toTopOf="@+id/company_report"
         app:layout_constraintEnd_toStartOf="@id/investor_account"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.147">
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
 
@@ -44,6 +84,7 @@
 
         <Spinner
             android:id="@+id/spinner_stocks"
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:entries="@array/stocks"
@@ -55,8 +96,29 @@
             android:layout_height="wrap_content"
             android:entries="@array/buy_or_sell"
             android:prompt="Select Buy or Sell" />
-
         <TextView
+            android:id="@+id/quantity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:padding="3dip"
+            android:text="Quantity"
+            android:textAllCaps="true"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/textSizeNormal"
+            />
+        <EditText
+            android:id="@+id/enter_number_of_stocks"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:padding="3dip"
+            android:textAllCaps="true"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/textSizeNormal"
+
+             />
+        <EditText
             android:id="@+id/money_sign"
 
             android:layout_width="match_parent"
@@ -66,12 +128,8 @@
             android:text="$"
             android:textAllCaps="true"
             android:textColor="@color/colorPrimaryDark"
-            android:textSize="@dimen/textSizeNormal" />
-
-        <EditText
-            android:id="@+id/bidding"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:textSize="@dimen/textSizeNormal"
+            android:visibility="invisible" />
 
 
     </LinearLayout>
@@ -87,7 +145,7 @@
         app:layout_constraintStart_toEndOf="@id/stock_exchange"
 
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.171">
+        app:layout_constraintVertical_bias="0.339">
 
         <TextView
             android:id="@+id/title_account"
@@ -98,7 +156,64 @@
             android:text="Account Details"
             android:textAllCaps="true"
             android:textColor="@color/colorPrimaryDark"
-            android:textSize="40dp" />
+            android:textSize="@dimen/textSizeTitle" />
+        <TextView
+            android:id="@+id/value_account"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:padding="3dip"
+            android:text="Value"
+            android:textAllCaps="true"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/textSizeNormal" />
+        <TextView
+            android:id="@+id/value_data"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:padding="3dip"
+            android:textAllCaps="true"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/textSizeNormal" />
+        <TextView
+            android:id="@+id/buying_power_account"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:padding="3dip"
+            android:text="Buying Power"
+            android:textAllCaps="true"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/textSizeNormal" />
+        <TextView
+            android:id="@+id/buying_power_value"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:padding="3dip"
+            android:textAllCaps="true"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/textSizeNormal" />
+        <TextView
+        android:id="@+id/cash_account"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="start"
+        android:padding="3dip"
+        android:text="Cash"
+        android:textAllCaps="true"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize= "@dimen/textSizeNormal" />
+        <TextView
+            android:id="@+id/cash_value"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:padding="3dip"
+            android:textAllCaps="true"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize= "@dimen/textSizeNormal" />
     </LinearLayout>
 
 
