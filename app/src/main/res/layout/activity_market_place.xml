@@ -191,25 +191,8 @@
             android:textAllCaps="true"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="@dimen/textSizeNormal" />
-        <TextView
-            android:id="@+id/buying_power_account"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="start"
-            android:padding="3dip"
-            android:text="Buying Power"
-            android:textAllCaps="true"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="@dimen/textSizeNormal" />
-        <TextView
-            android:id="@+id/buying_power_value"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="end"
-            android:padding="3dip"
-            android:textAllCaps="true"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="@dimen/textSizeNormal" />
+
+
         <TextView
         android:id="@+id/cash_account"
         android:layout_width="match_parent"

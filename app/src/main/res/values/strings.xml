@@ -3,6 +3,9 @@
     <string name="title_activity_admin__sign_in">Admin_Sign_in</string>
     <string name="title_activity_login__admin">Login_Admin</string>
     <string name="title_activity_player__sign_in">Player_Sign_in</string>
+    <string name="sign_in">Sign In</string>
+    <string name="sign_in_anon">Anonymous</string>
+
 
 
     <string-array name="buy_or_sell">
