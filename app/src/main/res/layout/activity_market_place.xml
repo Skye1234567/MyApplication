@@ -103,6 +103,7 @@
             android:layout_height="wrap_content"
             android:entries="@array/buy_or_sell"
             android:prompt="Select Buy or Sell" />
+
         <TextView
             android:id="@+id/quantity"
             android:layout_width="match_parent"
@@ -112,8 +113,8 @@
             android:text="Quantity"
             android:textAllCaps="true"
             android:textColor="@color/colorPrimaryDark"
-            android:textSize="@dimen/textSizeNormal"
-            />
+            android:textSize="@dimen/textSizeNormal" />
+
         <EditText
             android:id="@+id/enter_number_of_stocks"
             android:layout_width="match_parent"
@@ -124,7 +125,8 @@
             android:textColor="@color/colorPrimaryDark"
             android:textSize="@dimen/textSizeNormal"
 
-             />
+            />
+
         <EditText
             android:id="@+id/money_sign"
 
@@ -137,11 +139,12 @@
             android:textColor="@color/colorPrimaryDark"
             android:textSize="@dimen/textSizeNormal"
             android:visibility="invisible" />
+
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/textSizeNormal"
-            android:text="Place Order"/>
+            android:text="Place Order"
+            android:textSize="@dimen/textSizeNormal" />
 
 
     </LinearLayout>
