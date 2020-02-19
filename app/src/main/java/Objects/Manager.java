@@ -59,6 +59,7 @@ public class Manager extends Player {
     public Manager(String ID) {
         super(ID);
         super.setType("M");
+        setPerformance(1);
 
 
 

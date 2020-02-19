@@ -43,7 +43,7 @@ public class Market {
             float p_random = r.nextFloat();
             float pi_random = r.nextFloat();
             if (this.p<p_random){
-                m.setPerformance(false);
+                m.setPerformance(0);
                 if (pi_l<pi_random){
                     m.setSalary(lil_money);
                 }

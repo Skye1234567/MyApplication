@@ -17,10 +17,12 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
+import Objects.Market;
 import Objects.Player;
 
 public class Wait_Page extends AppCompatActivity {
     Integer num_participant_def;
+    Market Game_Market;
 
 
 
@@ -32,12 +34,13 @@ public class Wait_Page extends AppCompatActivity {
         Intent intent = getIntent();
         String player_id = intent.getStringExtra("player_id");
 
+
         DatabaseReference db = FirebaseDatabase.getInstance().getReference("player_list");
         Player current = new Player(player_id);
         db.child(player_id).setValue(current);
         DatabaseReference ref = FirebaseDatabase .getInstance().getReference("parameters").child("num_participants");
         updatePlayerCount(ref);
-        DatabaseReference reference_admin = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference reference_admin = FirebaseDatabase.getInstance().getReference("settings");
         wait_for_settings_data(reference_admin);
 
         boolean not_all_signed_in = true;
@@ -78,8 +81,24 @@ public class Wait_Page extends AppCompatActivity {
     }
 
 private void wait_for_settings_data(DatabaseReference r)
+
 {
-    //
+    Query get_settings = r;
+    r.addListenerForSingleValueEvent(new ValueEventListener() {
+        @Override
+        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+            for (  DataSnapshot child: dataSnapshot.getChildren()){
+                child.getKey();
+
+            }
+        }
+
+        @Override
+        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+        }
+    });
+
 }
 
 }
