@@ -6,6 +6,50 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Login_Admin">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:orientation="vertical"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="email"
+            android:textAllCaps="true"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/textSizeNormal"
+            />
+
+        <EditText
+            android:id="@+id/admin_email"
+            android:inputType="textPassword"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/textSizeNormal"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="password"
+            android:textAllCaps="true"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/textSizeNormal"
+            />
+
+        <EditText
+            android:id="@+id/admin_password"
+            android:inputType="textPassword"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/textSizeNormal"
+            />
+
+
+
+
+    </LinearLayout>
 
 
 
