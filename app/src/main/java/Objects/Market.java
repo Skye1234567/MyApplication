@@ -9,9 +9,31 @@ public class Market {
     private float p;
     private ArrayList<Manager> managers;
     private ArrayList<Investor> investors;
-    private int big_money;
-    private int lil_money;
+    private Integer big_money;
+    private Integer lil_money;
+
+    public float getPi_h() {
+        return pi_h;
+    }
+
+    public float getPi_l() {
+        return pi_l;
+    }
+
+    public float getP() {
+        return p;
+    }
+
     private  ArrayList<Share> shares;
+    private Integer num_players;
+
+    public Integer getNum_players() {
+        return num_players;
+    }
+
+    public void setNum_players(Integer num_players) {
+        this.num_players = num_players;
+    }
 
     public Market(float pi_h, float pi_l, float p) {
         this.pi_h = pi_h;

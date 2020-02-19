@@ -21,8 +21,9 @@ import Objects.Market;
 import Objects.Player;
 
 public class Wait_Page extends AppCompatActivity {
-    Integer num_participant_def;
+
     Market Game_Market;
+    Integer player_count;
 
 
 
@@ -41,10 +42,9 @@ public class Wait_Page extends AppCompatActivity {
         DatabaseReference ref = FirebaseDatabase .getInstance().getReference("parameters").child("num_participants");
         updatePlayerCount(ref);
         DatabaseReference reference_admin = FirebaseDatabase.getInstance().getReference("settings");
-        wait_for_settings_data(reference_admin);
-
-        boolean not_all_signed_in = true;
-        while(not_all_signed_in){
+        while(Game_Market ==null){wait_for_settings_data(reference_admin);}
+        Integer num_participant_def = Game_Market.getNum_players();
+        while(player_count<num_participant_def){
 
 
 
@@ -59,7 +59,7 @@ public class Wait_Page extends AppCompatActivity {
                     p=1;
                 }
 
-                if (p==num_participant_def) {
+                if (p==Game_Market.getNum_players()) {
                     return Transaction.success(mutableData);
 
                 } else {
@@ -74,6 +74,7 @@ public class Wait_Page extends AppCompatActivity {
             @Override
             public void onComplete(DatabaseError databaseError, boolean b,
                                    DataSnapshot dataSnapshot) {
+                player_count= dataSnapshot.getValue(Integer.class);
                 // Transaction completed
                 //Log.d(TAG, "postTransaction:onComplete:" + databaseError);
             }
@@ -84,13 +85,13 @@ private void wait_for_settings_data(DatabaseReference r)
 
 {
     Query get_settings = r;
-    r.addListenerForSingleValueEvent(new ValueEventListener() {
+    get_settings.addListenerForSingleValueEvent(new ValueEventListener() {
         @Override
         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-            for (  DataSnapshot child: dataSnapshot.getChildren()){
-                child.getKey();
+            Game_Market =dataSnapshot.getValue(Market.class);
 
-            }
+
+
         }
 
         @Override
