@@ -9,8 +9,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        tools:replace="android:appComponentFactory">
+        android:theme="@style/AppTheme">
         <activity android:name=".Set_Parameters"></activity>
         <activity
             android:name=".Player_Sign_in"
