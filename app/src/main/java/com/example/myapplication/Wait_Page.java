@@ -46,6 +46,8 @@ public class Wait_Page extends AppCompatActivity {
 
 
     }
+
+    /*
     private void updatePlayerCount(DatabaseReference player_counter) {
         player_counter.runTransaction(new Transaction.Handler() {
             @Override
@@ -97,5 +99,5 @@ private void wait_for_settings_data(DatabaseReference r)
     });
 
 }
-
+*/
 }

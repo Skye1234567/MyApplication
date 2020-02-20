@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
@@ -27,9 +28,11 @@ public class Sign_up_player extends AppCompatActivity {
         setContentView(R.layout.activity_sign_up_player);
         Button b = findViewById(R.id.signin);
 
+
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                FirebaseApp.initializeApp(context);
                 FirebaseAuth auth = FirebaseAuth.getInstance();
 
 
@@ -37,6 +40,7 @@ public class Sign_up_player extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()){
+                            FirebaseApp.initializeApp(context);
                             String player = FirebaseAuth.getInstance().getCurrentUser().getUid();
                             Intent intent = new Intent(context, Wait_Page.class);
                             intent.putExtra("player_id", player);
