@@ -21,16 +21,14 @@ import com.google.firebase.auth.FirebaseUser;
 
 
 public class Sign_up_admin extends AppCompatActivity {
-    Context context = this;
+    Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        FirebaseApp.initializeApp(this);
-        FirebaseAuth mAuth = FirebaseAuth.getInstance();
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up_admin);
-
+        context =this;
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
         EditText password = (EditText) findViewById(R.id.admin_password);
 

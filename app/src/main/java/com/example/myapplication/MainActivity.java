@@ -10,6 +10,7 @@ import android.widget.Button;
 import Objects.Market;
 
 public class MainActivity extends AppCompatActivity {
+    Context context;
 
 
     @Override
@@ -18,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
-        final Context context = this;
+        context = this;
         Market m = new Market(0.9f, 0.6f, 0.8f);
         Button button = (Button) findViewById(R.id.select_admin);
         Button button1 = (Button) findViewById(R.id.select_player);
