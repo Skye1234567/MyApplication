@@ -30,22 +30,21 @@ public class Wait_Page extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wait__page);
         Intent intent = getIntent();
-        String player_id = intent.getStringExtra("player_id");
+        //String player_id = intent.getStringExtra("player_id");
 
 
-        DatabaseReference db = FirebaseDatabase.getInstance().getReference("player_list");
-        Player current = new Player(player_id);
-        db.child(player_id).setValue(current);
-        DatabaseReference ref = FirebaseDatabase .getInstance().getReference("parameters").child("num_participants");
-        updatePlayerCount(ref);
-        DatabaseReference reference_admin = FirebaseDatabase.getInstance().getReference("settings");
-        while(Game_Market ==null){wait_for_settings_data(reference_admin);}
-        Integer num_participant_def = Game_Market.getNum_players();
-        while(player_count<num_participant_def){
+        ///DatabaseReference db = FirebaseDatabase.getInstance().getReference("player_list");
+       // Player current = new Player(player_id);
+       // db.child(player_id).setValue(current);
+        //DatabaseReference ref = FirebaseDatabase .getInstance().getReference("parameters").child("num_participants");
+        //updatePlayerCount(ref);
+
+        //while(Game_Market ==null){wait_for_settings_data(reference_admin);}
+         //Integer num_participant_def = Game_Market.getNum_players();
 
 
 
-        }
+
     }
     private void updatePlayerCount(DatabaseReference player_counter) {
         player_counter.runTransaction(new Transaction.Handler() {

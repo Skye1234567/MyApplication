@@ -1,5 +1,6 @@
 package com.example.myapplication;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -17,31 +18,32 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import androidx.annotation.NonNull;
 
-public class Player_Sign_in extends AppCompatActivity {
+public class Sign_up_player extends AppCompatActivity {
+    Context context =this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_player__sign_in);
+        setContentView(R.layout.activity_sign_up_player);
         Button b = findViewById(R.id.signin);
 
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 FirebaseAuth auth = FirebaseAuth.getInstance();
-                final String player = auth.getCurrentUser().toString();
+
 
                 auth.signInAnonymously().addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()){
-                            FirebaseDatabase.getInstance().getReference("players").child(player);
-                            Intent intent = new Intent(Player_Sign_in.this, Wait_Page.class);
+                            String player = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                            Intent intent = new Intent(context, Wait_Page.class);
                             intent.putExtra("player_id", player);
-                            Player_Sign_in.this.startActivity(intent);
+                            context.startActivity(intent);
                         }
                         else{
-                            Toast.makeText(Player_Sign_in.this, "Error in signing in", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Sign_up_player.this, "Error in signing in", Toast.LENGTH_SHORT).show();
                         };
 
                     }
