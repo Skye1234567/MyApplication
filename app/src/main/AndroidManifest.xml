@@ -10,17 +10,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Sign_up_player"></activity>
+
         <activity android:name=".Sign_up_admin" />
         <activity android:name=".Set_Parameters" />
-        <activity
-            android:name=".Player_Sign_in"
-            android:label="@string/title_activity_player__sign_in"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".Login_Admin"
-            android:label="@string/title_activity_login__admin"
-            android:theme="@style/AppTheme.NoActionBar" />
+
+
         <activity android:name=".Wait_Page" />
         <activity android:name=".MainActivity">
             <intent-filter>

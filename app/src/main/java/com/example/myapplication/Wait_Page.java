@@ -4,6 +4,7 @@ import android.content.Intent;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -30,24 +31,24 @@ public class Wait_Page extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wait__page);
         Intent intent = getIntent();
-        //String player_id = intent.getStringExtra("player_id");
+        String player_id = intent.getStringExtra("player_id");
 
 
-        ///DatabaseReference db = FirebaseDatabase.getInstance().getReference("player_list");
-       // Player current = new Player(player_id);
-       // db.child(player_id).setValue(current);
+        FirebaseDatabase db = FirebaseDatabase.getInstance();
+        Player current = new Player(player_id);
+        db.getReference(player_id).setValue(current);
         //DatabaseReference ref = FirebaseDatabase .getInstance().getReference("parameters").child("num_participants");
-        //updatePlayerCount(ref);
+        //SupdatePlayerCount(ref);
 
         //while(Game_Market ==null){wait_for_settings_data(reference_admin);}
-         //Integer num_participant_def = Game_Market.getNum_players();
+//        Integer num_participant_def = Game_Market.getNum_players();
 
 
 
 
     }
 
-    /*
+
     private void updatePlayerCount(DatabaseReference player_counter) {
         player_counter.runTransaction(new Transaction.Handler() {
             @Override
@@ -99,5 +100,15 @@ private void wait_for_settings_data(DatabaseReference r)
     });
 
 }
-*/
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event)
+    {
+        if(keyCode == KeyEvent.KEYCODE_BACK)
+        {
+            return true;
+        }
+        return false;
+    }
+
 }

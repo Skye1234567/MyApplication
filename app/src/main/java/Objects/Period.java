@@ -2,7 +2,7 @@ package Objects;
 
 import java.util.ArrayList;
 
-public class Session {
+public class Period {
 
     private int session_id;
     private ArrayList player_ids;

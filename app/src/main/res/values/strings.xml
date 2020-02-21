@@ -5,7 +5,7 @@
     <string name="title_activity_player__sign_in">Player_Sign_in</string>
     <string name="sign_in">Sign In</string>
     <string name="sign_in_anon">Anonymous</string>
-
+    <string name="submit">Submit</string>
 
     <string-array name="buy_or_sell">
         <item>Buy</item>

@@ -6,8 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".Set_Parameters">
     <LinearLayout
-
-        android:id="@+id/set_round_1"
+        android:id="@+id/set_round_2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -23,7 +22,7 @@
             android:textAllCaps="true"
             android:textColor="@color/colorPrimaryDark"
             android:textSize= "@dimen/textSizeTitle"
-            android:text="ROUND 1"
+            android:text="ROUND 2"
             />
 
 
@@ -38,7 +37,7 @@
             android:text="Enter p"
             />
         <EditText
-            android:id="@+id/prob_ofhigh"
+            android:id="@+id/prob_ofhigh2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="right"
@@ -57,7 +56,7 @@
             android:text="Enter pi_h"
             />
         <EditText
-            android:id="@+id/prob_outcome_high"
+            android:id="@+id/prob_outcome_high2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="right"
@@ -76,7 +75,7 @@
             android:text="Enter pi_l"
             />
         <EditText
-            android:id="@+id/prob_outcome_low"
+            android:id="@+id/prob_outcome_low2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="right"
@@ -92,10 +91,11 @@
             android:textAllCaps="true"
             android:textColor="@color/colorPrimaryDark"
             android:textSize= "@dimen/textSizeNormal"
-            android:text="Enter number of rounds"
+            android:text="ENter the number of Rounds"
+
             />
         <EditText
-            android:id="@+id/num_rounds"
+            android:id="@+id/num_rounds2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="right"
@@ -106,7 +106,7 @@
 
     </LinearLayout>
     <Button
-        android:id="@+id/button_submit_round_1"
+        android:id="@+id/button_submit_round_2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/set_practice_round"
@@ -119,5 +119,6 @@
         android:textAllCaps="true"
 
         />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
