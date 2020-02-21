@@ -4,7 +4,7 @@ public class Admin {
     private int player_num;
 
     public void begin_session(){
-        Session  s = new Session();
+        Period s = new Period();
         s.setNum_players(player_num);
 
     }

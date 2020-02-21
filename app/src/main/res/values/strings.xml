@@ -3,20 +3,23 @@
     <string name="title_activity_admin__sign_in">Admin_Sign_in</string>
     <string name="title_activity_login__admin">Login_Admin</string>
     <string name="title_activity_player__sign_in">Player_Sign_in</string>
-
+    <string name="sign_in">Sign In</string>
+    <string name="sign_in_anon">Anonymous</string>
+    <string name="submit">Submit</string>
 
     <string-array name="buy_or_sell">
-    <item>Buy</item>
-    <item>Sell</item>
-</string-array>
+        <item>Buy</item>
+        <item>Sell</item>
+    </string-array>
 
-<string-array name="stocks">
-<item>:)</item>
-    <item>:(</item>
-    <item>:}</item>
-    <item>:{</item>
-    <item>:|</item>
-    <item>:*</item>
+    <string-array name="stocks">
+        <item>:)</item>
+        <item>:(</item>
+        <item>:}</item>
+        <item>:{</item>
+        <item>:|</item>
+        <item>:*</item>
 
-</string-array>
-    </resources>
+    </string-array>
+    <string name="title_activity_set__market__parameters">Set_Market_Parameters</string>
+</resources>

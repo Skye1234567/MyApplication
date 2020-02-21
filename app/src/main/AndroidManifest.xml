@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.myapplication">
 
     <application
@@ -9,14 +10,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity
-            android:name=".Player_Sign_in"
-            android:label="@string/title_activity_player__sign_in"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity
-            android:name=".Login_Admin"
-            android:label="@string/title_activity_login__admin"
-            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity android:name=".Sign_up_admin" />
+        <activity android:name=".Set_Parameters" />
+
+
         <activity android:name=".Wait_Page" />
         <activity android:name=".MainActivity">
             <intent-filter>
