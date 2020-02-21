@@ -1,6 +1,5 @@
 package com.example.myapplication;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 
@@ -13,7 +12,6 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -30,7 +28,6 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
         context = this;
-        Market m = new Market(0.9f, 0.6f, 0.8f);
         Button button = (Button) findViewById(R.id.select_admin);
         Button button1 = (Button) findViewById(R.id.select_player);
         button.setOnClickListener(new View.OnClickListener() {

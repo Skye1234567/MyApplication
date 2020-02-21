@@ -60,19 +60,13 @@ public class Sign_up_admin extends AppCompatActivity {
                                         // Sign in success, update UI with the signed-in user's information
 
                                         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                                        Intent intent = new Intent(context, Set_Parameters.class);
+                                        Intent intent = new Intent(context, Set_Parameters_Practice.class);
                                         intent.putExtra("player_id", user);
                                         context.startActivity(intent);
 
 
                                     } else {
-                                        // If sign in fails, display a message to the user.
-                                        Intent intent = new Intent(context, Set_Parameters.class);
-
-                                        context.startActivity(intent);
-
-                                        //Toast.makeText(context, "Authentication failed.",
-                                               //  Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(context, "Authentication failed.", Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             });

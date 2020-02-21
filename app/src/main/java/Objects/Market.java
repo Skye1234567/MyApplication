@@ -4,27 +4,34 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Market {
-    private float pi_h;
-    private float pi_l;
-    private float p;
-    private ArrayList<Manager> managers;
-    private ArrayList<Investor> investors;
+    private Float pi_h;
+    private Float pi_l;
+    private Float p;
     private Integer big_money;
     private Integer lil_money;
+    private Integer num_rounds;
 
-    public float getPi_h() {
+    public Integer getNum_rounds() {
+        return num_rounds;
+    }
+
+    public void setNum_rounds(Integer num_rounds) {
+        this.num_rounds = num_rounds;
+    }
+
+    public Float getPi_h() {
         return pi_h;
     }
 
-    public float getPi_l() {
+    public Float getPi_l() {
         return pi_l;
     }
 
-    public float getP() {
+    public Float getP() {
         return p;
     }
 
-    private  ArrayList<Share> shares;
+
     private Integer num_players;
 
     public Integer getNum_players() {
@@ -35,33 +42,34 @@ public class Market {
         this.num_players = num_players;
     }
 
-    public Market(float pi_h, float pi_l, float p) {
+    public Market(Float pi_h, Float pi_l, Float p, Integer num_rounds) {
         this.pi_h = pi_h;
         this.pi_l = pi_l;
         this.p = p;
         this.big_money =100;
         this.lil_money =10;
+        this.num_rounds = num_rounds;
     }
 
 
 
-    public void setPi_h(float pi_h) {
+    public void setPi_h(Float pi_h) {
         this.pi_h = pi_h;
     }
 
-    public void setPi_l(float pi_l) {
+    public void setPi_l(Float pi_l) {
         this.pi_l = pi_l;
     }
 
-    public void setP(float p) {
+    public void setP(Float p) {
         this.p = p;
     }
 
 
-    public void generate_player_data(){
+    public void generate_player_data(ArrayList<Manager> managers, ArrayList<Investor> investors, boolean reset_shares){
         Random r = new Random();
 
-        for (Manager m :this.managers){
+        for (Manager m :managers){
             float p_random = r.nextFloat();
             float pi_random = r.nextFloat();
             if (this.p<p_random){
@@ -81,9 +89,10 @@ public class Market {
                 }
 
             }
-            for (Investor i: this.investors){
+            if (reset_shares){
+            for (Investor i: investors){
                 i.add_Shares(new Share(i.getID(),m.getID()));
-            }
+            }}
 
 
         }
