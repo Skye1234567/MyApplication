@@ -35,7 +35,7 @@
             android:textAllCaps="true"
             android:textColor="@color/colorPrimaryDark"
             android:textSize= "@dimen/textSizeNormal"
-            android:text=""
+            android:text="Enter p"
             />
         <EditText
             android:id="@+id/prob_ofhigh_practice"
@@ -54,7 +54,7 @@
             android:textAllCaps="true"
             android:textColor="@color/colorPrimaryDark"
             android:textSize= "@dimen/textSizeNormal"
-            android:text=""
+            android:text="Enter pi_h"
             />
         <EditText
             android:id="@+id/prob_outcome_high_practice"
@@ -73,7 +73,7 @@
             android:textAllCaps="true"
             android:textColor="@color/colorPrimaryDark"
             android:textSize= "@dimen/textSizeNormal"
-            android:text=""
+            android:text="pi_L"
             />
         <EditText
             android:id="@+id/prob_outcome_low_practice"
@@ -92,7 +92,7 @@
             android:textAllCaps="true"
             android:textColor="@color/colorPrimaryDark"
             android:textSize= "@dimen/textSizeNormal"
-            android:text=""
+            android:text="Enter number  of Rounds"
             />
         <EditText
             android:id="@+id/num_rounds_practice"
@@ -136,7 +136,7 @@
         android:textAllCaps="true"
         android:textColor="@color/colorPrimaryDark"
         android:textSize= "@dimen/textSizeNormal"
-        android:text=""
+        android:text="Enter p"
         />
         <EditText
             android:id="@+id/prob_ofhigh"
@@ -155,7 +155,7 @@
             android:textAllCaps="true"
             android:textColor="@color/colorPrimaryDark"
             android:textSize= "@dimen/textSizeNormal"
-            android:text=""
+            android:text="Enter pi_h"
             />
         <EditText
             android:id="@+id/prob_outcome_high"
@@ -174,7 +174,7 @@
             android:textAllCaps="true"
             android:textColor="@color/colorPrimaryDark"
             android:textSize= "@dimen/textSizeNormal"
-            android:text=""
+            android:text="Enter pi_l"
             />
         <EditText
             android:id="@+id/prob_outcome_low"
@@ -193,7 +193,7 @@
             android:textAllCaps="true"
             android:textColor="@color/colorPrimaryDark"
             android:textSize= "@dimen/textSizeNormal"
-            android:text=""
+            android:text="Enter number of rounds"
             />
         <EditText
             android:id="@+id/num_rounds"
@@ -236,7 +236,7 @@
             android:textAllCaps="true"
             android:textColor="@color/colorPrimaryDark"
             android:textSize= "@dimen/textSizeNormal"
-            android:text=""
+            android:text="Enter p"
             />
         <EditText
             android:id="@+id/prob_ofhigh2"
@@ -255,7 +255,7 @@
             android:textAllCaps="true"
             android:textColor="@color/colorPrimaryDark"
             android:textSize= "@dimen/textSizeNormal"
-            android:text=""
+            android:text="Enter pi_h"
             />
         <EditText
             android:id="@+id/prob_outcome_high2"
@@ -274,7 +274,7 @@
             android:textAllCaps="true"
             android:textColor="@color/colorPrimaryDark"
             android:textSize= "@dimen/textSizeNormal"
-            android:text=""
+            android:text="Enter pi_l"
             />
         <EditText
             android:id="@+id/prob_outcome_low2"
@@ -293,7 +293,8 @@
             android:textAllCaps="true"
             android:textColor="@color/colorPrimaryDark"
             android:textSize= "@dimen/textSizeNormal"
-            android:text=""
+            android:text="ENter the number of Rounds"
+
             />
         <EditText
             android:id="@+id/num_rounds2"

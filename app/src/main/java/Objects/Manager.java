@@ -3,6 +3,15 @@ package Objects;
 
 public class Manager extends Player {
     private Integer salary;
+    private String company_symbol;
+
+    public String getCompany_symbol() {
+        return company_symbol;
+    }
+
+    public void setCompany_symbol(String company_symbol) {
+        this.company_symbol = company_symbol;
+    }
 
     private int performance;
     private int profit;
