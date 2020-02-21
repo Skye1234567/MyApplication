@@ -13,7 +13,8 @@
 
         <activity android:name=".Sign_up_admin" />
         <activity android:name=".Set_Parameters" />
-
+        <activity android:name=".Set_Parameters_Practice" />
+        <activity android:name=".Set_Parameters_Round_2" />
 
         <activity android:name=".Wait_Page" />
         <activity android:name=".MainActivity">

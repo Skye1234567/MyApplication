@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Set_Parameters">
+    tools:context=".Set_Parameters_Practice">
 
     <LinearLayout
         android:id="@+id/set_practice_round"
@@ -23,7 +23,7 @@
             android:textAllCaps="true"
             android:textColor="@color/colorPrimaryDark"
             android:textSize= "@dimen/textSizeTitle"
-            android:text="PRACTICE ROUND "
+            android:text="PRACTICE ROUND"
             />
 
 
