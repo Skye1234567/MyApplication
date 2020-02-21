@@ -1,5 +1,6 @@
-package com.example.myapplication;
+ package com.example.myapplication;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -22,43 +24,68 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class Sign_up_admin extends AppCompatActivity {
     Context context;
+    FirebaseAuth mAuth;
+    EditText email;
+    EditText password;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up_admin);
-        context =this;
-        FirebaseAuth mAuth = FirebaseAuth.getInstance();
-
-        EditText password = (EditText) findViewById(R.id.admin_password);
-
-                                              // Perform action on key press
-        EditText email = (EditText) findViewById(R.id.admin_email);
-        mAuth.signInWithEmailAndPassword(email.toString(), password.toString())
-              .addOnCompleteListener(getParent(), new OnCompleteListener<AuthResult>() {
-                  @Override
-                  public void onComplete(@NonNull Task<AuthResult> task) {
-                      if (task.isSuccessful()) {
-                          // Sign in success, update UI with the signed-in user's information
-
-                          FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                          Intent intent = new Intent(context, Set_Parameters.class);
-                          intent.putExtra("player_id", user);
-                          context.startActivity(intent);
+        context = Sign_up_admin.this;
 
 
 
-                      } else {
-                          // If sign in fails, display a message to the user.
 
-                          Toast.makeText(Sign_up_admin.this, "Authentication failed.",
-                                  Toast.LENGTH_SHORT).show();
-                      }
-                  }
-              });
+        Button button = findViewById(R.id.sign_in_admin_button);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                password = (EditText) findViewById(R.id.admin_password);
+                email = (EditText) findViewById(R.id.admin_email);
+                String ps =password.getText().toString();
+                String em = email.getText().toString();
+                if (ps==null) {ps ="";}
+                if(em==null){em="";}
+                if ( 0!=ps.compareTo("") && 0!=em.compareTo("")) {
+                    Activity activity = (Activity) context;
+                    mAuth = FirebaseAuth.getInstance();
+                    mAuth.signInWithEmailAndPassword(em, ps)
+                            .addOnCompleteListener(activity, new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    if (task.isSuccessful()) {
+                                        // Sign in success, update UI with the signed-in user's information
+
+                                        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                                        Intent intent = new Intent(context, Set_Parameters.class);
+                                        intent.putExtra("player_id", user);
+                                        context.startActivity(intent);
+
+
+                                    } else {
+                                        // If sign in fails, display a message to the user.
+                                        Intent intent = new Intent(context, Set_Parameters.class);
+
+                                        context.startActivity(intent);
+
+                                        //Toast.makeText(context, "Authentication failed.",
+                                               //  Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            });
+                }
+                else{
+                    //Toast.makeText(context, "Whats up",Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
+
 
     }
+
+
 }
-
-
-

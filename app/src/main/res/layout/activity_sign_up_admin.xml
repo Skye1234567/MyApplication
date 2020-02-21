@@ -46,6 +46,26 @@
                 android:layout_height="@dimen/textSizeNormal"
                 />
 
+            <Button
+
+                android:id="@+id/sign_in_admin_button"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:text="Sign In"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:padding="3dip"
+                android:textAllCaps="true"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize= "@dimen/textSizeNormal"
+                android:visibility="visible"
+                >
+
+            </Button>
+
 
 
 
