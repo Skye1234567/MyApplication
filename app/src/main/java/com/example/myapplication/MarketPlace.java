@@ -35,7 +35,7 @@ public class MarketPlace extends AppCompatActivity {
         setContentView(R.layout.activity_market_place);
         FirebaseDatabase db = FirebaseDatabase.getInstance();
         DatabaseReference ref = db.getReference();
-
+/*
         place_order = findViewById(R.id.place_order_button);
 
         stocks = findViewById(R.id.spinner_stocks);
@@ -59,7 +59,7 @@ public class MarketPlace extends AppCompatActivity {
 
             }
         });
-
+//make sure u dont call getText on null object reference
         Query qa = ref.child("managers").orderByChild(a.getText().toString());
         Query qb = ref.child("managers").orderByChild(b.getText().toString());
         Query qc = ref.child("managers").orderByChild(b.getText().toString());
@@ -77,5 +77,8 @@ public class MarketPlace extends AppCompatActivity {
 
             }
         });
+
+
+*/
     }
 }

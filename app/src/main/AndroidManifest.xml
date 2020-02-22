@@ -11,11 +11,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".Admin_Menu"></activity>
-        <activity android:name=".Sign_up_admin" />
-        <activity android:name=".Set_Parameters" />
-        <activity android:name=".Set_Parameters_Practice" />
-        <activity android:name=".Set_Parameters_Round_2" />
-        <activity android:name=".Wait_Page" />
+        <activity android:name=".Sign_up_admin" ></activity>
+        <activity android:name=".Set_Parameters"></activity>
+        <activity android:name=".Set_Parameters_Practice" ></activity>
+        <activity android:name=".Set_Parameters_Round_2"></activity>
+        <activity android:name=".Wait_Page"></activity>
+        <activity android:name=".MarketPlace"></activity>
+        <activity android:name=".Manager_Instructions"></activity>
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

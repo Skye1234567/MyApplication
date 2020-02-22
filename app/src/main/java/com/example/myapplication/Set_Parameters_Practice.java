@@ -54,6 +54,7 @@ public class Set_Parameters_Practice extends AppCompatActivity {
 
                 if (!(fp==null || fpi_h==null || fpi_l==null || num_round==null)) {
                     Market practice = new Market(fpi_h,fpi_l,fp, num_round);
+                    practice.setType("P");
                     db = FirebaseDatabase.getInstance();
                     db.getReference("markets").child("practice").setValue(practice).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override

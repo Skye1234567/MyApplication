@@ -54,6 +54,7 @@ public class Set_Parameters_Round_2 extends AppCompatActivity {
 
                 if (!(fp==null || fpi_h==null || fpi_l==null || num_round==null)) {
                     Market round_2 = new Market(fpi_h,fpi_l,fp, num_round);
+                    round_2.setType("BUST");
                     db = FirebaseDatabase.getInstance();
                     db.getReference("markets").child("round_2").setValue(round_2).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override

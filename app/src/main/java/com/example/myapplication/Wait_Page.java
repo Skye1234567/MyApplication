@@ -1,5 +1,6 @@
 package com.example.myapplication;
 
+import android.content.Context;
 import android.content.Intent;
 
 import Objects.Session;
@@ -31,7 +32,8 @@ public class Wait_Page extends AppCompatActivity {
     Market market;
     DatabaseReference ref_def ;
     DatabaseReference ref_count;
-    Session sess
+    Session sess;
+    Context context;
 
     Integer player_count_definition;
 
@@ -41,46 +43,66 @@ public class Wait_Page extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        player_count_definition=1;
-        sess = new Session(player_count_definition);
-        ref_def = FirebaseDatabase .getInstance().getReference(player_count_database_def);
-        ref_count = FirebaseDatabase .getInstance().getReference(count_database);
+        context = (Context)this;
         setContentView(R.layout.activity_wait__page);
         Intent intent = getIntent();
         String player_id = intent.getStringExtra("player_id");
+        player_count_definition=1;
+        sess = new Session(player_count_definition);
         player_count_database_def="player_count";
         player_id_list_database_def = "player_list";
         count_database = "player_counter";
+        ref_def = FirebaseDatabase .getInstance().getReference(player_count_database_def);
+        ref_count = FirebaseDatabase .getInstance().getReference(count_database);
 
         FirebaseDatabase db = FirebaseDatabase.getInstance();
         Player current = new Player(player_id);
         Query markets = db.getReference("markets");
         Query player_list = db.getReference(player_id_list_database_def);
 
-
         markets.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 market = dataSnapshot.getValue(Market.class);
-                if (s.compareTo("practice")==0){
-                sess.setPractice(market);}
-                if (s.compareTo("round_1")==0){
+                if (market.getType().compareTo("P")==0){
+                    sess.setPractice(market);
+                }
+                if (market.getType().compareTo("BOOM")==0){
                     sess.setBoom(market);
                 }
-                if (s.compareTo("round_2")==0){
-                    sess.setBust(market);
-                }
+                if (market.getType().compareTo("BUST")==0){
+                    sess.setBust(market);}
+                when_Session_configured();
 
 
             }
 
             @Override
             public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                market = dataSnapshot.getValue(Market.class);
+                if (market.getType().compareTo("P")==0){
+                    sess.setPractice(market);
+                }
+                if (market.getType().compareTo("BOOM")==0){
+                    sess.setBoom(market);
+                }
+                if (market.getType().compareTo("BUST")==0){
+                    sess.setBust(market);}
+                }
 
-            }
 
             @Override
             public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+                market = dataSnapshot.getValue(Market.class);
+                if (market.getType().compareTo("P")==0){
+                    sess.setPractice(null);
+                }
+                if (market.getType().compareTo("BOOM")==0){
+                    sess.setBoom(null);
+                }
+                if (market.getType().compareTo("BUST")==0){
+                    sess.setBust(null);}
+
 
 
             }
@@ -99,6 +121,8 @@ public class Wait_Page extends AppCompatActivity {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 updatePlayerCountadd(ref_count, player_count_definition);
+                when_Session_configured();
+
 
             }
 
@@ -131,38 +155,36 @@ public class Wait_Page extends AppCompatActivity {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
+
+    private void when_Session_configured(){
+        if (sess!=null){
+        if (sess.isValid()&&player_count!=null &&player_count_definition!=null){
+            Intent intent = new Intent(context, MarketPlace.class );
+            context.startActivity(intent);
+            finish();
+        }}
+    }
+
 
 
     private void updatePlayerCountsubtract(DatabaseReference player_counter) {
         player_counter.runTransaction(new Transaction.Handler() {
             @Override
             public Transaction.Result doTransaction(MutableData mutableData) {
-                Integer p = mutableData.getValue(Integer.class);
-                if (p==0 || p==null) {
+                Integer p;
+                if ( mutableData==null) {
                     return Transaction.success(mutableData);
-
                 }else {
+                     p = mutableData.getValue(Integer.class);
+
                     p-=1;
+                    if (p<0){p=0;}
                 }
-
-
 
                 // Set value and report transaction success
                 mutableData.setValue(p);
+                player_count = p;
                 return Transaction.success(mutableData);
             }
 
@@ -180,20 +202,23 @@ public class Wait_Page extends AppCompatActivity {
         player_counter.runTransaction(new Transaction.Handler() {
             @Override
             public Transaction.Result doTransaction(MutableData mutableData) {
-                Integer p = mutableData.getValue(Integer.class);
-                if (p==player_count_definition) {
+
+                if (mutableData==null) {
                     return Transaction.success(mutableData);
                 }
+                Integer p = mutableData.getValue(Integer.class);
                 if (p == null) {
                     p=1;
                 }else {
                     p+=1;
+
                 }
 
 
 
                 // Set value and report transaction success
                 mutableData.setValue(p);
+                player_count = p;
                 return Transaction.success(mutableData);
             }
 
@@ -225,6 +250,8 @@ private void wait_for_settings_data(DatabaseReference r)
     });
 
 }*/
+
+
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event)
