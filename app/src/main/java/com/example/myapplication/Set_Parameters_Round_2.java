@@ -27,7 +27,6 @@ public class Set_Parameters_Round_2 extends AppCompatActivity {
     Button submit_round_2;
     FirebaseDatabase db;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

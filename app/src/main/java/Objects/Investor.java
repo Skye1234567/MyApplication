@@ -7,6 +7,7 @@ public class Investor extends Player {
     ArrayList<Share> Shares;
 
 
+
     public Investor(String ID) {
         super(ID);
         super.setType("I");

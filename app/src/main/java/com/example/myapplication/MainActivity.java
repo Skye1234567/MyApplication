@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
         context = this;
+        FirebaseAuth.getInstance().signOut();
         Button button = (Button) findViewById(R.id.select_admin);
         Button button1 = (Button) findViewById(R.id.select_player);
         button.setOnClickListener(new View.OnClickListener() {
@@ -37,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
                //put admin auth stuff
                Intent intent = new Intent(context, Sign_up_admin.class);
                context.startActivity(intent);
+               finish();
                }});
 
 
@@ -54,16 +56,16 @@ public class MainActivity extends AppCompatActivity {
 
                             String player = FirebaseAuth.getInstance().getCurrentUser().getUid();
                             if (player!=null && FirebaseAuth.getInstance().getCurrentUser().isAnonymous()){
-                            Intent intent = new Intent(context, Wait_Page.class);
-                            intent.putExtra("player_id", player);
-                            context.startActivity(intent);
-                            finish();}
+                                Intent intent = new Intent(context, Wait_Page.class);
+                                intent.putExtra("player_id", player);
+                                context.startActivity(intent);
+                                finish();}
                             else{
-                                Toast.makeText(context, "Error in signing in", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, "Error in signing in 1", Toast.LENGTH_SHORT).show();
                             };
                         }
                         else{
-                            Toast.makeText(context, "Error in signing in", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, "Error in signing in 2", Toast.LENGTH_SHORT).show();
                         };
 
                     }
