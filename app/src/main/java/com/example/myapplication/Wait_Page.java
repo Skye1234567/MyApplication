@@ -54,9 +54,10 @@ public class Wait_Page extends AppCompatActivity {
         count_database = "player_counter";
         ref_def = FirebaseDatabase .getInstance().getReference(player_count_database_def);
         ref_count = FirebaseDatabase .getInstance().getReference(count_database);
-
+        ref_count.setValue(0);
         FirebaseDatabase db = FirebaseDatabase.getInstance();
         Player current = new Player(player_id);
+
         Query markets = db.getReference("markets");
         Query player_list = db.getReference(player_id_list_database_def);
 
