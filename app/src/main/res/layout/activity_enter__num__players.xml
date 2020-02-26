@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/textSizeNormal"
+    tools:context=".Enter_Num_Players">
+
+    <TextView
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/num_player_entry_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enter Number of Participants in the Session"
+        android:textAllCaps="false"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="@dimen/textSizeNormal"
+        android:paddingBottom="@dimen/textSizeTitle"
+        />
+
+    <EditText
+
+        app:layout_constraintBottom_toTopOf="@+id/final_submission_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:paddingBottom="@dimen/textSizeTitle"
+        android:layout_height="@dimen/textSizeTitle"
+        android:layout_width="match_parent"
+        android:id="@+id/num_player_entry_edit"
+        />
+
+    <Button
+        android:id="@+id/final_submission_button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/submit"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
