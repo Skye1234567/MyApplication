@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -43,6 +44,8 @@ public class Wait_Page extends AppCompatActivity  {
     DatabaseReference player_id_list_ref;
     Session sess;
     Context context;
+    String current_user_type;
+    String current_user_id;
 
 
     Integer player_count_definition;
@@ -63,10 +66,12 @@ public class Wait_Page extends AppCompatActivity  {
         String player_count_database_def="player_count";
         String player_id_list_database_def = "player_list";
 
+        current_user_type = "";
         player_count_definition=1;
         sess = new Session(player_count_definition);
         count_database = "player_counter";
-
+        current_user_id = player_id;
+        
         player_id_list_ref = FirebaseDatabase.getInstance().getReference(player_id_list_database_def);
         ref_def = FirebaseDatabase .getInstance().getReference(player_count_database_def);
         ref_count = FirebaseDatabase .getInstance().getReference(count_database);
@@ -229,12 +234,19 @@ public class Wait_Page extends AppCompatActivity  {
                         Investor i = new Investor(p.getID());
                         FirebaseDatabase.getInstance().getReference("Investors").child(p.getID()).setValue(i);
                     }
+                    if ( current_user_id==p.getID()){current_user_type=p.getType();}
+
 
                     the_count+=1;
                 }
-                Intent intent = new Intent(context, Investor_Instructions.class);
-                context.startActivity(intent);
-
+                if (current_user_type.compareTo("I")==0) {
+                    Intent intent = new Intent(context, Investor_Instructions.class);
+                    context.startActivity(intent);
+                }
+                if (current_user_type.compareTo("M")==0){
+                    Intent intent = new Intent(context, Manager_Instructions.class);
+                    context.startActivity(intent);
+                }
             }
 
             @Override
@@ -318,13 +330,5 @@ public class Wait_Page extends AppCompatActivity  {
         }
         return false;
     }
-/*
-public class DatabaseOnCompleteListener implements Database_callback{
-        @Override
-    public void execute_upon_retrieval() {
 
-    }
-
-}
-*/
 }
