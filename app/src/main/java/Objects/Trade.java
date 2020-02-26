@@ -1,10 +1,15 @@
 package Objects;
 
-public class Trade {
+import java.io.Serializable;
+
+public class Trade implements Serializable {
 
     private Integer high_bid;
     private Integer low_price;
     private Integer num_shares;
+
+    public Trade() {
+    }
 
     public Trade(Integer high_bid, Integer low_price, Integer num_shares) {
         this.high_bid = high_bid;

@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Set_Parameters_Round_2">
+    tools:context=".Set_Parameters_Round_2"
+    android:layout_margin="@dimen/textSizeNormal">
     <LinearLayout
         android:id="@+id/set_round_2"
         app:layout_constraintBottom_toBottomOf="parent"

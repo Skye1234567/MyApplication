@@ -5,7 +5,9 @@
     android:paddingTop="40dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Investor_Instructions">
+    tools:context=".Investor_Instructions"
+    android:layout_margin="@dimen/textSizeNormal"
+    >
 
 
     <TextView
@@ -153,7 +155,7 @@
     android:id="@+id/next2"
     android:text="Next"
     app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/name"
+    app:layout_constraintTop_toBottomOf="@+id/invest_table"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintStart_toStartOf="parent"
 

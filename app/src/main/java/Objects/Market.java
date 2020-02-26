@@ -1,10 +1,11 @@
 package Objects;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Random;
 
-public class Market {
+public class Market implements Serializable {
 
 
     private Float pi_h;

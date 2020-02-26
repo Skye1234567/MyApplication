@@ -1,6 +1,8 @@
 package Objects;
 
-public class Session {
+import java.io.Serializable;
+
+public class Session implements Serializable {
     private Integer num_players;
     private Market practice;
     private Market boom;

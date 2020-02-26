@@ -1,15 +1,17 @@
 package Objects;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Period {
+public class Period implements Serializable {
 
     private int session_id;
     private ArrayList player_ids;
     private int num_players;
     private ArrayList<Trade > Trades;
 
-
+    public Period() {
+    }
 
     public int getSession_id() {
         return session_id;

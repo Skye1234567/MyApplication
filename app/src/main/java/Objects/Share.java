@@ -1,11 +1,16 @@
 package Objects;
 
-public class Share {
+import java.io.Serializable;
+
+public class Share implements Serializable {
 
     private Integer price;
     private String owner;
     private String company;
     private int number;
+
+    public Share() {
+    }
 
     public Share(String owner, String company) {
         this.owner = owner;
