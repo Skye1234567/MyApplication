@@ -5,6 +5,7 @@ public class Manager extends Player {
     private Integer salary;
     private String company_symbol;
 
+
     public String getCompany_symbol() {
         return company_symbol;
     }

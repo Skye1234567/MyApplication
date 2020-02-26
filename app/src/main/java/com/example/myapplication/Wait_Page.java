@@ -3,6 +3,7 @@ package com.example.myapplication;
 import android.content.Context;
 import android.content.Intent;
 
+import Objects.Database_callback;
 import Objects.Investor;
 import Objects.Manager;
 import Objects.Session;
@@ -10,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.widget.Toast;
 
@@ -30,7 +32,7 @@ import java.util.Random;
 import Objects.Market;
 import Objects.Player;
 
-public class Wait_Page extends AppCompatActivity {
+public class Wait_Page extends AppCompatActivity  {
 
     Integer player_count;
 
@@ -41,7 +43,6 @@ public class Wait_Page extends AppCompatActivity {
     DatabaseReference player_id_list_ref;
     Session sess;
     Context context;
-    Method callback;
 
 
     Integer player_count_definition;
@@ -54,9 +55,7 @@ public class Wait_Page extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         context = (Context)this;
-        try{callback= Wait_Page.class.getMethod("assign_player_roles", Method.class);}catch(NoSuchMethodException e){
-           Toast.makeText(context, "No callback function defined", Toast.LENGTH_LONG);
-        };
+
 
         setContentView(R.layout.activity_wait__page);
         Intent intent = getIntent();
@@ -83,49 +82,65 @@ public class Wait_Page extends AppCompatActivity {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 Toast.makeText(context,"getting market data...", Toast.LENGTH_LONG).show();
-                market = dataSnapshot.getValue(Market.class);
-                if (market.getType().compareTo("P")==0){
-                    sess.setPractice(market);
+                try {market = dataSnapshot.getValue(Market.class);
+                String market_type = market.getType();
+                if (market_type!=null) {
+                    if (market_type.compareTo("P") == 0) {
+                        sess.setPractice(market);
+                    }
+                    if (market_type.compareTo("BOOM") == 0) {
+                        sess.setBoom(market);
+                    }
+                    if (market_type.compareTo("BUST") == 0) {
+                        sess.setBust(market);
+                    }
+                    when_Session_configured();
                 }
-                if (market.getType().compareTo("BOOM")==0){
-                    sess.setBoom(market);
+                }catch (NullPointerException n){
+                    Log.d("my_logs_market_child_added", n.getMessage());
                 }
-                if (market.getType().compareTo("BUST")==0){
-                    sess.setBust(market);}
-                when_Session_configured();
 
 
             }
 
             @Override
             public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                market = dataSnapshot.getValue(Market.class);
-                if (market.getType().compareTo("P")==0){
-                    sess.setPractice(market);
+                String market_type = market.getType();
+                if (market_type != null) {
+                    if (market_type.compareTo("P") == 0) {
+                        sess.setPractice(market);
+                    }
+                    if (market_type.compareTo("BOOM") == 0) {
+                        sess.setBoom(market);
+                    }
+                    if (market_type.compareTo("BUST") == 0) {
+                        sess.setBust(market);
+                    }
+                    when_Session_configured();
                 }
-                if (market.getType().compareTo("BOOM")==0){
-                    sess.setBoom(market);
-                }
-                if (market.getType().compareTo("BUST")==0){
-                    sess.setBust(market);}
-                }
+            }
 
 
-            @Override
+                @Override
             public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
                 market = dataSnapshot.getValue(Market.class);
-                if (market.getType().compareTo("P")==0){
-                    sess.setPractice(null);
+                    String market_type = market.getType();
+                    if (market_type!=null) {
+                        if (market_type.compareTo("P") == 0) {
+                            sess.setPractice(null);
+                        }
+                        if (market_type.compareTo("BOOM") == 0) {
+                            sess.setBoom(null);
+                        }
+                        if (market_type.compareTo("BUST") == 0) {
+                            sess.setBust(null);
+                        }
+
+                    }
+
+
+
                 }
-                if (market.getType().compareTo("BOOM")==0){
-                    sess.setBoom(null);
-                }
-                if (market.getType().compareTo("BUST")==0){
-                    sess.setBust(null);}
-
-
-
-            }
 
             @Override
             public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
@@ -193,6 +208,7 @@ public class Wait_Page extends AppCompatActivity {
     private void assign_player_roles(DatabaseReference player_id_list_database){
 
         Query get_all_players = player_id_list_database;
+
         get_all_players.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -205,17 +221,19 @@ public class Wait_Page extends AppCompatActivity {
                     Player p = s.getValue(Player.class);
                     if (the_count%num_man==0){
                         p.setType("M");
-                        Manager m = (Manager) p;
+                        Manager m = new Manager(p.getID());
                         FirebaseDatabase.getInstance().getReference("Managers").child(p.getID()).setValue(m);
                     }
                     else {
                         p.setType("I");
-                        Investor i = (Investor) p;
+                        Investor i = new Investor(p.getID());
                         FirebaseDatabase.getInstance().getReference("Investors").child(p.getID()).setValue(i);
                     }
 
                     the_count+=1;
                 }
+                Intent intent = new Intent(context, Investor_Instructions.class);
+                context.startActivity(intent);
 
             }
 
@@ -300,5 +318,13 @@ public class Wait_Page extends AppCompatActivity {
         }
         return false;
     }
+/*
+public class DatabaseOnCompleteListener implements Database_callback{
+        @Override
+    public void execute_upon_retrieval() {
 
+    }
+
+}
+*/
 }

@@ -1,12 +1,16 @@
 package Objects;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 
-public class Player {
+public class Player implements Serializable {
     private String ID;
     private ArrayList<Integer> payout_history;
     private String type;
+
+    public Player() {
+    }
 
     public Player(String ID) {
         this.ID = ID;
