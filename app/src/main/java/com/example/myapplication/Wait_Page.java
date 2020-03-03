@@ -71,7 +71,7 @@ public class Wait_Page extends AppCompatActivity  {
         sess = new Session(player_count_definition);
         count_database = "player_counter";
         current_user_id = player_id;
-        
+
         player_id_list_ref = FirebaseDatabase.getInstance().getReference(player_id_list_database_def);
         ref_def = FirebaseDatabase .getInstance().getReference(player_count_database_def);
         ref_count = FirebaseDatabase .getInstance().getReference(count_database);
