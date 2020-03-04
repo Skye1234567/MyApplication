@@ -28,12 +28,14 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 
 import Objects.Market;
 import Objects.Player;
 
 public class Wait_Page extends AppCompatActivity  {
+    private final static String TAG ="Wait_page_ACtivity";
 
     Integer player_count;
 
@@ -154,6 +156,7 @@ public class Wait_Page extends AppCompatActivity  {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.d(TAG, "Trouble accessing market data");
 
             }
         });
@@ -185,6 +188,8 @@ public class Wait_Page extends AppCompatActivity  {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.d(TAG, "trouble adding player");
+
 
             }
         });
@@ -227,6 +232,9 @@ public class Wait_Page extends AppCompatActivity  {
                     if (the_count%num_man==0){
                         p.setType("M");
                         Manager m = new Manager(p.getID());
+                        Integer last_index = current_user_id.length();
+                        char[] slice = Arrays.copyOfRange( current_user_id.toCharArray(), last_index-5, last_index-1);
+                        m.setCompany_symbol(slice.toString());
                         FirebaseDatabase.getInstance().getReference("Managers").child(p.getID()).setValue(m);
                     }
                     else {
@@ -241,16 +249,19 @@ public class Wait_Page extends AppCompatActivity  {
                 }
                 if (current_user_type.compareTo("I")==0) {
                     Intent intent = new Intent(context, Investor_Instructions.class);
+                    intent.putExtra("investor_id", current_user_id);
                     context.startActivity(intent);
                 }
                 if (current_user_type.compareTo("M")==0){
                     Intent intent = new Intent(context, Manager_Instructions.class);
+                    intent.putExtra("manager_id",current_user_id);
                     context.startActivity(intent);
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.d(TAG, "trouble getting entire player_list");
 
             }
         });

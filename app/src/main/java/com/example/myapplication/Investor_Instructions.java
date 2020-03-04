@@ -16,6 +16,7 @@ public class Investor_Instructions extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         context = this;
         setContentView(R.layout.activity_investor__instructions);
+        final String investor_id = getIntent().getStringExtra("investor_id");
 
 
         Button b = findViewById(R.id.next2);
@@ -23,6 +24,7 @@ public class Investor_Instructions extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, MarketPlace.class);
+                intent.putExtra("user_id", investor_id );
                 context.startActivity(intent);
             }
         });
