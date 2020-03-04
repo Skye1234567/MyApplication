@@ -3,6 +3,8 @@ package com.example.myapplication;
 import Objects.Trade;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
+
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -10,6 +12,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -19,6 +22,7 @@ import com.google.firebase.database.Transaction;
 import com.google.firebase.database.ValueEventListener;
 
 public class MarketPlace extends AppCompatActivity {
+    private static final String TAG="Marketplace";
     TextView a;
     TextView b;
     TextView high_price;
@@ -27,14 +31,24 @@ public class MarketPlace extends AppCompatActivity {
     TextView e;
     TextView f;
     Button place_order;
+    private ViewPager viewPager;
+
+    private SectionsPageAdapter mSectionsPageAdapter;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_market_place);
+
         FirebaseDatabase db = FirebaseDatabase.getInstance();
         DatabaseReference ref = db.getReference();
+
+        mSectionsPageAdapter = new SectionsPageAdapter(getSupportFragmentManager());
+        viewPager = (ViewPager) findViewById(R.id.marketplace_container);
+        setUpViewPager(viewPager);
+        TabLayout tabLayout = findViewById(R.id.tabmarketplacelayout);
+        tabLayout.setupWithViewPager(viewPager);
 /*
         place_order = findViewById(R.id.place_order_button);
 
@@ -80,5 +94,13 @@ public class MarketPlace extends AppCompatActivity {
 
 
 */
+    }
+
+    private void setUpViewPager(ViewPager viewPager){
+        SectionsPageAdapter adapter = new SectionsPageAdapter(getSupportFragmentManager());
+        adapter.addFragment(new OrderStockFragment(), "Place Order");
+        adapter.addFragment(new PersonalValueFragment(), "Cash");
+        adapter.addFragment(new CompanyReportFragment(), "Company Report");
+        viewPager.setAdapter(adapter);
     }
 }

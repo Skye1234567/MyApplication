@@ -39,7 +39,7 @@
         app:layout_constraintTop_toBottomOf="@id/welcome_investor"
           />
 
-    <TableLayout
+   /* <TableLayout
         android:id="@+id/invest_table"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -146,6 +146,7 @@
 
 
     </TableLayout>
+    */
 
 
 
@@ -153,7 +154,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:id="@+id/next2"
-    android:text="Next"
+    android:text="Proceed to marketplace"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintTop_toBottomOf="@+id/invest_table"
     app:layout_constraintBottom_toBottomOf="parent"
