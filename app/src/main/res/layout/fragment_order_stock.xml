@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".OrderStockFragment">
 
-    <!-- TODO: Update blank fragment layout -->
+
     <LinearLayout
         android:id="@+id/stock_exchange"
         android:layout_width="wrap_content"
@@ -18,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintTop_toBottomOf="parent"
         android:paddingLeft="@dimen/textSizeTitle"
-        android:paddingTop="@dimen/textSizeTitle"
+        android:paddingTop="@dimen/tab_bar_gap"
         android:layout_gravity="center"
         >
 
@@ -35,17 +35,17 @@
 
         <Spinner
             android:id="@+id/spinner_stocks"
-
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:entries="@array/stocks"
+
             />
 
         <Spinner
             android:id="@+id/spinner_buy_sell"
             android:layout_width="347dp"
             android:layout_height="wrap_content"
-            android:entries="@array/buy_or_sell"
+
+
             />
 
         <TextView
