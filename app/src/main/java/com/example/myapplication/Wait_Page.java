@@ -2,8 +2,6 @@ package com.example.myapplication;
 
 import android.content.Context;
 import android.content.Intent;
-
-import Objects.Database_callback;
 import Objects.Investor;
 import Objects.Manager;
 import Objects.Session;
@@ -48,6 +46,7 @@ public class Wait_Page extends AppCompatActivity  {
     Context context;
     String current_user_type;
     String current_user_id;
+    String current_company_symbol;
 
 
     Integer player_count_definition;
@@ -59,7 +58,7 @@ public class Wait_Page extends AppCompatActivity  {
 
 
         super.onCreate(savedInstanceState);
-        context = (Context)this;
+        context = this;
 
 
         setContentView(R.layout.activity_wait__page);
@@ -217,9 +216,7 @@ public class Wait_Page extends AppCompatActivity  {
 
     private void assign_player_roles(DatabaseReference player_id_list_database){
 
-        Query get_all_players = player_id_list_database;
-
-        get_all_players.addListenerForSingleValueEvent(new ValueEventListener() {
+        player_id_list_database.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Random random = new Random();
@@ -234,7 +231,9 @@ public class Wait_Page extends AppCompatActivity  {
                         Manager m = new Manager(p.getID());
                         Integer last_index = current_user_id.length();
                         char[] slice = Arrays.copyOfRange( current_user_id.toCharArray(), last_index-5, last_index-1);
-                        m.setCompany_symbol(slice.toString());
+                        current_company_symbol = slice.toString();
+                        current_company_symbol.replaceAll("[\[ \],.\$#]", "j");
+                        m.setCompany_symbol(current_company_symbol);
                         FirebaseDatabase.getInstance().getReference("Managers").child(p.getID()).setValue(m);
                     }
                     else {
@@ -255,6 +254,7 @@ public class Wait_Page extends AppCompatActivity  {
                 if (current_user_type.compareTo("M")==0){
                     Intent intent = new Intent(context, Manager_Instructions.class);
                     intent.putExtra("manager_id",current_user_id);
+                    intent.putExtra("company_symbol", current_company_symbol);
                     context.startActivity(intent);
                 }
             }

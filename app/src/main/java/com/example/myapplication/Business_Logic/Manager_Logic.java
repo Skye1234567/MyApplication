@@ -20,7 +20,15 @@ import androidx.annotation.NonNull;
 public class Manager_Logic {
     private final static String TAG ="Manager_Logic";
 
-    public void allocate_shares(final String manager_id){
+    private String company_symbol;
+    private String manager_id;
+
+    public Manager_Logic(String company_symbol, String manager_id) {
+        this.company_symbol = company_symbol;
+        this.manager_id= manager_id;
+    }
+
+    public void allocate_shares(){
         FirebaseDatabase db = FirebaseDatabase.getInstance();
         Query q = db.getReference("Investors");
         q.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -28,7 +36,7 @@ public class Manager_Logic {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot d : dataSnapshot.getChildren()){
                     String investor_id = d.getValue(Investor.class).getID();
-                    FirebaseDatabase.getInstance().getReference("Shares").child(manager_id).setValue(new Share(investor_id, manager_id ));
+                    FirebaseDatabase.getInstance().getReference("Shares").child(investor_id).child(company_symbol).setValue(new Share(investor_id, manager_id ));
                 }
             }
 

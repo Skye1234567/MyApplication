@@ -19,11 +19,14 @@ public class Manager_Instructions extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Manager_Logic mLogic = new Manager_Logic();
+
         setContentView(R.layout.activity_manager__instructions);
         context=this;
-        final String manager_id = getIntent().getStringExtra("manager_id");
-        mLogic.allocate_shares(manager_id);
+        Intent intent = getIntent();
+        final String manager_id = intent.getStringExtra("manager_id");
+        final String company_symbol = intent.getStringExtra("company_symbol");
+        Manager_Logic mLogic = new Manager_Logic( company_symbol, manager_id);
+        mLogic.allocate_shares();
         Button b = findViewById(R.id.no_audit);
         b.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +23,9 @@ import com.google.firebase.database.ValueEventListener;
 
 
 public class PersonalValueFragment extends Fragment {
+    private final static String TAG="personal value fragment";
     TextView textView;
+    TextView payout;
     @Nullable
     @Override
 
@@ -30,6 +33,7 @@ public class PersonalValueFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_personal_value,container, false);
         String user_id = getActivity().getIntent().getStringExtra("user_id");
         textView = (TextView) view.findViewById(R.id.cash_value);
+        payout = (TextView) view.findViewById(R.id.value_account);
 
         String id = getActivity().getIntent().getStringExtra("user_id");
         Query q = FirebaseDatabase.getInstance().getReference().child("player_list").child(id);
@@ -37,13 +41,17 @@ public class PersonalValueFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Player current  =dataSnapshot.getValue(Player.class);
-                textView.setText( current.getCash().toString());
+                String cash = current.getCash().toString();
+                String value = current.getValue().toString();
+                textView.setText(cash);
+                payout.setText(value);
+
 
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                Log.d(TAG, "data listener for the cash value for a player cancelled");
             }
         });
 
