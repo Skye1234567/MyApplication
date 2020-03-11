@@ -1,7 +1,7 @@
 <resources>
-    <dimen name="fab_margin">16dp</dimen>
-    <dimen name="tab_bar_gap">100dp</dimen>
+    <dimen name="fab_margin">16sp</dimen>
+    <dimen name="tab_bar_gap">100sp</dimen>
 
-    <dimen name="textSizeTitle">40dp</dimen>
-    <dimen name="textSizeNormal">25dp</dimen>
+    <dimen name="textSizeTitle">40sp</dimen>
+    <dimen name="textSizeNormal">25sp</dimen>
 </resources>

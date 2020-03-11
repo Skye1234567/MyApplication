@@ -18,7 +18,7 @@ public class CompanyReportFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_company_report,container, false);
-
+        String user_id = getActivity().getIntent().getStringExtra("user_id");
         return view;
     }
 }

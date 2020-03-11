@@ -5,6 +5,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -12,7 +14,9 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -23,14 +27,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class MarketPlace extends AppCompatActivity {
     private static final String TAG="Marketplace";
-    TextView a;
-    TextView b;
-    TextView high_price;
-    TextView low_price;
-    Spinner stocks;
-    TextView e;
-    TextView f;
-    Button place_order;
+    private Context context;
     private ViewPager viewPager;
 
     private SectionsPageAdapter mSectionsPageAdapter;
@@ -40,60 +37,26 @@ public class MarketPlace extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_market_place);
+        context=this;
 
         FirebaseDatabase db = FirebaseDatabase.getInstance();
         DatabaseReference ref = db.getReference();
+        FloatingActionButton sign_out=findViewById(R.id.FAB);
+        sign_out.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, MainActivity.class);
+                FirebaseAuth.getInstance().signOut();
+                context.startActivity(intent);
+            }
+        });
 
         mSectionsPageAdapter = new SectionsPageAdapter(getSupportFragmentManager());
         viewPager = (ViewPager) findViewById(R.id.marketplace_container);
         setUpViewPager(viewPager);
         TabLayout tabLayout = findViewById(R.id.tabmarketplacelayout);
         tabLayout.setupWithViewPager(viewPager);
-/*
-        place_order = findViewById(R.id.place_order_button);
 
-        stocks = findViewById(R.id.spinner_stocks);
-        String current_company = stocks.getSelectedItem().toString();
-        Query share = ref.child("shares"). child(current_company).orderByValue();
-        share.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String high;
-                String low;
-                high=dataSnapshot.child("high").toString();
-               low = dataSnapshot.child("low").toString();
-               high_price.setText(high);
-               low_price.setText(low);
-
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-//make sure u dont call getText on null object reference
-        Query qa = ref.child("managers").orderByChild(a.getText().toString());
-        Query qb = ref.child("managers").orderByChild(b.getText().toString());
-        Query qc = ref.child("managers").orderByChild(b.getText().toString());
-        Query qd = ref.child("managers").orderByChild(b.getText().toString());
-        Query qe = ref.child("managers").orderByChild(b.getText().toString());
-        Query qf = ref.child("managers").orderByChild(b.getText().toString());
-
-        place_order.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-
-
-
-
-            }
-        });
-
-
-*/
     }
 
     private void setUpViewPager(ViewPager viewPager){

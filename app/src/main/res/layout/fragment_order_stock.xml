@@ -49,6 +49,26 @@
             />
 
         <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/quantity_owned"
+            android:layout_gravity="start"
+            android:padding="3dip"
+            android:textAllCaps="true"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/textSizeNormal"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/current_bid"
+            android:layout_gravity="start"
+            android:padding="3dip"
+            android:textAllCaps="true"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/textSizeNormal"/>
+
+        <TextView
             android:id="@+id/quantity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -70,6 +90,18 @@
             android:textSize="@dimen/textSizeNormal"
 
             />
+        <TextView
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:padding="3dip"
+        android:text="$ Amount "
+        android:textAllCaps="true"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="@dimen/textSizeNormal"
+        />
+
 
         <EditText
             android:id="@+id/money_sign"
@@ -78,11 +110,11 @@
             android:layout_height="wrap_content"
             android:layout_gravity="left"
             android:padding="3dip"
-            android:text="$"
+
             android:textAllCaps="true"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="@dimen/textSizeNormal"
-            android:visibility="invisible" />
+            />
 
         <Button
             android:id="@+id/place_order_button"

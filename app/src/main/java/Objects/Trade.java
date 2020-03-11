@@ -1,20 +1,57 @@
 package Objects;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class Trade implements Serializable {
 
-    private Integer high_bid;
-    private Integer low_price;
     private Integer num_shares;
+    private Date timeStamp;
+    private boolean completed;
+    private boolean for_sale;
+    private Integer price_point;
+
 
     public Trade() {
     }
 
-    public Trade(Integer high_bid, Integer low_price, Integer num_shares) {
-        this.high_bid = high_bid;
-        this.low_price = low_price;
+    public Trade(Integer num_shares,  boolean for_sale, Integer price_point) {
         this.num_shares = num_shares;
+        this.completed = false;
+        this.for_sale = for_sale;
+        this.price_point = price_point;
+    }
+
+    public Date getTimeStamp() {
+        return timeStamp;
+    }
+
+    public void setTimeStamp(Date timeStamp) {
+        this.timeStamp = timeStamp;
+    }
+
+    public boolean isCompleted() {
+        return completed;
+    }
+
+    public void setCompleted(boolean completed) {
+        this.completed = completed;
+    }
+
+    public boolean isFor_sale() {
+        return for_sale;
+    }
+
+    public void setFor_sale(boolean for_sale) {
+        this.for_sale = for_sale;
+    }
+
+    public Integer getPrice_point() {
+        return price_point;
+    }
+
+    public void setPrice_point(Integer price_point) {
+        this.price_point = price_point;
     }
 
     public Integer getNum_shares() {
@@ -25,26 +62,6 @@ public class Trade implements Serializable {
         this.num_shares = num_shares;
     }
 
-    public Integer getHigh_bid() {
-        return high_bid;
-    }
 
-    public void setHigh_bid(Integer high_bid) {
-        this.high_bid = high_bid;
-    }
-
-    public Integer getLow_price() {
-        return low_price;
-    }
-
-    public void setLow_price(Integer low_price) {
-        this.low_price = low_price;
-    }
-
-
-    public Integer get_stock_price(){
-
-        return this.high_bid+this.low_price/2;
-    }
 
 }

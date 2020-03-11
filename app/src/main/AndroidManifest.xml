@@ -22,7 +22,7 @@
         <activity android:name=".MarketPlace" />
         <activity android:name=".Manager_Instructions" />
         <activity android:name=".Investor_Instructions"/>
-
+        <activity android:name=".Sign_up_player"/>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

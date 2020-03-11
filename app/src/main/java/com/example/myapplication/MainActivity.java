@@ -3,6 +3,7 @@ package com.example.myapplication;
 import android.content.Context;
 import android.content.Intent;
 
+import Objects.SimpleLoginHelper;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
@@ -28,7 +29,9 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
         context = this;
-        FirebaseAuth.getInstance().signOut();
+
+
+
         Button button = (Button) findViewById(R.id.select_admin);
         Button button1 = (Button) findViewById(R.id.select_player);
         button.setOnClickListener(new View.OnClickListener() {
@@ -47,29 +50,11 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //put stuff for player auth
                 FirebaseAuth auth = FirebaseAuth.getInstance();
+                Intent intent = new Intent(context, Sign_up_player.class);
+                context.startActivity(intent);
+                finish();
 
 
-                auth.signInAnonymously().addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()){
-
-                            String player = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                            if (player!=null && FirebaseAuth.getInstance().getCurrentUser().isAnonymous()){
-                                Intent intent = new Intent(context, Wait_Page.class);
-                                intent.putExtra("player_id", player);
-                                context.startActivity(intent);
-                                finish();}
-                            else{
-                                Toast.makeText(context, "Error in signing in 1", Toast.LENGTH_SHORT).show();
-                            };
-                        }
-                        else{
-                            Toast.makeText(context, "Error in signing in 2", Toast.LENGTH_SHORT).show();
-                        };
-
-                    }
-                });
 
 
 

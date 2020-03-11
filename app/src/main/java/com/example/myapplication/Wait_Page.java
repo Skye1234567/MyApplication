@@ -3,10 +3,8 @@ package com.example.myapplication;
 import android.content.Context;
 import android.content.Intent;
 
-import Objects.Database_callback;
-import Objects.Investor;
-import Objects.Manager;
 import Objects.Session;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -28,12 +26,14 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 
 import Objects.Market;
 import Objects.Player;
 
 public class Wait_Page extends AppCompatActivity  {
+    private final static String TAG ="Wait_page_ACtivity";
 
     Integer player_count;
 
@@ -48,6 +48,7 @@ public class Wait_Page extends AppCompatActivity  {
     String current_user_id;
 
 
+
     Integer player_count_definition;
 
 
@@ -57,30 +58,45 @@ public class Wait_Page extends AppCompatActivity  {
 
 
         super.onCreate(savedInstanceState);
-        context = (Context)this;
+        context = this;
 
-
+        FirebaseDatabase.getInstance().getReference("ALLOW_TRADES").setValue(false);
         setContentView(R.layout.activity_wait__page);
         Intent intent = getIntent();
-        String player_id = intent.getStringExtra("player_id");
+        String player_id = intent.getStringExtra("user_id");
         String player_count_database_def="player_count";
         String player_id_list_database_def = "player_list";
 
         current_user_type = "";
-        player_count_definition=1;
+
         sess = new Session(player_count_definition);
         count_database = "player_counter";
         current_user_id = player_id;
+        FirebaseDatabase current_data= FirebaseDatabase.getInstance();
 
-        player_id_list_ref = FirebaseDatabase.getInstance().getReference(player_id_list_database_def);
-        ref_def = FirebaseDatabase .getInstance().getReference(player_count_database_def);
-        ref_count = FirebaseDatabase .getInstance().getReference(count_database);
+        player_id_list_ref = current_data.getReference(player_id_list_database_def);
+        ref_def = current_data.getReference(player_count_database_def);
+        ref_count = current_data.getReference(count_database);
         ref_count.setValue(0);
         FirebaseDatabase db = FirebaseDatabase.getInstance();
-        Player current = new Player(player_id);
 
-        Query markets = db.getReference("markets");
-        Query player_list = db.getReference(player_id_list_database_def);
+       Query markets = db.getReference("markets");
+       Query player_list = db.getReference(player_id_list_database_def);
+
+       ref_def.addListenerForSingleValueEvent(new ValueEventListener() {
+           @Override
+           public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+               player_count_definition=dataSnapshot.getValue(Integer.class);
+           }
+
+           @Override
+           public void onCancelled(@NonNull DatabaseError databaseError) {
+               Log.d(TAG, databaseError.getMessage());
+           }
+       });
+
+
+
 
 
         markets.addChildEventListener(new ChildEventListener() {
@@ -99,7 +115,8 @@ public class Wait_Page extends AppCompatActivity  {
                     if (market_type.compareTo("BUST") == 0) {
                         sess.setBust(market);
                     }
-                    when_Session_configured();
+                    when_sess_valid();
+
                 }
                 }catch (NullPointerException n){
                     Log.d("my_logs_market_child_added", n.getMessage());
@@ -121,7 +138,7 @@ public class Wait_Page extends AppCompatActivity  {
                     if (market_type.compareTo("BUST") == 0) {
                         sess.setBust(market);
                     }
-                    when_Session_configured();
+
                 }
             }
 
@@ -154,6 +171,7 @@ public class Wait_Page extends AppCompatActivity  {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.d(TAG, "Trouble accessing market data");
 
             }
         });
@@ -162,7 +180,7 @@ public class Wait_Page extends AppCompatActivity  {
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 Toast.makeText(context," Adding players...", Toast.LENGTH_LONG).show();
                 updatePlayerCountAdd(ref_count);
-                when_Session_configured();
+                when_sess_valid();
 
 
             }
@@ -185,79 +203,14 @@ public class Wait_Page extends AppCompatActivity  {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.d(TAG, "trouble adding player");
+
 
             }
         });
 
-        db.getReference(player_id_list_database_def).child(player_id).setValue(current);
-
-
-
-
-
 
     }
-
-
-    private void when_Session_configured(){
-        if (sess!=null){
-        if (sess.isValid()&&player_count!=null &&player_count_definition!=null){
-            Toast.makeText(context,"Assigning player roles...", Toast.LENGTH_LONG).show();
-            assign_player_roles(player_id_list_ref);
-
-
-        }}
-    }
-
-
-    private void assign_player_roles(DatabaseReference player_id_list_database){
-
-        Query get_all_players = player_id_list_database;
-
-        get_all_players.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Random random = new Random();
-                ArrayList<Player> player_list_extra = new ArrayList<>();
-                int num_man = random.nextInt(1)+3;
-                int the_count = 0;
-
-                for (DataSnapshot s: dataSnapshot.getChildren()){
-                    Player p = s.getValue(Player.class);
-                    if (the_count%num_man==0){
-                        p.setType("M");
-                        Manager m = new Manager(p.getID());
-                        FirebaseDatabase.getInstance().getReference("Managers").child(p.getID()).setValue(m);
-                    }
-                    else {
-                        p.setType("I");
-                        Investor i = new Investor(p.getID());
-                        FirebaseDatabase.getInstance().getReference("Investors").child(p.getID()).setValue(i);
-                    }
-                    if ( current_user_id==p.getID()){current_user_type=p.getType();}
-
-
-                    the_count+=1;
-                }
-                if (current_user_type.compareTo("I")==0) {
-                    Intent intent = new Intent(context, Investor_Instructions.class);
-                    context.startActivity(intent);
-                }
-                if (current_user_type.compareTo("M")==0){
-                    Intent intent = new Intent(context, Manager_Instructions.class);
-                    context.startActivity(intent);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-    }
-
-
 
     private void updatePlayerCountSubtract(DatabaseReference player_counter) {
         player_counter.runTransaction(new Transaction.Handler() {
@@ -320,7 +273,18 @@ public class Wait_Page extends AppCompatActivity  {
         });
     }
 
+    private void when_sess_valid(){
+        if (sess.isValid() &&player_count_definition==player_count){
+            Intent intent = new Intent(context, MarketPlace.class);
+            intent.putExtra("session", sess);
+            startActivity(intent);
 
+
+        }
+
+
+
+    }
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event)
     {

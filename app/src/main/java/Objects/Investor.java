@@ -6,7 +6,8 @@ public class Investor extends Player {
 
     ArrayList<Share> Shares;
 
-
+    public Investor() {
+    }
 
     public Investor(String ID) {
         super(ID);
