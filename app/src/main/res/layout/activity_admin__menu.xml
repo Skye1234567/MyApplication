@@ -8,4 +8,24 @@
     tools:context=".Admin_Menu"
     android:layout_margin="@dimen/textSizeNormal">
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <androidx.appcompat.widget.ActionMenuView
+            android:id="@+id/menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:layout_marginBottom="@dimen/textSizeNormal"
+            android:layout_marginRight="@dimen/textSizeNormal">
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/FAB"
+        app:fabSize="mini"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+        </androidx.appcompat.widget.ActionMenuView>
+    </FrameLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
