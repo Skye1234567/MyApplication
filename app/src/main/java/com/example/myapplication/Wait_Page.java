@@ -277,6 +277,7 @@ public class Wait_Page extends AppCompatActivity  {
         if (sess.isValid() &&player_count_definition==player_count){
             Intent intent = new Intent(context, MarketPlace.class);
             intent.putExtra("session", sess);
+            intent.putExtra("user_id", current_user_id);
             startActivity(intent);
 
 

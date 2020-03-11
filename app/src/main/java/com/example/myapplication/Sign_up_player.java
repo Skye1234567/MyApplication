@@ -122,13 +122,15 @@
          FirebaseDatabase.getInstance().getReference("Managers").addListenerForSingleValueEvent(new ValueEventListener() {
              @Override
              public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                 if (dataSnapshot.hasChild(id)){
-                     Intent intentman = new Intent(context, Manager_Instructions.class);
-                     intentman.putExtra("player_id", id);
-                     context.startActivity(intentman);
-                     finish();
+                 Manager manager = dataSnapshot.child(id).getValue(Manager.class);
 
-                 }
+                 Intent intentman = new Intent(context, Manager_Instructions.class);
+                 intentman.putExtra("user_id", id);
+                 intentman.putExtra("c", manager.getCompany_symbol());
+                 context.startActivity(intentman);
+                 finish();
+
+
 
              }
 
@@ -144,7 +146,7 @@
              public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                  if (dataSnapshot.hasChild(id)){
                      Intent intent = new Intent(context, Manager_Instructions.class);
-                     intent.putExtra("player_id", id);
+                     intent.putExtra("user_id", id);
                      context.startActivity(intent);
                      finish();
 
@@ -176,6 +178,7 @@
              FirebaseDatabase.getInstance().getReference("Managers").child(player.getID()).setValue(m);
              Intent intent = new Intent(context, Manager_Instructions.class);
              intent.putExtra("user_id", UID);
+             intent.putExtra("c", current_company_symbol);
              context.startActivity(intent);}
          else {
              player.setType("I");
@@ -183,6 +186,7 @@
              FirebaseDatabase.getInstance().getReference("Investors").child(player.getID()).setValue(investor);
              Intent intent = new Intent(context, Investor_Instructions.class);
              intent.putExtra("user_id", UID);
+
              context.startActivity(intent);
 
          }

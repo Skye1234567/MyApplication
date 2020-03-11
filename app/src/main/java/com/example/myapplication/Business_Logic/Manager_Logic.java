@@ -23,19 +23,22 @@ public class Manager_Logic {
     private String company_symbol;
     private String manager_id;
 
-    public Manager_Logic(String company_symbol, String manager_id) {
+    public Manager_Logic( String company_symbol, String manager_id) {
         this.company_symbol = company_symbol;
         this.manager_id= manager_id;
+
     }
 
     public void allocate_shares(){
+        if (company_symbol==null)company_symbol=" u";
+
         FirebaseDatabase db = FirebaseDatabase.getInstance();
         Query q = db.getReference("Investors");
         q.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot d : dataSnapshot.getChildren()){
-                    String investor_id = d.getValue(Investor.class).getID();
+                    String investor_id = d.getKey();
                      FirebaseDatabase.getInstance().getReference("Shares").child(investor_id).child(company_symbol).setValue(new Share(investor_id, manager_id ));
                 }
             }

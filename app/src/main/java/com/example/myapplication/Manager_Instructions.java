@@ -25,7 +25,7 @@ public class Manager_Instructions extends AppCompatActivity {
         context=this;
         Intent intent = getIntent();
         final String manager_id = intent.getStringExtra("user_id");
-        final String company_symbol = intent.getStringExtra("company_symbol");
+        final String company_symbol = intent.getStringExtra("c");
         Manager_Logic mLogic = new Manager_Logic( company_symbol, manager_id);
         mLogic.allocate_shares();
         Button b = findViewById(R.id.no_audit);
