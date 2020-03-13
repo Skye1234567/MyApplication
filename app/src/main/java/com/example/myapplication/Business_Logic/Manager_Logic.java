@@ -30,7 +30,7 @@ public class Manager_Logic {
     }
 
     public void allocate_shares(){
-        if (company_symbol==null)company_symbol=" u";
+        if (company_symbol==null)return;
 
         FirebaseDatabase db = FirebaseDatabase.getInstance();
         Query q = db.getReference("Investors");

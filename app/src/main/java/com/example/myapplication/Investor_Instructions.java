@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.myapplication.Business_Logic.Investor_Logic;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -20,6 +21,8 @@ public class Investor_Instructions extends AppCompatActivity {
         context = this;
         setContentView(R.layout.activity_investor__instructions);
         final String investor_id = getIntent().getStringExtra("user_id");
+        Investor_Logic ILL = new Investor_Logic(investor_id);
+        ILL.allocate_shares();
 
 
         Button b = findViewById(R.id.next2);
@@ -29,6 +32,7 @@ public class Investor_Instructions extends AppCompatActivity {
                 Intent intent = new Intent(context, Wait_Page.class);
                 intent.putExtra("user_id", investor_id );
                 context.startActivity(intent);
+                finish();
             }
         });
         FloatingActionButton sign_out=findViewById(R.id.FAB);
@@ -39,6 +43,7 @@ public class Investor_Instructions extends AppCompatActivity {
                 Intent intent = new Intent(context, MainActivity.class);
                 FirebaseAuth.getInstance().signOut();
                 context.startActivity(intent);
+                finish();
             }
         });
     }
