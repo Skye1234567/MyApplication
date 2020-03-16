@@ -4,27 +4,36 @@ import java.io.Serializable;
 
 public class Share implements Serializable {
 
-    private Float price;
+    private Float market_price;
     private String owner;
     private String company;
     private Integer number;
-    private Float asking_price;
-    private Integer number_for_sale;
+    private Float offer_amount;
+    private Integer number_offered;
+    private String status;
 
-    public Integer getNumber_for_sale() {
-        return number_for_sale;
+    public String getStatus() {
+        return status;
     }
 
-    public void setNumber_for_sale(Integer number_for_sale) {
-        this.number_for_sale = number_for_sale;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
-    public Float getAsking_price() {
-        return asking_price;
+    public Integer getNumber_offered() {
+        return number_offered;
     }
 
-    public void setAsking_price(Float asking_price) {
-        this.asking_price = asking_price;
+    public void setNumber_offered(Integer number_offered) {
+        this.number_offered = number_offered;
+    }
+
+    public Float getOffer_amount() {
+        return offer_amount;
+    }
+
+    public void setOffer_amount(Float offer_amount) {
+        this.offer_amount = offer_amount;
     }
 
     public Share() {
@@ -36,12 +45,12 @@ public class Share implements Serializable {
         this.number=10;
     }
 
-    public Float getPrice() {
-        return price;
+    public Float getMarket_price() {
+        return market_price;
     }
 
-    public void setPrice(Float price) {
-        this.price = price;
+    public void setMarket_price(Float market_price) {
+        this.market_price = market_price;
     }
 
     public String getOwner() {

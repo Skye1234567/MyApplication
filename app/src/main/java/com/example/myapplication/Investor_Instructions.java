@@ -25,7 +25,7 @@ public class Investor_Instructions extends AppCompatActivity {
         ILL.allocate_shares();
 
 
-        Button b = findViewById(R.id.next2);
+        Button b = findViewById(R.id.proceed_to_market);
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -204,12 +204,14 @@ public class OrderStockFragment extends Fragment{
                         FirebaseDatabase db = FirebaseDatabase.getInstance();
                         DatabaseReference ref_shares;
                         ref_shares = db.getReference("Shares").child(user_id);
+                        my_share.setOffer_amount(dollars);
                         if(bs.compareTo("Sell")==0){
+                            my_share.setStatus("S");
 
-                            my_share.setAsking_price(dollars);
+
                             if (my_share.getNumber()>=num_stock){
 
-                                my_share.setNumber_for_sale(num_stock);
+                                my_share.setNumber_offered(num_stock);
                                 ref_shares.setValue(my_share);
                                 db.getReference("Companies").child(my_share.getCompany()).child("for_sale").push().setValue(my_share);
                             }
@@ -219,6 +221,13 @@ public class OrderStockFragment extends Fragment{
 
                         }
                         else if (bs.compareTo("Buy")==0){
+                            my_share.setStatus("B");
+
+                            my_share.setNumber_offered(num_stock);
+
+                            ref_shares.setValue(my_share);
+                            db.getReference("Companies").child(my_share.getCompany()).child("bids").push().setValue(my_share);
+
                             Toast.makeText(getActivity(), "Buy stock clicked", Toast.LENGTH_LONG).show();
                         }
 

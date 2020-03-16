@@ -24,13 +24,8 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.Transaction;
 import com.google.firebase.database.ValueEventListener;
 
-import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Random;
-
 import Objects.Market;
-import Objects.Player;
+
 
 public class Wait_Page extends AppCompatActivity  {
     private final static String TAG ="Wait_page_ACtivity";
@@ -44,7 +39,6 @@ public class Wait_Page extends AppCompatActivity  {
     DatabaseReference player_id_list_ref;
     Session sess;
     Context context;
-    String current_user_type;
     String current_user_id;
 
 
@@ -66,10 +60,6 @@ public class Wait_Page extends AppCompatActivity  {
         String player_id = intent.getStringExtra("user_id");
         String player_count_database_def="player_count";
         String player_id_list_database_def = "player_list";
-
-        current_user_type = "";
-
-        sess = new Session(player_count_definition);
         count_database = "player_counter";
         current_user_id = player_id;
         FirebaseDatabase current_data= FirebaseDatabase.getInstance();
@@ -87,6 +77,9 @@ public class Wait_Page extends AppCompatActivity  {
            @Override
            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                player_count_definition=dataSnapshot.getValue(Integer.class);
+               sess=new Session(player_count_definition);
+
+
            }
 
            @Override
@@ -115,9 +108,10 @@ public class Wait_Page extends AppCompatActivity  {
                     if (market_type.compareTo("BUST") == 0) {
                         sess.setBust(market);
                     }
-                    when_sess_valid();
+
 
                 }
+
                 }catch (NullPointerException n){
                     Log.d("my_logs_market_child_added", n.getMessage());
                 }
@@ -139,7 +133,9 @@ public class Wait_Page extends AppCompatActivity  {
                         sess.setBust(market);
                     }
 
+
                 }
+
             }
 
 
@@ -180,7 +176,7 @@ public class Wait_Page extends AppCompatActivity  {
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 Toast.makeText(context," Adding players...", Toast.LENGTH_LONG).show();
                 updatePlayerCountAdd(ref_count);
-                when_sess_valid();
+
 
 
             }
@@ -210,6 +206,7 @@ public class Wait_Page extends AppCompatActivity  {
         });
 
 
+
     }
 
     private void updatePlayerCountSubtract(DatabaseReference player_counter) {
@@ -236,6 +233,7 @@ public class Wait_Page extends AppCompatActivity  {
             public void onComplete(DatabaseError databaseError, boolean b,
                                    DataSnapshot dataSnapshot) {
                 player_count= dataSnapshot.getValue(Integer.class);
+                try {throw new Exception();}catch (Exception e ){}
                 // Transaction completed
                 //Log.d(TAG, "postTransaction:onComplete:" + databaseError);
             }
@@ -260,6 +258,7 @@ public class Wait_Page extends AppCompatActivity  {
                 // Set value and report transaction success
                 mutableData.setValue(p);
                 player_count = p;
+                when_sess_valid();
                 return Transaction.success(mutableData);
             }
 
@@ -274,18 +273,28 @@ public class Wait_Page extends AppCompatActivity  {
     }
 
     private void when_sess_valid(){
-        if (sess.isValid() &&player_count_definition==player_count){
+        if (sess!=null){
+        if (sess.isValid() &&player_count_definition.equals(player_count)){
             Intent intent = new Intent(context, MarketPlace.class);
             intent.putExtra("session", sess);
             intent.putExtra("user_id", current_user_id);
             startActivity(intent);
+            finish();
 
 
-        }
+        }}
+
 
 
 
     }
+
+
+
+
+
+
+
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event)
     {

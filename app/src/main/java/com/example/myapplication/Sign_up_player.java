@@ -40,7 +40,7 @@
      EditText password;
      String UID;
      long manager_num;
-     ArrayList<Integer> player_assigned;
+
 
 
      @Override
@@ -119,12 +119,6 @@
 
      private void get_PlayerType() {
          final String id = mAuth.getCurrentUser().getUid();
-         player_assigned = new ArrayList();
-         player_assigned.add(10);
-         player_assigned.add(11);
-         final Integer finished = null;
-
-
          FirebaseDatabase.getInstance().getReference("Managers").addListenerForSingleValueEvent(new ValueEventListener() {
              @Override
              public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -164,7 +158,7 @@ private void get_investors(){
         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
             if (dataSnapshot.hasChild(id)) {
-                Intent intent = new Intent(context, Manager_Instructions.class);
+                Intent intent = new Intent(context, Investor_Instructions.class);
                 intent.putExtra("user_id", id);
                 context.startActivity(intent);
                 finish();
@@ -187,14 +181,10 @@ private void get_investors(){
 
 
      private void setType(Player player){
-         Random r=new Random();
 
-         ArrayList<Integer> arrayList = new ArrayList<>();
-         long i;
-         for (i=0; i<manager_num ;i++) arrayList.add(0);
-         for(i=manager_num; i<manager_num+2;i++) arrayList.add(1);
-         Integer integer = r.nextInt(arrayList.size());
-         if (arrayList.get(integer)==1){player.setType("M");
+
+
+         if (manager_num<4){player.setType("M");
              Manager m = new Manager(player.getID());
              String current_company_symbol = new StringBuilderRandom(3).buildString();
              m.setCompany_symbol(current_company_symbol);
