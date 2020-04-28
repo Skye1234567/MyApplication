@@ -86,13 +86,14 @@
                                          FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                                          UID =user.getUid();
                                          Player player = new Player(UID);
-                                         FirebaseDatabase.getInstance().getReference("player_list").child(user.getUid()).setValue(player).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                         FirebaseDatabase.getInstance().getReference("player_list")
+                                                 .child(user.getUid()).setValue(player).addOnCompleteListener(new OnCompleteListener<Void>() {
                                              @Override
                                              public void onComplete(@NonNull Task<Void> task) {
 
-
-                                                 SimpleLoginHelper simpleLoginHelper = new SimpleLoginHelper(context);
-                                                 simpleLoginHelper.KeepLoggedIn(UID);
+//TODO: keep logged in
+                                                 //SimpleLoginHelper simpleLoginHelper = new SimpleLoginHelper(context);
+                                                 //simpleLoginHelper.KeepLoggedIn(UID);
                                                  get_PlayerType();
 
 

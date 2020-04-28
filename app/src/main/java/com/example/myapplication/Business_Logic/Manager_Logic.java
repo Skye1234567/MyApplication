@@ -1,16 +1,12 @@
 package com.example.myapplication.Business_Logic;
 import android.util.Log;
 
-import Objects.Investor;
-
 import Objects.Share;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-
-import java.util.*;
 
 
 import androidx.annotation.NonNull;
@@ -39,7 +35,7 @@ public class Manager_Logic {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot d : dataSnapshot.getChildren()){
                     String investor_id = d.getKey();
-                     FirebaseDatabase.getInstance().getReference("Shares").child(investor_id).child(company_symbol).setValue(new Share(investor_id, manager_id ));
+                     FirebaseDatabase.getInstance().getReference("Shares").child(investor_id).child(company_symbol).setValue(new Share(investor_id,company_symbol, manager_id ));
                 }
             }
 

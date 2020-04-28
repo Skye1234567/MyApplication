@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schem as.android.com/tools"
     android:paddingTop="40dp"
@@ -8,6 +8,7 @@
     tools:context=".Investor_Instructions"
     android:layout_margin="@dimen/textSizeNormal"
     >
+
 
 <TextView
     app:layout_constraintStart_toStartOf="parent"
@@ -33,6 +34,13 @@
          android:textColor="@color/colorPrimaryDark"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content" />
+
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swiper_investor_instructions"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
     <TableLayout
         android:id="@+id/company_shares_table"
         android:textSize="@dimen/textSizeNormal"
@@ -46,14 +54,82 @@
 
             <TextView
                 android:text="Company Symbol"
+                android:padding="@dimen/textSizeNormal"
                 android:textSize="@dimen/textSizeNormal"
                 android:textColor="@color/colorPrimaryDark"/>
             <TextView
                 android:text="Your Shares"
+                android:padding="@dimen/textSizeNormal"
+                android:textSize="@dimen/textSizeNormal"
+                android:textColor="@color/colorPrimaryDark"/>
+        </TableRow>
+        <TableRow>
+
+        <TextView
+            android:id="@+id/company1"
+            android:padding="@dimen/textSizeNormal"
+            android:textSize="@dimen/textSizeNormal"
+            android:textColor="@color/colorPrimaryDark"/>
+        <TextView
+            android:id="@+id/numshares1"
+            android:padding="@dimen/textSizeNormal"
+            android:textSize="@dimen/textSizeNormal"
+            android:textColor="@color/colorPrimaryDark"/>
+    </TableRow>
+        <TableRow>
+
+            <TextView
+                android:id="@+id/company2"
+                android:padding="@dimen/textSizeNormal"
+                android:textSize="@dimen/textSizeNormal"
+                android:textColor="@color/colorPrimaryDark"/>
+            <TextView
+                android:id="@+id/numshares2"
+                android:padding="@dimen/textSizeNormal"
+                android:textSize="@dimen/textSizeNormal"
+                android:textColor="@color/colorPrimaryDark"/>
+        </TableRow>
+        <TableRow>
+
+            <TextView
+                android:id="@+id/company3"
+                android:padding="@dimen/textSizeNormal"
+                android:textSize="@dimen/textSizeNormal"
+                android:textColor="@color/colorPrimaryDark"/>
+            <TextView
+                android:id="@+id/numshares3"
+                android:padding="@dimen/textSizeNormal"
+                android:textSize="@dimen/textSizeNormal"
+                android:textColor="@color/colorPrimaryDark"/>
+        </TableRow>
+        <TableRow>
+
+            <TextView
+                android:id="@+id/company4"
+                android:padding="@dimen/textSizeNormal"
+                android:textSize="@dimen/textSizeNormal"
+                android:textColor="@color/colorPrimaryDark"/>
+            <TextView
+                android:id="@+id/numshares4"
+                android:padding="@dimen/textSizeNormal"
+                android:textSize="@dimen/textSizeNormal"
+                android:textColor="@color/colorPrimaryDark"/>
+        </TableRow>
+        <TableRow>
+
+            <TextView
+                android:id="@+id/company5"
+                android:padding="@dimen/textSizeNormal"
+                android:textSize="@dimen/textSizeNormal"
+                android:textColor="@color/colorPrimaryDark"/>
+            <TextView
+                android:id="@+id/numshares5"
+                android:padding="@dimen/textSizeNormal"
                 android:textSize="@dimen/textSizeNormal"
                 android:textColor="@color/colorPrimaryDark"/>
         </TableRow>
     </TableLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <Button
         android:id="@+id/proceed_to_market"
@@ -87,6 +163,5 @@
 
         </androidx.appcompat.widget.ActionMenuView>
     </FrameLayout>
+</RelativeLayout>
 
-
-</androidx.constraintlayout.widget.ConstraintLayout>

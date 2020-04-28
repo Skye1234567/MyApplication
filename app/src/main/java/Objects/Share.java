@@ -11,6 +11,7 @@ public class Share implements Serializable {
     private Float offer_amount;
     private Integer number_offered;
     private String status;
+    private String manager_id;
 
     public String getStatus() {
         return status;
@@ -39,10 +40,11 @@ public class Share implements Serializable {
     public Share() {
     }
 
-    public Share(String owner, String company) {
+    public Share(String owner, String company, String manager_id) {
         this.owner = owner;
         this.company = company;
         this.number=10;
+        this.manager_id=manager_id;
     }
 
     public Float getMarket_price() {
