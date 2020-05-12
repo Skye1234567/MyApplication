@@ -24,7 +24,7 @@ public class Investor_Instructions extends AppCompatActivity {
     TextView company2;
     TextView company3;
     TextView company4;
-    SwipeRefreshLayout SRL;
+
     SwipeRefreshLayout.OnRefreshListener ORL;
 
     TextView numshare1;
@@ -41,15 +41,13 @@ public class Investor_Instructions extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         context = this;
-
-
-        SRL = findViewById(R.id.swiper_investor_instructions);
         setContentView(R.layout.activity_investor__instructions);
         company1 = findViewById(R.id.company1);
         company2= findViewById(R.id.company2);
         company3= findViewById(R.id.company3);
         company4= findViewById(R.id.company4);
-
+        SwipeRefreshLayout SRL;
+        SRL = findViewById(R.id.swiper_investor_instructions);
         numshare1= findViewById(R.id.numshares1);
         numshare2=findViewById(R.id.numshares2);
         numshare3=findViewById(R.id.numshares3);
@@ -57,7 +55,8 @@ public class Investor_Instructions extends AppCompatActivity {
         investor_id = getIntent().getStringExtra("user_id");
         investor_shares = new ArrayList<>();
         IL= new Investor_Logic(investor_id);
-        ORL = new SwipeRefreshLayout.OnRefreshListener() {
+
+        SRL.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 IL.get_symbols();
@@ -91,15 +90,13 @@ public class Investor_Instructions extends AppCompatActivity {
                             company4.setText(s.getCompany());
                             numshare4.setText(s.getNumber());
                             break;}
-                            i+=1;
+                    i+=1;
                 }
 
-                }
+            }
 
 
-        };
-
-        SRL.setOnRefreshListener(ORL);
+        });
 
 
 
@@ -130,6 +127,8 @@ public class Investor_Instructions extends AppCompatActivity {
 
 
     }
+
+
 
 
 }
