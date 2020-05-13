@@ -2,6 +2,7 @@ package com.example.myapplication.Business_Logic;
 
 import android.util.Log;
 
+import com.example.myapplication.Investor_Instructions;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -14,38 +15,32 @@ import java.util.HashMap;
 
 import Objects.Manager;
 import Objects.Share;
+import Objects.ShareAdapter;
 import androidx.annotation.NonNull;
 
 public class Investor_Logic {
 
     private final static String TAG="INVESTOR_LOGIC";
-
+    private Investor_Instructions activity;
     private String investor_id;
-    boolean complete_id;
-    boolean complete_shares;
-    HashMap<String, String> symbol_id;
-    ArrayList<Share>  investor_shares;
-    public Investor_Logic(String investor_id) {
+    private HashMap<String, String> symbol_id;
+    private ShareAdapter shareAdapter;
+
+    public Investor_Logic(String investor_id, Investor_Instructions activity, ShareAdapter shareAdapter) {
        this.investor_id =investor_id;
-       this.complete_id=false;
-       this.complete_shares=false;
+       this.activity = activity;
+       this.shareAdapter = shareAdapter;
+
+
+
     }
 
-    public boolean isComplete_id() {
-        return complete_id;
-    }
 
-    public boolean isComplete_shares() {
-        return complete_shares;
-    }
 
     public HashMap<String, String> getSymbol_id() {
         return symbol_id;
     }
 
-    public ArrayList<Share> getInvestor_shares() {
-        return investor_shares;
-    }
 
     public void get_symbols(){
        symbol_id= new HashMap<>();
@@ -64,7 +59,7 @@ public class Investor_Logic {
                     }
 
                 }
-                complete_id=true;
+               retrieve_investor_data(symbol_id);
 
 
             }
@@ -83,8 +78,9 @@ public class Investor_Logic {
 
 
     public void retrieve_investor_data(HashMap<String, String> symbol_id) {
+        Log.d(TAG, "IN RETRIEVE INVESTOR DATA");
 
-     investor_shares = new ArrayList<>();
+
 
 
 
@@ -98,9 +94,9 @@ public class Investor_Logic {
                     if (share==null){
                         DatabaseReference r = FirebaseDatabase.getInstance().getReference("Shares").child(investor_id).child(sym);
                         r.setValue(new Share(investor_id,sym, manager_val ));
-                        investor_shares.add(new Share(investor_id,sym, manager_val ));
+                        shareAdapter.add(new Share(investor_id,sym, manager_val ));
 
-                    }else investor_shares.add(share);
+                    }else shareAdapter.add(share);
 
                 }
 
@@ -108,10 +104,14 @@ public class Investor_Logic {
                 public void onCancelled(@NonNull DatabaseError databaseError) {
 
                 }
+
             });
 
+
          }
-        complete_shares=true;
+        //activity.set_table_values(investor_shares);
+
+
 
     }
 }

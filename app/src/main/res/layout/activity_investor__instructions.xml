@@ -45,8 +45,10 @@
         android:layout_height="match_parent"
        >
 
-    <TableLayout
-        android:id="@+id/company_shares_table"
+
+
+    <ListView
+        android:id="@+id/company_shares_table_investor_instructions"
         android:textSize="@dimen/textSizeNormal"
         android:textColor="@color/colorPrimaryDark"
         app:layout_constraintTop_toBottomOf="@id/investor_instructions"
@@ -56,88 +58,9 @@
 
 
 
-        <TableRow>
-
-            <TextView
-                android:text="Company Symbol"
-                android:padding="@dimen/textSizeNormal"
-                android:textSize="@dimen/textSizeNormal"
-                android:textColor="@color/colorPrimaryDark"/>
-            <TextView
-                android:text="Your Shares"
-                android:padding="@dimen/textSizeNormal"
-                android:textSize="@dimen/textSizeNormal"
-                android:textColor="@color/colorPrimaryDark"/>
-        </TableRow>
-        <TableRow>
-
-        <TextView
-            android:id="@+id/company1"
-            android:padding="@dimen/textSizeNormal"
-            android:textSize="@dimen/textSizeNormal"
-            android:textColor="@color/colorPrimaryDark"/>
-        <TextView
-            android:id="@+id/numshares1"
-            android:padding="@dimen/textSizeNormal"
-            android:textSize="@dimen/textSizeNormal"
-            android:textColor="@color/colorPrimaryDark"/>
-    </TableRow>
-        <TableRow>
-
-            <TextView
-                android:id="@+id/company2"
-                android:padding="@dimen/textSizeNormal"
-                android:textSize="@dimen/textSizeNormal"
-                android:textColor="@color/colorPrimaryDark"/>
-            <TextView
-                android:id="@+id/numshares2"
-                android:padding="@dimen/textSizeNormal"
-                android:textSize="@dimen/textSizeNormal"
-                android:textColor="@color/colorPrimaryDark"/>
-        </TableRow>
-        <TableRow>
-
-            <TextView
-                android:id="@+id/company3"
-                android:padding="@dimen/textSizeNormal"
-                android:textSize="@dimen/textSizeNormal"
-                android:textColor="@color/colorPrimaryDark"/>
-            <TextView
-                android:id="@+id/numshares3"
-                android:padding="@dimen/textSizeNormal"
-                android:textSize="@dimen/textSizeNormal"
-                android:textColor="@color/colorPrimaryDark"/>
-        </TableRow>
-        <TableRow>
-
-            <TextView
-                android:id="@+id/company4"
-                android:padding="@dimen/textSizeNormal"
-                android:textSize="@dimen/textSizeNormal"
-                android:textColor="@color/colorPrimaryDark"/>
-            <TextView
-                android:id="@+id/numshares4"
-                android:padding="@dimen/textSizeNormal"
-                android:textSize="@dimen/textSizeNormal"
-                android:textColor="@color/colorPrimaryDark"/>
-        </TableRow>
-        <TableRow>
-
-            <TextView
-                android:id="@+id/company5"
-                android:padding="@dimen/textSizeNormal"
-                android:textSize="@dimen/textSizeNormal"
-                android:textColor="@color/colorPrimaryDark"/>
-            <TextView
-                android:id="@+id/numshares5"
-                android:padding="@dimen/textSizeNormal"
-                android:textSize="@dimen/textSizeNormal"
-                android:textColor="@color/colorPrimaryDark"/>
-        </TableRow>
-
-
-    </TableLayout>
+    </ListView>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
     </LinearLayout>
 
     <Button
