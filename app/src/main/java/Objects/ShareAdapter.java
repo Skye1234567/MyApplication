@@ -15,7 +15,7 @@ import androidx.annotation.NonNull;
 
 public class ShareAdapter extends ArrayAdapter<Share> {
     public ShareAdapter(@NonNull Context context,  @NonNull List<Share> objects) {
-        super(context,  0, objects);
+        super(context, R.layout.res_share , objects);
     }
 
 
@@ -33,7 +33,7 @@ public class ShareAdapter extends ArrayAdapter<Share> {
             TextView sharenum = (TextView) convertView.findViewById(R.id.sharenumb);
             // Populate the data into the template view using the data object
             compsym.setText(share.getCompany());
-            sharenum.setText(share.getNumber());
+            sharenum.setText(share.getNumber().toString());
             // Return the completed view to render on screen
             return convertView;
         }
