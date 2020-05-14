@@ -124,7 +124,7 @@ public class Market implements Serializable {
             }
             if (reset_shares){
             for (Investor i: investors){
-                i.add_Shares(new Share(i.getID(),m.getID()));
+                i.add_Shares(new Share(i.getID(),m.getCompany_symbol(),m.getID()));
             }}
 
 

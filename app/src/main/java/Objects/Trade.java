@@ -9,17 +9,36 @@ public class Trade implements Serializable {
     private Date timeStamp;
     private boolean completed;
     private boolean for_sale;
-    private Integer price_point;
+    private Float price_point;
+    private String buyer_id;
+    private String seller_id;
+
 
 
     public Trade() {
     }
 
-    public Trade(Integer num_shares,  boolean for_sale, Integer price_point) {
+    public Trade(Integer num_shares, Float price_point) {
         this.num_shares = num_shares;
         this.completed = false;
-        this.for_sale = for_sale;
         this.price_point = price_point;
+
+    }
+
+    public String getBuyer_id() {
+        return buyer_id;
+    }
+
+    public void setBuyer_id(String buyer_id) {
+        this.buyer_id = buyer_id;
+    }
+
+    public String getSeller_id() {
+        return seller_id;
+    }
+
+    public void setSeller_id(String seller_id) {
+        this.seller_id = seller_id;
     }
 
     public Date getTimeStamp() {
@@ -46,11 +65,11 @@ public class Trade implements Serializable {
         this.for_sale = for_sale;
     }
 
-    public Integer getPrice_point() {
+    public Float getPrice_point() {
         return price_point;
     }
 
-    public void setPrice_point(Integer price_point) {
+    public void setPrice_point(Float price_point) {
         this.price_point = price_point;
     }
 
