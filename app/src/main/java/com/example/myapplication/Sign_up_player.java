@@ -129,7 +129,7 @@
                  if (dataSnapshot.hasChild(id)) {
                      Manager manager = dataSnapshot.child(id).getValue(Manager.class);
 
-                 Intent intentman = new Intent(context, Manager_Instructions.class);
+                 Intent intentman = new Intent(context, Manager_Home_Page.class);
                  intentman.putExtra("user_id", id);
                  intentman.putExtra("c", manager.getCompany_symbol());
                  context.startActivity(intentman);
@@ -192,7 +192,7 @@ private void get_investors(){
              String current_company_symbol = new StringBuilderRandom(3).buildString();
              m.setCompany_symbol(current_company_symbol);
              FirebaseDatabase.getInstance().getReference("Managers").child(player.getID()).setValue(m);
-             Intent intent = new Intent(context, Manager_Instructions.class);
+             Intent intent = new Intent(context, Manager_Home_Page.class);
              intent.putExtra("user_id", UID);
              intent.putExtra("c", current_company_symbol);
              context.startActivity(intent);}

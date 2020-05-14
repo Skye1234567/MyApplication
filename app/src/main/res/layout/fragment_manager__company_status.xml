@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingTop="@dimen/textSizeNormal"
-    tools:context=".Manager_Instructions"
+    tools:context=".Company_status_fragment"
     android:layout_margin="@dimen/textSizeNormal"
     >
     <TableLayout
@@ -142,120 +142,6 @@
     </TableLayout>
 
 
-    <TextView
-        android:id="@+id/question"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="right|center"
-        android:text="Would you like to pay to generate an independent auditor's report?"
-        android:textSize="@dimen/textSizeNormal"
-        app:layout_constraintBottom_toTopOf="@id/yes_audit"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/info_company" />
-
-    <Button
-        android:id="@+id/yes_audit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="YES"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/no_audit"
-        app:layout_constraintHorizontal_bias="0.798"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/question" />
-
-    <Button
-    android:id="@+id/no_audit"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="4dp"
-    android:text="NO"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintHorizontal_bias="0.588"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/question" />
-
-
-    <TextView
-        android:id="@+id/question_div"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="right|center"
-        android:text="Would you like to pay a dividend?"
-        android:textSize="@dimen/textSizeNormal"
-        app:layout_constraintBottom_toTopOf="@id/yes_dividend"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/no_audit" />
-
-    <Button
-        android:id="@+id/yes_dividend"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="YES"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/no_audit"
-        app:layout_constraintHorizontal_bias="0.798"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/question_div" />
-
-    <Button
-        android:id="@+id/no_dividend"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text="NO"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.588"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/question_div" />
-    <TextView
-        android:id="@+id/question_performance"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="right|center"
-        android:text="Please select a report type."
-        android:textSize="@dimen/textSizeNormal"
-        app:layout_constraintBottom_toTopOf="@id/strong_type"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/yes_dividend" />
-
-    <Button
-        android:id="@+id/strong_type"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="REPORT STRONG"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/weak_type"
-        app:layout_constraintHorizontal_bias="0.798"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/question_performance" />
-
-    <Button
-        android:id="@+id/weak_type"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text="REPORT WEAK"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.588"
-        app:layout_constraintStart_toEndOf="@id/strong_type"
-        app:layout_constraintTop_toBottomOf="@id/question_performance" />
-    <Button
-        android:id="@+id/to_market"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text="NEXT"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/weak_type"
-        android:visibility="invisible"/>
 
 
     <FrameLayout
