@@ -4,41 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="40dp"
+    android:paddingTop="@dimen/textSizeNormal"
     tools:context=".Manager_Instructions"
     android:layout_margin="@dimen/textSizeNormal"
     >
-
-        android:layout_height="match_parent">
-
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/manager_welcome"
-        android:text="Welcome"
-        android:textSize="30dp"
-        android:paddingTop="30dp"
-        android:paddingBottom="30dp"
-        android:textColor="@color/colorPrimary"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
-
-    <TextView
-
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="You are a manager! Here is a your company at a glance. "
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="20dp"
-        android:id="@+id/title_manager"
-        app:layout_constraintBottom_toTopOf="@id/info_company"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/manager_welcome"
-        />
-
     <TableLayout
         android:gravity="left"
         android:id="@+id/info_company"
@@ -46,15 +15,43 @@
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/title_manager">
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TableRow>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/manager_welcome"
+                android:text="Welcome"
+                android:textSize="@dimen/textSizeTitle"
+                android:textColor="@color/colorPrimary"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+            </TableRow>
+        <TableRow>
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="You are a manager! Please Select from options to generate your report for investors. "
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="@dimen/textSizeNormal"
+                android:id="@+id/title_manager"
+                app:layout_constraintBottom_toTopOf="@id/info_company"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/manager_welcome"
+                />
+        </TableRow>
 
 
             <TableRow>
 
                 <TextView
-                    android:text="Assets"
+                    android:text="Equity"
                     android:padding="13dp"
-                    android:textSize="25dp"
+                    android:textSize="@dimen/textSizeNormal"
                     android:textColor = "@color/colorPrimaryDark"
                     android:textColorHighlight="@color/colorAccent"
                     android:gravity="center"
@@ -62,7 +59,7 @@
                 <TextView
                     android:id="@+id/assets_info"
                     android:padding="13dp"
-                    android:textSize="25dp"
+                    android:textSize="@dimen/textSizeNormal"
                     android:textColor = "@color/colorPrimaryDark"
                     android:textColorHighlight="@color/colorAccent"
                     android:gravity="center"/>
@@ -71,7 +68,7 @@
             <TextView
                 android:text="Performance"
                 android:padding="13dp"
-                android:textSize="25dp"
+                android:textSize="@dimen/textSizeNormal"
                 android:textColor = "@color/colorPrimaryDark"
                 android:textColorHighlight="@color/colorAccent"
                 android:gravity="center"
@@ -80,7 +77,7 @@
                 android:id="@+id/performance_info"
 
                 android:padding="13dp"
-                android:textSize="25dp"
+                android:textSize="@dimen/textSizeNormal"
                 android:textColor = "@color/colorPrimaryDark"
                 android:textColorHighlight="@color/colorAccent"
                 android:gravity="center"/>
@@ -88,9 +85,9 @@
         <TableRow>
 
             <TextView
-                android:text="Profit"
+                android:text="Revenue / Expenses"
                 android:padding="13dp"
-                android:textSize="25dp"
+                android:textSize="@dimen/textSizeNormal"
                 android:textColor = "@color/colorPrimaryDark"
                 android:textColorHighlight="@color/colorAccent"
                 android:gravity="center"
@@ -99,7 +96,7 @@
                 android:id="@+id/profit_info"
 
                 android:padding="13dp"
-                android:textSize="25dp"
+                android:textSize="@dimen/textSizeNormal"
                 android:textColor = "@color/colorPrimaryDark"
                 android:textColorHighlight="@color/colorAccent"
                 android:gravity="center"/>
@@ -110,7 +107,7 @@
             <TextView
                 android:text="Audit"
                 android:padding="13dp"
-                android:textSize="25dp"
+                android:textSize="@dimen/textSizeNormal"
                 android:textColor = "@color/colorPrimaryDark"
                 android:textColorHighlight="@color/colorAccent"
                 android:gravity="center"
@@ -119,7 +116,24 @@
                 android:id="@+id/audit_info"
 
                 android:padding="13dp"
-                android:textSize="25dp"
+                android:textSize="@dimen/textSizeNormal"
+                android:textColor = "@color/colorPrimaryDark"
+                android:textColorHighlight="@color/colorAccent"
+                android:gravity="center"/>
+        </TableRow>
+        <TableRow>
+            <TextView
+                android:text="Dividend"
+                android:padding="13dp"
+                android:textSize="@dimen/textSizeNormal"
+                android:textColor = "@color/colorPrimaryDark"
+                android:textColorHighlight="@color/colorAccent"
+                android:gravity="center"
+                />
+            <TextView
+                android:id="@+id/dividend_info"
+                android:padding="13dp"
+                android:textSize="@dimen/textSizeNormal"
                 android:textColor = "@color/colorPrimaryDark"
                 android:textColorHighlight="@color/colorAccent"
                 android:gravity="center"/>
@@ -127,13 +141,14 @@
 
     </TableLayout>
 
+
     <TextView
         android:id="@+id/question"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="right|center"
         android:text="Would you like to pay to generate an independent auditor's report?"
-        android:textSize="20dp"
+        android:textSize="@dimen/textSizeNormal"
         app:layout_constraintBottom_toTopOf="@id/yes_audit"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -161,6 +176,76 @@
     app:layout_constraintHorizontal_bias="0.588"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@id/question" />
+
+
+    <TextView
+        android:id="@+id/question_div"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="right|center"
+        android:text="Would you like to pay a dividend?"
+        android:textSize="@dimen/textSizeNormal"
+        app:layout_constraintBottom_toTopOf="@id/yes_dividend"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/no_audit" />
+
+    <Button
+        android:id="@+id/yes_dividend"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="YES"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/no_audit"
+        app:layout_constraintHorizontal_bias="0.798"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/question_div" />
+
+    <Button
+        android:id="@+id/no_dividend"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="NO"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.588"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/question_div" />
+    <TextView
+        android:id="@+id/question_performance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="right|center"
+        android:text="Please select a report type."
+        android:textSize="@dimen/textSizeNormal"
+        app:layout_constraintBottom_toTopOf="@id/strong_type"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/yes_dividend" />
+
+    <Button
+        android:id="@+id/strong_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="REPORT STRONG"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/weak_type"
+        app:layout_constraintHorizontal_bias="0.798"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/question_performance" />
+
+    <Button
+        android:id="@+id/weak_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="REPORT WEAK"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.588"
+        app:layout_constraintStart_toEndOf="@id/strong_type"
+        app:layout_constraintTop_toBottomOf="@id/question_performance" />
     <Button
         android:id="@+id/to_market"
         android:layout_width="wrap_content"
@@ -169,7 +254,7 @@
         android:text="NEXT"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/no_audit"
+        app:layout_constraintTop_toBottomOf="@id/weak_type"
         android:visibility="invisible"/>
 
 

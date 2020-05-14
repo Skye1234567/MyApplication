@@ -4,19 +4,18 @@ package Objects;
 public class Manager extends Player {
     private Integer salary;
     private String company_symbol;
+    int performance;
+    private int profit;
+    private int report_performance;
+    private int report_dividend;
+
+    public Manager() {
+    }
 
 
     public String getCompany_symbol() {
         return company_symbol;
     }
-
-    public void setCompany_symbol(String company_symbol) {
-        this.company_symbol = company_symbol;
-    }
-
-    private int performance;
-    private int profit;
-
     public int getProfit() {
         return profit;
     }
@@ -29,8 +28,10 @@ public class Manager extends Player {
         this.accept_audit = accept_audit;
     }
 
-    private int report_performance;
-    private int report_dividend;
+
+    public void setCompany_symbol(String company_symbol) {
+        this.company_symbol = company_symbol;
+    }
 
     public int getReport_performance() {
         return report_performance;

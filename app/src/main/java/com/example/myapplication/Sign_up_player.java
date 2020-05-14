@@ -39,7 +39,8 @@
      EditText email;
      EditText password;
      String UID;
-     String player_type;
+     long manager_num;
+
 
 
      @Override
@@ -84,15 +85,16 @@
 
                                          FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                                          UID =user.getUid();
-                                         final Player player = new Player(UID);
-                                         FirebaseDatabase.getInstance().getReference("player_list").child(user.getUid()).setValue(player).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                         Player player = new Player(UID);
+                                         FirebaseDatabase.getInstance().getReference("player_list")
+                                                 .child(user.getUid()).setValue(player).addOnCompleteListener(new OnCompleteListener<Void>() {
                                              @Override
                                              public void onComplete(@NonNull Task<Void> task) {
 
-
-                                                 SimpleLoginHelper simpleLoginHelper = new SimpleLoginHelper(context);
-                                                 simpleLoginHelper.KeepLoggedIn(UID);
-                                                 setType(player);
+//TODO: keep logged in
+                                                 //SimpleLoginHelper simpleLoginHelper = new SimpleLoginHelper(context);
+                                                 //simpleLoginHelper.KeepLoggedIn(UID);
+                                                 get_PlayerType();
 
 
 
@@ -102,12 +104,14 @@
 
                                      } else {
                                          Toast.makeText(context, "Authentication failed.", Toast.LENGTH_SHORT).show();
+                                         Intent intent = new Intent(context, Sign_up_player.class);
+                                         startActivity(intent);
                                      }
                                  }
                              });
                  }
                  else{
-                     //Toast.makeText(context, "Whats up",Toast.LENGTH_SHORT).show();
+                     Toast.makeText(context, "Whats up",Toast.LENGTH_SHORT).show();
                  }
 
              }
@@ -117,19 +121,21 @@
      }}
 
      private void get_PlayerType() {
-         final String id =  mAuth.getCurrentUser().getUid();
-
+         final String id = mAuth.getCurrentUser().getUid();
          FirebaseDatabase.getInstance().getReference("Managers").addListenerForSingleValueEvent(new ValueEventListener() {
              @Override
              public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                 Manager manager = dataSnapshot.child(id).getValue(Manager.class);
+                 manager_num = dataSnapshot.getChildrenCount();
+                 if (dataSnapshot.hasChild(id)) {
+                     Manager manager = dataSnapshot.child(id).getValue(Manager.class);
 
                  Intent intentman = new Intent(context, Manager_Instructions.class);
                  intentman.putExtra("user_id", id);
                  intentman.putExtra("c", manager.getCompany_symbol());
                  context.startActivity(intentman);
+
                  finish();
-
+                 } else get_investors();
 
 
              }
@@ -141,37 +147,47 @@
              }
          });
 
-         FirebaseDatabase.getInstance().getReference("Investors").addListenerForSingleValueEvent(new ValueEventListener() {
-             @Override
-             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                 if (dataSnapshot.hasChild(id)){
-                     Intent intent = new Intent(context, Manager_Instructions.class);
-                     intent.putExtra("user_id", id);
-                     context.startActivity(intent);
-                     finish();
 
-                 }
 
-             }
 
-             @Override
-             public void onCancelled(@NonNull DatabaseError databaseError) {
-                 Log.d(TAG, databaseError.getMessage());
 
-             }
-         });
      }
+
+private void get_investors(){
+         final String id = mAuth.getCurrentUser().getUid();
+
+    FirebaseDatabase.getInstance().getReference("Investors").addListenerForSingleValueEvent(new ValueEventListener() {
+        @Override
+        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+            if (dataSnapshot.hasChild(id)) {
+                Intent intent = new Intent(context, Investor_Instructions.class);
+                intent.putExtra("user_id", id);
+                context.startActivity(intent);
+                finish();
+
+            } else setType(new Player(id));
+
+
+        }
+
+        @Override
+        public void onCancelled(@NonNull DatabaseError databaseError) {
+            Log.d(TAG, databaseError.getMessage());
+
+        }
+    });
+
+
+
+}
 
 
      private void setType(Player player){
-         Random r=new Random();
 
-         ArrayList<Integer> arrayList = new ArrayList<>();
-         int i;
-         for (i=0; i<8;i++) arrayList.add(0);
-         for(i=8; i<10;i++) arrayList.add(1);
-         Integer integer = r.nextInt(arrayList.size());
-         if (integer==1){player.setType("M");
+
+
+         if (manager_num<4){player.setType("M");
              Manager m = new Manager(player.getID());
              String current_company_symbol = new StringBuilderRandom(3).buildString();
              m.setCompany_symbol(current_company_symbol);
