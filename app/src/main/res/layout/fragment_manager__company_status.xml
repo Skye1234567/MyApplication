@@ -8,6 +8,10 @@
     tools:context=".Company_status_fragment"
     android:layout_margin="@dimen/textSizeNormal"
     >
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/refresh_comp_stat">
     <TableLayout
         android:gravity="left"
         android:id="@+id/info_company"
@@ -35,7 +39,7 @@
 
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="You are a manager! Please Select from options to generate your report for investors. "
+                android:text="You are a manager!  "
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="@dimen/textSizeNormal"
                 android:id="@+id/title_manager"
@@ -143,7 +147,7 @@
     </TableLayout>
 
 
-
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <FrameLayout
         android:layout_width="match_parent"

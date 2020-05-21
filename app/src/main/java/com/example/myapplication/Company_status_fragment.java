@@ -35,6 +35,7 @@ public class Company_status_fragment extends Fragment {
     TextView assets;
     TextView audit;
     TextView dividend;
+    SwipeRefreshLayout SR;
     final String TAG ="company status";
     Accountant accountant;
     Manager manager;
@@ -50,7 +51,7 @@ public class Company_status_fragment extends Fragment {
         performance = view.findViewById(R.id.performance_info);
         audit = view.findViewById(R.id.audit_info);
         dividend = view.findViewById(R.id.dividend_info);
-        SwipeRefreshLayout SR;
+
 
         manager =(Manager) intent.getSerializableExtra("manager");
         Manager_Logic mLogic = new Manager_Logic( manager.getCompany_symbol(), manager.getID());
@@ -87,6 +88,13 @@ public class Company_status_fragment extends Fragment {
 
             }
         });
+        SR = view.findViewById(R.id.refresh_comp_stat);
+        SR.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                update_Manager();
+            }
+        });
 
         return view;
     }
@@ -105,7 +113,10 @@ public class Company_status_fragment extends Fragment {
         Integer rev = accountant.getRevenue();
         manager.setProfit(rev);
         profit.setText(rev.toString());
+        SR.setRefreshing(false);
+
         FirebaseDatabase.getInstance().getReference().child("Managers").child(manager.getID()).setValue(manager);
+
 
 
 

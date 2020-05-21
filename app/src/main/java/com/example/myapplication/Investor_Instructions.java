@@ -44,7 +44,7 @@ public class Investor_Instructions extends AppCompatActivity {
         context = this;
         setContentView(R.layout.activity_investor__instructions);
 
-        SwipeRefreshLayout SRL;
+        final SwipeRefreshLayout SRL;
         SRL = findViewById(R.id.swiper_investor_instructions);
         tableLayout=findViewById(R.id.company_shares_table_investor_instructions);
         Investor investor = (Investor) getIntent().getSerializableExtra("investor");
@@ -59,6 +59,7 @@ public class Investor_Instructions extends AppCompatActivity {
             @Override
             public void onRefresh() {
                 shareAdapter.clear();
+                SRL.setRefreshing(false);
 
             }
 
