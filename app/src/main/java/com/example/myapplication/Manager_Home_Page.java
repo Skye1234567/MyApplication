@@ -11,13 +11,19 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import Objects.Man_Model;
+import Objects.Manager;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelStore;
 import androidx.viewpager.widget.ViewPager;
 
 public class Manager_Home_Page extends AppCompatActivity {
     private static final String TAG="Manager_home_page";
     private Context context;
     private ViewPager viewPager;
+    private Manager manager;
 
     private SectionsPageAdapter mSectionsPageAdapter;
 
@@ -27,7 +33,9 @@ public class Manager_Home_Page extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manager_home);
         context=this;
-
+        manager =(Manager) getIntent().getSerializableExtra("manager");
+        Man_Model MM = new ViewModelProvider(this).get(Man_Model.class);
+        MM.setMan(manager);
         FirebaseDatabase db = FirebaseDatabase.getInstance();
         DatabaseReference ref = db.getReference();
         FloatingActionButton sign_out=findViewById(R.id.FAB);

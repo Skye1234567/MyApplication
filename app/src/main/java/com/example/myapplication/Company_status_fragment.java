@@ -1,10 +1,13 @@
 package com.example.myapplication;
 
+import Objects.Man_Model;
 import Objects.Manager;
 import Objects.Market;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Context;
@@ -14,7 +17,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.myapplication.Business_Logic.Accountant;
@@ -29,6 +31,7 @@ import com.google.firebase.database.ValueEventListener;
 import static com.google.firebase.auth.FirebaseAuth.getInstance;
 
 public class Company_status_fragment extends Fragment {
+    Man_Model man_model;
     Context context;
     TextView profit;
     TextView performance;
@@ -38,7 +41,7 @@ public class Company_status_fragment extends Fragment {
     SwipeRefreshLayout SR;
     final String TAG ="company status";
     Accountant accountant;
-    Manager manager;
+    Manager managerstat;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -51,12 +54,13 @@ public class Company_status_fragment extends Fragment {
         performance = view.findViewById(R.id.performance_info);
         audit = view.findViewById(R.id.audit_info);
         dividend = view.findViewById(R.id.dividend_info);
+        managerstat = (Manager) getActivity().getIntent().getSerializableExtra("manager");
 
-
-        manager =(Manager) intent.getSerializableExtra("manager");
-        Manager_Logic mLogic = new Manager_Logic( manager.getCompany_symbol(), manager.getID());
+        Manager_Logic mLogic = new Manager_Logic( managerstat.getCompany_symbol(), managerstat.getID());
         mLogic.allocate_shares();
-         assets.setText(manager.getCash().toString());
+
+
+
 
         FirebaseDatabase.getInstance().getReference().child("markets").child("practice").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -65,6 +69,18 @@ public class Company_status_fragment extends Fragment {
                 try{
                 accountant.generate_company_data(market.getP());
                 accountant.generate_round_data(market.getPi_h(), market.getPi_l());
+                switch (accountant.getPerformance()){
+                    case 0:
+                        managerstat.setPerformance(0);
+
+                        break;
+                    case 1:
+                        managerstat.setPerformance(1);
+
+                        break;
+                    }
+
+                    managerstat.setProfit(accountant.getRevenue());
                 }catch (NullPointerException e){Log.e("market null", e.getMessage());}
 
             }
@@ -92,35 +108,48 @@ public class Company_status_fragment extends Fragment {
         SR.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                update_Manager();
+                update_Manager_status();
             }
         });
 
         return view;
     }
 
-    private void update_Manager() {
-        switch (accountant.getPerformance()){
+    private void update_Manager_status() {
+        switch (managerstat.getPerformance()){
             case 0:
-                manager.setPerformance(0);
                 performance.setText("Low");
                 break;
             case 1:
-                manager.setPerformance(1);
                 performance.setText("High");
                 break;
         }
-        Integer rev = accountant.getRevenue();
-        manager.setProfit(rev);
+        Integer rev = managerstat.getProfit();
         profit.setText(rev.toString());
+        assets.setText(managerstat.getCash().toString());
+        if (managerstat.getAudit_choice()==1 &&managerstat.getAccept_audit()==1){
+            audit.setText("Yes");
+        }else audit.setText("No");
+
         SR.setRefreshing(false);
 
-        FirebaseDatabase.getInstance().getReference().child("Managers").child(manager.getID()).setValue(manager);
-
-
-
+        FirebaseDatabase.getInstance().getReference().child("Managers").child(managerstat.getID()).setValue(managerstat);
 
     }
 
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        man_model = new ViewModelProvider(getActivity()).get(Man_Model.class);
+        man_model.getMan().observe(getViewLifecycleOwner(), new Observer<Manager>() {
+            @Override
+            public void onChanged(Manager manager) {
+                managerstat =manager;
+                update_Manager_status();
 
+
+            }
+        });
+
+    }
 }

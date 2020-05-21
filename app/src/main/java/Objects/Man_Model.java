@@ -5,12 +5,14 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 public class Man_Model extends ViewModel {
-    private final MutableLiveData<Manager> livedata = new MutableLiveData<>();
+    private  MutableLiveData<Manager> livedata=new MutableLiveData<>();
     public LiveData<Manager> getMan(){
+
         return livedata;
     }
     public Man_Model(){}
 
-    public void update(){
+   public void setMan(Manager manager){
+        livedata.setValue(manager);
 
-}}
+   }}
