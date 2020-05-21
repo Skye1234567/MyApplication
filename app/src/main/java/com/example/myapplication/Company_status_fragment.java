@@ -59,6 +59,7 @@ public class Company_status_fragment extends Fragment {
         Manager_Logic mLogic = new Manager_Logic( managerstat.getCompany_symbol(), managerstat.getID());
         mLogic.allocate_shares();
 
+        man_model = new ViewModelProvider(getActivity()).get(Man_Model.class);
 
 
 
@@ -81,6 +82,7 @@ public class Company_status_fragment extends Fragment {
                     }
 
                     managerstat.setProfit(accountant.getRevenue());
+                    man_model.setMan(managerstat);
                 }catch (NullPointerException e){Log.e("market null", e.getMessage());}
 
             }
@@ -131,6 +133,7 @@ public class Company_status_fragment extends Fragment {
             audit.setText("Yes");
         }else audit.setText("No");
 
+
         SR.setRefreshing(false);
 
         FirebaseDatabase.getInstance().getReference().child("Managers").child(managerstat.getID()).setValue(managerstat);
@@ -144,7 +147,7 @@ public class Company_status_fragment extends Fragment {
         man_model.getMan().observe(getViewLifecycleOwner(), new Observer<Manager>() {
             @Override
             public void onChanged(Manager manager) {
-                managerstat =manager;
+                managerstat=manager;
                 update_Manager_status();
 
 

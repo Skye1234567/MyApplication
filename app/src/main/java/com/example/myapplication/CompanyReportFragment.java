@@ -2,7 +2,6 @@ package com.example.myapplication;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 
 import Objects.Man_Model;
@@ -17,12 +16,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
+
+import com.example.myapplication.Business_Logic.Auditor;
 
 
 public class CompanyReportFragment extends Fragment {
     Context context;
     Man_Model man_model;
     Manager managerman;
+    Button aud_yes;
+    Button aud_no;
+    Button div_yes;
+    Button div_no;
+    Button Accept_Report;
+    TextView Audit_result_textview;
     @Nullable
     @Override
 
@@ -32,25 +40,22 @@ public class CompanyReportFragment extends Fragment {
 
         Intent intent = getActivity().getIntent();
         context = getContext();
-
-
-        Button b = view.findViewById(R.id.no_audit);
-        Button b2 = view.findViewById(R.id.yes_audit);
+        man_model = new ViewModelProvider(getActivity()).get(Man_Model.class);
+        managerman=man_model.getMan().getValue();
+         aud_yes = view.findViewById(R.id.yes_audit);
+         aud_no = view.findViewById(R.id.no_audit);
         final Button marketplace = view.findViewById(R.id.to_market);
-        b2.setOnClickListener(new View.OnClickListener() {
+        aud_no.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                marketplace.setVisibility(View.VISIBLE);
-
-
-            }
+                managerman.setAudit_choice(0); }
         });
-        b.setOnClickListener(new View.OnClickListener() {
+        aud_yes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                marketplace.setVisibility(View.VISIBLE);
-
-
+                managerman.setAudit_choice(1);
+                int auditor_report = new Auditor(managerman.getPerformance()).generateReport(managerman.getProfit());
+            
             }
         });
 
@@ -61,6 +66,21 @@ public class CompanyReportFragment extends Fragment {
                 intent.putExtra("user_id", managerman.getID());
                 context.startActivity(intent);
             }
+        });
+        div_no = view.findViewById(R.id.no_dividend);
+        div_yes =view.findViewById(R.id.yes_dividend);
+        div_no.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                managerman.setReport_dividend(0);
+            }
+        });
+        div_yes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                managerman.setReport_dividend(1);
+            }
+
         });
         return view;
     }
