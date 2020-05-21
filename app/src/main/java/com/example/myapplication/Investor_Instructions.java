@@ -30,7 +30,7 @@ import java.util.HashMap;
 
 public class Investor_Instructions extends AppCompatActivity {
     String investor_id;
-    SwipeRefreshLayout.OnRefreshListener ORL;
+
     Context context;
     ListView tableLayout;
 
