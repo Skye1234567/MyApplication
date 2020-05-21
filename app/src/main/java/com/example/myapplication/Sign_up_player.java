@@ -130,8 +130,7 @@
                      Manager manager = dataSnapshot.child(id).getValue(Manager.class);
 
                  Intent intentman = new Intent(context, Manager_Home_Page.class);
-                 intentman.putExtra("user_id", id);
-                 intentman.putExtra("c", manager.getCompany_symbol());
+                 intentman.putExtra("manager", manager);
                  context.startActivity(intentman);
 
                  finish();
@@ -161,8 +160,10 @@ private void get_investors(){
         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
             if (dataSnapshot.hasChild(id)) {
+                Investor i = dataSnapshot.getValue(Investor.class);
+
                 Intent intent = new Intent(context, Investor_Instructions.class);
-                intent.putExtra("user_id", id);
+                intent.putExtra("investor", i);
                 context.startActivity(intent);
                 finish();
 
@@ -193,15 +194,17 @@ private void get_investors(){
              m.setCompany_symbol(current_company_symbol);
              FirebaseDatabase.getInstance().getReference("Managers").child(player.getID()).setValue(m);
              Intent intent = new Intent(context, Manager_Home_Page.class);
-             intent.putExtra("user_id", UID);
-             intent.putExtra("c", current_company_symbol);
+             //intent.putExtra("user_id", UID);
+             //intent.putExtra("c", current_company_symbol);
+             intent.putExtra("manager", m);
              context.startActivity(intent);}
          else {
              player.setType("I");
              Investor investor = new Investor(player.getID());
              FirebaseDatabase.getInstance().getReference("Investors").child(player.getID()).setValue(investor);
              Intent intent = new Intent(context, Investor_Instructions.class);
-             intent.putExtra("user_id", UID);
+             //intent.putExtra("user_id", UID);
+             intent.putExtra("investor", investor);
 
              context.startActivity(intent);
 

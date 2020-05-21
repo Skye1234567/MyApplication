@@ -41,7 +41,7 @@ public class Manager_Logic {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                 Market market = dataSnapshot.getValue(Market.class);
-                accountant.generate_company_data(market);
+                accountant.generate_company_data(market.getP());
 
             }
 

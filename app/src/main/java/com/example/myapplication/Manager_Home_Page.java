@@ -30,7 +30,7 @@ public class Manager_Home_Page extends AppCompatActivity {
 
         FirebaseDatabase db = FirebaseDatabase.getInstance();
         DatabaseReference ref = db.getReference();
-        FloatingActionButton sign_out=findViewById(R.id.FABmanhome);
+        FloatingActionButton sign_out=findViewById(R.id.FAB);
         sign_out.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

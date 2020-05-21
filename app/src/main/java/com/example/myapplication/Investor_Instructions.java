@@ -1,5 +1,6 @@
 package com.example.myapplication;
 
+import Objects.Investor;
 import Objects.Manager;
 import Objects.Share;
 import Objects.ShareAdapter;
@@ -46,7 +47,8 @@ public class Investor_Instructions extends AppCompatActivity {
         SwipeRefreshLayout SRL;
         SRL = findViewById(R.id.swiper_investor_instructions);
         tableLayout=findViewById(R.id.company_shares_table_investor_instructions);
-        investor_id = getIntent().getStringExtra("user_id");
+        Investor investor = (Investor) getIntent().getSerializableExtra("investor");
+        investor_id = investor.getID();
         investor_shares = new ArrayList<>();
         final ShareAdapter shareAdapter =new ShareAdapter(context,investor_shares);
         tableLayout.setAdapter(shareAdapter);
