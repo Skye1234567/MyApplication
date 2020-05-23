@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
@@ -27,9 +28,10 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Objects;
 
 public class Investor_Instructions extends AppCompatActivity {
-    String investor_id;
+    String in_id;
 
     Context context;
     ListView tableLayout;
@@ -47,12 +49,15 @@ public class Investor_Instructions extends AppCompatActivity {
         final SwipeRefreshLayout SRL;
         SRL = findViewById(R.id.swiper_investor_instructions);
         tableLayout=findViewById(R.id.company_shares_table_investor_instructions);
-        Investor investor = (Investor) getIntent().getSerializableExtra("investor");
-        investor_id = investor.getID();
+        Investor investor = (Investor) Objects.requireNonNull(getIntent().getExtras()).getSerializable("investor");
+        in_id = investor.getID();
         investor_shares = new ArrayList<>();
         final ShareAdapter shareAdapter =new ShareAdapter(context,investor_shares);
         tableLayout.setAdapter(shareAdapter);
-        IL= new Investor_Logic(investor_id,shareAdapter);
+        if (in_id ==null){
+            Toast.makeText(context, "HELP NO ID", Toast.LENGTH_LONG).show();
+        }
+        IL= new Investor_Logic(in_id,shareAdapter);
         IL.get_symbols();
 
         SRL.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -71,7 +76,7 @@ public class Investor_Instructions extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, Wait_Page.class);
-                intent.putExtra("user_id", investor_id );
+                intent.putExtra("user_id",  in_id );
                 context.startActivity(intent);
                 finish();
             }
@@ -135,8 +140,9 @@ public class Investor_Instructions extends AppCompatActivity {
                         }
 
                     }
-                   retrieve_investor_data(symbol_id);
-
+                    if (symbol_id!=null&& !symbol_id.isEmpty()) {
+                        retrieve_investor_data(symbol_id);
+                    }
 
                 }
 
@@ -156,34 +162,31 @@ public class Investor_Instructions extends AppCompatActivity {
         public void retrieve_investor_data(HashMap<String, String> symbol_id) {
             Log.d(TAG, "IN RETRIEVE INVESTOR DATA");
 
-
-
-
-
             for (final String sym: symbol_id.keySet()){
                 final String manager_val=symbol_id.get(sym);
-                final Query shares =FirebaseDatabase.getInstance().getReference("Shares").child(investor_id).child(sym);
-                shares.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        Share share = dataSnapshot.getValue(Share.class);
-                        if (share==null){
-                            DatabaseReference r = FirebaseDatabase.getInstance().getReference("Shares").child(investor_id).child(sym);
-                            r.setValue(new Share(investor_id,sym, manager_val ));
-                            shareAdapter.add(new Share(investor_id,sym, manager_val ));
+                if (investor_id!=null) {
+                    final Query shares = FirebaseDatabase.getInstance().getReference("Shares").child(investor_id).child(sym);
+                    shares.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            Share share = dataSnapshot.getValue(Share.class);
+                            if (share == null) {
+                                DatabaseReference r = FirebaseDatabase.getInstance().getReference("Shares").child(investor_id).child(sym);
+                                r.setValue(new Share(investor_id, sym, manager_val));
+                                shareAdapter.add(new Share(investor_id, sym, manager_val));
 
-                        }else shareAdapter.add(share);
+                            } else shareAdapter.add(share);
 
-                    }
+                        }
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                    }
+                        }
 
-                });
+                    });
 
-
+                }
 
              }
 

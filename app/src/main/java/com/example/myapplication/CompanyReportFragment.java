@@ -55,7 +55,7 @@ public class CompanyReportFragment extends Fragment {
             public void onClick(View v) {
                 managerman.setAudit_choice(1);
                 int auditor_report = new Auditor(managerman.getPerformance()).generateReport(managerman.getProfit());
-            
+
             }
         });
 

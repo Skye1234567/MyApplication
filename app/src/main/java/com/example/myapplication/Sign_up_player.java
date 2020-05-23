@@ -20,6 +20,7 @@
  import com.google.firebase.database.FirebaseDatabase;
  import com.google.firebase.database.ValueEventListener;
 
+ import java.io.Serializable;
  import java.util.ArrayList;
  import java.util.Random;
 
@@ -160,7 +161,7 @@ private void get_investors(){
         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
             if (dataSnapshot.hasChild(id)) {
-                Investor i = dataSnapshot.getValue(Investor.class);
+                Investor i = dataSnapshot.child(id).getValue(Investor.class);
 
                 Intent intent = new Intent(context, Investor_Instructions.class);
                 intent.putExtra("investor", i);
