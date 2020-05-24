@@ -20,13 +20,9 @@
  import com.google.firebase.database.FirebaseDatabase;
  import com.google.firebase.database.ValueEventListener;
 
- import java.util.ArrayList;
- import java.util.Random;
-
  import Objects.Investor;
  import Objects.Manager;
  import Objects.Player;
- import Objects.SimpleLoginHelper;
  import Objects.StringBuilderRandom;
  import androidx.annotation.NonNull;
  import androidx.appcompat.app.AppCompatActivity;
@@ -129,9 +125,8 @@
                  if (dataSnapshot.hasChild(id)) {
                      Manager manager = dataSnapshot.child(id).getValue(Manager.class);
 
-                 Intent intentman = new Intent(context, Manager_Instructions.class);
-                 intentman.putExtra("user_id", id);
-                 intentman.putExtra("c", manager.getCompany_symbol());
+                 Intent intentman = new Intent(context, Manager_Home_Page.class);
+                 intentman.putExtra("manager", manager);
                  context.startActivity(intentman);
 
                  finish();
@@ -161,8 +156,10 @@ private void get_investors(){
         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
             if (dataSnapshot.hasChild(id)) {
-                Intent intent = new Intent(context, Investor_Instructions.class);
-                intent.putExtra("user_id", id);
+                Investor i = dataSnapshot.child(id).getValue(Investor.class);
+
+                Intent intent = new Intent(context, MarketPlace.class);
+                intent.putExtra("investor", i);
                 context.startActivity(intent);
                 finish();
 
@@ -192,16 +189,18 @@ private void get_investors(){
              String current_company_symbol = new StringBuilderRandom(3).buildString();
              m.setCompany_symbol(current_company_symbol);
              FirebaseDatabase.getInstance().getReference("Managers").child(player.getID()).setValue(m);
-             Intent intent = new Intent(context, Manager_Instructions.class);
-             intent.putExtra("user_id", UID);
-             intent.putExtra("c", current_company_symbol);
+             Intent intent = new Intent(context, Manager_Home_Page.class);
+             //intent.putExtra("user_id", UID);
+             //intent.putExtra("c", current_company_symbol);
+             intent.putExtra("manager", m);
              context.startActivity(intent);}
          else {
              player.setType("I");
              Investor investor = new Investor(player.getID());
              FirebaseDatabase.getInstance().getReference("Investors").child(player.getID()).setValue(investor);
-             Intent intent = new Intent(context, Investor_Instructions.class);
-             intent.putExtra("user_id", UID);
+             Intent intent = new Intent(context, Investor_Instructions_Fragment.class);
+             //intent.putExtra("user_id", UID);
+             intent.putExtra("investor", investor);
 
              context.startActivity(intent);
 

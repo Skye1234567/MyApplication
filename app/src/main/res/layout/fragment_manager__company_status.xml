@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/textSizeTitle"
+    tools:context=".Company_status_fragment"
+    android:layout_margin="@dimen/textSizeNormal"
+    >
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/refresh_comp_stat">
+    <TableLayout
+        android:gravity="left"
+        android:id="@+id/info_company"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TableRow>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/manager_welcome"
+                android:paddingTop="@dimen/textSizeTitle"
+                android:text="Welcome"
+                android:textSize="@dimen/textSizeTitle"
+                android:textColor="@color/colorPrimary"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                />
+            </TableRow>
+        <TableRow>
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="You are a manager!  "
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="@dimen/textSizeNormal"
+                android:id="@+id/title_manager"
+                app:layout_constraintBottom_toTopOf="@id/info_company"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/manager_welcome"
+                />
+        </TableRow>
+
+
+            <TableRow>
+
+                <TextView
+                    android:text="Equity"
+                    android:padding="13dp"
+                    android:textSize="@dimen/textSizeNormal"
+                    android:textColor = "@color/colorPrimaryDark"
+                    android:textColorHighlight="@color/colorAccent"
+                    android:gravity="center"
+                    />
+                <TextView
+                    android:id="@+id/assets_info"
+                    android:padding="13dp"
+                    android:textSize="@dimen/textSizeNormal"
+                    android:textColor = "@color/colorPrimaryDark"
+                    android:textColorHighlight="@color/colorAccent"
+                    android:gravity="center"/>
+            </TableRow>
+        <TableRow>
+            <TextView
+                android:text="Performance"
+                android:padding="13dp"
+                android:textSize="@dimen/textSizeNormal"
+                android:textColor = "@color/colorPrimaryDark"
+                android:textColorHighlight="@color/colorAccent"
+                android:gravity="center"
+                />
+            <TextView
+                android:id="@+id/performance_info"
+
+                android:padding="13dp"
+                android:textSize="@dimen/textSizeNormal"
+                android:textColor = "@color/colorPrimaryDark"
+                android:textColorHighlight="@color/colorAccent"
+                android:gravity="center"/>
+        </TableRow>
+        <TableRow>
+
+            <TextView
+                android:text="Revenue / Expenses"
+                android:padding="13dp"
+                android:textSize="@dimen/textSizeNormal"
+                android:textColor = "@color/colorPrimaryDark"
+                android:textColorHighlight="@color/colorAccent"
+                android:gravity="center"
+                />
+            <TextView
+                android:id="@+id/profit_info"
+
+                android:padding="13dp"
+                android:textSize="@dimen/textSizeNormal"
+                android:textColor = "@color/colorPrimaryDark"
+                android:textColorHighlight="@color/colorAccent"
+                android:gravity="center"/>
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:text="Audit"
+                android:padding="13dp"
+                android:textSize="@dimen/textSizeNormal"
+                android:textColor = "@color/colorPrimaryDark"
+                android:textColorHighlight="@color/colorAccent"
+                android:gravity="center"
+                />
+            <TextView
+                android:id="@+id/audit_info"
+
+                android:padding="13dp"
+                android:textSize="@dimen/textSizeNormal"
+                android:textColor = "@color/colorPrimaryDark"
+                android:textColorHighlight="@color/colorAccent"
+                android:gravity="center"/>
+        </TableRow>
+        <TableRow>
+            <TextView
+                android:text="Dividend"
+                android:padding="13dp"
+                android:textSize="@dimen/textSizeNormal"
+                android:textColor = "@color/colorPrimaryDark"
+                android:textColorHighlight="@color/colorAccent"
+                android:gravity="center"
+                />
+            <TextView
+                android:id="@+id/dividend_info"
+                android:padding="13dp"
+                android:textSize="@dimen/textSizeNormal"
+                android:textColor = "@color/colorPrimaryDark"
+                android:textColorHighlight="@color/colorAccent"
+                android:gravity="center"/>
+        </TableRow>
+
+    </TableLayout>
+
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.ActionMenuView
+            android:id="@+id/menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:layout_marginBottom="@dimen/textSizeNormal"
+            android:layout_marginRight="@dimen/textSizeNormal">
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/FAB"
+                app:fabSize="mini"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </androidx.appcompat.widget.ActionMenuView>
+    </FrameLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

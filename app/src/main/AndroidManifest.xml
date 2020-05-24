@@ -20,10 +20,11 @@
         <activity android:name=".Set_Parameters_Round_2" />
         <activity android:name=".Wait_Page" />
         <activity android:name=".MarketPlace" />
-        <activity android:name=".Manager_Instructions" />
-        <activity android:name=".Investor_Instructions"/>
+        <activity android:name=".Manager_Home_Page" />
+        <activity android:name=".Investor_Instructions_Fragment"/>
         <activity android:name=".Sign_up_player"/>
         <activity android:name=".MainActivity">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

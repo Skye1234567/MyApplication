@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import Objects.Database_callback_current_bid;
 import Objects.Database_callback_order_stock;
+import Objects.Investor;
 import Objects.Share;
 import Objects.Trade;
 import androidx.annotation.NonNull;
@@ -48,7 +49,8 @@ public class OrderStockFragment extends Fragment{
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_order_stock,container, false);
-        user_id = getActivity().getIntent().getStringExtra("user_id");
+        Investor investor = (Investor) getActivity().getIntent().getSerializableExtra("investor");
+        user_id = investor.getID();
         current_bid = view.findViewById(R.id.current_bid);
         my_share=new Share( );
 

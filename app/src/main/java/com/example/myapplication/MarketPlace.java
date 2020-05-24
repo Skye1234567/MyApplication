@@ -30,7 +30,7 @@ public class MarketPlace extends AppCompatActivity {
     private Context context;
     private ViewPager viewPager;
 
-    private SectionsPageAdapter mSectionsPageAdapter;
+    private SectionsPageAdapter adapter;
 
 
     @Override
@@ -39,8 +39,6 @@ public class MarketPlace extends AppCompatActivity {
         setContentView(R.layout.activity_market_place);
         context=this;
 
-        FirebaseDatabase db = FirebaseDatabase.getInstance();
-        DatabaseReference ref = db.getReference();
         FloatingActionButton sign_out=findViewById(R.id.FAB);
         sign_out.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,8 +49,8 @@ public class MarketPlace extends AppCompatActivity {
             }
         });
 
-        mSectionsPageAdapter = new SectionsPageAdapter(getSupportFragmentManager());
-        viewPager = (ViewPager) findViewById(R.id.marketplace_container);
+
+        viewPager = findViewById(R.id.marketplace_container);
         setUpViewPager(viewPager);
         TabLayout tabLayout = findViewById(R.id.tabmarketplacelayout);
         tabLayout.setupWithViewPager(viewPager);
@@ -60,10 +58,12 @@ public class MarketPlace extends AppCompatActivity {
     }
 
     private void setUpViewPager(ViewPager viewPager){
-        SectionsPageAdapter adapter = new SectionsPageAdapter(getSupportFragmentManager());
+        adapter = new SectionsPageAdapter(getSupportFragmentManager());
+        adapter.addFragment(new Investor_Instructions_Fragment(), "Stocks");
         adapter.addFragment(new OrderStockFragment(), "Place Order");
         adapter.addFragment(new PersonalValueFragment(), "Cash");
-        adapter.addFragment(new CompanyReportFragment(), "Company Report");
+        adapter.addFragment(new Investor_View_Report(), "Company Report");
+
         viewPager.setAdapter(adapter);
     }
 }
