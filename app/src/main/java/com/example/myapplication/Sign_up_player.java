@@ -20,14 +20,9 @@
  import com.google.firebase.database.FirebaseDatabase;
  import com.google.firebase.database.ValueEventListener;
 
- import java.io.Serializable;
- import java.util.ArrayList;
- import java.util.Random;
-
  import Objects.Investor;
  import Objects.Manager;
  import Objects.Player;
- import Objects.SimpleLoginHelper;
  import Objects.StringBuilderRandom;
  import androidx.annotation.NonNull;
  import androidx.appcompat.app.AppCompatActivity;
@@ -163,7 +158,7 @@ private void get_investors(){
             if (dataSnapshot.hasChild(id)) {
                 Investor i = dataSnapshot.child(id).getValue(Investor.class);
 
-                Intent intent = new Intent(context, Investor_Instructions.class);
+                Intent intent = new Intent(context, MarketPlace.class);
                 intent.putExtra("investor", i);
                 context.startActivity(intent);
                 finish();
@@ -203,7 +198,7 @@ private void get_investors(){
              player.setType("I");
              Investor investor = new Investor(player.getID());
              FirebaseDatabase.getInstance().getReference("Investors").child(player.getID()).setValue(investor);
-             Intent intent = new Intent(context, Investor_Instructions.class);
+             Intent intent = new Intent(context, Investor_Instructions_Fragment.class);
              //intent.putExtra("user_id", UID);
              intent.putExtra("investor", investor);
 

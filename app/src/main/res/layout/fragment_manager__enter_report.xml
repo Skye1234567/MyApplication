@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingTop="@dimen/textSizeNormal"
-    tools:context=".Sumbit_Manager_Report_Fragment"
+    tools:context=".Investor_View_Report"
     android:layout_margin="@dimen/textSizeNormal"
     >
    <TextView

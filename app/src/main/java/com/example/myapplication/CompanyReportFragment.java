@@ -36,9 +36,9 @@ public class CompanyReportFragment extends Fragment {
 
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_company_report,container, false);
+        View view = inflater.inflate(R.layout.fragment_manager__enter_report,container, false);
 
-        Intent intent = getActivity().getIntent();
+
         context = getContext();
         man_model = new ViewModelProvider(getActivity()).get(Man_Model.class);
         managerman=man_model.getMan().getValue();

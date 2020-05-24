@@ -14,9 +14,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import Objects.Man_Model;
 import Objects.Manager;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelStore;
 import androidx.viewpager.widget.ViewPager;
 
 public class Manager_Home_Page extends AppCompatActivity {
@@ -59,7 +57,7 @@ public class Manager_Home_Page extends AppCompatActivity {
     private void setUpViewPager(ViewPager viewPager){
 
         mSectionsPageAdapter.addFragment(new Company_status_fragment(), "Company Status");
-        mSectionsPageAdapter.addFragment(new Sumbit_Manager_Report_Fragment(), "Your Report");
+        mSectionsPageAdapter.addFragment(new CompanyReportFragment(), "Your Report");
 
         viewPager.setAdapter(mSectionsPageAdapter);
     }

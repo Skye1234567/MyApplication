@@ -5,20 +5,21 @@ import Objects.Manager;
 import Objects.Share;
 import Objects.ShareAdapter;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -30,7 +31,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
 
-public class Investor_Instructions extends AppCompatActivity {
+
+public class Investor_Instructions_Fragment extends Fragment {
     String in_id;
 
     Context context;
@@ -40,16 +42,16 @@ public class Investor_Instructions extends AppCompatActivity {
 
     Investor_Logic IL;
 
+    @Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        context = this;
-        setContentView(R.layout.activity_investor__instructions);
-
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
+    {
+       View view = inflater.inflate(R.layout.activity_investor__instructions, container, false);
+       context = getContext();
         final SwipeRefreshLayout SRL;
-        SRL = findViewById(R.id.swiper_investor_instructions);
-        tableLayout=findViewById(R.id.company_shares_table_investor_instructions);
-        Investor investor = (Investor) Objects.requireNonNull(getIntent().getExtras()).getSerializable("investor");
+        SRL = view.findViewById(R.id.swiper_investor_instructions);
+        tableLayout=view.findViewById(R.id.company_shares_table_investor_instructions);
+        Investor investor = (Investor) Objects.requireNonNull(getActivity().getIntent().getExtras()).getSerializable("investor");
         in_id = investor.getID();
         investor_shares = new ArrayList<>();
         final ShareAdapter shareAdapter =new ShareAdapter(context,investor_shares);
@@ -71,32 +73,12 @@ public class Investor_Instructions extends AppCompatActivity {
 
         });
 
-        Button b = findViewById(R.id.proceed_to_market);
-        b.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, Wait_Page.class);
-                intent.putExtra("user_id",  in_id );
-                context.startActivity(intent);
-                finish();
-            }
-        });
-        FloatingActionButton sign_out=findViewById(R.id.FAB);
-        sign_out.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent intent = new Intent(context, MainActivity.class);
-                FirebaseAuth.getInstance().signOut();
-                context.startActivity(intent);
-                finish();
-            }
-        });
 
 
-
+        return view;
 
     }
+
 
 
     public static class Investor_Logic {
@@ -123,7 +105,7 @@ public class Investor_Instructions extends AppCompatActivity {
         }
 
 
-        public void get_symbols(){
+        public void  get_symbols(){
            symbol_id= new HashMap<>();
             FirebaseDatabase db = FirebaseDatabase.getInstance();
             Query q = db.getReference("Managers");

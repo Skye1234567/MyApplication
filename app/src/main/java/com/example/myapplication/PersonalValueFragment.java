@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 
+import Objects.Investor;
 import Objects.Player;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -35,7 +36,8 @@ public class PersonalValueFragment extends Fragment {
         textView = (TextView) view.findViewById(R.id.cash_value);
         payout = (TextView) view.findViewById(R.id.value_account);
 
-        String id = getActivity().getIntent().getStringExtra("user_id");
+        Investor investor = (Investor)getActivity().getIntent().getSerializableExtra("investor");
+        String id = investor.getID();
         Query q = FirebaseDatabase.getInstance().getReference().child("player_list").child(id);
         q.addValueEventListener(new ValueEventListener() {
             @Override

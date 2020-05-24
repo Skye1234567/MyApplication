@@ -10,12 +10,11 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 
-public class Sumbit_Manager_Report_Fragment extends Fragment {
+public class Investor_View_Report extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_manager__enter_report,container, false);
-        String user_id = getActivity().getIntent().getStringExtra("user_id");
+        View view = inflater.inflate(R.layout.fragment_company_report,container, false);
         return view;
     }
 }
