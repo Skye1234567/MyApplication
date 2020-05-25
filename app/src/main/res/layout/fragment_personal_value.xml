@@ -10,6 +10,7 @@
 
     <LinearLayout
         android:id="@+id/investor_account"
+        android:paddingTop="@dimen/tab_bar_gap"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -18,9 +19,7 @@
         app:layout_constraintStart_toEndOf="parent"
 
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.339"
-        android:paddingLeft="@dimen/textSizeTitle"
-        android:paddingTop= "@dimen/tab_bar_gap"
+
         android:layout_gravity="center">
 
         <TextView

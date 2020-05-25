@@ -20,6 +20,7 @@
         android:paddingLeft="@dimen/textSizeTitle"
         android:paddingTop="@dimen/tab_bar_gap"
         android:layout_gravity="center"
+
         >
 
         <TextView
