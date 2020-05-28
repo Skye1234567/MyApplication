@@ -6,10 +6,13 @@ import Objects.Database_callback_current_bid;
 import Objects.Database_callback_order_stock;
 import Objects.Investor;
 import Objects.Share;
+import Objects.Share_Model;
 import Objects.Trade;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -31,6 +34,7 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Set;
 
 
 public class OrderStockFragment extends Fragment{
@@ -45,6 +49,32 @@ public class OrderStockFragment extends Fragment{
     private String user_id;
     final private String high_bid = "high_bid";
     private Share my_share;
+    private Share_Model sm;
+
+
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        sm = new ViewModelProvider(getActivity()).get(Share_Model.class);
+        sm.getShares().observe(getViewLifecycleOwner(), new Observer<ArrayList<Share>>() {
+            @Override
+            public void onChanged(ArrayList<Share> shares) {
+                ArrayList<String> a = new ArrayList<>();
+                for (Share s : shares){
+                    a.add(s.getCompany());
+                }
+                ArrayList<String>b =new ArrayList<String>();
+                b.add("Buy");
+                b.add("Sell");
+               update_Company_Symbols(a, b);
+
+            }
+        });
+
+    }
+
+
+
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -53,16 +83,15 @@ public class OrderStockFragment extends Fragment{
         user_id = investor.getID();
         current_bid = view.findViewById(R.id.current_bid);
         my_share=new Share( );
+        sm = new ViewModelProvider(getActivity()).get(Share_Model.class);
+        sm.setId(user_id);
 
         spinner = view.findViewById(R.id.spinner_buy_sell);
         spinner2 = view.findViewById(R.id.spinner_stocks);
         quantity_owned= view.findViewById(R.id.quantity);
-        final ArrayList<String> list1 = new ArrayList();
-        final ArrayList<String> list2 = new ArrayList();
-        list2.add("Buy");
-        list2.add("Sell");
 
-        Query q = FirebaseDatabase.getInstance().getReference().child("Managers");
+
+        /*Query q = FirebaseDatabase.getInstance().getReference().child("Managers");
 
 
         q.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -82,7 +111,7 @@ public class OrderStockFragment extends Fragment{
                 Log.d(TAG, "trouble getting the managers from database");
 
             }
-        });
+        });*/
         quantity = view.findViewById(R.id.enter_number_of_stocks);
         price = view.findViewById(R.id.money_sign);
 

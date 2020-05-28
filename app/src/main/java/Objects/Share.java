@@ -1,6 +1,7 @@
 package Objects;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 public class Share implements Serializable {
 
@@ -38,6 +39,19 @@ public class Share implements Serializable {
     }
 
     public Share() {
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Share)) return false;
+        Share share = (Share) o;
+        return getCompany().equals(share.getCompany());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getCompany());
     }
 
     public Share(String owner, String company, String manager_id) {
