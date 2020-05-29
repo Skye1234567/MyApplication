@@ -1,8 +1,13 @@
 package com.example.myapplication;
 
+import Objects.Investor;
+import Objects.Man_Model;
+import Objects.Share_Model;
 import Objects.Trade;
+import Objects.Vest_Model;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Context;
@@ -38,6 +43,14 @@ public class MarketPlace extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_market_place);
         context=this;
+        Investor i = (Investor)getIntent().getSerializableExtra("investor");
+        String id = i.getID();
+        Share_Model SM= new ViewModelProvider(this).get(Share_Model.class);
+        SM.setId(id);
+        Vest_Model VM =  new ViewModelProvider(this).get(Vest_Model.class);
+        VM.setId(id);
+
+
 
         FloatingActionButton sign_out=findViewById(R.id.FAB);
         sign_out.setOnClickListener(new View.OnClickListener() {

@@ -1,9 +1,7 @@
 package Objects;
 
-import android.content.Context;
 import android.util.Log;
 
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -11,37 +9,40 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class Man_Model extends ViewModel {
-    private  MutableLiveData<Manager> livedata=new MutableLiveData<>();
+public class Vest_Model extends ViewModel {
+    private  MutableLiveData<Investor> livedata=new MutableLiveData<>();
     private String id;
-    public LiveData<Manager> getMan(){
-        update_manager();
+    public LiveData<Investor> getMan(){
+        update_investor();
 
         return livedata;
     }
-    public Man_Model(){
-        update_manager();
+    public Vest_Model(){
+
     }
 
-   public void setMan(Manager manager){
-        livedata.setValue(manager);
-        id=manager.getID();
+   public void setMan(Investor investor){
+        livedata.setValue(investor);
+        id=investor.getID();
 
    }
 
-public void update_manager(){
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void update_investor(){
         if (id==null){return;}else{
     DatabaseReference ref = FirebaseDatabase.getInstance()
-            .getReference().child("Managers").child(id);
+            .getReference().child("Investors").child(id);
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                livedata.setValue(dataSnapshot.getValue(Manager.class));
+                livedata.setValue(dataSnapshot.getValue(Investor.class));
 
             }
 

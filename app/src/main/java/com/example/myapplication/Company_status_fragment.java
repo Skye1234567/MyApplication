@@ -46,7 +46,6 @@ public class Company_status_fragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_manager__company_status,container, false);
-        Intent intent = getActivity().getIntent();
         context = getContext();
         accountant = new Accountant();
         profit = view.findViewById(R.id.profit_info);
@@ -82,7 +81,7 @@ public class Company_status_fragment extends Fragment {
                     }
 
                     managerstat.setProfit(accountant.getRevenue());
-                    man_model.setMan(managerstat);
+                    FirebaseDatabase.getInstance().getReference().child("Managers").child(managerstat.getID()).setValue(managerstat);
                 }catch (NullPointerException e){Log.e("market null", e.getMessage());}
 
             }
@@ -129,7 +128,8 @@ public class Company_status_fragment extends Fragment {
         Integer rev = managerstat.getProfit();
         profit.setText(rev.toString());
         assets.setText(managerstat.getCash().toString());
-        if (managerstat.getAudit_choice()==1 &&managerstat.getAccept_audit()==1){
+        //TODO: accept audit stuff in comment
+        if (managerstat.getAudit_choice()==1 /*&&managerstat.getAccept_audit()==1*/){
             audit.setText("Yes");
         }else audit.setText("No");
 
@@ -140,7 +140,7 @@ public class Company_status_fragment extends Fragment {
 
     }
 
-    @Override
+   @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         man_model = new ViewModelProvider(getActivity()).get(Man_Model.class);

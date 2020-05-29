@@ -12,7 +12,6 @@
        android:id="@+id/yourreport"
        android:layout_width="wrap_content"
        android:layout_height="wrap_content"
-       android:padding="@dimen/textSizeNormal"
        app:layout_constraintTop_toTopOf="parent"
        app:layout_constraintBottom_toTopOf="@id/question"
        app:layout_constraintStart_toStartOf="parent"

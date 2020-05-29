@@ -1,14 +1,15 @@
 package Objects;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 public class Share implements Serializable {
 
-    private Float market_price;
+    private Integer market_price;
     private String owner;
     private String company;
     private Integer number;
-    private Float offer_amount;
+    private Integer offer_amount;
     private Integer number_offered;
     private String status;
     private String manager_id;
@@ -29,15 +30,28 @@ public class Share implements Serializable {
         this.number_offered = number_offered;
     }
 
-    public Float getOffer_amount() {
+    public Integer getOffer_amount() {
         return offer_amount;
     }
 
-    public void setOffer_amount(Float offer_amount) {
+    public void setOffer_amount(Integer offer_amount) {
         this.offer_amount = offer_amount;
     }
 
     public Share() {
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Share)) return false;
+        Share share = (Share) o;
+        return getCompany().equals(share.getCompany());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getCompany());
     }
 
     public Share(String owner, String company, String manager_id) {
@@ -45,13 +59,16 @@ public class Share implements Serializable {
         this.company = company;
         this.number=10;
         this.manager_id=manager_id;
+        this.number_offered=0;
+        this.market_price=0;
+        this.offer_amount=0;
     }
 
-    public Float getMarket_price() {
+    public Integer getMarket_price() {
         return market_price;
     }
 
-    public void setMarket_price(Float market_price) {
+    public void setMarket_price(Integer market_price) {
         this.market_price = market_price;
     }
 

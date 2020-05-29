@@ -1,13 +1,15 @@
 package com.example.myapplication;
 
 import Objects.Investor;
-import Objects.Manager;
+import Objects.Share_Model;
 import Objects.Share;
 import Objects.ShareAdapter;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Context;
@@ -34,13 +36,16 @@ import java.util.Objects;
 
 public class Investor_Instructions_Fragment extends Fragment {
     String in_id;
+    ShareAdapter shareAdapter;
+
 
     Context context;
     ListView tableLayout;
 
     ArrayList<Share> investor_shares;
 
-    Investor_Logic IL;
+    Share_Model share_model;
+    //Investor_Logic IL;
 
     @Nullable
     @Override
@@ -48,19 +53,22 @@ public class Investor_Instructions_Fragment extends Fragment {
     {
        View view = inflater.inflate(R.layout.activity_investor__instructions, container, false);
        context = getContext();
+        share_model = new ViewModelProvider(getActivity()).get(Share_Model.class);
+
         final SwipeRefreshLayout SRL;
         SRL = view.findViewById(R.id.swiper_investor_instructions);
         tableLayout=view.findViewById(R.id.company_shares_table_investor_instructions);
         Investor investor = (Investor) Objects.requireNonNull(getActivity().getIntent().getExtras()).getSerializable("investor");
         in_id = investor.getID();
         investor_shares = new ArrayList<>();
-        final ShareAdapter shareAdapter =new ShareAdapter(context,investor_shares);
+        share_model .setId(in_id);
+        shareAdapter =new ShareAdapter(context,investor_shares);
         tableLayout.setAdapter(shareAdapter);
         if (in_id ==null){
             Toast.makeText(context, "HELP NO ID", Toast.LENGTH_LONG).show();
         }
-        IL= new Investor_Logic(in_id,shareAdapter);
-        IL.get_symbols();
+        //IL= new Investor_Logic(in_id,shareAdapter);
+        //IL.get_symbols();
 
         SRL.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -79,9 +87,34 @@ public class Investor_Instructions_Fragment extends Fragment {
 
     }
 
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        share_model = new ViewModelProvider(getActivity()).get(Share_Model.class);
+        share_model.getShares().observe(getViewLifecycleOwner(), new Observer<ArrayList<Share>>() {
+            @Override
+            public void onChanged(ArrayList<Share> shares) {
+                investor_shares = shares;
+                update_ShareAdapter();
+
+            }
+        });
+
+    }
+    public void update_ShareAdapter(){
+        shareAdapter.clear();
+
+        for (Share s : investor_shares){
+            shareAdapter.add(s);
+
+        }
 
 
-    public static class Investor_Logic {
+    }
+
+
+
+    /*public static class Investor_Logic {
 
         private final static String TAG="INVESTOR_LOGIC";
 
@@ -89,7 +122,7 @@ public class Investor_Instructions_Fragment extends Fragment {
         private HashMap<String, String> symbol_id;
         private ShareAdapter shareAdapter;
 
-        public Investor_Logic(String investor_id,  ShareAdapter shareAdapter) {
+       public Investor_Logic(String investor_id,  ShareAdapter shareAdapter) {
            this.investor_id =investor_id;
 
            this.shareAdapter = shareAdapter;
@@ -178,5 +211,5 @@ public class Investor_Instructions_Fragment extends Fragment {
 
 
         }
-    }
+    }*/
 }

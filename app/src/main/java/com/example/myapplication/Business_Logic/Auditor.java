@@ -40,10 +40,12 @@ public class Auditor {
 
 
         ArrayList<Integer> urn = new ArrayList<>();
+        double rando = Math.random();
         for (int i=0; i<10; i++){
-            if (Math.random()<percent_high){
+
+            if (rando<percent_high){
                 urn.add(1);
-            }
+            }else urn.add(0);
 
         }
 

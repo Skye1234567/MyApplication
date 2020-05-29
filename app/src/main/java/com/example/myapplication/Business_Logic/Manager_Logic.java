@@ -53,7 +53,7 @@ public class Manager_Logic {
 
     }
 
-    public void allocate_shares(){
+    public void  allocate_shares(){
         if (company_symbol==null)return;
 
         FirebaseDatabase db = FirebaseDatabase.getInstance();
