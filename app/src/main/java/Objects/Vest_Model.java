@@ -22,7 +22,7 @@ public class Vest_Model extends ViewModel {
         return livedata;
     }
     public Vest_Model(){
-        update_investor();
+
     }
 
    public void setMan(Investor investor){
@@ -31,7 +31,11 @@ public class Vest_Model extends ViewModel {
 
    }
 
-public void update_investor(){
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void update_investor(){
         if (id==null){return;}else{
     DatabaseReference ref = FirebaseDatabase.getInstance()
             .getReference().child("Investors").child(id);

@@ -82,6 +82,7 @@
 
         <EditText
             android:id="@+id/enter_number_of_stocks"
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
@@ -106,7 +107,6 @@
 
         <EditText
             android:id="@+id/money_sign"
-
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
