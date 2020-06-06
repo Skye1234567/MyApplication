@@ -65,8 +65,9 @@ public void update_manager(){
             q.equalTo(symbol).addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    livedata.setValue(dataSnapshot.getValue(Manager.class));
-                }
+                    for (DataSnapshot d: dataSnapshot.getChildren()){
+                    livedata.setValue(d.getValue(Manager.class));
+                }}
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
