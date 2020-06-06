@@ -3,6 +3,8 @@ package com.example.myapplication;
 import android.os.Bundle;
 
 import Objects.Investor;
+import Objects.Man_Model;
+import Objects.Manager;
 import Objects.Share;
 import Objects.Share_Model;
 import Objects.Trade;
@@ -30,6 +32,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 
 public class OrderStockFragment extends Fragment{
@@ -52,10 +55,14 @@ public class OrderStockFragment extends Fragment{
     private Share_Model sm;
     private String buy = "Buy";
     private String sell = "Sell";
+    private Man_Model mm;
+
 
 
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
+
         sm = new ViewModelProvider(getActivity()).get(Share_Model.class);
         sm.getShares().observe(getViewLifecycleOwner(), new Observer<ArrayList<Share>>() {
             @Override
@@ -88,6 +95,7 @@ public class OrderStockFragment extends Fragment{
         current_bid = view.findViewById(R.id.current_bid);
         sm = new ViewModelProvider(getActivity()).get(Share_Model.class);
         sm.setId(user_id);
+        mm = new ViewModelProvider(getActivity()).get(Man_Model.class);
         vm = new ViewModelProvider(getActivity()).get(Vest_Model.class);
         vm.setId(user_id);
         spinner = view.findViewById(R.id.spinner_buy_sell);
@@ -112,6 +120,7 @@ public class OrderStockFragment extends Fragment{
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Cpany = parent.getItemAtPosition(position).toString();
+                mm.setSymbol(Cpany);
 
                 for (Share sha : my_shares) {
                     if (sha.getCompany().equals(Cpany)) current_selection = sha;

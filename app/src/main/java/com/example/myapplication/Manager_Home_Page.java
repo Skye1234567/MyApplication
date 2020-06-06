@@ -47,7 +47,7 @@ public class Manager_Home_Page extends AppCompatActivity {
         });
 
         mSectionsPageAdapter = new SectionsPageAdapter(getSupportFragmentManager());
-        viewPager = (ViewPager) findViewById(R.id.manhome_container);
+        viewPager = findViewById(R.id.manhome_container);
         setUpViewPager(viewPager);
         TabLayout tabLayout = findViewById(R.id.tabmanhome);
         tabLayout.setupWithViewPager(viewPager);

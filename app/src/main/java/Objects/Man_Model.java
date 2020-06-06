@@ -8,6 +8,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import androidx.annotation.NonNull;
@@ -19,6 +20,13 @@ import androidx.lifecycle.ViewModel;
 public class Man_Model extends ViewModel {
     private  MutableLiveData<Manager> livedata=new MutableLiveData<>();
     private String id;
+    private String symbol;
+
+    public void setSymbol(String symbol) {
+        this.symbol = symbol;
+        update_manager();
+    }
+
     public LiveData<Manager> getMan(){
         update_manager();
 
@@ -35,7 +43,7 @@ public class Man_Model extends ViewModel {
    }
 
 public void update_manager(){
-        if (id==null){return;}else{
+        if (id!=null){
     DatabaseReference ref = FirebaseDatabase.getInstance()
             .getReference().child("Managers").child(id);
         ref.addValueEventListener(new ValueEventListener() {
@@ -51,6 +59,20 @@ public void update_manager(){
 
             }
         });
+        }
+        else if (symbol!=null){
+            Query q = FirebaseDatabase.getInstance().getReference().child("Managers").orderByChild("company_symbol");
+            q.equalTo(symbol).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    livedata.setValue(dataSnapshot.getValue(Manager.class));
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
         }
 }
 }

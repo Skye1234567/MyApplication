@@ -15,8 +15,7 @@ public class Trade implements Serializable {
     public Trade() {
     }
     public boolean greater_than(Trade other_trade){
-        if (this.price_point<=other_trade.price_point) return false;
-        else return true;
+        return this.price_point > other_trade.price_point;
     }
     public Trade(Integer num_shares, Integer price_point, String company) {
         this.num_shares = num_shares;

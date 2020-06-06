@@ -32,14 +32,14 @@ public class Set_Parameters extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_set__parameters);
-        context=(Context) this;
+        context= this;
         mauth = FirebaseAuth.getInstance();
         if (mauth.getCurrentUser().isAnonymous()|| mauth.getCurrentUser()==null){
             Intent intent = new Intent(context, Sign_up_admin.class);
             context.startActivity(intent);
-        };
+        }
 
-    p = findViewById(R.id.prob_ofhigh);
+        p = findViewById(R.id.prob_ofhigh);
     pi_h = findViewById(R.id.prob_outcome_high);
     pi_l = findViewById(R.id.prob_outcome_low);
     rounds = findViewById(R.id.num_rounds);
