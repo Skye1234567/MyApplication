@@ -1,28 +1,44 @@
 package Objects;
 
 import java.io.Serializable;
-import java.util.Date;
 
 public class Trade implements Serializable {
+    private String id;
 
     private Integer num_shares;
-    private Date timeStamp;
-    private boolean completed;
+    private long timeStamp;
     private boolean for_sale;
     private Integer price_point;
     private String buyer_id;
     private String seller_id;
-
-
-
+    private String company;
     public Trade() {
     }
-
-    public Trade(Integer num_shares, Integer price_point) {
+    public boolean greater_than(Trade other_trade){
+        if (this.price_point<=other_trade.price_point) return false;
+        else return true;
+    }
+    public Trade(Integer num_shares, Integer price_point, String company) {
         this.num_shares = num_shares;
-        this.completed = false;
         this.price_point = price_point;
+        this.company=company;
 
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getCompany() {
+        return company;
+    }
+
+    public void setCompany(String company) {
+        this.company = company;
     }
 
     public String getBuyer_id() {
@@ -41,20 +57,12 @@ public class Trade implements Serializable {
         this.seller_id = seller_id;
     }
 
-    public Date getTimeStamp() {
+    public long getTimeStamp() {
         return timeStamp;
     }
 
-    public void setTimeStamp(Date timeStamp) {
+    public void setTimeStamp(long timeStamp) {
         this.timeStamp = timeStamp;
-    }
-
-    public boolean isCompleted() {
-        return completed;
-    }
-
-    public void setCompleted(boolean completed) {
-        this.completed = completed;
     }
 
     public boolean isFor_sale() {

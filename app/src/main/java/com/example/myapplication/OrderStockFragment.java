@@ -2,12 +2,11 @@ package com.example.myapplication;
 
 import android.os.Bundle;
 
-import Objects.Database_callback_current_bid;
-import Objects.Database_callback_order_stock;
 import Objects.Investor;
 import Objects.Share;
 import Objects.Share_Model;
 import Objects.Trade;
+import Objects.Trade_Manager;
 import Objects.Vest_Model;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -27,15 +26,10 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Set;
 
 
 public class OrderStockFragment extends Fragment{
@@ -151,43 +145,49 @@ public class OrderStockFragment extends Fragment{
                     try {
                         num_shares = Integer.parseInt(quantity.getText().toString());
                         dollars =Integer.parseInt(price.getText().toString());
-                        if (dollars>investor.getCash()||num_shares>current_selection.getNumber()) throw new Error();
+                        if (dollars>investor.getCash()||num_shares>current_selection.getNumber())
+                            Toast.makeText(getContext(), "Invalid entry: make sure you have enough cash", Toast.LENGTH_LONG).show();
+                    else{
+                        String looking_for="";
                         FirebaseDatabase db = FirebaseDatabase.getInstance();
                         DatabaseReference ref_shares;
-                        ref_shares= db.getReference("Trades").child(sell).child(Cpany);
-
+                        ref_shares= db.getReference("Trades").child(sell).push();
+                        trade = new Trade(num_shares, dollars, Cpany);
+                        trade.setId(ref_shares.getKey());
 
                         if(bs.compareTo(sell)==0){
                             current_selection.setStatus(sell);
-
-                            trade = new Trade(num_shares, dollars);
                             trade.setFor_sale(true);
                             trade.setSeller_id(user_id);
+                            trade.setTimeStamp(System.currentTimeMillis());
                             ref_shares.setValue(trade);
-
-                            }
+                            current_selection.setNumber(current_selection.getNumber()-num_shares);
+                            looking_for = buy;
+                        }
                         else if (bs.compareTo(buy)==0){
-                            trade = new Trade(num_shares, dollars);
                             trade.setFor_sale(false);
                             trade.setBuyer_id(user_id);
                              FirebaseDatabase.getInstance().getReference(high_bid).child(Cpany).setValue(Integer.parseInt(price.getText().toString()));
-                            ref_shares= db.getReference("Trades").child(buy).child(Cpany);
+                            ref_shares= db.getReference("Trades").child(buy).push();
+                            trade.setId(ref_shares.getKey());
                             ref_shares.setValue(trade);
                             Toast.makeText(getActivity(), "Buy stock clicked", Toast.LENGTH_LONG).show();
                             investor.setCash(investor.getCash()-dollars);
                             current_selection.setStatus(buy);
+                            looking_for = sell;
 
                         }
                         current_selection.setNumber_offered(num_shares);
-                        current_selection.setNumber(current_selection.getNumber()-num_shares);
                         current_selection.setOffer_amount(dollars);
                         db.getReference("Shares").child(user_id).child(Cpany).setValue(current_selection);
                         db.getReference().child("Investors").child(user_id).setValue(investor);
+                        Trade_Manager trade_manager = new Trade_Manager(trade,looking_for);
+                        trade_manager.search_for_trade();
+                    }
                     }
                     catch (Exception e){
                         Log.d(TAG, e.getMessage());
-                        Toast.makeText(getContext(), "Invalid entry: make sure you have enough cash", Toast.LENGTH_LONG).show();
-                    }
+                        }
                 }
             }
         });
