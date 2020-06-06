@@ -52,14 +52,22 @@ private String Cmpany;
         hash2.put(0, "Low");
         hash2.put(1, "High");
         mm = new ViewModelProvider(getActivity()).get(Man_Model.class);
+        mm.getMan().observe(getViewLifecycleOwner(), new Observer<Manager>() {
+            @Override
+            public void onChanged(Manager manager) {
+                managr =manager;
+                update_report_fields();
 
+
+            }
+        });
         spiner = view.findViewById(R.id.spinner_stocks_commpany_eport);
         spiner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Cmpany = parent.getItemAtPosition(position).toString();
                 mm.setSymbol(Cmpany);
-                if (managr!=null) update_report_fields();
+
             }
 
             @Override
@@ -76,15 +84,7 @@ private String Cmpany;
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mm = new ViewModelProvider(getActivity()).get(Man_Model.class);
-        mm.getMan().observe(getViewLifecycleOwner(), new Observer<Manager>() {
-            @Override
-            public void onChanged(Manager manager) {
-                managr =manager;
 
-
-            }
-        });
         sm = new ViewModelProvider(getActivity()).get(Share_Model.class);
         sm.getShares().observe(getViewLifecycleOwner(), new Observer<ArrayList<Share>>() {
             @Override
