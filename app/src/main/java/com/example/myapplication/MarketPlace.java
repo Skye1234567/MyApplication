@@ -2,6 +2,7 @@ package com.example.myapplication;
 
 import Objects.Investor;
 import Objects.Man_Model;
+import Objects.Pricing_Model;
 import Objects.Share_Model;
 import Objects.Trade;
 import Objects.Vest_Model;
@@ -34,7 +35,6 @@ public class MarketPlace extends AppCompatActivity {
     private static final String TAG="Marketplace";
     private Context context;
     private ViewPager viewPager;
-
     private SectionsPageAdapter adapter;
 
 
@@ -50,6 +50,10 @@ public class MarketPlace extends AppCompatActivity {
         Vest_Model VM =  new ViewModelProvider(this).get(Vest_Model.class);
         VM.setId(id);
         Man_Model MM = new ViewModelProvider(this).get(Man_Model.class);
+        Pricing_Model PM= new ViewModelProvider(this).get(Pricing_Model.class);
+        PM.setCurrent_user_id(id);
+
+
 
 
 

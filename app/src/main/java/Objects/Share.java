@@ -95,4 +95,12 @@ public class Share implements Serializable {
     public void setNumber(Integer number) {
         this.number = number;
     }
+
+
+
+    public Integer calculate_shareholder_value(){
+        if (this.number==null || this.market_price==null) return 0;
+
+        return this.number*this.market_price;
+    }
 }
