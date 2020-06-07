@@ -43,8 +43,8 @@ public class Sign_up_admin extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                password = (EditText) findViewById(R.id.admin_password);
-                email = (EditText) findViewById(R.id.admin_email);
+                password = findViewById(R.id.admin_password);
+                email = findViewById(R.id.admin_email);
                 String ps =password.getText().toString();
                 String em = email.getText().toString();
                 if (ps==null) {ps ="";}

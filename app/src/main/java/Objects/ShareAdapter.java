@@ -29,8 +29,8 @@ public class ShareAdapter extends ArrayAdapter<Share> {
                 convertView = LayoutInflater.from(getContext()).inflate(R.layout.res_share, parent, false);
             }
             // Lookup view for data population
-            TextView compsym = (TextView) convertView.findViewById(R.id.compsymb);
-            TextView sharenum = (TextView) convertView.findViewById(R.id.sharenumb);
+            TextView compsym = convertView.findViewById(R.id.compsymb);
+            TextView sharenum = convertView.findViewById(R.id.sharenumb);
             // Populate the data into the template view using the data object
             compsym.setText(share.getCompany());
             sharenum.setText(share.getNumber().toString());

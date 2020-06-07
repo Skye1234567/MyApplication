@@ -32,8 +32,8 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        Button button = (Button) findViewById(R.id.select_admin);
-        Button button1 = (Button) findViewById(R.id.select_player);
+        Button button = findViewById(R.id.select_admin);
+        Button button1 = findViewById(R.id.select_player);
         button.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {

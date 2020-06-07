@@ -44,11 +44,14 @@
 
          super.onCreate(savedInstanceState);
          setContentView(R.layout.activity_sign_up_player);
-
+         password = findViewById(R.id.player_password);
+         email = findViewById(R.id.player_email);
          context = Sign_up_player.this;
          mAuth = FirebaseAuth.getInstance();
 
          if (mAuth.getCurrentUser()!=null){
+             email.setVisibility(View.INVISIBLE);
+             password.setVisibility(View.INVISIBLE);
 
              get_PlayerType();
             }else{
@@ -63,8 +66,8 @@
              @Override
              public void onClick(View v) {
 
-                 password = (EditText) findViewById(R.id.player_password);
-                 email = (EditText) findViewById(R.id.player_email);
+                 password = findViewById(R.id.player_password);
+                 email = findViewById(R.id.player_email);
                  String ps =password.getText().toString();
                  String em = email.getText().toString();
                  if (ps==null) {ps ="";}

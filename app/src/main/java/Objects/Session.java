@@ -52,8 +52,6 @@ public class Session implements Serializable {
     }
 
     public boolean isValid(){
-        if (this.boom==null||this.bust==null||this.practice ==null)
-        {return false;}
-        return true;
+        return this.boom != null && this.bust != null && this.practice != null;
     }
 }

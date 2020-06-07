@@ -49,6 +49,7 @@ public class MarketPlace extends AppCompatActivity {
         SM.setId(id);
         Vest_Model VM =  new ViewModelProvider(this).get(Vest_Model.class);
         VM.setId(id);
+        Man_Model MM = new ViewModelProvider(this).get(Man_Model.class);
 
 
 

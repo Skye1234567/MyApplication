@@ -30,8 +30,8 @@ public class PersonalValueFragment extends Fragment {
         invester = (Investor)getActivity().getIntent().getSerializableExtra("investor");
 
 
-        cash = (TextView) view.findViewById(R.id.cash_value);
-        payout = (TextView) view.findViewById(R.id.value_account);
+        cash = view.findViewById(R.id.cash_value);
+        payout = view.findViewById(R.id.value_account);
 
 
         String id = invester.getID();
