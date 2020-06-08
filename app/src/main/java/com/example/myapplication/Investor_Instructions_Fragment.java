@@ -22,23 +22,17 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
-
+import Objects.Pricing_Model;
+import Objects.Price;
 
 public class Investor_Instructions_Fragment extends Fragment {
     String in_id;
     ShareAdapter shareAdapter;
-
-
+    Pricing_Model pricing_model;
     Context context;
     ListView tableLayout;
 
@@ -62,6 +56,8 @@ public class Investor_Instructions_Fragment extends Fragment {
         in_id = investor.getID();
         investor_shares = new ArrayList<>();
         share_model .setId(in_id);
+        pricing_model =new ViewModelProvider(getActivity()).get(Pricing_Model.class);
+        pricing_model.setCurrent_user_id(in_id);
         shareAdapter =new ShareAdapter(context,investor_shares);
         tableLayout.setAdapter(shareAdapter);
         if (in_id ==null){
@@ -90,13 +86,21 @@ public class Investor_Instructions_Fragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        pricing_model = new ViewModelProvider(getActivity()).get(Pricing_Model.class);
+         pricing_model.getPrices().observe(getViewLifecycleOwner(), new Observer<HashMap<String, Price>>() {
+            @Override
+            public void onChanged(HashMap<String, Price> stringPriceHashMap) {
+                //update share price
+
+
+            }
+        });
         share_model = new ViewModelProvider(getActivity()).get(Share_Model.class);
         share_model.getShares().observe(getViewLifecycleOwner(), new Observer<ArrayList<Share>>() {
             @Override
             public void onChanged(ArrayList<Share> shares) {
                 investor_shares = shares;
                 update_ShareAdapter();
-
             }
         });
 

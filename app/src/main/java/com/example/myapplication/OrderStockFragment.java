@@ -73,7 +73,6 @@ public class OrderStockFragment extends Fragment{
         pm.getPrices().observe(getViewLifecycleOwner(), new Observer<HashMap<String, Price>>() {
             @Override
             public void onChanged(HashMap<String, Price> stringPriceHashMap) {
-                pm.update_share_price();
                 prices_hash = stringPriceHashMap;
 
 
@@ -101,7 +100,7 @@ public class OrderStockFragment extends Fragment{
 
             }
         });
-        vm = new ViewModelProvider(getActivity()).get(Vest_Model.class);
+
 
     }
 
@@ -118,13 +117,13 @@ public class OrderStockFragment extends Fragment{
         investor.setValue(s_val);
         FirebaseDatabase.getInstance().getReference("Investors").child(user_id).setValue(investor);
         current_bid = view.findViewById(R.id.current_bid);
-        pm = new ViewModelProvider(getActivity()).get(Pricing_Model.class);
+       pm = new ViewModelProvider(getActivity()).get(Pricing_Model.class);
         pm.setCurrent_user_id(user_id);
         sm = new ViewModelProvider(getActivity()).get(Share_Model.class);
         sm.setId(user_id);
         mm = new ViewModelProvider(getActivity()).get(Man_Model.class);
-        vm = new ViewModelProvider(getActivity()).get(Vest_Model.class);
-        vm.setId(user_id);
+
+
         spinner = view.findViewById(R.id.spinner_buy_sell);
         spinner2 = view.findViewById(R.id.spinner_stocks);
         quantity_owned= view.findViewById(R.id.quantity);
@@ -236,7 +235,7 @@ public class OrderStockFragment extends Fragment{
                         db.getReference("Prices").child(Cpany).setValue(p);
                         Trade_Manager trade_manager = new Trade_Manager(trade,looking_for, p);
                         trade_manager.search_for_trade();
-                        pm.update_share_price();
+
 
 
                     }
@@ -244,7 +243,9 @@ public class OrderStockFragment extends Fragment{
                         Log.d(TAG, e.getMessage());
                         }
                 }
-        vm.update_trade_info();    }
+                FirebaseDatabase.getInstance().getReference("Investors").child(user_id).child("value").setValue(s_val);
+
+            }
         });
         return view;
     }

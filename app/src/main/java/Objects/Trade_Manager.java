@@ -26,6 +26,7 @@ public class Trade_Manager {
         this.my_trade=my_trade;
         this.bos = bos;
         this.price = price;
+        if (this.price==null) this.price = new Price(0,0);
 
     }
 
@@ -54,10 +55,11 @@ public class Trade_Manager {
             optimal_trade= trades.remove(trades.size()-1);
             if (optimal_trade.getPrice_point()>=price.getPrice()&&my_trade.getPrice_point()<=price.getPrice())
             perform_exchange(my_trade, optimal_trade);}
-        }
-        else {
+       }
+       else {
             while (my_trade.getSeller_id() == null && trades.size() > 0) {
                 optimal_trade = trades.remove(0);
+
                 if (optimal_trade.getPrice_point()<=price.getPrice()&&my_trade.getPrice_point()>=price.getPrice())
                 perform_exchange(optimal_trade, my_trade);
             }

@@ -36,16 +36,42 @@ public class Pricing_Model extends ViewModel {
     public void setPrice(HashMap<String,Price> price) {
         livedata.setValue(price);
     }
+    public void  addPrice(String key, Price p){
+        if (livedata.getValue()==null) livedata.setValue(new HashMap<String, Price>());
+        HashMap<String, Price>  h =livedata.getValue();
+        h.put(key, p);
+        livedata.setValue(h);
+
+
+    }
 
 
 
     public void update_prices(){
 
-        FirebaseDatabase.getInstance().getReference("Prices").addListenerForSingleValueEvent(new ValueEventListener() {
+        FirebaseDatabase.getInstance().getReference("Prices").addChildEventListener(new ChildEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-               HashMap<String, Price> hm= (HashMap<String, Price>) dataSnapshot.getValue();
-               setPrice(hm);
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                addPrice(dataSnapshot.getKey(), dataSnapshot.getValue(Price.class));
+
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                addPrice(dataSnapshot.getKey(), dataSnapshot.getValue(Price.class));
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+                addPrice(dataSnapshot.getKey(), null);
+
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
             }
 
             @Override
@@ -55,16 +81,7 @@ public class Pricing_Model extends ViewModel {
         });
 
 
-
     }
 
-    public void update_share_price(){
-        if (current_user_id!=null&&livedata.getValue()!=null) {
-            for (String k: livedata.getValue().keySet()) {
 
-                FirebaseDatabase db = FirebaseDatabase.getInstance();
-                db.getReference("Shares").child(current_user_id).child(k).child("market_price").setValue(livedata.getValue().get(k));
-            }
-        }
-    }
 }

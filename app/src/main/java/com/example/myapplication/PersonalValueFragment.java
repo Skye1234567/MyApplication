@@ -54,7 +54,6 @@ public class PersonalValueFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         VM = new ViewModelProvider(getActivity()).get(Vest_Model.class);
-        VM.update_trade_info();
         VM.getMan().observe(getViewLifecycleOwner(), new Observer<Investor>() {
             @Override
             public void onChanged(Investor investor) {
