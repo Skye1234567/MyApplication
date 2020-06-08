@@ -126,7 +126,7 @@ public class OrderStockFragment extends Fragment{
 
         spinner = view.findViewById(R.id.spinner_buy_sell);
         spinner2 = view.findViewById(R.id.spinner_stocks);
-        quantity_owned= view.findViewById(R.id.quantity);
+        quantity_owned= view.findViewById(R.id.quantity_owned);
         quantity = view.findViewById(R.id.enter_number_of_stocks);
         price = view.findViewById(R.id.money_sign);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
