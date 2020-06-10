@@ -1,7 +1,7 @@
 <resources>
     <dimen name="fab_margin">16sp</dimen>
-    <dimen name="tab_bar_gap">100sp</dimen>
+    <dimen name="tab_bar_gap">50sp</dimen>
 
     <dimen name="textSizeTitle">30sp</dimen>
-    <dimen name="textSizeNormal">20sp</dimen>
+    <dimen name="textSizeNormal">15sp</dimen>
 </resources>

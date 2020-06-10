@@ -49,8 +49,8 @@ public class Investor_Instructions_Fragment extends Fragment {
        context = getContext();
         share_model = new ViewModelProvider(getActivity()).get(Share_Model.class);
 
-        final SwipeRefreshLayout SRL;
-        SRL = view.findViewById(R.id.swiper_investor_instructions);
+        //final SwipeRefreshLayout SRL;
+        //SRL = view.findViewById(R.id.swiper_investor_instructions);
         tableLayout=view.findViewById(R.id.company_shares_table_investor_instructions);
         Investor investor = (Investor) Objects.requireNonNull(getActivity().getIntent().getExtras()).getSerializable("investor");
         in_id = investor.getID();
@@ -66,16 +66,7 @@ public class Investor_Instructions_Fragment extends Fragment {
         //IL= new Investor_Logic(in_id,shareAdapter);
         //IL.get_symbols();
 
-        SRL.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                shareAdapter.clear();
-                SRL.setRefreshing(false);
 
-            }
-
-
-        });
 
 
 

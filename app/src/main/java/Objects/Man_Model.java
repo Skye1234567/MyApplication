@@ -11,6 +11,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.LiveData;
@@ -18,17 +21,12 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 public class Man_Model extends ViewModel {
-    private  MutableLiveData<Manager> livedata=new MutableLiveData<>();
-    private String id;
-    private String symbol;
+    private  MutableLiveData<HashMap<String, Manager>> livedata=new MutableLiveData<>();
+   private HashMap<String, Manager> a;
 
-    public void setSymbol(String symbol) {
-        this.symbol = symbol;
+    public LiveData<HashMap<String, Manager>> getMan(){
         update_manager();
-    }
 
-    public LiveData<Manager> getMan(){
-        update_manager();
 
         return livedata;
     }
@@ -36,44 +34,54 @@ public class Man_Model extends ViewModel {
         update_manager();
     }
 
-   public void setMan(Manager manager){
+   public void setMan(HashMap<String, Manager> manager){
         livedata.setValue(manager);
-        id=manager.getID();
+
 
    }
 
 public void update_manager(){
-        if (id!=null){
+        if (livedata.getValue()==null) livedata.setValue(new HashMap<String, Manager>());
+        a = livedata.getValue();
+
     DatabaseReference ref = FirebaseDatabase.getInstance()
-            .getReference().child("Managers").child(id);
-        ref.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                livedata.setValue(dataSnapshot.getValue(Manager.class));
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.d("can't get man for man_model", databaseError.getMessage());
-
-            }
-        });
+            .getReference().child("Managers");
+    ref.addChildEventListener(new ChildEventListener() {
+        @Override
+        public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+            Manager m =dataSnapshot.getValue(Manager.class);
+            a.put(m.getCompany_symbol(), m);
+            setMan(a);
         }
-        else if (symbol!=null){
-            Query q = FirebaseDatabase.getInstance().getReference().child("Managers").orderByChild("company_symbol");
-            q.equalTo(symbol).addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    for (DataSnapshot d: dataSnapshot.getChildren()){
-                    livedata.setValue(d.getValue(Manager.class));
-                }}
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
+        @Override
+        public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+            Manager m =dataSnapshot.getValue(Manager.class);
+            a.put(m.getCompany_symbol(), m);
+            setMan(a);
 
-                }
-            });
         }
+
+        @Override
+        public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+            Manager m =dataSnapshot.getValue(Manager.class);
+            a.put(m.getCompany_symbol(), null);
+            setMan(a);
+
+        }
+
+        @Override
+        public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+        }
+
+        @Override
+        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+        }
+    });
+
 }
+
+
 }

@@ -77,11 +77,8 @@ public class MarketPlace extends AppCompatActivity {
 
     private void setUpViewPager(ViewPager viewPager){
         adapter = new SectionsPageAdapter(getSupportFragmentManager());
-        adapter.addFragment(new Investor_Instructions_Fragment(), "Stocks");
-        adapter.addFragment(new OrderStockFragment(), "Place Order");
-        adapter.addFragment(new PersonalValueFragment(), "Cash");
-        adapter.addFragment(new Investor_View_Report(), "Company Report");
-
+        adapter.addFragment(new Investor_View_Report(), "Company Reports");
+        adapter.addFragment(new Investor_Instructions_Fragment(), "Your  Stocks");
         viewPager.setAdapter(adapter);
     }
 }

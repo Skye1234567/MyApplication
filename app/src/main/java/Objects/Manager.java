@@ -4,10 +4,10 @@ package Objects;
 public class Manager extends Player {
     private Integer salary;
     private String company_symbol;
-    int performance;
-    private int profit;
-    private int report_performance;
-    private int report_dividend;
+    private Integer performance;
+    private Integer profit;
+    private Integer report_performance;
+    private Integer report_dividend;
 
     public Manager() {
     }
@@ -16,15 +16,15 @@ public class Manager extends Player {
     public String getCompany_symbol() {
         return company_symbol;
     }
-    public int getProfit() {
+    public Integer getProfit() {
         return profit;
     }
 
-    public void setProfit(int profit) {
+    public void setProfit(Integer profit) {
         this.profit = profit;
     }
 
-    void setAccept_audit(int accept_audit) {
+    void setAccept_audit(Integer accept_audit) {
         this.accept_audit = accept_audit;
     }
 
@@ -33,37 +33,37 @@ public class Manager extends Player {
         this.company_symbol = company_symbol;
     }
 
-    public int getReport_performance() {
+    public Integer getReport_performance() {
         return report_performance;
     }
 
-    public void setReport_performance(int report_performance) {
+    public void setReport_performance(Integer report_performance) {
         this.report_performance = report_performance;
     }
 
-    public int getAudit_report() {
+    public Integer getAudit_report() {
         return audit_report;
     }
 
-    public void setAudit_report(int audit_report) {
+    public void setAudit_report(Integer audit_report) {
         this.audit_report = audit_report;
     }
 
-    public int getAccept_audit() {
+    public Integer getAccept_audit() {
         return accept_audit;
     }
 
 
-    private int audit_choice;
-    private int audit_report;
-    private int accept_audit;
-    private int num_shares;
+    private Integer audit_choice;
+    private Integer audit_report;
+    private Integer accept_audit;
+    private Integer num_shares;
 
-    public int getNum_shares() {
+    public Integer getNum_shares() {
         return num_shares;
     }
 
-    public void setNum_shares(int num_shares) {
+    public void setNum_shares(Integer num_shares) {
         this.num_shares = num_shares;
     }
 
@@ -85,27 +85,27 @@ public class Manager extends Player {
         this.salary = salary;
     }
 
-    public int getPerformance() {
+    public Integer getPerformance() {
         return performance;
     }
 
-    public void setPerformance(int performance) {
+    public void setPerformance(Integer performance) {
         this.performance = performance;
     }
 
-    public int getReport_dividend() {
+    public Integer getReport_dividend() {
         return report_dividend;
     }
 
-    public void setReport_dividend(int report_dividend) {
+    public void setReport_dividend(Integer report_dividend) {
         this.report_dividend = report_dividend;
     }
 
-    public int getAudit_choice() {
+    public Integer getAudit_choice() {
         return audit_choice;
     }
 
-    public void setAudit_choice(int audit_choice) {
+    public void setAudit_choice(Integer audit_choice) {
         this.audit_choice = audit_choice;
     }
 }
