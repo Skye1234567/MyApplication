@@ -10,7 +10,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".orderstockActivity"></activity>
+        <activity android:name=".View_Companies"></activity>
+        <activity android:name=".orderstockActivity" />
         <activity android:name=".Enter_Num_Players" />
         <activity android:name=".Relevant_terminology" />
         <activity android:name=".Wait_page2" />
