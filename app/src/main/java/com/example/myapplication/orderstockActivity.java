@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -42,18 +43,16 @@ import java.util.HashMap;
      private TextView current_bid;
      private TextView quantity_owned;
      private String user_id;
-     private Vest_Model vm;
-     private HashMap<String, Price> prices_hash;
-     Integer s_val=0;
 
+     Integer s_val=0;
      private String bs;
      private String Cpany;
-     private Share_Model sm;
      private String buy = "Buy";
      private String sell = "Sell";
-     private Man_Model mm;
-     private Pricing_Model pm;
      private Context context;
+     private Investor investor;
+     private Price p;
+
 
 
 
@@ -61,23 +60,26 @@ import java.util.HashMap;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         context=this;
-        setContentView(R.layout.activityorderstock);final Investor investor = (Investor) getIntent().getSerializableExtra("investor");
+        setContentView(R.layout.activityorderstock);
+        Intent intent1 = getIntent();
+        Cpany= intent1.getStringExtra("symbol");
+         investor = (Investor) intent1.getSerializableExtra("user");
+         current_selection = (Share) intent1.getSerializableExtra("share");
+
+        current_selection = (Share) intent1.getSerializableExtra("share");
+          p = (Price)intent1.getSerializableExtra("price");
          user_id = investor.getID();
          investor.setValue(s_val);
          FirebaseDatabase.getInstance().getReference("Investors").child(user_id).setValue(investor);
          current_bid =findViewById(R.id.current_bid);
-         pm = new ViewModelProvider(this).get(Pricing_Model.class);
-         pm.setCurrent_user_id(user_id);
-         sm = new ViewModelProvider(this).get(Share_Model.class);
-         sm.setId(user_id);
-         mm = new ViewModelProvider(this).get(Man_Model.class);
-
-
          spinner = findViewById(R.id.spinner_buy_sell);
-         spinner2 = findViewById(R.id.spinner_stocks);
          quantity_owned= findViewById(R.id.quantity_owned);
          quantity = findViewById(R.id.enter_number_of_stocks);
          price =findViewById(R.id.money_sign);
+         try{
+         quantity_owned.setText(current_selection.getNumber().toString());
+         current_bid.setText(current_selection.getMarket_price().toString());}
+         catch (NullPointerException e){}
          spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
              @Override
              public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -91,32 +93,12 @@ import java.util.HashMap;
              }
          });
 
-         spinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-             @Override
-             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                 Cpany = parent.getItemAtPosition(position).toString();
-                 prices_hash = pm.getPrices().getValue();
-
-                 for (Share sha : my_shares) {
-                     if (sha.getCompany().equals(Cpany)) current_selection = sha;
-                 }
-                 try {
-                     quantity_owned.setText( current_selection.getNumber().toString());
-                     Price p = (Price)prices_hash.get(Cpany);
-                     current_bid.setText(p.getPrice().toString());
 
 
-                 }catch(NullPointerException e){
 
 
-                 }
-             }
 
-             @Override
-             public void onNothingSelected(AdapterView<?> parent) {
 
-             }
-         });
          order_stock = findViewById(R.id.place_order_button);
          order_stock.setOnClickListener(new View.OnClickListener() {
              @Override
@@ -124,11 +106,7 @@ import java.util.HashMap;
                  Integer num_shares;
                  Integer dollars;
                  Trade trade;
-                 Price p;
-                 if (prices_hash==null) p = new Price();
 
-
-                 else p= prices_hash.get(Cpany);
 
 
 
@@ -175,7 +153,7 @@ import java.util.HashMap;
                              }
 
                          }
-                         current_bid.setText(p.getPrice().toString());
+                         current_bid.setText(current_selection.getMarket_price().toString());
                          current_selection.setNumber_offered(num_shares);
                          current_selection.setOffer_amount(dollars);
                          db.getReference("Shares").child(user_id).child(Cpany).setValue(current_selection);
