@@ -1,6 +1,7 @@
 package Objects;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 public class Trade implements Serializable {
     private String id;
@@ -14,6 +15,20 @@ public class Trade implements Serializable {
     private String company;
     public Trade() {
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Trade)) return false;
+        Trade trade = (Trade) o;
+        return Objects.equals(getId(), trade.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId());
+    }
+
     public boolean greater_than(Trade other_trade){
         return this.price_point > other_trade.price_point;
     }
@@ -87,6 +102,7 @@ public class Trade implements Serializable {
     public void setNum_shares(Integer num_shares) {
         this.num_shares = num_shares;
     }
+
 
 
 

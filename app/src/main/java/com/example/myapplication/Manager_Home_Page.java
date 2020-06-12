@@ -13,6 +13,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import Objects.Man_Model;
 import Objects.Manager;
+import Objects.One_Man_Model;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager.widget.ViewPager;
@@ -32,7 +33,7 @@ public class Manager_Home_Page extends AppCompatActivity {
         setContentView(R.layout.activity_manager_home);
         context=this;
         manager =(Manager) getIntent().getSerializableExtra("manager");
-        Man_Model MM = new ViewModelProvider(this).get(Man_Model.class);
+        One_Man_Model MM = new ViewModelProvider(this).get(One_Man_Model.class);
         MM.setMan(manager);
         FirebaseDatabase db = FirebaseDatabase.getInstance();
         DatabaseReference ref = db.getReference();

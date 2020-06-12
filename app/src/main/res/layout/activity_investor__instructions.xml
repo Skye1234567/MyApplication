@@ -5,54 +5,30 @@
     android:paddingTop="40dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Investor_Instructions"
+    tools:context=".Investor_Instructions_Fragment"
     android:layout_margin="@dimen/textSizeNormal"
     >
 
 
-
-<TextView
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintBottom_toTopOf="@id/investor_instructions"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:id="@+id/investor_info_title"
-    android:text="Welcome!"
-    android:textSize="@dimen/textSizeTitle"/>
-
-
-
-
-     <TextView
-         android:text = "You are an investor! Below are your current investments."
-         android:id="@+id/investor_instructions"
-
-         app:layout_constraintTop_toBottomOf="@+id/investor_info_title"
-         app:layout_constraintStart_toStartOf="parent"
-         android:textSize="@dimen/textSizeNormal"
-         android:textColor="@color/colorPrimaryDark"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content" />
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/investor_instructions">
-
-   <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/swiper_investor_instructions"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-       >
+       <TextView
+           android:id="@+id/titleofinvestorinstructions"
+           app:layout_constraintStart_toStartOf="parent"
+           app:layout_constraintTop_toTopOf="parent"
+           android:paddingTop="@dimen/tab_bar_gap"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_margin="@dimen/textSizeNormal"
+           android:text="Your Assets"
+           android:textSize="@dimen/textSizeTitle"/>
 
 
 
     <ListView
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleofinvestorinstructions"
         android:id="@+id/company_shares_table_investor_instructions"
         android:textSize="@dimen/textSizeNormal"
         android:textColor="@color/colorPrimaryDark"
-        app:layout_constraintTop_toBottomOf="@id/investor_instructions"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         >
@@ -60,9 +36,7 @@
 
 
     </ListView>
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-    </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

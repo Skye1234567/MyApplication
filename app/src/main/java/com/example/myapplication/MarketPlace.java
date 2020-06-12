@@ -2,10 +2,10 @@ package com.example.myapplication;
 
 import Objects.Investor;
 import Objects.Man_Model;
+import Objects.Pricing_Model;
 import Objects.Share_Model;
-import Objects.Trade;
+import Objects.Trade_Model;
 import Objects.Vest_Model;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager.widget.ViewPager;
@@ -14,27 +14,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Spinner;
-import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.Transaction;
-import com.google.firebase.database.ValueEventListener;
 
 public class MarketPlace extends AppCompatActivity {
     private static final String TAG="Marketplace";
     private Context context;
     private ViewPager viewPager;
-
     private SectionsPageAdapter adapter;
 
 
@@ -50,6 +38,13 @@ public class MarketPlace extends AppCompatActivity {
         Vest_Model VM =  new ViewModelProvider(this).get(Vest_Model.class);
         VM.setId(id);
         Man_Model MM = new ViewModelProvider(this).get(Man_Model.class);
+        Pricing_Model PM= new ViewModelProvider(this).get(Pricing_Model.class);
+        Trade_Model TM = new ViewModelProvider(this).get(Trade_Model.class);
+        TM.setId(id);
+
+        PM.setCurrent_user_id(id);
+
+
 
 
 
@@ -73,11 +68,9 @@ public class MarketPlace extends AppCompatActivity {
 
     private void setUpViewPager(ViewPager viewPager){
         adapter = new SectionsPageAdapter(getSupportFragmentManager());
-        adapter.addFragment(new Investor_Instructions_Fragment(), "Stocks");
-        adapter.addFragment(new OrderStockFragment(), "Place Order");
-        adapter.addFragment(new PersonalValueFragment(), "Cash");
-        adapter.addFragment(new Investor_View_Report(), "Company Report");
-
+        adapter.addFragment(new View_Companies(), "Company Reports");
+        adapter.addFragment(new Investor_Instructions_Fragment(), "Your  Stocks");
+        adapter.addFragment(new ActiveTradesFragment(), "Active Trades");
         viewPager.setAdapter(adapter);
     }
 }

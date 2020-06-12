@@ -8,6 +8,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -16,8 +18,9 @@ import androidx.lifecycle.ViewModel;
 public class Vest_Model extends ViewModel {
     private  MutableLiveData<Investor> livedata=new MutableLiveData<>();
     private String id;
+    private ArrayList<Trade> t;
     public LiveData<Investor> getMan(){
-        update_investor();
+       update_investor();
 
         return livedata;
     }
@@ -44,6 +47,7 @@ public class Vest_Model extends ViewModel {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 livedata.setValue(dataSnapshot.getValue(Investor.class));
 
+
             }
 
             @Override
@@ -54,4 +58,6 @@ public class Vest_Model extends ViewModel {
         });
         }
 }
+
+
 }

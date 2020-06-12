@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import Objects.Man_Model;
 import Objects.Manager;
+import Objects.One_Man_Model;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -23,7 +24,7 @@ import com.example.myapplication.Business_Logic.Auditor;
 
 public class CompanyReportFragment extends Fragment {
     Context context;
-    Man_Model man_model;
+    One_Man_Model man_model;
     Manager managerman;
     Button aud_yes;
     Button aud_no;
@@ -33,14 +34,13 @@ public class CompanyReportFragment extends Fragment {
     TextView Audit_result_textview;
     @Nullable
     @Override
-
+//TODO: FIX THE MAN MODEL.
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_manager__enter_report,container, false);
 
-
         context = getContext();
-        man_model = new ViewModelProvider(getActivity()).get(Man_Model.class);
+        man_model = new ViewModelProvider(getActivity()).get(One_Man_Model.class);
         managerman=man_model.getMan().getValue();
          aud_yes = view.findViewById(R.id.yes_audit);
          aud_no = view.findViewById(R.id.no_audit);
@@ -53,8 +53,8 @@ public class CompanyReportFragment extends Fragment {
         aud_yes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                managerman.setAudit_choice(1);
-                int auditor_report = new Auditor(managerman.getPerformance()).generateReport(managerman.getProfit());
+               managerman.setAudit_choice(1);
+               Integer auditor_report = new Auditor(managerman.getPerformance()).generateReport(managerman.getProfit());
 
             }
         });
@@ -87,13 +87,11 @@ public class CompanyReportFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        man_model = new ViewModelProvider(getActivity()).get(Man_Model.class);
+        man_model = new ViewModelProvider(getActivity()).get(One_Man_Model.class);
         man_model.getMan().observe(getViewLifecycleOwner(), new Observer<Manager>() {
             @Override
             public void onChanged(Manager manager) {
                 managerman = manager;
-                updateReportManager();
-
             }
         });
 

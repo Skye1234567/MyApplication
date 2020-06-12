@@ -54,7 +54,8 @@ public class Share_Model extends ViewModel {
    }
    public void addShare(Share share){
         ArrayList a = livedata.getValue();
-        if (!a.contains(share)) a.add(share);
+        if (share!=null){
+        if (!a.contains(share)) a.add(share);}
         setShareList(a);
 
 
@@ -94,4 +95,7 @@ public void update_shares(){
 
         }
 }
+
+
+
 }

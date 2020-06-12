@@ -60,7 +60,7 @@ public class Share implements Serializable {
         this.number=10;
         this.manager_id=manager_id;
         this.number_offered=0;
-        this.market_price=0;
+       this.market_price=0;
         this.offer_amount=0;
     }
 
@@ -94,5 +94,13 @@ public class Share implements Serializable {
 
     public void setNumber(Integer number) {
         this.number = number;
+    }
+
+
+
+    public Integer calculate_shareholder_value(){
+        if (this.number==null || this.market_price==null) return 0;
+
+        return this.number*this.market_price;
     }
 }

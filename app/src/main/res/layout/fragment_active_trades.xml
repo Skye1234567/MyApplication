@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ActiveTradesFragment">
+    <TextView
+
+        android:id="@+id/title_account"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:padding="3dip"
+        android:paddingTop="@dimen/tab_bar_gap"
+        android:text="Active Trades"
+        android:textAllCaps="true"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="@dimen/textSizeTitle"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        />
+
+
+
+    <LinearLayout
+        app:layout_constraintTop_toBottomOf = "@id/title_account"
+        android:id="@+id/investor_account"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_gravity="center">
+
+       <LinearLayout
+           android:layout_weight="0.5"
+           android:orientation="vertical"
+           android:layout_width="0dp"
+           android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/buy_title_active_trades"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="3dip"
+            android:text="Buy"
+            android:textAllCaps="true"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/textSizeNormal" />
+    <ListView
+        android:id = "@+id/tradeslistbuy"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        >
+
+    </ListView>
+       </LinearLayout>
+<LinearLayout
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_weight="0.5">
+        <TextView
+            android:id="@+id/sell_title_active_trades"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="3dip"
+            android:text="Sell"
+            android:textAllCaps="true"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/textSizeNormal" />
+        <ListView
+            android:id = "@+id/tradeslistsell"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            >
+
+        </ListView>
+</LinearLayout>
+
+    </LinearLayout>
+</FrameLayout>

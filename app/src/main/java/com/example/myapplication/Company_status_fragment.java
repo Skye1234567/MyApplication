@@ -3,6 +3,7 @@ package com.example.myapplication;
 import Objects.Man_Model;
 import Objects.Manager;
 import Objects.Market;
+import Objects.One_Man_Model;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -31,7 +32,7 @@ import com.google.firebase.database.ValueEventListener;
 import static com.google.firebase.auth.FirebaseAuth.getInstance;
 
 public class Company_status_fragment extends Fragment {
-    Man_Model man_model;
+    One_Man_Model man_model;
     Context context;
     TextView profit;
     TextView performance;
@@ -58,7 +59,7 @@ public class Company_status_fragment extends Fragment {
         Manager_Logic mLogic = new Manager_Logic( managerstat.getCompany_symbol(), managerstat.getID());
         mLogic.allocate_shares();
 
-        man_model = new ViewModelProvider(getActivity()).get(Man_Model.class);
+        man_model = new ViewModelProvider(getActivity()).get(One_Man_Model.class);
 
 
 
@@ -143,7 +144,7 @@ public class Company_status_fragment extends Fragment {
    @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        man_model = new ViewModelProvider(getActivity()).get(Man_Model.class);
+        man_model = new ViewModelProvider(getActivity()).get(One_Man_Model.class);
         man_model.getMan().observe(getViewLifecycleOwner(), new Observer<Manager>() {
             @Override
             public void onChanged(Manager manager) {

@@ -10,7 +10,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Enter_Num_Players"></activity>
+        <activity android:name=".View_Companies"></activity>
+        <activity android:name=".orderstockActivity" />
+        <activity android:name=".Enter_Num_Players" />
         <activity android:name=".Relevant_terminology" />
         <activity android:name=".Wait_page2" />
         <activity android:name=".Admin_Menu" />
@@ -21,10 +23,9 @@
         <activity android:name=".Wait_Page" />
         <activity android:name=".MarketPlace" />
         <activity android:name=".Manager_Home_Page" />
-        <activity android:name=".Investor_Instructions_Fragment"/>
-        <activity android:name=".Sign_up_player"/>
+        <activity android:name=".Investor_Instructions_Fragment" />
+        <activity android:name=".Sign_up_player" />
         <activity android:name=".MainActivity">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
