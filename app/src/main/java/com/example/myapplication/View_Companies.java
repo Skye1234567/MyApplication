@@ -67,11 +67,15 @@ public class View_Companies extends Fragment {
                  String symbol = manager.getCompany_symbol();
                  Share s = new Share();
                  s.setCompany(symbol);
+                 Price p;
+                 if (hm ==null) p=new Price();
+                 else p= hm.get(symbol);
                  intent.putExtra("user", investor);
                  intent.putExtra("symbol", symbol);
                  intent.putExtra("share", my_shares.get(my_shares.indexOf(s)));
-                 intent.putExtra("price", hm.get(symbol));
+                 intent.putExtra("price", p);
                  startActivity(intent);
+
 
             }
         });

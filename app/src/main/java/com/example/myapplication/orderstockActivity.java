@@ -65,14 +65,14 @@ import java.util.HashMap;
         Cpany= intent1.getStringExtra("symbol");
          investor = (Investor) intent1.getSerializableExtra("user");
          current_selection = (Share) intent1.getSerializableExtra("share");
-
-        current_selection = (Share) intent1.getSerializableExtra("share");
           p = (Price)intent1.getSerializableExtra("price");
          user_id = investor.getID();
-         investor.setValue(s_val);
-         FirebaseDatabase.getInstance().getReference("Investors").child(user_id).setValue(investor);
          current_bid =findViewById(R.id.current_bid);
          spinner = findViewById(R.id.spinner_buy_sell);
+         ArrayAdapter arrayAdapter = new ArrayAdapter(this, R.layout.spinner_item);
+         arrayAdapter.add("Buy");
+         arrayAdapter.add("Sell");
+         spinner.setAdapter(arrayAdapter);
          quantity_owned= findViewById(R.id.quantity_owned);
          quantity = findViewById(R.id.enter_number_of_stocks);
          price =findViewById(R.id.money_sign);
@@ -106,6 +106,7 @@ import java.util.HashMap;
                  Integer num_shares;
                  Integer dollars;
                  Trade trade;
+                 if (p==null) p= new Price();
 
 
 
@@ -168,8 +169,13 @@ import java.util.HashMap;
                      catch (Exception e){
                          Log.d(TAG, e.getMessage());
                      }
+                     Toast.makeText(context, "Order Placed", Toast.LENGTH_LONG).show();
+                     price.setText("");
+                     quantity.setText("");
                  }
-                 FirebaseDatabase.getInstance().getReference("Investors").child(user_id).child("value").setValue(s_val);
+                 Intent intent = new Intent(context, MarketPlace.class);
+                 intent.putExtra("investor", investor);
+                 startActivity(intent);
 
              }
          });

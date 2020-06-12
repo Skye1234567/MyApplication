@@ -34,12 +34,7 @@
             android:textColor="@color/colorPrimaryDark"
             android:textSize="40dp" />
 
-        <Spinner
-            android:id="@+id/spinner_stocks"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
 
-            />
 
         <Spinner
             android:id="@+id/spinner_buy_sell"
@@ -123,7 +118,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
-            android:padding="3dip"
+            android:padding="@dimen/textSizeNormal"
             android:textAllCaps="true"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="@dimen/textSizeNormal"
@@ -147,7 +142,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
-            android:padding="3dip"
+            android:padding="@dimen/textSizeNormal"
 
             android:textAllCaps="true"
             android:textColor="@color/colorPrimaryDark"

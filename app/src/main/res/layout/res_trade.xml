@@ -5,49 +5,25 @@
     >
 
     <TextView
-        android:id="@+id/compsymbolres"
+        android:id="@+id/compsymbtrade"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Company Symbol"
         android:padding="@dimen/textSizeNormal"
         android:textSize="@dimen/textSizeNormal"
         android:textColor="@color/colorPrimaryDark"/>
     <TextView
-        android:id="@+id/performanceres"
+        android:id="@+id/tradenumb"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Performance"
-        android:padding="@dimen/textSizeNormal"
-        android:textSize="@dimen/textSizeNormal"
-        android:textColor="@color/colorPrimaryDark"/>
-
-    <TextView
-        android:id="@+id/auditres"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Audit"
-        android:padding="@dimen/textSizeNormal"
-        android:textSize="@dimen/textSizeNormal"
-        android:textColor="@color/colorPrimaryDark"/>
-
-    <TextView
-        android:id="@+id/dividendres"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Dividend"
         android:padding="@dimen/textSizeNormal"
         android:textSize="@dimen/textSizeNormal"
         android:textColor="@color/colorPrimaryDark"/>
     <TextView
-        android:id= "@+id/mp"
+        android:id="@+id/tradedollars"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Market_Price"
         android:padding="@dimen/textSizeNormal"
         android:textSize="@dimen/textSizeNormal"
         android:textColor="@color/colorPrimaryDark"/>
-
-
-
 
 </LinearLayout>

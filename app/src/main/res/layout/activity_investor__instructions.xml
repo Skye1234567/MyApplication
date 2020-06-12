@@ -10,15 +10,22 @@
     >
 
 
-   <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/swiper_investor_instructions"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-       >
+       <TextView
+           android:id="@+id/titleofinvestorinstructions"
+           app:layout_constraintStart_toStartOf="parent"
+           app:layout_constraintTop_toTopOf="parent"
+           android:paddingTop="@dimen/tab_bar_gap"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_margin="@dimen/textSizeNormal"
+           android:text="Your Assets"
+           android:textSize="@dimen/textSizeTitle"/>
 
 
 
     <ListView
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleofinvestorinstructions"
         android:id="@+id/company_shares_table_investor_instructions"
         android:textSize="@dimen/textSizeNormal"
         android:textColor="@color/colorPrimaryDark"
@@ -29,7 +36,6 @@
 
 
     </ListView>
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 
 

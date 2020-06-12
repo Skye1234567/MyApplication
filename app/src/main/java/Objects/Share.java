@@ -60,7 +60,7 @@ public class Share implements Serializable {
         this.number=10;
         this.manager_id=manager_id;
         this.number_offered=0;
-        this.market_price=0;
+       this.market_price=0;
         this.offer_amount=0;
     }
 
