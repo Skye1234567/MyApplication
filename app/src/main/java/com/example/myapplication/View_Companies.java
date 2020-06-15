@@ -97,6 +97,7 @@ public class View_Companies extends Fragment {
                 hm = stringPriceHashMap;
 
 
+
             }
         });
 

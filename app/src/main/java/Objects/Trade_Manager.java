@@ -18,15 +18,15 @@ public class Trade_Manager {
     String comp_path="company";
     Trade optimal_trade;
     Trade my_trade;
-    Price price;
+    Integer price;
 
 
 
-    public Trade_Manager(Trade my_trade, String bos, Price price) {
+    public Trade_Manager(Trade my_trade, String bos, Integer price) {
         this.my_trade=my_trade;
         this.bos = bos;
         this.price = price;
-        if (this.price==null) this.price = new Price(0,0);
+
 
     }
 
@@ -53,14 +53,14 @@ public class Trade_Manager {
             while (my_trade.getBuyer_id()==null&&trades.size()>0){
 
             optimal_trade= trades.remove(trades.size()-1);
-            if (optimal_trade.getPrice_point()>=price.getPrice()&&my_trade.getPrice_point()<=price.getPrice())
+            if (optimal_trade.getPrice_point()>=price&&my_trade.getPrice_point()<=price)
             perform_exchange(my_trade, optimal_trade);}
        }
        else {
             while (my_trade.getSeller_id() == null && trades.size() > 0) {
                 optimal_trade = trades.remove(0);
 
-                if (optimal_trade.getPrice_point()<=price.getPrice()&&my_trade.getPrice_point()>=price.getPrice())
+                if (optimal_trade.getPrice_point()<=price&&my_trade.getPrice_point()>=price)
                 perform_exchange(optimal_trade, my_trade);
             }
         }
@@ -89,6 +89,7 @@ public class Trade_Manager {
             seller_trade.setNum_shares(i);
             db.getReference("Trades").child("Sell").child(seller_trade.getId()).setValue(seller_trade);
             db.getReference("Trades").child("Buy").child(buyer_trade.getId()).setValue(null);
+            buyer_trade.setPrice_point(price);
             db.getReference("Trades").child("Completed").child(buyer_trade.getId()).setValue(buyer_trade);
 
 
@@ -97,6 +98,7 @@ public class Trade_Manager {
             seller_trade.setBuyer_id(buyer_trade.getBuyer_id());
             db.getReference("Trades").child("Buy").child(buyer_trade.getId()).setValue(null);
             db.getReference("Trades").child("Sell").child(seller_trade.getId()).setValue(null);
+            seller_trade.setPrice_point(price);
             db.getReference("Trades").child("Completed").child(seller_trade.getId()).setValue(seller_trade);
 
         }else{
@@ -104,7 +106,10 @@ public class Trade_Manager {
             buyer_trade.setNum_shares(-i);
             db.getReference("Trades").child("Buy").child(buyer_trade.getId()).setValue(buyer_trade);
             db.getReference("Trades").child("Sell").child(seller_trade.getId()).setValue(null);
+            seller_trade.setPrice_point(price);
             db.getReference("Trades").child("Completed").child(seller_trade.getId()).setValue(seller_trade);
+
+
 
         }
 

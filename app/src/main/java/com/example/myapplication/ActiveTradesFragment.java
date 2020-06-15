@@ -6,6 +6,7 @@ import Objects.Investor;
 import Objects.Trade;
 import Objects.TradeAdapter;
 import Objects.Trade_Model;
+import Objects.Value_Assessor;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -62,8 +63,8 @@ public class ActiveTradesFragment extends Fragment {
             public void onChanged(ArrayList<ArrayList<Trade>> arrayLists) {
                 buytradeArray = arrayLists.get(0);
                 selltradeArray = arrayLists.get(1);
-                update_Adapter();
-            }
+                update_Adapter();}
+
         });
     }
     public void update_Adapter(){

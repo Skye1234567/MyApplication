@@ -66,6 +66,8 @@ public class MarketPlace extends AppCompatActivity {
 
     }
 
+
+
     private void setUpViewPager(ViewPager viewPager){
         adapter = new SectionsPageAdapter(getSupportFragmentManager());
         adapter.addFragment(new View_Companies(), "Company Reports");

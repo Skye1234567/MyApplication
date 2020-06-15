@@ -106,7 +106,7 @@ import java.util.HashMap;
                  Integer num_shares;
                  Integer dollars;
                  Trade trade;
-                 if (p==null) p= new Price();
+                 if (p==null) p= new Price(0,0);
 
 
 
@@ -160,8 +160,9 @@ import java.util.HashMap;
                          db.getReference("Shares").child(user_id).child(Cpany).setValue(current_selection);
                          db.getReference().child("Investors").child(user_id).setValue(investor);
                          db.getReference("Prices").child(Cpany).setValue(p);
-                         Trade_Manager trade_manager = new Trade_Manager(trade,looking_for, p);
+                         Trade_Manager trade_manager = new Trade_Manager(trade,looking_for, p.getPrice());
                          trade_manager.search_for_trade();
+
 
 
 
@@ -176,6 +177,7 @@ import java.util.HashMap;
                  Intent intent = new Intent(context, MarketPlace.class);
                  intent.putExtra("investor", investor);
                  startActivity(intent);
+                 finish();
 
              }
          });
