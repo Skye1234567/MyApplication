@@ -3,8 +3,13 @@ package com.example.myapplication;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 
+import com.example.myapplication.Business_Logic.Accountant;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
@@ -37,15 +42,8 @@ public class Manager_Home_Page extends AppCompatActivity {
         MM.setMan(manager);
         FirebaseDatabase db = FirebaseDatabase.getInstance();
         DatabaseReference ref = db.getReference();
-        FloatingActionButton sign_out=findViewById(R.id.FAB);
-        sign_out.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, MainActivity.class);
-                FirebaseAuth.getInstance().signOut();
-                context.startActivity(intent);
-            }
-        });
+
+
 
         mSectionsPageAdapter = new SectionsPageAdapter(getSupportFragmentManager());
         viewPager = findViewById(R.id.manhome_container);
@@ -61,5 +59,32 @@ public class Manager_Home_Page extends AppCompatActivity {
         mSectionsPageAdapter.addFragment(new CompanyReportFragment(), "Your Report");
 
         viewPager.setAdapter(mSectionsPageAdapter);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.logout:
+                Intent intent = new Intent(context, MainActivity.class);
+                FirebaseAuth.getInstance().signOut();
+                context.startActivity(intent);
+                finish();
+
+
+                return true;
+            case R.id.reset:
+
+
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }

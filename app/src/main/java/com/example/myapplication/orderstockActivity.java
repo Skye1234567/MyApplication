@@ -138,7 +138,7 @@ import java.util.HashMap;
                                  looking_for = buy;}
                          }
                          else if (bs.compareTo(buy)==0){
-                             if (dollars>investor.getCash())
+                             if (dollars*num_shares >investor.getCash())
                                  Toast.makeText(context, "Invalid entry: make sure you have enough cash", Toast.LENGTH_LONG).show();
                              else {
                                  p.challenge_bid(dollars);
@@ -148,7 +148,7 @@ import java.util.HashMap;
                                  trade.setId(ref_shares.getKey());
                                  ref_shares.setValue(trade);
                                  Toast.makeText(context, "Buy stock clicked", Toast.LENGTH_LONG).show();
-                                 investor.setCash(investor.getCash() - dollars);
+                                 investor.setCash(investor.getCash() - dollars*num_shares);
                                  current_selection.setStatus(buy);
                                  looking_for = sell;
                              }

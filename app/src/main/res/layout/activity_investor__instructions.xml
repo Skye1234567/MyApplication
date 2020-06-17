@@ -35,8 +35,26 @@
 
 
 
-    </ListView>
 
+    </ListView>
+    <TextView
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/company_shares_table_investor_instructions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="@dimen/textSizeNormal"
+        android:text="CASH"
+        android:id="@+id/cashmoney"/>
+    <TextView
+        app:layout_constraintStart_toEndOf="@id/cashmoney"
+        app:layout_constraintTop_toBottomOf="@id/company_shares_table_investor_instructions"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="@dimen/textSizeNormal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/cashmoneydata"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -70,19 +70,11 @@ public class Company_status_fragment extends Fragment {
                 try{
                 accountant.generate_company_data(market.getP());
                 accountant.generate_round_data(market.getPi_h(), market.getPi_l());
-                switch (accountant.getPerformance()){
-                    case 0:
-                        managerstat.setPerformance(0);
 
-                        break;
-                    case 1:
-                        managerstat.setPerformance(1);
+                managerstat.setPerformance(accountant.getPerformance());
 
-                        break;
-                    }
-
-                    managerstat.setProfit(accountant.getRevenue());
-                    FirebaseDatabase.getInstance().getReference().child("Managers").child(managerstat.getID()).setValue(managerstat);
+                managerstat.setProfit(accountant.getRevenue());
+                    //FirebaseDatabase.getInstance().getReference().child("Managers").child(managerstat.getID()).setValue(managerstat);
                 }catch (NullPointerException e){Log.e("market null", e.getMessage());}
 
             }
@@ -96,16 +88,7 @@ public class Company_status_fragment extends Fragment {
 
 
 
-        FloatingActionButton sign_out= view.findViewById(R.id.FAB);
-        sign_out.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, MainActivity.class);
-                FirebaseAuth.getInstance().signOut();
-                context.startActivity(intent);
 
-            }
-        });
         SR = view.findViewById(R.id.refresh_comp_stat);
         SR.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -133,7 +116,8 @@ public class Company_status_fragment extends Fragment {
         if (managerstat.getAudit_choice()==1 /*&&managerstat.getAccept_audit()==1*/){
             audit.setText("Yes");
         }else audit.setText("No");
-
+        if (managerstat.getReport_dividend()==1) dividend.setText("50");
+        else dividend.setText("0");
 
         SR.setRefreshing(false);
 

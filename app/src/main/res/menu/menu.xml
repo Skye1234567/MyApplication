@@ -4,7 +4,7 @@
     android:layout_height="wrap_content">
     <item android:id="@+id/logout"
         android:title="LOGOUT"
-        android:showAsAction="ifRoom"/>
+       />
     <item android:id="@+id/reset"
         android:title="RESET" />
 </menu>

@@ -46,7 +46,7 @@ public class Share implements Serializable {
         if (this == o) return true;
         if (!(o instanceof Share)) return false;
         Share share = (Share) o;
-        return getCompany().equals(share.getCompany());
+        return getCompany().compareTo(share.getCompany())==0;
     }
 
     @Override

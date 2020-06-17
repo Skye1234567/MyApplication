@@ -21,6 +21,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
@@ -32,6 +33,7 @@ import java.util.Objects;
 import Objects.Pricing_Model;
 import Objects.Price;
 import Objects.Value_Assessor;
+import Objects.Vest_Model;
 
 public class Investor_Instructions_Fragment extends Fragment {
     String in_id;
@@ -39,8 +41,10 @@ public class Investor_Instructions_Fragment extends Fragment {
     Pricing_Model pricing_model;
     Context context;
     ListView tableLayout;
-
+    Vest_Model VM;
     ArrayList<Share> investor_shares;
+    TextView cash;
+
 
     Share_Model share_model;
 
@@ -53,6 +57,8 @@ public class Investor_Instructions_Fragment extends Fragment {
        context = getContext();
         share_model = new ViewModelProvider(getActivity()).get(Share_Model.class);
 
+       VM = new ViewModelProvider(getActivity()).get(Vest_Model.class);
+       cash = view.findViewById(R.id.cashmoneydata);
 
 
         tableLayout=view.findViewById(R.id.company_shares_table_investor_instructions);
@@ -86,7 +92,7 @@ public class Investor_Instructions_Fragment extends Fragment {
             @Override
             public void onChanged(HashMap<String, Price> stringPriceHashMap) {
                 DatabaseReference ref;
-                if (in_id!=null){
+                if (in_id!=null&&stringPriceHashMap!=null ){
                 ref = FirebaseDatabase.getInstance().getReference("Shares").child(in_id);
                 for (String comp:stringPriceHashMap.keySet()){
                     ref.child(comp).child("market_price").setValue(stringPriceHashMap.get(comp).getPrice());
@@ -106,6 +112,14 @@ public class Investor_Instructions_Fragment extends Fragment {
                 update_ShareAdapter();
             }
         });
+        VM = new ViewModelProvider(getActivity()).get(Vest_Model.class);
+        VM.getMan().observe(getViewLifecycleOwner(), new Observer<Investor>() {
+            @Override
+            public void onChanged(Investor investor) {
+                update_cash(investor.getCash().toString());
+
+            }
+        });
 
     }
     public void update_ShareAdapter(){
@@ -118,7 +132,9 @@ public class Investor_Instructions_Fragment extends Fragment {
 
 
     }
-
+public void update_cash(String s){
+        cash.setText(s);
+}
 
 
 

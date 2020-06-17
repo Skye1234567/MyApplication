@@ -20,4 +20,12 @@
         android:padding="@dimen/textSizeNormal"
         android:textSize="@dimen/textSizeNormal"
         android:textColor="@color/colorPrimaryDark"/>
+    <TextView
+        android:id="@+id/mp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Your Shares"
+        android:padding="@dimen/textSizeNormal"
+        android:textSize="@dimen/textSizeNormal"
+        android:textColor="@color/colorPrimaryDark"/>
 </LinearLayout>

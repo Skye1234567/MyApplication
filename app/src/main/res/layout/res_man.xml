@@ -38,7 +38,7 @@
         android:padding="@dimen/textSizeNormal"
         android:textSize="@dimen/textSizeNormal"
         android:textColor="@color/colorPrimaryDark"/>
-   
+
 
 
 

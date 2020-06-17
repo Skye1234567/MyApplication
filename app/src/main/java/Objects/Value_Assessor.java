@@ -19,7 +19,7 @@ public class Value_Assessor {
     private DatabaseReference ref_cash;
     private Query ref_trades_buyer;
 
-    private String company;
+
 
 
     public Value_Assessor(@NonNull String investor_id) {
@@ -93,11 +93,12 @@ public class Value_Assessor {
     }
 
     public void update_seller_cash(String seller_id, final Integer price_point){
-            ref_cash =ref_cash.child(seller_id).child("cash");
-            ref_cash.addListenerForSingleValueEvent(new ValueEventListener() {
+            ref_cash.child(seller_id).child("cash").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                ref_cash.setValue(dataSnapshot.getValue(Integer.class)+price_point);
+                Integer i =dataSnapshot.getValue(Integer.class);
+                cashupdate(price_point, i, ref_cash);
+
 
             }
 
@@ -111,5 +112,6 @@ public class Value_Assessor {
 
 
     }
-
+    public void cashupdate(Integer p, Integer i, DatabaseReference ref){
+    ref.setValue(p+i);}
 }
