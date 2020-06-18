@@ -33,7 +33,7 @@ import com.google.firebase.database.FirebaseDatabase;
      private TextView market_price;
      private TextView quantity_owned;
      private String user_id;
-     private String bs;
+     private String bs="Buy";
      private String Cpany;
      private String buy = "Buy";
      private String sell = "Sell";
@@ -67,7 +67,7 @@ import com.google.firebase.database.FirebaseDatabase;
          try{
          quantity_owned.setText(current_selection.getNumber().toString());
          market_price.setText(current_selection.getMarket_price().toString());}
-         catch (NullPointerException e){}
+         catch (NullPointerException e){Toast.makeText(context,"HELP", Toast.LENGTH_LONG).show();}
          spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
              @Override
              public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -100,7 +100,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 
                  if (quantity.getText()!=null&& price.getText()!=null) {
-                     try {
+                     //try {
                          num_shares = Integer.parseInt(quantity.getText().toString());
                          dollars =Integer.parseInt(price.getText().toString());
 
@@ -151,12 +151,13 @@ import com.google.firebase.database.FirebaseDatabase;
 
 
 
-
+/*
                      }
                      catch (Exception e){
                          Log.d(TAG, e.getMessage());
-                     }
-                     Toast.makeText(context, "Order Placed", Toast.LENGTH_LONG).show();
+                         Toast.makeText(context, "try statement failed", Toast.LENGTH_LONG).show();
+                     }*/
+                     //Toast.makeText(context, "Order Placed", Toast.LENGTH_LONG).show();
                      price.setText("");
                      quantity.setText("");
                  }

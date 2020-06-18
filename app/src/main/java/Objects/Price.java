@@ -56,6 +56,7 @@ public class Price implements Serializable {
         calculate_price();
     }
     public void add_ask(String key, Integer value){
+        if (asks==null) asks =new HashMap<>();
         asks.put(key,value);
         Integer min = null;
         for (Integer i: asks.values()){
@@ -67,6 +68,7 @@ public class Price implements Serializable {
         calculate_price();
     }
     public void add_bid(String key, Integer value){
+        if (bids ==null) bids =new HashMap<>();
         bids.put(key,value);
         Integer max = null;
         for (Integer i: bids.values()){
