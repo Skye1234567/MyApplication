@@ -1,16 +1,11 @@
  package com.example.myapplication;
 
 import Objects.Investor;
-import Objects.Man_Model;
 import Objects.Price;
-import Objects.Pricing_Model;
 import Objects.Share;
-import Objects.Share_Model;
 import Objects.Trade;
 import Objects.Trade_Manager;
-import Objects.Vest_Model;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Context;
 import android.content.Intent;
@@ -28,23 +23,16 @@ import android.widget.Toast;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
  public class orderstockActivity extends AppCompatActivity {
      private final static  String TAG = "Order Stock Fragment";
-     private ArrayList<Share> my_shares;
      private Spinner spinner ;
-     private Spinner spinner2 ;
      private Share current_selection;
      private Button order_stock;
      private EditText quantity;
      private EditText price;
-     private TextView current_bid;
+     private TextView market_price;
      private TextView quantity_owned;
      private String user_id;
-
-     Integer s_val=0;
      private String bs;
      private String Cpany;
      private String buy = "Buy";
@@ -67,7 +55,7 @@ import java.util.HashMap;
          current_selection = (Share) intent1.getSerializableExtra("share");
           p = (Price)intent1.getSerializableExtra("price");
          user_id = investor.getID();
-         current_bid =findViewById(R.id.current_bid);
+         market_price =findViewById(R.id.current_bid);
          spinner = findViewById(R.id.spinner_buy_sell);
          ArrayAdapter arrayAdapter = new ArrayAdapter(this, R.layout.spinner_item);
          arrayAdapter.add("Buy");
@@ -78,7 +66,7 @@ import java.util.HashMap;
          price =findViewById(R.id.money_sign);
          try{
          quantity_owned.setText(current_selection.getNumber().toString());
-         current_bid.setText(current_selection.getMarket_price().toString());}
+         market_price.setText(current_selection.getMarket_price().toString());}
          catch (NullPointerException e){}
          spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
              @Override
@@ -128,7 +116,7 @@ import java.util.HashMap;
                              if (num_shares>current_selection.getNumber())
                                  Toast.makeText(context, "Invalid entry: make sure you have enough shares", Toast.LENGTH_LONG).show();
                              else{
-                                 p.challenge_ask(dollars);
+                                 p.add_ask(user_id,dollars);
                                  current_selection.setStatus(sell);
                                  trade.setFor_sale(true);
                                  trade.setSeller_id(user_id);
@@ -141,7 +129,7 @@ import java.util.HashMap;
                              if (dollars*num_shares >investor.getCash())
                                  Toast.makeText(context, "Invalid entry: make sure you have enough cash", Toast.LENGTH_LONG).show();
                              else {
-                                 p.challenge_bid(dollars);
+                                 p.add_bid(user_id,dollars);
                                  trade.setFor_sale(false);
                                  trade.setBuyer_id(user_id);
                                  ref_shares = db.getReference("Trades").child(buy).push();
@@ -154,9 +142,7 @@ import java.util.HashMap;
                              }
 
                          }
-                         current_bid.setText(current_selection.getMarket_price().toString());
-                         current_selection.setNumber_offered(num_shares);
-                         current_selection.setOffer_amount(dollars);
+                         market_price.setText(p.getPrice().toString());
                          db.getReference("Shares").child(user_id).child(Cpany).setValue(current_selection);
                          db.getReference().child("Investors").child(user_id).setValue(investor);
                          db.getReference("Prices").child(Cpany).setValue(p);

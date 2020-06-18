@@ -20,12 +20,7 @@ public class Value_Assessor {
     private Query ref_trades_buyer;
 
 
-
-
     public Value_Assessor(@NonNull String investor_id) {
-
-
-
 
 
         FirebaseDatabase db = FirebaseDatabase.getInstance();
@@ -44,7 +39,7 @@ public class Value_Assessor {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot d : dataSnapshot.getChildren()) {
 
-                    add_shares_bought( d.getValue(Trade.class));
+                    add_shares_bought(d.getValue(Trade.class));
 
                 }
 
@@ -73,33 +68,29 @@ public class Value_Assessor {
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
-        });}
-
-
+        });
+    }
 
 
     public void update_shares(Integer old_num, Trade complete) {
 
-                    old_num += complete.getNum_shares();
-                    update_seller_cash(complete.getSeller_id(),complete.getPrice_point());
-                    FirebaseDatabase.getInstance().getReference("Trades").child("Completed").child(complete.getId()).setValue(null);
-                    FirebaseDatabase.getInstance().getReference("Trades").child("Archive").child(complete.getId()).setValue(complete);
-                    ref_share_num.child(complete.getCompany()).child("number").setValue(old_num);
-
-
-
+        old_num += complete.getNum_shares();
+        update_seller_cash(complete.getSeller_id(), complete.getPrice_point());
+        FirebaseDatabase.getInstance().getReference("Trades").child("Completed").child(complete.getId()).setValue(null);
+        FirebaseDatabase.getInstance().getReference("Trades").child("Archive").child(complete.getId()).setValue(complete);
+        ref_share_num.child(complete.getCompany()).child("number").setValue(old_num);
 
 
     }
 
-    public void update_seller_cash(String seller_id, final Integer price_point){
-            ref_cash.child(seller_id).child("cash").addListenerForSingleValueEvent(new ValueEventListener() {
+    public void update_seller_cash(String seller_id, final Integer price_point) {
+        final DatabaseReference r = ref_cash.child(seller_id).child("cash");
+
+        r.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Integer i =dataSnapshot.getValue(Integer.class);
-                cashupdate(price_point, i, ref_cash);
-
-
+                Integer i = dataSnapshot.getValue(Integer.class);
+                if (i != null) r.setValue(i + price_point);
             }
 
             @Override
@@ -109,9 +100,5 @@ public class Value_Assessor {
         });
 
 
-
-
     }
-    public void cashupdate(Integer p, Integer i, DatabaseReference ref){
-    ref.setValue(p+i);}
 }

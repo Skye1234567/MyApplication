@@ -116,6 +116,7 @@ public class Investor_Instructions_Fragment extends Fragment {
         VM.getMan().observe(getViewLifecycleOwner(), new Observer<Investor>() {
             @Override
             public void onChanged(Investor investor) {
+                if (investor!=null)
                 update_cash(investor.getCash().toString());
 
             }
