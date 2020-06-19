@@ -140,6 +140,21 @@ public void update_BUy_Trades(){
 
 
     }
+public Trade filter_for_company(String comp){
+       Trade t=null;
+        for (ArrayList<Trade> at: livedata.getValue()){
+            for (Trade trade: at){
+                if (trade.getCompany().compareTo(comp)==0){
+                    t=trade;
+                    break;
+                }
+                if (trade!=null) break;
 
+            }
+        }
+
+
+       return t;
+}
 
 }

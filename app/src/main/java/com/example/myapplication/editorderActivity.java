@@ -51,7 +51,7 @@
         Intent intent1 = getIntent();
         deleter = findViewById(R.id.delete_order_button);
         num_trade_shares = intent1.getIntExtra("ShareNum", 0);
-        bs =  intent1.getStringExtra("bos");
+
          investor = (Investor) intent1.getSerializableExtra("investor");
          current_selection = (Trade) intent1.getSerializableExtra("trade");
           p = (Price)intent1.getSerializableExtra("price");
@@ -60,11 +60,11 @@
          quantity_owned= findViewById(R.id.quantity_owned);
          quantity = findViewById(R.id.enter_number_of_stocks);
          price =findViewById(R.id.money_sign);
-         quantity.setText(current_selection.getNum_shares());
-         price.setText(current_selection.getPrice_point());
+         quantity.setText(current_selection.getNum_shares().toString());
+         price.setText(current_selection.getPrice_point().toString());
          Cpany= current_selection.getCompany();
-
-
+         if (current_selection.getBuyer_id().compareTo(user_id)==0) bs =  buy;
+         else bs=sell;
 
 
 
@@ -76,19 +76,22 @@
              @Override
              public void onClick(View v) {
                  FirebaseDatabase db = FirebaseDatabase.getInstance();
-                if (bs==buy) {
-                    p.add_bid(user_id, null);
+                if (bs.compareTo(buy)==0) {
+
                     investor.setCash(investor.getCash()+current_selection.getPrice_point());
+                    db.getReference("Prices").child(Cpany).child("bids").child(user_id).setValue(null);
 
                 }else {
-                    p.add_ask(user_id, null);
+                    db.getReference("Prices").child(Cpany).child("asks").child(user_id).setValue(null);
+
                     db.getReference("Shares").child(investor.getID()).child(current_selection.getCompany()).child("number").setValue(num_trade_shares+current_selection.getNum_shares());
 
                 }
 
+                 db.getReference("Shares").child(user_id).child(Cpany).child("status").setValue(null);
                  db.getReference("Trades").child(bs).child(current_selection.getId()).setValue(null);
                  db.getReference().child("Investors").child(user_id).setValue(investor);
-                 db.getReference("Prices").child(Cpany).setValue(p);
+
                  Intent intent = new Intent(context, MarketPlace.class);
                  intent.putExtra("investor", investor);
                  startActivity(intent);
@@ -102,6 +105,7 @@
              public void onClick(View v) {
                  Integer num_shares;
                  Integer dollars;
+
                  if (p==null) p= new Price(0,0);
 
 
@@ -125,6 +129,7 @@
                                  Toast.makeText(context, "Invalid entry: make sure you have enough shares", Toast.LENGTH_LONG).show();
                              else{
                                  p.add_ask(user_id,dollars);
+                                 db.getReference("Prices").child(Cpany).child("asks").child(user_id).setValue(dollars);
                                  current_selection.setFor_sale(true);
                                  current_selection.setSeller_id(user_id);
                                  current_selection.setTimeStamp(System.currentTimeMillis());
@@ -138,6 +143,7 @@
                                  Toast.makeText(context, "Invalid entry: make sure you have enough cash", Toast.LENGTH_LONG).show();
                              else {
                                  p.add_bid(user_id,dollars);
+                                 db.getReference("Prices").child(Cpany).child("bids").child(user_id).setValue(dollars);
                                  current_selection.setFor_sale(false);
                                  current_selection.setBuyer_id(user_id);
                                  ref_shares = db.getReference("Trades").child(buy).child(current_selection.getId());
@@ -147,10 +153,8 @@
                                  looking_for = sell; }
                              break; }
                          current_bid.setText(p.getPrice().toString());
-
-                         db.getReference("Shares").child(user_id).child(Cpany).setValue(current_selection);
                          db.getReference().child("Investors").child(user_id).setValue(investor);
-                         db.getReference("Prices").child(Cpany).setValue(p);
+
                          Trade_Manager trade_manager = new Trade_Manager(current_selection,looking_for, p.getPrice());
                          trade_manager.search_for_trade(); }
                      catch (Exception e){

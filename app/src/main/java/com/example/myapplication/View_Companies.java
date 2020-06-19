@@ -8,6 +8,8 @@ import Objects.Price;
 import Objects.Pricing_Model;
 import Objects.Share;
 import Objects.Share_Model;
+import Objects.Trade;
+import Objects.Trade_Model;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,6 +32,7 @@ import java.util.HashMap;
 public class View_Companies extends Fragment {
     private Man_Model mm;
     private Share_Model sm;
+    private Trade_Model tm;
     private Pricing_Model pricing_model;
     private ArrayList<Manager> managersArray;
     private ManAdapter manAdapter;
@@ -54,6 +57,7 @@ public class View_Companies extends Fragment {
         mm.update_manager();
         sm = new ViewModelProvider(getActivity()).get(Share_Model.class);
 
+        tm = new ViewModelProvider(getActivity()).get(Trade_Model.class);
 
         manAdapter = new ManAdapter(getContext(), managersArray);
         listView = view.findViewById(R.id.list_of_companies);
@@ -62,19 +66,40 @@ public class View_Companies extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent  = new Intent(getActivity(), orderstockActivity.class);
+
+
                  Manager manager = (Manager) parent.getItemAtPosition(position);
                  String symbol = manager.getCompany_symbol();
-                 Share s = new Share();
-                 s.setCompany(symbol);
-                 Price p;
-                 if (hm ==null) p=new Price();
-                 else p= hm.get(symbol);
+                 Trade t = tm.filter_for_company(symbol);
+                Share s = new Share();
+
+                s.setCompany(symbol);
+                s=my_shares.get(my_shares.indexOf(s));
+                Price p;
+                if (hm ==null) p=new Price();
+
+
+                else p= hm.get(symbol);
+
+                if (t!=null){
+                    Intent intent = new Intent(getActivity(), editorderActivity.class);
+                    intent.putExtra("ShareNum", s.getNumber());
+                intent.putExtra("price", p);
+                intent.putExtra("trade",t);
+                intent.putExtra("investor",investor);
+                startActivity(intent);}
+
+
+
+
+                 else{
+                 Intent intent  = new Intent(getActivity(), orderstockActivity.class);
                  intent.putExtra("user", investor);
                  intent.putExtra("symbol", symbol);
-                 intent.putExtra("share", my_shares.get(my_shares.indexOf(s)));
+                 intent.putExtra("share", s);
                  intent.putExtra("price", p);
                  startActivity(intent);
+                 }
 
 
             }
@@ -120,6 +145,8 @@ public class View_Companies extends Fragment {
 
             }
         });
+        tm = new ViewModelProvider(getActivity()).get(Trade_Model.class);
+
 
 
 

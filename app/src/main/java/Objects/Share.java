@@ -12,6 +12,7 @@ public class Share implements Serializable {
    String manager_id;
     private String status;
 
+
     public String getStatus() {
         return status;
     }

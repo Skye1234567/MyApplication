@@ -52,13 +52,19 @@ public class Pricing_Model extends ViewModel {
         FirebaseDatabase.getInstance().getReference("Prices").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                addPrice(dataSnapshot.getKey(), dataSnapshot.getValue(Price.class));
+                Price p = dataSnapshot.getValue(Price.class);
+                p.setAsks(null);
+                p.setBids(null);
+                addPrice(dataSnapshot.getKey(), p);
 
             }
 
             @Override
             public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                addPrice(dataSnapshot.getKey(), dataSnapshot.getValue(Price.class));
+                Price p = dataSnapshot.getValue(Price.class);
+                p.setAsks(null);
+                p.setBids(null);
+                addPrice(dataSnapshot.getKey(), p);
 
             }
 

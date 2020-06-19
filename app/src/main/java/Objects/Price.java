@@ -16,9 +16,28 @@ public class Price implements Serializable {
         return price;
     }
 
+    public void setPrice(Integer price) {
+        this.price = price;
+    }
 
     public Price() {
 
+    }
+
+    public HashMap<String, Integer> getAsks() {
+        return asks;
+    }
+
+    public void setAsks(HashMap<String, Integer> asks) {
+        this.asks = asks;
+    }
+
+    public HashMap<String, Integer> getBids() {
+        return bids;
+    }
+
+    public void setBids(HashMap<String, Integer> bids) {
+        this.bids = bids;
     }
 
     public Integer getLow_ask() {
