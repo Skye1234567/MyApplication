@@ -34,7 +34,6 @@ public class CompanyReportFragment extends Fragment {
     TextView Audit_result_textview;
     @Nullable
     @Override
-//TODO: FIX THE MAN MODEL.
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_manager__enter_report,container, false);

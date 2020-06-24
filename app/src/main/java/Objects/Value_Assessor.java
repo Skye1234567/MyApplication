@@ -6,18 +6,19 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-
-import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
 
 
 import androidx.annotation.NonNull;
 
-public class Value_Assessor {
+public class Value_Assessor implements Runnable {
 
 
     private DatabaseReference ref_share_num;
     private DatabaseReference ref_cash;
     private Query ref_trades_buyer;
+    private Trade complete;
 
 
     public Value_Assessor(@NonNull String investor_id) {
@@ -28,7 +29,7 @@ public class Value_Assessor {
 
         ref_cash = db.getReference("Investors");
         ref_trades_buyer = db.getReference("Trades").child("Completed").orderByChild("buyer_id").equalTo(investor_id);
-        query_for_trades();
+
 
     }
 
@@ -38,12 +39,13 @@ public class Value_Assessor {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot d : dataSnapshot.getChildren()) {
+                    complete = d.getValue(Trade.class);
+                    FirebaseDatabase.getInstance().getReference("Trades").child("Completed").child(complete.getId()).setValue(null);
+                    FirebaseDatabase.getInstance().getReference("Trades").child("Archive").child(complete.getId()).setValue(complete);
 
-                    add_shares_bought(d.getValue(Trade.class));
-
+                    update_buyer_shares();
+                    update_seller_cash();
                 }
-
-
             }
 
             @Override
@@ -54,51 +56,43 @@ public class Value_Assessor {
     }
 
 
-    public void add_shares_bought(final Trade t) {
+    public void update_buyer_shares( ) {
 
 
-        ref_share_num.child(t.getCompany()).child("number").addListenerForSingleValueEvent(new ValueEventListener() {
+        final DatabaseReference ref = ref_share_num.child(complete.getCompany()).child("number");
+        IntegerDatabase SD = new IntegerDatabase(ref);
+        SD.addObserver(new Observer() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Integer old_num = dataSnapshot.getValue(Integer.class);
-                update_shares(old_num, t);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
+            public void update(Observable o, Object arg) {
+                new Thread(new Ledger((Integer)arg, complete.getNum_shares(), ref)).start();
 
             }
         });
-    }
-
-
-    public void update_shares(Integer old_num, Trade complete) {
-
-        old_num += complete.getNum_shares();
-        update_seller_cash(complete.getSeller_id(), complete.getPrice_point());
-        FirebaseDatabase.getInstance().getReference("Trades").child("Completed").child(complete.getId()).setValue(null);
-        FirebaseDatabase.getInstance().getReference("Trades").child("Archive").child(complete.getId()).setValue(complete);
-        ref_share_num.child(complete.getCompany()).child("number").setValue(old_num);
-
+        SD.updating();
 
     }
 
-    public void update_seller_cash(String seller_id, final Integer price_point) {
-        final DatabaseReference r = ref_cash.child(seller_id).child("cash");
 
-        r.addListenerForSingleValueEvent(new ValueEventListener() {
+
+    public void update_seller_cash() {
+        final DatabaseReference r = ref_cash.child(complete.getSeller_id()).child("cash");
+
+        IntegerDatabase CD = new IntegerDatabase(r);
+        CD.addObserver(new Observer() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Integer i = dataSnapshot.getValue(Integer.class);
-                if (i != null) r.setValue(i + price_point);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
+            public void update(Observable o, Object arg) {
+                new Thread(new Ledger((Integer)arg, complete.getPrice_point(), r)).start();
             }
         });
+        CD.updating();
 
+
+    }
+
+
+    @Override
+    public void run() {
+        query_for_trades();
 
     }
 }

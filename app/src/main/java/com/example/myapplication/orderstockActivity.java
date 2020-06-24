@@ -136,7 +136,8 @@ import com.google.firebase.database.FirebaseDatabase;
                                  trade.setId(ref_shares.getKey());
                                  ref_shares.setValue(trade);
                                  Toast.makeText(context, "Buy stock clicked", Toast.LENGTH_LONG).show();
-                                 investor.setCash(investor.getCash() - dollars*num_shares);
+                                 Integer set_cash =investor.getCash() - dollars*num_shares;
+                                 investor.setCash(set_cash);
                                  current_selection.setStatus(buy);
                                  looking_for = sell;
                              }

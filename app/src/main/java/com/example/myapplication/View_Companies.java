@@ -87,6 +87,7 @@ public class View_Companies extends Fragment {
                 intent.putExtra("price", p);
                 intent.putExtra("trade",t);
                 intent.putExtra("investor",investor);
+
                 startActivity(intent);}
 
 

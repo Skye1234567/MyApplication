@@ -15,11 +15,11 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -64,7 +64,8 @@ public class Investor_Instructions_Fragment extends Fragment {
         tableLayout=view.findViewById(R.id.company_shares_table_investor_instructions);
         Investor investor = (Investor) Objects.requireNonNull(getActivity().getIntent().getExtras()).getSerializable("investor");
         in_id = investor.getID();
-        new Value_Assessor(in_id);
+        new Thread(new Value_Assessor(in_id)).start();
+
 
         investor_shares = new ArrayList<>();
         share_model .setId(in_id);

@@ -53,8 +53,6 @@ public class Pricing_Model extends ViewModel {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 Price p = dataSnapshot.getValue(Price.class);
-                p.setAsks(null);
-                p.setBids(null);
                 addPrice(dataSnapshot.getKey(), p);
 
             }
@@ -62,8 +60,6 @@ public class Pricing_Model extends ViewModel {
             @Override
             public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 Price p = dataSnapshot.getValue(Price.class);
-                p.setAsks(null);
-                p.setBids(null);
                 addPrice(dataSnapshot.getKey(), p);
 
             }

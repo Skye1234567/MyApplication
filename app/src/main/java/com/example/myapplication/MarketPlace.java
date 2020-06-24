@@ -91,6 +91,8 @@ public class MarketPlace extends AppCompatActivity {
                 return true;
             case R.id.reset:
                 new Accountant().reset_investor(id);
+                Vest_Model VM  = new ViewModelProvider(this).get(Vest_Model.class);
+                VM.update_investor();
 
                 return true;
             default:

@@ -113,7 +113,7 @@ public class Wait_Page extends AppCompatActivity  {
                 }
 
                 }catch (NullPointerException n){
-                    Log.d("my_logs_market_child_added", n.getMessage());
+                    Log.d("my_logs_ma", n.getMessage());
                 }
 
 

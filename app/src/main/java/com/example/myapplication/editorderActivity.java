@@ -5,10 +5,8 @@
  import android.os.Bundle;
  import android.util.Log;
  import android.view.View;
- import android.widget.ArrayAdapter;
  import android.widget.Button;
  import android.widget.EditText;
- import android.widget.Spinner;
  import android.widget.TextView;
  import android.widget.Toast;
 
@@ -17,13 +15,15 @@
 
  import Objects.Investor;
  import Objects.Price;
+ import Objects.Share;
  import Objects.Trade;
  import Objects.Trade_Manager;
  import androidx.appcompat.app.AppCompatActivity;
 
  public class editorderActivity extends AppCompatActivity {
      private final static  String TAG = "Order Stock Fragment";
-     private Trade current_selection;
+     private Trade current_trade;
+
      private Button edit_stock;
      private EditText quantity;
      private EditText price;
@@ -53,23 +53,24 @@
         num_trade_shares = intent1.getIntExtra("ShareNum", 0);
 
          investor = (Investor) intent1.getSerializableExtra("investor");
-         current_selection = (Trade) intent1.getSerializableExtra("trade");
+         current_trade = (Trade) intent1.getSerializableExtra("trade");
+
           p = (Price)intent1.getSerializableExtra("price");
          user_id = investor.getID();
          current_bid =findViewById(R.id.current_bid);
          quantity_owned= findViewById(R.id.quantity_owned);
          quantity = findViewById(R.id.enter_number_of_stocks);
          price =findViewById(R.id.money_sign);
-         quantity.setText(current_selection.getNum_shares().toString());
-         price.setText(current_selection.getPrice_point().toString());
-         Cpany= current_selection.getCompany();
-         if (current_selection.getBuyer_id().compareTo(user_id)==0) bs =  buy;
-         else bs=sell;
+         quantity.setText(current_trade.getNum_shares().toString());
+         price.setText(current_trade.getPrice_point().toString());
+         Cpany= current_trade.getCompany();
+         if (current_trade.getBuyer_id()!=null){
+             if (current_trade.getBuyer_id().compareTo(user_id)==0) bs =  buy;}else bs=sell;
 
 
 
          try{
-         quantity_owned.setText(current_selection.getNum_shares().toString());
+         quantity_owned.setText(current_trade.getNum_shares().toString());
          current_bid.setText(p.getPrice().toString());}
          catch (NullPointerException e){}
          deleter.setOnClickListener(new View.OnClickListener() {
@@ -78,18 +79,20 @@
                  FirebaseDatabase db = FirebaseDatabase.getInstance();
                 if (bs.compareTo(buy)==0) {
 
-                    investor.setCash(investor.getCash()+current_selection.getPrice_point());
+                    Integer new_cash = investor.getCash()+ current_trade.getPrice_point()* current_trade.getNum_shares();
+                   investor.setCash(new_cash);
+
                     db.getReference("Prices").child(Cpany).child("bids").child(user_id).setValue(null);
 
                 }else {
                     db.getReference("Prices").child(Cpany).child("asks").child(user_id).setValue(null);
 
-                    db.getReference("Shares").child(investor.getID()).child(current_selection.getCompany()).child("number").setValue(num_trade_shares+current_selection.getNum_shares());
+                    db.getReference("Shares").child(investor.getID()).child(current_trade.getCompany()).child("number").setValue(num_trade_shares+ current_trade.getNum_shares());
 
                 }
 
                  db.getReference("Shares").child(user_id).child(Cpany).child("status").setValue(null);
-                 db.getReference("Trades").child(bs).child(current_selection.getId()).setValue(null);
+                 db.getReference("Trades").child(bs).child(current_trade.getId()).setValue(null);
                  db.getReference().child("Investors").child(user_id).setValue(investor);
 
                  Intent intent = new Intent(context, MarketPlace.class);
@@ -115,47 +118,58 @@
                      try {
                          num_shares = Integer.parseInt(quantity.getText().toString());
                          dollars =Integer.parseInt(price.getText().toString());
+                         Integer tot_dol = num_shares*dollars;
 
 
                          String looking_for="";
                          FirebaseDatabase db = FirebaseDatabase.getInstance();
-                         DatabaseReference ref_shares = db.getReference("Trades").child(sell).child(current_selection.getId());
 
-                         current_selection.setTimeStamp(System.currentTimeMillis());
 
-                       switch (bs.compareTo(sell)){
+                         Integer old_num_share =num_trade_shares+current_trade.getNum_shares();
+                         Integer tots_cash = investor.getCash()+current_trade.getPrice_point()*current_trade.getNum_shares();
+
+
+                         switch (bs.compareTo(sell)){
+
+
                            case 0:
-                             if (num_shares>current_selection.getNum_shares())
+                             if (num_shares> old_num_share)
                                  Toast.makeText(context, "Invalid entry: make sure you have enough shares", Toast.LENGTH_LONG).show();
                              else{
-                                 p.add_ask(user_id,dollars);
+                                p.add_ask(user_id,dollars);
                                  db.getReference("Prices").child(Cpany).child("asks").child(user_id).setValue(dollars);
-                                 current_selection.setFor_sale(true);
-                                 current_selection.setSeller_id(user_id);
-                                 current_selection.setTimeStamp(System.currentTimeMillis());
-                                 ref_shares.setValue(current_selection);
-                                 current_selection.setNum_shares(current_selection.getNum_shares()-num_shares);
+                                 current_trade.setNum_shares(num_shares);
+                                 current_trade.setPrice_point(dollars);
+                                 current_trade.setTimeStamp(System.currentTimeMillis());
+
+                                FirebaseDatabase.getInstance().getReference("Shares")
+                                        .child(current_trade.getSeller_id()).child(current_trade.getCompany())
+                                        .child("number").setValue(old_num_share-num_shares);
                                  looking_for = buy;}
                              break;
 
                          case 1:
-                             if (dollars*num_shares >investor.getCash())
+
+                             if (tot_dol >tots_cash) {
                                  Toast.makeText(context, "Invalid entry: make sure you have enough cash", Toast.LENGTH_LONG).show();
+                             }
                              else {
                                  p.add_bid(user_id,dollars);
                                  db.getReference("Prices").child(Cpany).child("bids").child(user_id).setValue(dollars);
-                                 current_selection.setFor_sale(false);
-                                 current_selection.setBuyer_id(user_id);
-                                 ref_shares = db.getReference("Trades").child(buy).child(current_selection.getId());
-                                 ref_shares.setValue(current_selection);
+                                 current_trade.setPrice_point(dollars);
+                                 current_trade.setNum_shares(num_shares);
                                  Toast.makeText(context, "Buy stock clicked", Toast.LENGTH_LONG).show();
-                                 investor.setCash(investor.getCash() - dollars*num_shares);
+                                 investor.setCash(tots_cash-tot_dol);
                                  looking_for = sell; }
-                             break; }
+                             }
+
+
+
                          current_bid.setText(p.getPrice().toString());
                          db.getReference().child("Investors").child(user_id).setValue(investor);
+                         db.getReference("Trades").child(bs).child(current_trade.getId()).setValue(current_trade);
 
-                         Trade_Manager trade_manager = new Trade_Manager(current_selection,looking_for, p.getPrice());
+                         Trade_Manager trade_manager = new Trade_Manager(current_trade,looking_for, p.getPrice());
                          trade_manager.search_for_trade(); }
                      catch (Exception e){
                          Log.d(TAG, e.getMessage()); }
