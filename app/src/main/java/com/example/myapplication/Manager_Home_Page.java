@@ -6,28 +6,26 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 
-import com.example.myapplication.Business_Logic.Accountant;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
-import Objects.Man_Model;
 import Objects.Manager;
 import Objects.One_Man_Model;
+import Objects.RoundHandler;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager.widget.ViewPager;
+
+import static java.lang.Math.abs;
 
 public class Manager_Home_Page extends AppCompatActivity {
     private static final String TAG="Manager_home_page";
     private Context context;
     private ViewPager viewPager;
     private Manager manager;
+    private RoundHandler RH;
+    private Intent intent_future;
 
     private SectionsPageAdapter mSectionsPageAdapter;
 
@@ -37,10 +35,13 @@ public class Manager_Home_Page extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manager_home);
         context=this;
+        intent_future = new Intent(this, Manager_Round_Intro.class);
         manager =(Manager) getIntent().getSerializableExtra("manager");
         One_Man_Model MM = new ViewModelProvider(this).get(One_Man_Model.class);
         MM.setMan(manager);
-
+        intent_future.putExtra("manager", manager);
+        RH = new RoundHandler(context, intent_future);
+        new Thread(RH).start();
         mSectionsPageAdapter = new SectionsPageAdapter(getSupportFragmentManager());
         viewPager = findViewById(R.id.manhome_container);
         setUpViewPager(viewPager);
@@ -75,12 +76,19 @@ public class Manager_Home_Page extends AppCompatActivity {
 
 
                 return true;
-            case R.id.reset:
+                case R.id.reset:
 
 
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        RH.destroy_round();
+        super.onDestroy();
+
     }
 }

@@ -10,7 +10,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Round_Intro"></activity>
+        <activity android:name=".Investor_Round_Intro"></activity>
+        <activity android:name=".EndPage" />
+        <activity android:name=".Manager_Round_Intro" />
         <activity android:name=".View_Companies" />
         <activity android:name=".orderstockActivity" />
         <activity android:name=".editorderActivity" />

@@ -3,6 +3,9 @@ package com.example.myapplication;
 import Objects.Investor;
 import Objects.Man_Model;
 import Objects.Pricing_Model;
+
+import Objects.RoundHandler;
+
 import Objects.Share_Model;
 import Objects.Trade_Model;
 import Objects.Vest_Model;
@@ -16,13 +19,11 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 
 import com.example.myapplication.Business_Logic.Accountant;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
+
 
 public class MarketPlace extends AppCompatActivity {
     private static final String TAG="Marketplace";
@@ -30,6 +31,8 @@ public class MarketPlace extends AppCompatActivity {
     private ViewPager viewPager;
     private SectionsPageAdapter adapter;
     private  String id;
+    private RoundHandler RH;
+    private Intent future_intent;
 
 
     @Override
@@ -39,6 +42,10 @@ public class MarketPlace extends AppCompatActivity {
         context=this;
         Investor i = (Investor)getIntent().getSerializableExtra("investor");
        id = i.getID();
+       future_intent = new Intent(this, Investor_Round_Intro.class);
+       future_intent.putExtra("investor", i);
+       RH = new RoundHandler(context, future_intent);
+       new Thread(RH).start();
         Share_Model SM= new ViewModelProvider(this).get(Share_Model.class);
         SM.setId(id);
         Vest_Model VM =  new ViewModelProvider(this).get(Vest_Model.class);
@@ -49,10 +56,6 @@ public class MarketPlace extends AppCompatActivity {
         TM.setId(id);
 
         PM.setCurrent_user_id(id);
-
-
-
-
 
 
         viewPager = findViewById(R.id.marketplace_container);
@@ -98,5 +101,11 @@ public class MarketPlace extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        RH.destroy_round();
+        super.onDestroy();
     }
 }

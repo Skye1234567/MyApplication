@@ -193,8 +193,7 @@ private void get_investors(){
              m.setCompany_symbol(current_company_symbol);
              FirebaseDatabase.getInstance().getReference("Managers").child(player.getID()).setValue(m);
              Intent intent = new Intent(context, Manager_Home_Page.class);
-             //intent.putExtra("user_id", UID);
-             //intent.putExtra("c", current_company_symbol);
+
              intent.putExtra("manager", m);
              context.startActivity(intent);}
          else {
@@ -202,7 +201,7 @@ private void get_investors(){
              Investor investor = new Investor(player.getID());
              FirebaseDatabase.getInstance().getReference("Investors").child(player.getID()).setValue(investor);
              Intent intent = new Intent(context, MarketPlace.class);
-             //intent.putExtra("user_id", UID);
+
              intent.putExtra("investor", investor);
 
              context.startActivity(intent);
