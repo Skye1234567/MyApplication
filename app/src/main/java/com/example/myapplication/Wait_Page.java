@@ -58,119 +58,22 @@ public class Wait_Page extends AppCompatActivity  {
         setContentView(R.layout.activity_wait__page);
         Intent intent = getIntent();
         String player_id = intent.getStringExtra("user_id");
-        String player_count_database_def="player_count";
+        String player_count_database_def;
         String player_id_list_database_def = "player_list";
         count_database = "player_counter";
         current_user_id = player_id;
         FirebaseDatabase current_data= FirebaseDatabase.getInstance();
 
         player_id_list_ref = current_data.getReference(player_id_list_database_def);
-        ref_def = current_data.getReference(player_count_database_def);
+
         ref_count = current_data.getReference(count_database);
         ref_count.setValue(0);
         FirebaseDatabase db = FirebaseDatabase.getInstance();
 
-       Query markets = db.getReference("markets");
+
        Query player_list = db.getReference(player_id_list_database_def);
 
-       ref_def.addListenerForSingleValueEvent(new ValueEventListener() {
-           @Override
-           public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-               player_count_definition=dataSnapshot.getValue(Integer.class);
-               sess=new Session(player_count_definition);
 
-
-           }
-
-           @Override
-           public void onCancelled(@NonNull DatabaseError databaseError) {
-               Log.d(TAG, databaseError.getMessage());
-           }
-       });
-
-
-
-
-
-        markets.addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                Toast.makeText(context,"getting market data...", Toast.LENGTH_LONG).show();
-                try {market = dataSnapshot.getValue(Market.class);
-                String market_type = market.getType();
-                if (market_type!=null) {
-                    if (market_type.compareTo("P") == 0) {
-                        sess.setPractice(market);
-                    }
-                    if (market_type.compareTo("BOOM") == 0) {
-                        sess.setBoom(market);
-                    }
-                    if (market_type.compareTo("BUST") == 0) {
-                        sess.setBust(market);
-                    }
-
-
-                }
-
-                }catch (NullPointerException n){
-                    Log.d("my_logs_market_child_added", n.getMessage());
-                }
-
-
-            }
-
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                String market_type = market.getType();
-                if (market_type != null) {
-                    if (market_type.compareTo("P") == 0) {
-                        sess.setPractice(market);
-                    }
-                    if (market_type.compareTo("BOOM") == 0) {
-                        sess.setBoom(market);
-                    }
-                    if (market_type.compareTo("BUST") == 0) {
-                        sess.setBust(market);
-                    }
-
-
-                }
-
-            }
-
-
-                @Override
-            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-                market = dataSnapshot.getValue(Market.class);
-                    String market_type = market.getType();
-                    if (market_type!=null) {
-                        if (market_type.compareTo("P") == 0) {
-                            sess.setPractice(null);
-                        }
-                        if (market_type.compareTo("BOOM") == 0) {
-                            sess.setBoom(null);
-                        }
-                        if (market_type.compareTo("BUST") == 0) {
-                            sess.setBust(null);
-                        }
-
-                    }
-
-
-
-                }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.d(TAG, "Trouble accessing market data");
-
-            }
-        });
         player_list.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
@@ -199,12 +102,11 @@ public class Wait_Page extends AppCompatActivity  {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.d(TAG, "trouble adding player");
+
 
 
             }
         });
-
 
 
     }

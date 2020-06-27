@@ -32,15 +32,10 @@ public class Trade_Model extends ViewModel {
 
     public void removeTrade(Trade t, int position ){
         ArrayList<Trade>  a=livedata.getValue().get(position);
-        for (Trade Trade: a ){
-            if (Trade.getCompany() == t.getCompany()){
-                a.remove(Trade);
-            }
-
-        }
-                ArrayList b = livedata.getValue();
-                b.set(position, a);
-                livedata.setValue(b);
+       a.remove(t);
+        ArrayList b = livedata.getValue();
+        b.set(position, a);
+        livedata.setValue(b);
 
     }
     public LiveData<ArrayList<ArrayList<Trade>>> getTrades(){
@@ -145,6 +140,21 @@ public void update_BUy_Trades(){
 
 
     }
+public Trade filter_for_company(String comp){
+       Trade t=null;
+        for (ArrayList<Trade> at: livedata.getValue()){
+            for (Trade trade: at){
+                if (trade.getCompany().compareTo(comp)==0){
+                    t=trade;
+                    break;
+                }
+                if (trade!=null) break;
 
+            }
+        }
+
+
+       return t;
+}
 
 }

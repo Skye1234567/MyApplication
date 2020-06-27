@@ -3,20 +3,18 @@ package com.example.myapplication;
 import android.content.Context;
 import android.content.Intent;
 
-import Objects.SimpleLoginHelper;
-import androidx.annotation.NonNull;
+import Objects.Schedule;
+import Objects.SessionTimeDatabase;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
 
-import Objects.Market;
+import java.util.Observable;
+import java.util.Observer;
 
 public class MainActivity extends AppCompatActivity {
     Context context;
@@ -27,8 +25,13 @@ public class MainActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
 
+
         setContentView(R.layout.activity_main);
         context = this;
+
+
+        FirebaseDatabase.getInstance().getReference("Time").setValue(new Schedule(System.currentTimeMillis(), 50000, 60000
+        ));
 
 
 

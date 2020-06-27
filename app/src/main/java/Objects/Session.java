@@ -3,29 +3,23 @@ package Objects;
 import java.io.Serializable;
 
 public class Session implements Serializable {
-    private Integer num_players;
+
     private Market practice;
-    private Market boom;
-    private Market bust;
+    private Market round_1;
+    private Market round_2;
 
-    public Session(Integer num_players, Market practice, Market boom, Market bust) {
-        this.num_players = num_players;
+    public Session(Market practice, Market boom, Market bust) {
+
         this.practice = practice;
-        this.boom = boom;
-        this.bust = bust;
+        this.round_1 = boom;
+        this.round_2 = bust;
     }
 
-    public Session(Integer num_players) {
-        this.num_players = num_players;
+    public Session() {
+
     }
 
-    public Integer getNum_players() {
-        return num_players;
-    }
 
-    public void setNum_players(Integer num_players) {
-        this.num_players = num_players;
-    }
 
     public Market getPractice() {
         return practice;
@@ -35,23 +29,40 @@ public class Session implements Serializable {
         this.practice = practice;
     }
 
-    public Market getBoom() {
-        return boom;
+    public Market getRound_1() {
+        return round_1;
     }
 
-    public void setBoom(Market boom) {
-        this.boom = boom;
+    public void setRound_1(Market round_1) {
+        this.round_1 = round_1;
     }
 
-    public Market getBust() {
-        return bust;
+    public Market getRound_2() {
+        return round_2;
     }
 
-    public void setBust(Market bust) {
-        this.bust = bust;
+    public void setRound_2(Market round_2) {
+        this.round_2 = round_2;
     }
 
     public boolean isValid(){
-        return this.boom != null && this.bust != null && this.practice != null;
+        return this.round_1 != null && this.round_2 != null && this.practice != null;
+    }
+
+    public Market round_to_market(Integer round_num){
+        int bound = getPractice().getNum_rounds();
+        int bound2 = bound +getRound_1().getNum_rounds();
+        int bound3 = bound2+ getRound_2().getNum_rounds();
+
+        if (round_num<bound) return getPractice();
+
+        else if (round_num<bound2)return getRound_1();
+
+        else if (round_num<bound3)return getRound_2();
+        else{
+            return null;
+        }
+
+
     }
 }

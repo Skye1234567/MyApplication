@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".editorderActivity">
+
+
+    <LinearLayout
+        android:id="@+id/stock_exchange"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf ="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="parent"
+        android:paddingLeft="@dimen/textSizeTitle"
+        android:paddingTop="@dimen/tab_bar_gap"
+        android:layout_gravity="center"
+
+        >
+
+        <TextView
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:padding="3dip"
+            android:text="Edit Order"
+            android:textAllCaps="true"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="40dp" />
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/quantity_owned_text"
+                android:text="You Have"
+                android:layout_gravity="start"
+                android:padding="3dip"
+
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="@dimen/textSizeNormal"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/quantity_owned"
+                android:layout_gravity="start"
+                android:padding="3dip"
+                android:textAllCaps="true"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="@dimen/textSizeNormal"
+                />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/marketprice"
+                android:text="Market Price"
+                android:layout_gravity="start"
+                android:padding="3dip"
+                android:textAllCaps="true"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="@dimen/textSizeNormal"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/current_bid"
+                android:layout_gravity="start"
+                android:padding="3dip"
+                android:textAllCaps="true"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="@dimen/textSizeNormal"/>
+
+
+        </LinearLayout>
+
+
+
+
+        <TextView
+            android:id="@+id/quantity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:padding="3dip"
+            android:text="Quantity"
+            android:textAllCaps="true"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/textSizeNormal" />
+
+        <EditText
+            android:id="@+id/enter_number_of_stocks"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:padding="@dimen/textSizeNormal"
+            android:textAllCaps="true"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/textSizeNormal"
+
+            />
+        <TextView
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:padding="3dip"
+            android:text="$ Amount "
+            android:textAllCaps="true"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/textSizeNormal"
+            />
+
+
+        <EditText
+            android:id="@+id/money_sign"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:padding="@dimen/textSizeNormal"
+
+            android:textAllCaps="true"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/textSizeNormal"
+            />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/edit_order_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Update Order"
+            android:textSize="@dimen/textSizeNormal" />
+            <Button
+                android:id="@+id/delete_order_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Delete Order"
+                android:textSize="@dimen/textSizeNormal" />
+    </LinearLayout>
+
+    </LinearLayout>
+
+</FrameLayout>

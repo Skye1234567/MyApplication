@@ -36,6 +36,7 @@ public class ManAdapter extends ArrayAdapter<Manager> {
         TextView perform = convertView.findViewById(R.id.performanceres);
         TextView audit = convertView.findViewById(R.id.auditres);
         TextView div = convertView.findViewById(R.id.dividendres);
+
         hash = new HashMap<Integer, String>();
         hash2 = new HashMap<Integer, String>();
         hash.put(0, "No");
@@ -49,6 +50,7 @@ public class ManAdapter extends ArrayAdapter<Manager> {
         perform.setText(hash2.get(manager.getReport_performance()));
         audit.setText(hash.get(manager.getAudit_choice()));
         div.setText(hash.get(manager.getReport_dividend()));
+
 
     // Return the completed view to render on screen
             return convertView;
