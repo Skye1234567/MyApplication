@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingTop="@dimen/textSizeNormal"
-    tools:context=".CompanyReportFragment"
+    tools:context="Project.Activities.Managers.CompanyReportFragment"
     android:layout_margin="@dimen/textSizeNormal"
     >
    <TextView

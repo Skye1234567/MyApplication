@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Set_Parameters_Schedule"
+    tools:context="Project.Activities.Admin.Set_Parameters_Schedule"
     android:layout_margin="@dimen/textSizeNormal">
 
     <LinearLayout
