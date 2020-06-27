@@ -6,9 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,7 +14,6 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -60,7 +57,7 @@ public class Sign_up_admin extends AppCompatActivity {
                                         // Sign in success, update UI with the signed-in user's information
 
                                         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                                        Intent intent = new Intent(context, Set_Parameters_Practice.class);
+                                        Intent intent = new Intent(context, Set_Parameters_Schedule.class);
                                         intent.putExtra("player_id", user);
                                         context.startActivity(intent);
 

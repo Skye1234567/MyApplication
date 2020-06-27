@@ -10,7 +10,15 @@ public class Price implements Serializable {
     Integer price;
     HashMap<String, Integer> asks;
     HashMap<String, Integer> bids;
+    String company;
 
+    public String getCompany() {
+        return company;
+    }
+
+    public void setCompany(String company) {
+        this.company = company;
+    }
 
     public Integer getPrice() {
         return price;

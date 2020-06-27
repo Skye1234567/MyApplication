@@ -26,6 +26,7 @@ public class Set_Parameters extends AppCompatActivity {
     EditText rounds;
     Button submit_round_1;
     FirebaseDatabase db;
+    String child;
 
 
     @Override
@@ -33,8 +34,9 @@ public class Set_Parameters extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_set__parameters);
         context= this;
+        child =getIntent().getStringExtra("child");
         mauth = FirebaseAuth.getInstance();
-        if (mauth.getCurrentUser().isAnonymous()|| mauth.getCurrentUser()==null){
+        if ( mauth.getCurrentUser()==null){
             Intent intent = new Intent(context, Sign_up_admin.class);
             context.startActivity(intent);
         }
@@ -57,10 +59,10 @@ public class Set_Parameters extends AppCompatActivity {
                 Market round_1 = new Market(fpi_h,fpi_l,fp, num_round);
                 round_1.setType("BOOM");
                 db = FirebaseDatabase.getInstance();
-                db.getReference("markets").child("round_1").setValue(round_1).addOnCompleteListener(new OnCompleteListener<Void>() {
+                db.getReference("markets").child(child).setValue(round_1).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-                        Intent intent = new Intent(context, Set_Parameters_Round_2.class);
+                        Intent intent = new Intent(context, AdminHub.class);
                         context.startActivity(intent);
                         finish();
                     }

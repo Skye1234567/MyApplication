@@ -16,16 +16,12 @@ public class Round {
 
         this.stop_time = stop_time;
         this.context = context;
-        pendingIntent= PendingIntent.getActivity(context, (int) System.currentTimeMillis(), intent, PendingIntent.FLAG_ONE_SHOT);
+        pendingIntent= PendingIntent.getActivity(context, (int) System.currentTimeMillis(), intent, PendingIntent.FLAG_UPDATE_CURRENT);
         set_pending_intent_alarm(); }
 
     public void set_pending_intent_alarm() {
-
-
         alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         alarmManager.set(AlarmManager.RTC_WAKEUP, stop_time , pendingIntent);
-
-
     }
 
     public void cancel_alarm(){

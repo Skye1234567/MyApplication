@@ -10,7 +10,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Investor_Round_Intro"></activity>
+        <activity android:name=".AdminHub"></activity>
+        <activity android:name=".Investor_Round_Intro" />
         <activity android:name=".EndPage" />
         <activity android:name=".Manager_Round_Intro" />
         <activity android:name=".View_Companies" />
@@ -22,10 +23,10 @@
         <activity android:name=".Admin_Menu" />
         <activity android:name=".Sign_up_admin" />
         <activity android:name=".Set_Parameters" />
-        <activity android:name=".Set_Parameters_Practice" />
-        <activity android:name=".Set_Parameters_Round_2" />
+        <activity android:name=".Set_Parameters_Schedule" />
         <activity android:name=".Wait_Page" />
         <activity android:name=".MarketPlace" />
+        <activity android:name=".MarketPlaceForMan" />
         <activity android:name=".Manager_Home_Page" />
         <activity android:name=".Investor_Instructions_Fragment" />
         <activity android:name=".Sign_up_player" />

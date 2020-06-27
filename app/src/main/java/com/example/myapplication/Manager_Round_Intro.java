@@ -10,7 +10,7 @@ public class Manager_Round_Intro extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_round__intro);
+        setContentView(R.layout.activity_manager_round__intro);
         CountDownTimer CDT;
     }
 }

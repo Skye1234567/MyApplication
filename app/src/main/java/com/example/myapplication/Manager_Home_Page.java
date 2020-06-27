@@ -39,7 +39,7 @@ public class Manager_Home_Page extends AppCompatActivity {
         manager =(Manager) getIntent().getSerializableExtra("manager");
         One_Man_Model MM = new ViewModelProvider(this).get(One_Man_Model.class);
         MM.setMan(manager);
-        intent_future.putExtra("manager", manager);
+
         RH = new RoundHandler(context, intent_future);
         new Thread(RH).start();
         mSectionsPageAdapter = new SectionsPageAdapter(getSupportFragmentManager());

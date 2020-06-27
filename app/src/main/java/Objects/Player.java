@@ -2,6 +2,7 @@ package Objects;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Objects;
 
 
 public class Player implements Serializable {
@@ -10,6 +11,19 @@ public class Player implements Serializable {
     private String type;
     private Integer cash;
     private Integer value;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Player)) return false;
+        Player player = (Player) o;
+        return getID().equals(player.getID());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getID());
+    }
 
     public Integer getCash() {
         return cash;

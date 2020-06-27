@@ -99,38 +99,9 @@ public class Market implements Serializable {
     }
 
 
-    public void generate_player_data(ArrayList<Manager> managers, ArrayList<Investor> investors, boolean reset_shares){
-        Random r = new Random();
 
-        for (Manager m :managers){
-            float p_random = r.nextFloat();
-            float pi_random = r.nextFloat();
-            if (this.p<p_random){
-                m.setPerformance(0);
-                if (pi_l<pi_random){
-                    m.setSalary(lil_money);
-                }
-                else {m.setSalary(big_money);}
-
-            }
-            else {
-                if(pi_h<pi_random){
-                    m.setSalary(lil_money);
-                }
-                else{
-                    m.setSalary(big_money);
-                }
-
-            }
-            if (reset_shares){
-            for (Investor i: investors){
-                i.add_Shares(new Share(i.getID(),m.getCompany_symbol(),m.getID()));
-            }}
 
 
         }
 
 
-    }
-
-}

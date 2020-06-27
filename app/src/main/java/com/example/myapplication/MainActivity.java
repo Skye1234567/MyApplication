@@ -30,8 +30,7 @@ public class MainActivity extends AppCompatActivity {
         context = this;
 
 
-        FirebaseDatabase.getInstance().getReference("Time").setValue(new Schedule(System.currentTimeMillis(), 50000, 60000
-        ));
+
 
 
 

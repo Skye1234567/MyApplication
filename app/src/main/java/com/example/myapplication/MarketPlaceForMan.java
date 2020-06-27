@@ -1,18 +1,5 @@
 package com.example.myapplication;
 
-import Objects.Investor;
-import Objects.Man_Model;
-import Objects.Pricing_Model;
-
-import Objects.RoundHandler;
-
-import Objects.Share_Model;
-import Objects.Trade_Model;
-import Objects.Vest_Model;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.viewpager.widget.ViewPager;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -24,8 +11,19 @@ import com.example.myapplication.Business_Logic.Accountant;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 
+import Objects.Investor;
+import Objects.Man_Model;
+import Objects.Pricing_Model;
+import Objects.RoundHandler;
+import Objects.Share_Model;
+import Objects.Trade_Model;
+import Objects.Vest_Model;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.viewpager.widget.ViewPager;
 
-public class MarketPlace extends AppCompatActivity {
+
+public class MarketPlaceForMan extends AppCompatActivity {
     private static final String TAG="Marketplace";
     private Context context;
     private ViewPager viewPager;
@@ -38,7 +36,7 @@ public class MarketPlace extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_market_place);
+        setContentView(R.layout.activity_market_place_for_man);
         context=this;
         Investor i = (Investor)getIntent().getSerializableExtra("investor");
        id = i.getID();
@@ -69,9 +67,8 @@ public class MarketPlace extends AppCompatActivity {
 
     private void setUpViewPager(ViewPager viewPager){
         adapter = new SectionsPageAdapter(getSupportFragmentManager());
-        adapter.addFragment(new View_Companies(), "Company Reports");
-        adapter.addFragment(new Investor_Instructions_Fragment(), "Your  Stocks");
-        adapter.addFragment(new ActiveTradesFragment(), "Active Trades");
+        adapter.addFragment(new View_Companies_Manager(), "Company Reports");
+        adapter.addFragment(new Market_Prices(), "Stocks");
         viewPager.setAdapter(adapter);
     }
 
