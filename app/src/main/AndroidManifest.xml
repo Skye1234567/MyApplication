@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.myapplication">
+    package="com.example.myapplication"
+    >
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -10,26 +12,27 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Investor_Round_Intro"></activity>
-        <activity android:name=".EndPage" />
-        <activity android:name=".Manager_Round_Intro" />
-        <activity android:name=".View_Companies" />
-        <activity android:name=".orderstockActivity" />
-        <activity android:name=".editorderActivity" />
-        <activity android:name=".Enter_Num_Players" />
-        <activity android:name=".Relevant_terminology" />
-        <activity android:name=".Wait_page2" />
-        <activity android:name=".Admin_Menu" />
-        <activity android:name=".Sign_up_admin" />
-        <activity android:name=".Set_Parameters" />
-        <activity android:name=".Set_Parameters_Practice" />
-        <activity android:name=".Set_Parameters_Round_2" />
-        <activity android:name=".Wait_Page" />
-        <activity android:name=".MarketPlace" />
-        <activity android:name=".Manager_Home_Page" />
-        <activity android:name=".Investor_Instructions_Fragment" />
-        <activity android:name=".Sign_up_player" />
-        <activity android:name=".MainActivity">
+
+        <activity android:name="Project.Activities.Admin.DownloadPage"></activity>
+        <activity android:name="Project.Activities.Admin.AdminHub" />
+        <activity android:name="Project.Activities.Investors.Investor_Round_Intro" />
+        <activity android:name="Project.Activities.Player.EndPage" />
+        <activity android:name="Project.Activities.Managers.Manager_Round_Intro" />
+        <activity android:name="Project.Activities.Investors.View_Companies" />
+        <activity android:name="Project.Activities.Investors.orderstockActivity" />
+        <activity android:name="Project.Activities.Investors.editorderActivity" />
+        <activity android:name="Project.Activities.Admin.Enter_Num_Players" />
+        <activity android:name="Project.Activities.Player.Relevant_terminology" />
+        <activity android:name="Project.Activities.Admin.Admin_Menu" />
+        <activity android:name="Project.Activities.Admin.Sign_up_admin" />
+        <activity android:name="Project.Activities.Admin.Set_Parameters" />
+        <activity android:name="Project.Activities.Admin.Set_Parameters_Schedule" />
+        <activity android:name="Project.Activities.Investors.MarketPlace" />
+        <activity android:name="Project.Activities.Managers.MarketPlaceForMan" />
+        <activity android:name="Project.Activities.Managers.Manager_Home_Page" />
+        <activity android:name="Project.Activities.Investors.Investor_Instructions_Fragment" />
+        <activity android:name="Project.Activities.Player.Sign_up_player" />
+        <activity android:name="Project.Activities.Player.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

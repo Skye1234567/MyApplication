@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="Project.Activities.Admin.AdminHub">
+
+    <LinearLayout
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <TextView
+            android:padding="@dimen/textSizeNormal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Edit Parameters"
+            android:textSize="@dimen/textSizeTitle"
+            android:textColor="@color/colorPrimaryDark"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:padding="@dimen/textSizeNormal"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <Button
+                android:padding="@dimen/textSizeNormal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/setpracticehub"
+                android:text="Practice"
+                android:textSize="@dimen/textSizeNormal"
+                android:textColor="@color/colorPrimaryDark"
+                />
+            <Button
+                android:padding="@dimen/textSizeNormal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/setround_1hub"
+                android:text="Round 1"
+                android:textSize="@dimen/textSizeNormal"
+                android:textColor="@color/colorPrimaryDark"
+                />
+
+        </LinearLayout>
+        <LinearLayout
+            android:padding="@dimen/textSizeNormal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <Button
+                android:padding="@dimen/textSizeNormal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/setschedhub"
+                android:text="Schedule"
+                android:textSize="@dimen/textSizeNormal"
+                android:textColor="@color/colorPrimaryDark"
+                />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/textSizeNormal"
+                android:id="@+id/setround_2hub"
+                android:text="Round 2"
+                android:textSize="@dimen/textSizeNormal"
+                android:textColor="@color/colorPrimaryDark"
+                />
+
+        </LinearLayout>
+
+
+        <Button
+            android:padding="@dimen/textSizeNormal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/to_menu"
+            android:text="Back to Menu"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/textSizeNormal"/>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

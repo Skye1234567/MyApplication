@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Set_Parameters"
+    tools:context="Project.Activities.Admin.Set_Parameters"
     android:layout_margin="@dimen/textSizeNormal">
     <LinearLayout
 
@@ -17,14 +17,15 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
         <TextView
+            android:id="@+id/Titleeditparam"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="right"
-            android:padding="3dip"
+            android:padding="@dimen/textSizeNormal"
             android:textAllCaps="true"
             android:textColor="@color/colorPrimaryDark"
             android:textSize= "@dimen/textSizeTitle"
-            android:text="ROUND 1"
+
             />
 
 
@@ -32,7 +33,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="right"
-            android:padding="3dip"
+            android:padding="@dimen/textSizeNormal"
             android:textAllCaps="true"
             android:textColor="@color/colorPrimaryDark"
             android:textSize= "@dimen/textSizeNormal"
@@ -51,7 +52,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="right"
-            android:padding="3dip"
+            android:padding="@dimen/textSizeNormal"
             android:textAllCaps="true"
             android:textColor="@color/colorPrimaryDark"
             android:textSize= "@dimen/textSizeNormal"
@@ -70,7 +71,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="right"
-            android:padding="3dip"
+            android:padding="@dimen/textSizeNormal"
             android:textAllCaps="true"
             android:textColor="@color/colorPrimaryDark"
             android:textSize= "@dimen/textSizeNormal"
@@ -89,7 +90,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="right"
-            android:padding="3dip"
+            android:padding="@dimen/textSizeNormal"
             android:textAllCaps="true"
             android:textColor="@color/colorPrimaryDark"
             android:textSize= "@dimen/textSizeNormal"
@@ -110,7 +111,7 @@
         android:id="@+id/button_submit_round_1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/set_practice_round"
+
         app:layout_constraintStart_toStartOf="parent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

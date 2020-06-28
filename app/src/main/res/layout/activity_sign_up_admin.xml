@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Sign_up_admin"
+    tools:context="Project.Activities.Admin.Sign_up_admin"
     android:layout_margin="@dimen/textSizeNormal">
 
         <LinearLayout
@@ -20,6 +20,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="email"
+                android:padding="@dimen/textSizeNormal"
                 android:textAllCaps="true"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="@dimen/textSizeNormal"
@@ -28,11 +29,13 @@
             <EditText
                 android:id="@+id/admin_email"
                 android:inputType="textPassword"
+                android:padding="@dimen/textSizeTitle"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/textSizeNormal"
                 />
             <TextView
                 android:layout_width="wrap_content"
+                android:padding="@dimen/textSizeNormal"
                 android:layout_height="wrap_content"
                 android:text="password"
                 android:textAllCaps="true"
@@ -44,6 +47,7 @@
                 android:id="@+id/admin_password"
                 android:inputType="textPassword"
                 android:layout_width="match_parent"
+                android:padding="@dimen/textSizeTitle"
                 android:layout_height="@dimen/textSizeNormal"
                 />
 
