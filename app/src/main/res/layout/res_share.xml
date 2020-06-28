@@ -11,6 +11,7 @@
         android:text="Company Symbol"
         android:padding="@dimen/textSizeNormal"
         android:textSize="@dimen/textSizeNormal"
+        android:paddingHorizontal="@dimen/textSizeTitle"
         android:textColor="@color/colorPrimaryDark"/>
     <TextView
         android:id="@+id/sharenumb"
@@ -19,6 +20,7 @@
         android:text="Number Owned"
         android:padding="@dimen/textSizeNormal"
         android:textSize="@dimen/textSizeNormal"
+        android:paddingHorizontal="@dimen/textSizeTitle"
         android:textColor="@color/colorPrimaryDark"/>
     <TextView
         android:id="@+id/mp"
@@ -26,6 +28,7 @@
         android:layout_height="wrap_content"
         android:text="Market Price"
         android:padding="@dimen/textSizeNormal"
+        android:paddingHorizontal="@dimen/textSizeTitle"
         android:textSize="@dimen/textSizeNormal"
         android:textColor="@color/colorPrimaryDark"/>
 </LinearLayout>

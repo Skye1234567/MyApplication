@@ -9,6 +9,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Company Symbol"
+        android:paddingHorizontal="@dimen/textSizeTitle"
         android:padding="@dimen/textSizeNormal"
         android:textSize="@dimen/textSizeNormal"
         android:textColor="@color/colorPrimaryDark"/>
@@ -16,6 +17,7 @@
     <TextView
         android:id="@+id/dollars"
         android:text="Market Price"
+        android:paddingHorizontal="@dimen/textSizeTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="@dimen/textSizeNormal"

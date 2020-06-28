@@ -29,6 +29,7 @@ public class Manager_Home_Page extends AppCompatActivity {
     private static final String TAG="Manager_home_page";
     private Context context;
     private ViewPager viewPager;
+    private Timer timer;
 
 
 
@@ -40,7 +41,7 @@ public class Manager_Home_Page extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manager_home);
         context=this;
-        Timer timer = new Timer();
+        timer = new Timer();
         TimerTask timerTask = new TimerTask() {
            @Override
            public void run() {
@@ -86,6 +87,7 @@ public class Manager_Home_Page extends AppCompatActivity {
                 Intent intent = new Intent(context, MainActivity.class);
                 FirebaseAuth.getInstance().signOut();
                 context.startActivity(intent);
+                timer.cancel();
                 finish();
 
 
@@ -100,4 +102,13 @@ public class Manager_Home_Page extends AppCompatActivity {
     }
 
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        timer.cancel();
+    }
+    @Override
+    public void onBackPressed() {
+        // Do Here what ever you want do on back press;
+    }
 }

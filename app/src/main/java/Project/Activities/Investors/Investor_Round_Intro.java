@@ -44,6 +44,7 @@ public class Investor_Round_Intro extends AppCompatActivity {
     Integer round;
     ArrayList<Manager> managersArray;
     ListView listView;
+    Timer timer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,13 +82,14 @@ public class Investor_Round_Intro extends AppCompatActivity {
                 Intent intent=new Intent(context, MarketPlace.class);
                 intent.putExtra("investor", i);
                 startActivity(intent);
+                timer.cancel();
                 finish();
 
 
             }
         };
 
-        Timer timer = new Timer();
+        timer = new Timer();
 
         if (schedule==null){
             timer.schedule(timerTask, 60000);

@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.myapplication.R;
@@ -28,6 +29,7 @@ public class Set_Parameters extends AppCompatActivity {
     Button submit_round_1;
     FirebaseDatabase db;
     String child;
+    Market market;
 
 
     @Override
@@ -36,17 +38,25 @@ public class Set_Parameters extends AppCompatActivity {
         setContentView(R.layout.activity_set__parameters);
         context= this;
         child =getIntent().getStringExtra("child");
+        market = (Market) getIntent().getSerializableExtra("market");
         mauth = FirebaseAuth.getInstance();
         if ( mauth.getCurrentUser()==null){
             Intent intent = new Intent(context, Sign_up_admin.class);
             context.startActivity(intent);
         }
+        ((TextView) findViewById(R.id.Titleeditparam)).setText(child);
 
         p = findViewById(R.id.prob_ofhigh);
     pi_h = findViewById(R.id.prob_outcome_high);
     pi_l = findViewById(R.id.prob_outcome_low);
     rounds = findViewById(R.id.num_rounds);
     submit_round_1 = findViewById(R.id.button_submit_round_1);
+    if(market!=null){
+        p.setText(market.getP().toString());
+        pi_h.setText(market.getPi_h().toString());
+        pi_l.setText(market.getPi_l().toString());
+        rounds.setText(market.getNum_rounds().toString());
+    }
 
         submit_round_1.setOnClickListener(new View.OnClickListener() {
         @Override

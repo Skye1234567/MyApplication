@@ -68,21 +68,24 @@ public class Set_Parameters_Schedule extends AppCompatActivity {
             }});
         alertDialog.setView(dialogView);
         alertDialog.show();
-
+        spinnerreport = findViewById(R.id.reporttime);
+        spinnerinvest=findViewById(R.id.investtime);
 
 
         ArrayAdapter arrayAdapter = new ArrayAdapter(this, R.layout.spinner_item);
-        arrayAdapter.add("10");
-        arrayAdapter.add("15");
-        arrayAdapter.add("20");
-        arrayAdapter.add("25");
+        arrayAdapter.add("2");
+        arrayAdapter.add("3");
+        arrayAdapter.add("5");
+        arrayAdapter.add("7");
+        arrayAdapter.add("11");
+
         spinnerreport.setAdapter(arrayAdapter);
         spinnerinvest.setAdapter(arrayAdapter);
         spinnerinvest.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Integer i = Integer.valueOf(parent.getItemAtPosition(position).toString());
-                report_length = i*60000;
+                invest_length = i*60000;
 
             }
 

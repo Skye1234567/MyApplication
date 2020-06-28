@@ -58,7 +58,7 @@ public class Sign_up_admin extends AppCompatActivity {
                                         // Sign in success, update UI with the signed-in user's information
 
                                         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                                        Intent intent = new Intent(context, Set_Parameters_Schedule.class);
+                                        Intent intent = new Intent(context, Admin_Menu.class);
                                         intent.putExtra("player_id", user);
                                         context.startActivity(intent);
 

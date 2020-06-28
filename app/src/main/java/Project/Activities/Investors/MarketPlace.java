@@ -117,4 +117,8 @@ public class MarketPlace extends AppCompatActivity {
         super.onStop();
         RH.destroy_round();
     }
+    @Override
+    public void onBackPressed() {
+        // Do Here what ever you want do on back press;
+    }
 }

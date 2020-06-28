@@ -7,7 +7,30 @@
     android:layout_height="match_parent"
     tools:context="Project.Activities.Admin.Admin_Menu"
     android:layout_margin="@dimen/textSizeNormal">
+    <LinearLayout
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
+    <Button
+        android:id="@+id/downloaddatatadmin"
+        android:text="Download Data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 
+        <Button
+            android:id="@+id/logoutadmin"
+            android:text="Logout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <Button
+            android:id="@+id/editparametersadmin"
+            android:text="Edit Parameters"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
 
+</LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

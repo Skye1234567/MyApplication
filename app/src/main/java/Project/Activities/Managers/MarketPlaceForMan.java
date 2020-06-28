@@ -87,6 +87,7 @@ public class MarketPlaceForMan extends AppCompatActivity {
                 Intent intent = new Intent(context, MainActivity.class);
                 FirebaseAuth.getInstance().signOut();
                 context.startActivity(intent);
+                RH.destroy_round();
                 finish();
                 return true;
             case R.id.reset:

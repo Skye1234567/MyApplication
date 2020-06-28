@@ -9,8 +9,6 @@ public class Market implements Serializable {
     private Float pi_h;
     private Float pi_l;
     private Float p;
-    private Integer big_money;
-    private Integer lil_money;
     private Integer num_rounds;
     private String type;
 
@@ -63,22 +61,13 @@ public class Market implements Serializable {
     }
 
 
-    private Integer num_players;
 
-    public Integer getNum_players() {
-        return num_players;
-    }
-
-    public void setNum_players(Integer num_players) {
-        this.num_players = num_players;
-    }
 
     public Market(Float pi_h, Float pi_l, Float p, Integer num_rounds) {
         this.pi_h = pi_h;
         this.pi_l = pi_l;
         this.p = p;
-        this.big_money =100;
-        this.lil_money =10;
+
         this.num_rounds = num_rounds;
     }
 
