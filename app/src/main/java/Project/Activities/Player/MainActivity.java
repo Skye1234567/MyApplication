@@ -12,6 +12,7 @@ import android.widget.Button;
 
 import com.example.myapplication.R;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class MainActivity extends AppCompatActivity {
     Context context;
@@ -21,6 +22,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+
+        FirebaseDatabase.getInstance().getReference("Time").child("start").setValue(System.currentTimeMillis());
 
 
         setContentView(R.layout.activity_main);

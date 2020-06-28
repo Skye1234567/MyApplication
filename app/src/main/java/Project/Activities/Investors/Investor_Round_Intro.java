@@ -40,6 +40,7 @@ public class Investor_Round_Intro extends AppCompatActivity {
     Session session;
     TimerTask timerTask;
     ManAdapter manAdapter;
+    Schedule schedule;
     Integer round;
     ArrayList<Manager> managersArray;
     ListView listView;
@@ -62,7 +63,14 @@ public class Investor_Round_Intro extends AppCompatActivity {
         manAdapter = new ManAdapter(this, managersArray);
         listView = findViewById(R.id.list_of_companies);
         listView.setAdapter(manAdapter);
+        SessionTimeDatabase SD = new SessionTimeDatabase();
+        SD.addObserver(new Observer() {
+            @Override
+            public void update(Observable o, Object arg) {
+                schedule=(Schedule) arg;
 
+            }
+        });
 
 
         context=this;
@@ -75,34 +83,28 @@ public class Investor_Round_Intro extends AppCompatActivity {
                 startActivity(intent);
                 finish();
 
+
             }
         };
 
+        Timer timer = new Timer();
+
+        if (schedule==null){
+            timer.schedule(timerTask, 60000);
+        }else timer.schedule(timerTask, schedule.getReport());
         getInvestor();
-        SessionTimeDatabase SD = new SessionTimeDatabase();
-        SD.addObserver(new Observer() {
-            @Override
-            public void update(Observable o, Object arg) {
-                Schedule s  =(Schedule) arg;
-                Timer timer = new Timer();
-                timer.schedule(timerTask, s.getReport());
-            }
-        });
+
         ManDatabase MD = new ManDatabase();
         MD.addObserver(new Observer() {
             @Override
             public void update(Observable o, Object arg) {
+
+
                 managersArray = (ArrayList<Manager>) arg;
+                update_adapter();
             }
         });
         MD.listenForChanges();
-
-
-
-
-
-
-
 
     }
 
@@ -119,6 +121,11 @@ public class Investor_Round_Intro extends AppCompatActivity {
 
             }
         });
+    }
+
+    public void update_adapter(){
+        manAdapter.clear();
+        manAdapter.addAll(managersArray);
     }
 
 

@@ -25,6 +25,10 @@ public class One_Man_Model extends ViewModel {
         this.symbol = symbol;
         update_manager();
     }
+    public void set_id(String id){
+        this.id=id;
+
+    }
 
     public LiveData<Manager> getMan(){
         update_manager();
@@ -54,7 +58,7 @@ public class One_Man_Model extends ViewModel {
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
-                    Log.d("can't get man for man_model", databaseError.getMessage());
+                    Log.d("can't get m", databaseError.getMessage());
 
                 }
             });

@@ -75,8 +75,6 @@ public class Manager extends Player {
         setPerformance(1);
 
 
-
-
     }
 
     public Integer getSalary() {

@@ -68,7 +68,6 @@ public class Investor_Instructions_Fragment extends Fragment {
         investor_shares = new ArrayList<>();
         share_model .setId(in_id);
         pricing_model =new ViewModelProvider(getActivity()).get(Pricing_Model.class);
-        pricing_model.setCurrent_user_id(in_id);
         shareAdapter =new ShareAdapter(context,investor_shares);
         tableLayout.setAdapter(shareAdapter);
         if (in_id ==null){

@@ -16,12 +16,9 @@ import androidx.lifecycle.ViewModel;
 public class Pricing_Model extends ViewModel {
     private MutableLiveData<HashMap<String, Price>> livedata = new MutableLiveData<>();
 
-    private String current_user_id;
 
 
-    public void setCurrent_user_id(String current_user_id) {
-        this.current_user_id = current_user_id;
-    }
+
 
     public MutableLiveData<HashMap<String,Price>> getPrices() {
         update_prices();

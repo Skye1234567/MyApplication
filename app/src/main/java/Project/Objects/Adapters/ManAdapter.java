@@ -12,15 +12,17 @@ import com.example.myapplication.R;
 import java.util.HashMap;
 import java.util.List;
 
+import Project.Objects.Handlers.ManHash;
 import Project.Objects.Personel.Manager;
 import androidx.annotation.NonNull;
 
 public class ManAdapter extends ArrayAdapter<Manager> {
-    private HashMap<Integer, String> hash;
-    private HashMap<Integer, String> hash2;
+    ManHash manHash;
+
 
     public ManAdapter(@NonNull Context context, @NonNull List<Manager> objects) {
         super(context, R.layout.res_man, objects);
+        manHash = new ManHash();
     }
 
 
@@ -37,24 +39,18 @@ public class ManAdapter extends ArrayAdapter<Manager> {
         TextView perform = convertView.findViewById(R.id.performanceres);
         TextView audit = convertView.findViewById(R.id.auditres);
         TextView div = convertView.findViewById(R.id.dividendres);
+        if (manager.getID()!=null) {
 
-        hash = new HashMap<Integer, String>();
-        hash2 = new HashMap<Integer, String>();
-        hash.put(0, "No");
-        hash.put(1, "Yes");
-        hash2.put(0, "Low");
-        hash2.put(1, "High");
+            // Populate the data into the template view using the data object
+            compsym.setText(manager.getCompany_symbol());
+            perform.setText(manHash.highLowHash(manager.getReport_performance()));
+            audit.setText(manHash.YesNOHash(manager.getAudit_choice()));
+            div.setText(manHash.YesNOHash(manager.getReport_dividend()));
 
-
-        // Populate the data into the template view using the data object
-        compsym.setText(manager.getCompany_symbol());
-        perform.setText(hash2.get(manager.getReport_performance()));
-        audit.setText(hash.get(manager.getAudit_choice()));
-        div.setText(hash.get(manager.getReport_dividend()));
-
-
+        }
     // Return the completed view to render on screen
             return convertView;
 }
+
 }
 

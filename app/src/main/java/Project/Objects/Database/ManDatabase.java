@@ -63,7 +63,7 @@ public class ManDatabase extends Observable {
     }
     public void remove(Manager m){
         for (Manager manager :arrayList){
-            if (manager==m){
+            if (manager.equals(m)){
                 arrayList.remove(manager);
                 return;
             }

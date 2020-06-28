@@ -15,6 +15,7 @@ import com.example.myapplication.R;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 
+import Project.Objects.Models.One_Man_Model;
 import Project.Objects.Personel.Investor;
 import Project.Objects.Models.Man_Model;
 import Project.Objects.Models.Pricing_Model;
@@ -32,7 +33,7 @@ public class MarketPlaceForMan extends AppCompatActivity {
     private Context context;
     private ViewPager viewPager;
     private SectionsPageAdapter adapter;
-    private  String id;
+
     private RoundHandler RH;
     private Intent future_intent;
 
@@ -42,21 +43,17 @@ public class MarketPlaceForMan extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_market_place_for_man);
         context=this;
-        Investor i = (Investor)getIntent().getSerializableExtra("investor");
-       id = i.getID();
-       future_intent = new Intent(this, Investor_Round_Intro.class);
+        String id = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+       future_intent = new Intent(this, Manager_Home_Page.class);
        RH = new RoundHandler(context, future_intent);
        new Thread(RH).start();
-        Share_Model SM= new ViewModelProvider(this).get(Share_Model.class);
-        SM.setId(id);
-        Vest_Model VM =  new ViewModelProvider(this).get(Vest_Model.class);
-        VM.setId(id);
+
         Man_Model MM = new ViewModelProvider(this).get(Man_Model.class);
         Pricing_Model PM= new ViewModelProvider(this).get(Pricing_Model.class);
-        Trade_Model TM = new ViewModelProvider(this).get(Trade_Model.class);
-        TM.setId(id);
+        One_Man_Model one_man_model = new ViewModelProvider(this).get(One_Man_Model.class);
+        one_man_model.set_id(id);
 
-        PM.setCurrent_user_id(id);
 
 
         viewPager = findViewById(R.id.marketplace_container);
@@ -93,9 +90,6 @@ public class MarketPlaceForMan extends AppCompatActivity {
                 finish();
                 return true;
             case R.id.reset:
-                new Accountant().reset_investor(id);
-                Vest_Model VM  = new ViewModelProvider(this).get(Vest_Model.class);
-                VM.update_investor();
 
                 return true;
             default:

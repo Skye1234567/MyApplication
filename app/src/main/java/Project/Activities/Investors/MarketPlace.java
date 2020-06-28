@@ -26,6 +26,7 @@ import Project.Business_Logic.Accountant;
 import com.example.myapplication.R;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
 
 
 public class MarketPlace extends AppCompatActivity {
@@ -57,7 +58,6 @@ public class MarketPlace extends AppCompatActivity {
         Trade_Model TM = new ViewModelProvider(this).get(Trade_Model.class);
         TM.setId(id);
 
-        PM.setCurrent_user_id(id);
 
 
         viewPager = findViewById(R.id.marketplace_container);
@@ -92,10 +92,11 @@ public class MarketPlace extends AppCompatActivity {
                 Intent intent = new Intent(context, MainActivity.class);
                 FirebaseAuth.getInstance().signOut();
                 context.startActivity(intent);
+                RH.destroy_round();
                 finish();
                 return true;
             case R.id.reset:
-                new Accountant().reset_investor(id);
+                new Accountant(FirebaseDatabase.getInstance().getReference()).reset_investor(id);
                 Vest_Model VM  = new ViewModelProvider(this).get(Vest_Model.class);
                 VM.update_investor();
 
@@ -107,7 +108,13 @@ public class MarketPlace extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
-        RH.destroy_round();
         super.onDestroy();
+        RH.destroy_round();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        RH.destroy_round();
     }
 }

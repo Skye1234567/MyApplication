@@ -16,7 +16,7 @@ public class Round {
 
         this.stop_time = stop_time;
         this.context = context;
-        pendingIntent= PendingIntent.getActivity(context, (int) System.currentTimeMillis(), intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        pendingIntent= PendingIntent.getActivity(context, 0, intent, 0);
         set_pending_intent_alarm(); }
 
     public void set_pending_intent_alarm() {

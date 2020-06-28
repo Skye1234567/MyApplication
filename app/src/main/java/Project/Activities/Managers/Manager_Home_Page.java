@@ -11,6 +11,9 @@ import com.example.myapplication.R;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import Project.Activities.Player.MainActivity;
 import Project.Objects.Adapters.SectionsPageAdapter;
 import Project.Objects.Personel.Manager;
@@ -26,9 +29,8 @@ public class Manager_Home_Page extends AppCompatActivity {
     private static final String TAG="Manager_home_page";
     private Context context;
     private ViewPager viewPager;
-    private Manager manager;
-    private RoundHandler RH;
-    private Intent intent_future;
+
+
 
     private SectionsPageAdapter mSectionsPageAdapter;
 
@@ -38,13 +40,22 @@ public class Manager_Home_Page extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manager_home);
         context=this;
-        intent_future = new Intent(this, Manager_Round_Intro.class);
-        manager =(Manager) getIntent().getSerializableExtra("manager");
-        One_Man_Model MM = new ViewModelProvider(this).get(One_Man_Model.class);
-        MM.setMan(manager);
+        Timer timer = new Timer();
+        TimerTask timerTask = new TimerTask() {
+           @Override
+           public void run() {
+               Intent intent = new Intent(context, MarketPlaceForMan.class);
+               startActivity(intent);
 
-        RH = new RoundHandler(context, intent_future);
-        new Thread(RH).start();
+
+
+           }
+       };
+        timer.schedule(timerTask, 120000);
+
+        One_Man_Model MM = new ViewModelProvider(this).get(One_Man_Model.class);
+
+
         mSectionsPageAdapter = new SectionsPageAdapter(getSupportFragmentManager());
         viewPager = findViewById(R.id.manhome_container);
         setUpViewPager(viewPager);
@@ -88,10 +99,5 @@ public class Manager_Home_Page extends AppCompatActivity {
         }
     }
 
-    @Override
-    protected void onDestroy() {
-        RH.destroy_round();
-        super.onDestroy();
 
-    }
 }

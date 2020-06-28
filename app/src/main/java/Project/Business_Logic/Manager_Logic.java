@@ -18,7 +18,6 @@ import androidx.annotation.NonNull;
 
 public class Manager_Logic {
     private final static String TAG ="Manager_Logic";
-    private Accountant accountant;
 
     private String company_symbol;
     private String manager_id;
@@ -26,32 +25,11 @@ public class Manager_Logic {
     public Manager_Logic( String company_symbol, String manager_id) {
         this.company_symbol = company_symbol;
         this.manager_id= manager_id;
-        this.accountant = new Accountant();
+
 
     }
 
-    public void refresh_market_values(int mode){
-        ArrayList<String> modes = new ArrayList<>();
-        modes.add(0, "practice");
-        modes.add(1, "round_1");
-        modes.add(2, "round_2");
-        FirebaseDatabase db = FirebaseDatabase.getInstance();
-        db.getReference("markets").child(modes.get(mode)).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                Market market = dataSnapshot.getValue(Market.class);
-                accountant.generate_company_data(market.getP());
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-    }
 
     public void  allocate_shares(){
         if (company_symbol==null)return;

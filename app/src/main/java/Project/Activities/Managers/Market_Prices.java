@@ -5,12 +5,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.myapplication.R;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
+import Project.Objects.Models.One_Man_Model;
 import Project.Objects.Personel.Manager;
 import Project.Objects.Economics.Price;
 import Project.Objects.Adapters.PriceAdapter;
@@ -25,23 +29,26 @@ import androidx.lifecycle.ViewModelProvider;
 public class Market_Prices extends Fragment {
 
     private Pricing_Model pricing_model;
-    private ArrayList<Manager> managersArray;
+    private One_Man_Model one_man_model;
     private PriceAdapter priceAdapter;
     private ListView listView;
-
+    private TextView youare;
+    private String yourstring;
     private HashMap<String, Price> hm;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
-
         View view = inflater.inflate(R.layout.fragment_market_prices,container, false);
-
-
-
-        priceAdapter = new PriceAdapter( hm);
+        String id = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        hm = new HashMap<>();
+        one_man_model=new ViewModelProvider(getActivity()).get(One_Man_Model.class);
+        one_man_model.set_id(id);
+        priceAdapter = new PriceAdapter(getContext(), new ArrayList<Map.Entry<String, Price>>());
         listView = view.findViewById(R.id.list_of_prices);
+        listView.setAdapter(priceAdapter);
+        youare =view.findViewById(R.id.youare);
+        yourstring = youare.getText().toString();
 
 
 
@@ -59,8 +66,17 @@ public class Market_Prices extends Fragment {
             @Override
             public void onChanged(HashMap<String, Price> stringPriceHashMap) {
                 hm = stringPriceHashMap;
+                priceAdapter.clear();
+                priceAdapter.addAll(hm.entrySet());
 
 
+            }
+        });
+        one_man_model =new ViewModelProvider(getActivity()).get(One_Man_Model.class);
+        one_man_model.getMan().observe(getViewLifecycleOwner(), new Observer<Manager>() {
+            @Override
+            public void onChanged(Manager manager) {
+                youare.setText(yourstring+manager.getCompany_symbol());
 
             }
         });

@@ -44,5 +44,19 @@ public class SessionTimeDatabase extends Observable {
 
     }
 
+    public Integer getCurrentRound(){
+
+        Integer current_round = 0;
+        if (schedule!=null){
+        long rn = System.currentTimeMillis();
+        long now = (rn - schedule.getStart()) / (schedule.getReport() + schedule.getInvest());
+        while (current_round < now) {
+            current_round += 1;
+
+        }}
+
+        return current_round;
+    }
+
 
 }

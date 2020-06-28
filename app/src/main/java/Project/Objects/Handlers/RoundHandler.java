@@ -20,6 +20,7 @@ public class RoundHandler implements Runnable {
     Context context;
     Intent intent;
     Round round;
+    SessionTimeDatabase SD;
 
     public RoundHandler(Context context, Intent intent) {
       this.context = context;
@@ -40,24 +41,16 @@ public class RoundHandler implements Runnable {
 
     public void observeSchedule(){
 
-        SessionTimeDatabase SD = new SessionTimeDatabase();
+        SD = new SessionTimeDatabase();
 
         SD.addObserver(new Observer() {
             @Override
             public void update(Observable o, Object arg) {
                 schedule = (Schedule) arg;
-                current_round = 0;
-                long rn = System.currentTimeMillis();
-                long now = (rn - schedule.getStart()) / (schedule.getReport() + schedule.getInvest());
-                while (current_round < now) {
-                    current_round += 1;
+               current_round = SD.getCurrentRound();
+                current_round+=1;
+                round_stop = schedule.getStart() + current_round * (schedule.getInvest() + schedule.getReport());
 
-                }
-                round_stop = schedule.getStart() + current_round * (schedule.getInvest() + schedule.getReport()) + schedule.getReport();
-                if (abs(System.currentTimeMillis() - round_stop) < 10000){
-                    current_round += 1;
-                round_stop = schedule.getStart() + (current_round) * (schedule.getInvest() + schedule.getReport());
-            }
                 intent.putExtra("Title", "Round "+current_round.toString());
 
                 create_round();

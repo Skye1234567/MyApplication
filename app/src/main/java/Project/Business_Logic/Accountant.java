@@ -17,10 +17,12 @@ public class Accountant {
     private Integer performance;
     private Integer revenue;
     private ArrayList<String> aL;
+    private DatabaseReference reference;
 
 
 
-    public Accountant() {
+    public Accountant(DatabaseReference ref) {
+        this.reference=ref;
         revenue = 10;
         aL = new ArrayList();
 
@@ -44,12 +46,15 @@ public class Accountant {
 
         }else performance =0;
 
+        reference.child("performance").setValue(performance);
+
     }
 public void generate_round_data(Float percent_chance_profit_h, Float percent_chance_profit_l) {
     Double val = Math.random();
-    if ((performance==1 && val < percent_chance_profit_h) || (performance==0 && val < percent_chance_profit_l)) {
+    if ((performance == 1 && val < percent_chance_profit_h) || (performance == 0 && val < percent_chance_profit_l)) {
         revenue = 50;
     }
+    reference.child("profit").setValue(revenue);
 }
 
 
