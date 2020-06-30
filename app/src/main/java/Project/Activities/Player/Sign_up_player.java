@@ -110,6 +110,7 @@
                                          Toast.makeText(context, "Authentication failed.", Toast.LENGTH_SHORT).show();
                                          Intent intent = new Intent(context, Sign_up_player.class);
                                          startActivity(intent);
+                                         finish();
                                      }
                                  }
                              });

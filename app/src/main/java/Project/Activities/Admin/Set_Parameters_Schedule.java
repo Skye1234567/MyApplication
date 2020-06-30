@@ -48,7 +48,14 @@ public class Set_Parameters_Schedule extends AppCompatActivity {
             context.startActivity(intent);
 
         }
-        time=System.currentTimeMillis();
+        Button start = findViewById(R.id.start_now);
+        start.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                time=System.currentTimeMillis()+60000;
+            }
+        });
+
         spinnerreport = findViewById(R.id.reporttime);
         spinnerinvest=findViewById(R.id.investtime);
 

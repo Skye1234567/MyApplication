@@ -23,6 +23,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import Project.Business_Logic.Auditor;
 import com.example.myapplication.R;
@@ -71,6 +72,21 @@ public class CompanyReportFragment extends Fragment {
         manHash=new ManHash();
         Audit_result_textview = view.findViewById(R.id.auditresult);
         audit_result = Audit_result_textview.getText().toString();
+        Reject_Report = view.findViewById(R.id.reject);
+        Reject_Report.setVisibility(View.INVISIBLE);
+        Reject_Report.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Ref.child("audit_choice").setValue(0);
+                reject=true;
+                Toast.makeText(context, "Audit rejected", Toast.LENGTH_LONG);
+                /*for (Button b :invisible){
+                    b.setVisibility(View.VISIBLE);
+                }
+                invisible.clear();*/
+
+            }
+        });
 
         String id = FirebaseAuth.getInstance().getCurrentUser().getUid();
         man_model = new ViewModelProvider(getActivity()).get(One_Man_Model.class);
@@ -106,6 +122,8 @@ public class CompanyReportFragment extends Fragment {
         aud_yes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Reject_Report.setVisibility(View.VISIBLE);
+
                 cashDatabase.updating();
                 Ref.child("audit_choice").setValue(1);
                auditor_report = new Auditor(managerman.getPerformance()).generateReport(managerman.getProfit());
@@ -179,19 +197,7 @@ public class CompanyReportFragment extends Fragment {
         });
 
 
-        Reject_Report = view.findViewById(R.id.reject);
-        Reject_Report.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Ref.child("audit_choice").setValue(0);
-                reject=true;
-                for (Button b :invisible){
-                    b.setVisibility(View.VISIBLE);
-                }
-                invisible.clear();
 
-            }
-        });
 
         return view;
 

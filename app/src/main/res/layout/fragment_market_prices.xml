@@ -28,7 +28,7 @@
                 android:id="@+id/youare"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="You are:"
+                android:text="You are: "
                 android:textSize="@dimen/textSizeTitle"
                 android:textColor="@color/colorPrimaryDark"
                 />

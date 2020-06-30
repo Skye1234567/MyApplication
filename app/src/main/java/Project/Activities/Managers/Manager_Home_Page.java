@@ -13,15 +13,14 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.Observable;
 import java.util.Observer;
-import java.util.Timer;
-import java.util.TimerTask;
+
 
 import Project.Activities.Player.MainActivity;
 import Project.Objects.Adapters.SectionsPageAdapter;
 import Project.Objects.Database.ALLOWDatabase;
-import Project.Objects.Models.One_Man_Model;
+
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
+
 import androidx.viewpager.widget.ViewPager;
 
 import static java.lang.Math.abs;
@@ -88,10 +87,7 @@ public class Manager_Home_Page extends AppCompatActivity {
 
 
                 return true;
-                case R.id.reset:
 
-
-                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }

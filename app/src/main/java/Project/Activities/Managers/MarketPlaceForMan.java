@@ -34,8 +34,6 @@ public class MarketPlaceForMan extends AppCompatActivity {
     private ALLOWDatabase allowDatabase;
 
 
-    private Intent future_intent;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,9 +94,7 @@ public class MarketPlaceForMan extends AppCompatActivity {
 
                 finish();
                 return true;
-            case R.id.reset:
 
-                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
