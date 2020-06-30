@@ -4,7 +4,6 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
@@ -16,8 +15,8 @@ import Project.Objects.Economics.Share;
 import androidx.annotation.NonNull;
 
 public class DividendManager {
-    String company_symbol;
-    Integer dividend;
+    private String company_symbol;
+    private Integer dividend;
 
     public DividendManager(String company_symbol, Integer dividend) {
         this.company_symbol = company_symbol;
@@ -62,7 +61,7 @@ public class DividendManager {
         final DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Investors")
                 .child(id).child("cash");
 
-        IntegerDatabase ID = new IntegerDatabase( ref);
+        final IntegerDatabase ID = new IntegerDatabase( ref);
         ID.addObserver(new Observer() {
             @Override
             public void update(Observable o, Object arg) {
@@ -70,23 +69,27 @@ public class DividendManager {
                 callback = (Integer) arg;
                 Ledger ledger = new Ledger(callback, dividend,ref);
                 new Thread(ledger).start();
+                ID.deleteObservers();
             }
         });
         ID.updating();
+
         final DatabaseReference ref2 = FirebaseDatabase.getInstance().getReference("Managers")
                 .child(manager).child("cash");
 
-        IntegerDatabase ID2 = new IntegerDatabase( ref2);
-        ID.addObserver(new Observer() {
+        final IntegerDatabase ID2 = new IntegerDatabase( ref2);
+        ID2.addObserver(new Observer() {
             @Override
             public void update(Observable o, Object arg) {
                 Integer callback;
                 callback = (Integer) arg;
                 Ledger ledger = new Ledger(callback, -1*dividend,ref2);
                 new Thread(ledger).start();
+                ID2.deleteObservers();
             }
         });
-        ID.updating();
+        ID2.updating();
+
 
 
     }

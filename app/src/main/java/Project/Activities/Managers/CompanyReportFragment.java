@@ -106,6 +106,7 @@ public class CompanyReportFragment extends Fragment {
         aud_yes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                cashDatabase.updating();
                 Ref.child("audit_choice").setValue(1);
                auditor_report = new Auditor(managerman.getPerformance()).generateReport(managerman.getProfit());
                Ref.child("audit_report").setValue(auditor_report);
