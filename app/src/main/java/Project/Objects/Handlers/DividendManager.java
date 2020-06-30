@@ -39,7 +39,7 @@ public class DividendManager {
                     for (DataSnapshot share: d.getChildren()){
                         Share s  = share.getValue(Share.class);
                         if (company_symbol.compareTo(s.getCompany())==0){
-                            pay(id);
+                            pay(id, s.getManager_id());
                         }
                     }
 
@@ -57,7 +57,7 @@ public class DividendManager {
     }
 
 
-    public void  pay(String id){
+    public void  pay(String id, String manager){
 
         final DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Investors")
                 .child(id).child("cash");
@@ -73,7 +73,20 @@ public class DividendManager {
             }
         });
         ID.updating();
+        final DatabaseReference ref2 = FirebaseDatabase.getInstance().getReference("Managers")
+                .child(manager).child("cash");
 
+        IntegerDatabase ID2 = new IntegerDatabase( ref2);
+        ID.addObserver(new Observer() {
+            @Override
+            public void update(Observable o, Object arg) {
+                Integer callback;
+                callback = (Integer) arg;
+                Ledger ledger = new Ledger(callback, -1*dividend,ref2);
+                new Thread(ledger).start();
+            }
+        });
+        ID.updating();
 
 
     }

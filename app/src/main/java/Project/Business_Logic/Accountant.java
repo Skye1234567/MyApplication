@@ -7,7 +7,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
 
+import Project.Objects.Database.IntegerDatabase;
+import Project.Objects.Handlers.Ledger;
 import androidx.annotation.NonNull;
 // leon walras
 
@@ -18,6 +22,8 @@ public class Accountant {
     private Integer revenue;
     private ArrayList<String> aL;
     private DatabaseReference reference;
+    private IntegerDatabase IntData;
+    private Ledger cash;
 
 
 
@@ -25,6 +31,16 @@ public class Accountant {
         this.reference=ref;
         revenue = 10;
         aL = new ArrayList();
+        IntData = new IntegerDatabase(reference.child("cash"));
+        IntData.addObserver(new Observer() {
+            @Override
+            public void update(Observable o, Object arg) {
+                Integer c = (Integer) arg;
+                cash = new Ledger(c, 0, reference.child("cash"));
+
+            }
+        });
+        IntData.updating();
 
 
 
@@ -55,13 +71,17 @@ public void generate_round_data(Float percent_chance_profit_h, Float percent_cha
         revenue = 50;
     }
     reference.child("profit").setValue(revenue);
-}
+    cash.setUpdate(revenue);
+    new Thread(cash).start();
 
+
+}
+//TODO reset investor can be done with newgame
 
 public void reset_investor(final String investor_id){
     DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
     ref.child("Investors").child(investor_id).child("cash").setValue(100);
-    ref.child("Investors").child(investor_id).child("value").setValue(0);
+    ref.child("Investors").child(investor_id).child("value").setValue(100);
     ref.child("Shares").child(investor_id).addListenerForSingleValueEvent(new ValueEventListener() {
         @Override
         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

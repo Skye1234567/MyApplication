@@ -107,8 +107,8 @@ public class Company_status_fragment extends Fragment {
     private void update_Manager_status() {
         if (current_round != null && session != null) {
             round_num.setText("Welcome to round"+current_round.toString());
-            //Market m = session.round_to_market(current_round);
-            Market m=session.getPractice();
+            Market m = session.round_to_market(current_round);
+            if( m==null)  m=session.getPractice();
             if (m!=null) {
                 accountant.generate_company_data(m.getP());
                 accountant.generate_round_data(m.getPi_h(), m.getPi_l());

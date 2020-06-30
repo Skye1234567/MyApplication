@@ -8,6 +8,7 @@ import android.os.Bundle;
 import Project.Objects.Adapters.ManAdapter;
 import Project.Objects.Database.IntegerDatabase;
 import Project.Objects.Handlers.DividendManager;
+import Project.Objects.Handlers.Ledger;
 import Project.Objects.Handlers.ManHash;
 import Project.Objects.Personel.Manager;
 import Project.Objects.Models.One_Man_Model;
@@ -56,6 +57,7 @@ public class CompanyReportFragment extends Fragment {
     private IntegerDatabase profitDatabase;
     private boolean div;
     private boolean reject;
+    private Ledger ledger;
     @Nullable
     @Override
 
@@ -78,13 +80,14 @@ public class CompanyReportFragment extends Fragment {
         aud_yes = view.findViewById(R.id.yes_audit);
         aud_no = view.findViewById(R.id.no_audit);
         submit = view.findViewById(R.id.submitreport);
+        ledger= new Ledger(0, 0, Ref.child("cash"));
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Managers").
                 child(id).child("cash");
         cashDatabase = new IntegerDatabase(databaseReference);
         cashDatabase.addObserver(new java.util.Observer() {
             @Override
             public void update(Observable o, Object arg) {
-
+                ledger.setCallback((Integer) arg);
             }
         });
         cashDatabase.updating();
@@ -106,9 +109,12 @@ public class CompanyReportFragment extends Fragment {
                 Ref.child("audit_choice").setValue(1);
                auditor_report = new Auditor(managerman.getPerformance()).generateReport(managerman.getProfit());
                Ref.child("audit_report").setValue(auditor_report);
+
                Audit_result_textview.setText(audit_result+" "+manHash.highLowHash(auditor_report));
                aud_no.setVisibility(View.INVISIBLE);
                invisible.add(aud_no);
+               ledger.setUpdate(-10);
+               new Thread(ledger).start();
 
 
 
