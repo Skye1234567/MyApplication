@@ -11,6 +11,7 @@
         android:text="Company Symbol"
         android:paddingHorizontal="@dimen/textSizeTitle"
         android:padding="@dimen/textSizeNormal"
+        android:paddingStart="@dimen/tab_bar_gap"
         android:textSize="@dimen/textSizeNormal"
         android:textColor="@color/colorPrimaryDark"/>
 
@@ -21,6 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="@dimen/textSizeNormal"
+        android:paddingStart="@dimen/textSizeTitle"
         android:textSize="@dimen/textSizeNormal"
         android:textColor="@color/colorPrimaryDark"/>
 

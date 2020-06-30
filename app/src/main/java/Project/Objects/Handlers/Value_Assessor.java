@@ -63,12 +63,12 @@ public class Value_Assessor implements Runnable {
 
 
         final DatabaseReference ref = ref_share_num.child(complete.getCompany()).child("number");
-        IntegerDatabase SD = new IntegerDatabase(ref);
+        final IntegerDatabase SD = new IntegerDatabase(ref);
         SD.addObserver(new Observer() {
             @Override
             public void update(Observable o, Object arg) {
                 new Thread(new Ledger((Integer)arg, complete.getNum_shares(), ref)).start();
-
+                SD.deleteObservers();
             }
         });
         SD.updating();
@@ -80,11 +80,12 @@ public class Value_Assessor implements Runnable {
     public void update_seller_cash() {
         final DatabaseReference r = ref_cash.child(complete.getSeller_id()).child("cash");
 
-        IntegerDatabase CD = new IntegerDatabase(r);
+        final IntegerDatabase CD = new IntegerDatabase(r);
         CD.addObserver(new Observer() {
             @Override
             public void update(Observable o, Object arg) {
-                new Thread(new Ledger((Integer)arg, complete.getPrice_point(), r)).start();
+                new Thread(new Ledger((Integer)arg, complete.getPrice_point()*complete.getNum_shares(), r)).start();
+                CD.deleteObservers();
             }
         });
         CD.updating();

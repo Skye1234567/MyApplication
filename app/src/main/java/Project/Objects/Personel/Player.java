@@ -48,8 +48,8 @@ public class Player implements Serializable {
     public Player(String ID) {
         this.ID = ID;
         this.payout_history = new ArrayList<Integer>();
-        this.cash = 100;
-        this.value = 100;
+        this.cash = 40;
+        this.value = 40;
     }
 
     public String getID() {

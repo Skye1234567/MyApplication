@@ -20,17 +20,16 @@
         android:layout_height="wrap_content"
         android:text="Number Owned"
         android:padding="@dimen/textSizeNormal"
-        android:paddingStart="@dimen/textSizeTitle"
+        android:paddingStart="@dimen/tab_bar_gap"
         android:textSize="@dimen/textSizeNormal"
         android:paddingHorizontal="@dimen/textSizeTitle"
         android:textColor="@color/colorPrimaryDark"/>
     <TextView
         android:id="@+id/mp"
-        android:paddingStart="@dimen/textSizeTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Market Price"
-        android:padding="@dimen/textSizeNormal"
+        android:paddingStart="@dimen/tab_bar_gap"
         android:paddingHorizontal="@dimen/textSizeTitle"
         android:textSize="@dimen/textSizeNormal"
         android:textColor="@color/colorPrimaryDark"/>

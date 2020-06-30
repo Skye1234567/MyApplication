@@ -17,10 +17,14 @@ import androidx.annotation.NonNull;
 public class DividendManager {
     private String company_symbol;
     private Integer dividend;
+    private Integer cost;
 
     public DividendManager(String company_symbol, Integer dividend) {
         this.company_symbol = company_symbol;
         this.dividend = dividend;
+        this.cost =0;
+
+
     }
 
 
@@ -32,17 +36,22 @@ public class DividendManager {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 String id;
+                String manager=null;
+
 
                 for (DataSnapshot d: dataSnapshot.getChildren()){
                     id = d.getKey();
                     for (DataSnapshot share: d.getChildren()){
                         Share s  = share.getValue(Share.class);
                         if (company_symbol.compareTo(s.getCompany())==0){
-                            pay(id, s.getManager_id());
+                            pay(id);
+                            cost-=dividend;
+                            manager=s.getManager_id();
                         }
                     }
 
                 }
+                if (manager!=null) incur_costs(manager);
 
             }
 
@@ -56,7 +65,7 @@ public class DividendManager {
     }
 
 
-    public void  pay(String id, String manager){
+    public void  pay(String id){
 
         final DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Investors")
                 .child(id).child("cash");
@@ -74,6 +83,12 @@ public class DividendManager {
         });
         ID.updating();
 
+
+
+
+    }
+
+    public void incur_costs(String manager){
         final DatabaseReference ref2 = FirebaseDatabase.getInstance().getReference("Managers")
                 .child(manager).child("cash");
 
@@ -83,7 +98,7 @@ public class DividendManager {
             public void update(Observable o, Object arg) {
                 Integer callback;
                 callback = (Integer) arg;
-                Ledger ledger = new Ledger(callback, -1*dividend,ref2);
+                Ledger ledger = new Ledger(callback, cost,ref2);
                 new Thread(ledger).start();
                 ID2.deleteObservers();
             }
@@ -91,6 +106,7 @@ public class DividendManager {
         ID2.updating();
 
 
-
     }
+
+
 }

@@ -105,7 +105,8 @@ import com.google.firebase.database.FirebaseDatabase;
                          dollars =Integer.parseInt(price.getText().toString());
 
 
-                         String looking_for="";
+
+                     String looking_for="";
                          FirebaseDatabase db = FirebaseDatabase.getInstance();
                          DatabaseReference ref_shares = db.getReference("Trades").child(sell).push();
                          trade = new Trade(num_shares, dollars, Cpany);
@@ -113,6 +114,7 @@ import com.google.firebase.database.FirebaseDatabase;
                          trade.setTimeStamp(System.currentTimeMillis());
 
                          if(bs.compareTo(sell)==0){
+                            
                              if (num_shares>current_selection.getNumber())
                                  Toast.makeText(context, "Invalid entry: make sure you have enough shares", Toast.LENGTH_LONG).show();
                              else{
@@ -126,9 +128,9 @@ import com.google.firebase.database.FirebaseDatabase;
                                  looking_for = buy;}
                          }
                          else if (bs.compareTo(buy)==0){
-                             if (dollars*num_shares >investor.getCash())
-                                 Toast.makeText(context, "Invalid entry: make sure you have enough cash", Toast.LENGTH_LONG).show();
-                             else {
+                             if (investor.getCash()>=(dollars*num_shares)){
+                                 Integer set_cash =investor.getCash() - dollars*num_shares;
+
                                  p.add_bid(user_id,dollars);
                                  trade.setFor_sale(false);
                                  trade.setBuyer_id(user_id);
@@ -136,13 +138,15 @@ import com.google.firebase.database.FirebaseDatabase;
                                  trade.setId(ref_shares.getKey());
                                  ref_shares.setValue(trade);
                                  Toast.makeText(context, "Buy stock clicked", Toast.LENGTH_LONG).show();
-                                 Integer set_cash =investor.getCash() - dollars*num_shares;
                                  investor.setCash(set_cash);
                                  current_selection.setStatus(buy);
                                  looking_for = sell;
-                             }
+                             }   else
+                                 Toast.makeText(context, "Invalid entry: make sure you have enough cash", Toast.LENGTH_LONG).show();
+
 
                          }
+
                          market_price.setText(p.getPrice().toString());
                          db.getReference("Shares").child(user_id).child(Cpany).setValue(current_selection);
                          db.getReference().child("Investors").child(user_id).setValue(investor);

@@ -2,6 +2,7 @@ package Project.Activities.Investors;
 
 import Project.Activities.Managers.Manager_Home_Page;
 import Project.Activities.Player.MainActivity;
+import Project.Business_Logic.New_Game;
 import Project.Objects.Database.ALLOWDatabase;
 import Project.Objects.Personel.Investor;
 import Project.Objects.Models.Man_Model;
@@ -108,12 +109,7 @@ public class MarketPlace extends AppCompatActivity {
 
                 finish();
                 return true;
-            case R.id.reset:
-                new Accountant(FirebaseDatabase.getInstance().getReference()).reset_investor(id);
-                Vest_Model VM  = new ViewModelProvider(this).get(Vest_Model.class);
-                VM.update_investor();
 
-                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
