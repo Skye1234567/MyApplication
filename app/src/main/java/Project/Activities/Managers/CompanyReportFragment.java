@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import Project.Objects.Adapters.ManAdapter;
 import Project.Objects.Database.IntegerDatabase;
+import Project.Objects.Handlers.DividendManager;
 import Project.Objects.Handlers.ManHash;
 import Project.Objects.Personel.Manager;
 import Project.Objects.Models.One_Man_Model;
@@ -29,34 +30,39 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
+import java.util.Observable;
 
 
 public class CompanyReportFragment extends Fragment {
-    Context context;
-    One_Man_Model man_model;
-    DatabaseReference Ref;
-    Manager managerman;
-    Button aud_yes;
-    ManHash manHash;
-    Button aud_no;
-    Button div_yes;
-    Button div_no;
-    Button strong;
-    Button weak;
-    Button submit;
-    Button Accept_Report;
-    Button Reject_Report;
-    TextView Audit_result_textview;
-    String audit_result;
-    ArrayList<Button> invisible;
-    IntegerDatabase cashDatabase;
-    IntegerDatabase profitDatabase;
+    private Integer auditor_report;
+    private Context context;
+    private One_Man_Model man_model;
+    private DatabaseReference Ref;
+    private Manager managerman;
+    private Button aud_yes;
+    private ManHash manHash;
+    private Button aud_no;
+    private Button div_yes;
+    private Button div_no;
+    private Button strong;
+    private Button weak;
+    private Button submit;
+
+    private Button Reject_Report;
+    private TextView Audit_result_textview;
+    private String audit_result;
+    private ArrayList<Button> invisible;
+    private IntegerDatabase cashDatabase;
+    private IntegerDatabase profitDatabase;
+    private boolean div;
+    private boolean reject;
     @Nullable
     @Override
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_manager__enter_report,container, false);
-
+        div=false;
+        reject=false;
 
         context = getContext();
         invisible=new ArrayList<>();
@@ -72,6 +78,16 @@ public class CompanyReportFragment extends Fragment {
         aud_yes = view.findViewById(R.id.yes_audit);
         aud_no = view.findViewById(R.id.no_audit);
         submit = view.findViewById(R.id.submitreport);
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Managers").
+                child(id).child("cash");
+        cashDatabase = new IntegerDatabase(databaseReference);
+        cashDatabase.addObserver(new java.util.Observer() {
+            @Override
+            public void update(Observable o, Object arg) {
+
+            }
+        });
+        cashDatabase.updating();
         updateReportManager();
 
         aud_no.setOnClickListener(new View.OnClickListener() {
@@ -87,10 +103,8 @@ public class CompanyReportFragment extends Fragment {
         aud_yes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Ref.child("audit_choice").setValue(1);
-
-               Integer auditor_report = new Auditor(managerman.getPerformance()).generateReport(managerman.getProfit());
+               auditor_report = new Auditor(managerman.getPerformance()).generateReport(managerman.getProfit());
                Ref.child("audit_report").setValue(auditor_report);
                Audit_result_textview.setText(audit_result+" "+manHash.highLowHash(auditor_report));
                aud_no.setVisibility(View.INVISIBLE);
@@ -104,7 +118,11 @@ public class CompanyReportFragment extends Fragment {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent( context, MarketPlaceForMan.class);
+                if(div&&managerman!=null) new DividendManager(managerman.getCompany_symbol(), 5).payDividends();
+                if (auditor_report!=null&&!reject)
+                    Ref.child("report_performance").setValue(auditor_report);
+
+                Intent intent = new Intent( context, Wait_Page.class);
 
                 context.startActivity(intent);
             }
@@ -114,6 +132,7 @@ public class CompanyReportFragment extends Fragment {
         div_no.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                div=false;
 
                 Ref.child("report_dividend").setValue(0);
                 div_yes.setVisibility(View.INVISIBLE);
@@ -124,6 +143,7 @@ public class CompanyReportFragment extends Fragment {
         div_yes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                div =true;
 
                 Ref.child("report_dividend").setValue(1);
                 div_no.setVisibility(View.INVISIBLE);
@@ -137,7 +157,7 @@ public class CompanyReportFragment extends Fragment {
         strong.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Ref.child("performance").setValue(1);
+                Ref.child("report_performance").setValue(1);
                 weak.setVisibility(View.INVISIBLE);
                 invisible.add(weak);
             }
@@ -145,17 +165,19 @@ public class CompanyReportFragment extends Fragment {
         weak.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Ref.child("performance").setValue(0);
+                Ref.child("report_performance").setValue(0);
                 strong.setVisibility(View.INVISIBLE);
                 invisible.add(strong);
             }
         });
 
-        Accept_Report = view.findViewById(R.id.acceptreport);
+
         Reject_Report = view.findViewById(R.id.reject);
         Reject_Report.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Ref.child("audit_choice").setValue(0);
+                reject=true;
                 for (Button b :invisible){
                     b.setVisibility(View.VISIBLE);
                 }
@@ -167,6 +189,7 @@ public class CompanyReportFragment extends Fragment {
         return view;
 
     }
+
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {

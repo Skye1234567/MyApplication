@@ -10,6 +10,7 @@
         android:layout_height="wrap_content"
         android:text=" "
         android:padding="@dimen/textSizeNormal"
+        android:paddingStart="@dimen/textSizeTitle"
         android:textSize="@dimen/textSizeNormal"
         android:textColor="@color/colorPrimaryDark"/>
     <TextView
@@ -17,12 +18,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Type"
+        android:paddingStart="@dimen/textSizeTitle"
         android:padding="@dimen/textSizeNormal"
         android:textSize="@dimen/textSizeNormal"
         android:textColor="@color/colorPrimaryDark"/>
 
     <TextView
         android:id="@+id/auditres"
+        android:paddingStart="@dimen/textSizeTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Audit"
@@ -32,6 +35,7 @@
 
     <TextView
         android:id="@+id/dividendres"
+        android:paddingStart="@dimen/textSizeTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Dividend"

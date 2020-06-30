@@ -46,7 +46,7 @@ public class Company_status_fragment extends Fragment {
     TextView audit;
     TextView dividend;
     Session session;
-    SwipeRefreshLayout SR;
+    TextView round_num;
     final String TAG ="company status";
     Accountant accountant;
     Manager managerstat;
@@ -59,6 +59,7 @@ public class Company_status_fragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_manager__company_status,container, false);
         context = getContext();
+        round_num = view.findViewById(R.id.manager_welcome);
 
         profit = view.findViewById(R.id.profit_info);
         assets = view.findViewById(R.id.assets_info);
@@ -105,10 +106,13 @@ public class Company_status_fragment extends Fragment {
 
     private void update_Manager_status() {
         if (current_round != null && session != null) {
-            Market m = session.round_to_market(current_round);
-            accountant.generate_company_data(m.getP());
-            accountant.generate_round_data(m.getPi_h(), m.getPi_l());
-
+            round_num.setText("Welcome to round"+current_round.toString());
+            //Market m = session.round_to_market(current_round);
+            Market m=session.getPractice();
+            if (m!=null) {
+                accountant.generate_company_data(m.getP());
+                accountant.generate_round_data(m.getPi_h(), m.getPi_l());
+            }
 
 
         }
@@ -116,11 +120,13 @@ public class Company_status_fragment extends Fragment {
     public void updateUI(){
         if(managerstat!=null){
         ManHash MH= new ManHash();
+        if (managerstat.isValid()){
         profit.setText(managerstat.getProfit().toString());
+        assets.setText(managerstat.getCash().toString());}
         performance.setText(MH.highLowHash(managerstat.getPerformance()));
-        assets.setText(managerstat.getCash().toString());
         dividend.setText(MH.YesNOHash(managerstat.getReport_dividend()));
         audit.setText(MH.YesNOHash(managerstat.getAudit_choice()));}
+
     }
         @Override
         public void onActivityCreated (@Nullable Bundle savedInstanceState){

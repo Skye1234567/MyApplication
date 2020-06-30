@@ -25,8 +25,9 @@ public class IntegerDatabase extends Observable {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 s=dataSnapshot.getValue(Integer.class);
+                if (s!=null){
                 setChanged();
-                notifyObservers(s);
+                notifyObservers(s);}
             }
 
             @Override

@@ -108,4 +108,10 @@ public class Manager extends Player {
     public void setAudit_choice(Integer audit_choice) {
         this.audit_choice = audit_choice;
     }
+
+    public boolean isValid(){
+        return (profit!=null &&performance!=null);
+    }
+
 }
+

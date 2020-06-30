@@ -5,6 +5,7 @@ package Project.Activities.Admin;
         import Project.Activities.Admin.Sign_up_admin;
         import Project.Objects.Database.SessionDatabase;
         import Project.Objects.Economics.Session;
+        import Project.Objects.Handlers.AdminTime;
         import androidx.appcompat.app.AppCompatActivity;
 
         import android.content.Context;
@@ -24,6 +25,7 @@ public class AdminHub extends AppCompatActivity {
     private Button EditRound1;
     private Button EditRound2;
     private Button EditSchedule;
+    private  Button back_to_menu;
     private SessionDatabase SD;
     private Context context;
     private Session session;
@@ -61,7 +63,7 @@ public class AdminHub extends AppCompatActivity {
 
                 Intent intent =  new Intent(context, Set_Parameters.class);
                 intent.putExtra("child", "practice");
-                intent.putExtra("market", session.getPractice());
+                if (session!=null) intent.putExtra("market", session.getPractice());
                 startActivity(intent);
 
             }
@@ -71,7 +73,7 @@ public class AdminHub extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent =  new Intent(context, Set_Parameters.class);
                 intent.putExtra("child", "round_1");
-                intent.putExtra("market", session.getRound_1());
+                if (session!=null)intent.putExtra("market", session.getRound_1());
                 startActivity(intent);
 
             }
@@ -81,7 +83,7 @@ public class AdminHub extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent =  new Intent(context, Set_Parameters.class);
                 intent.putExtra("child", "round_2");
-                intent.putExtra("market", session.getRound_2());
+                if (session!=null)intent.putExtra("market", session.getRound_2());
                 startActivity(intent);
 
             }
@@ -94,6 +96,13 @@ public class AdminHub extends AppCompatActivity {
 
                 startActivity(intent);
 
+            }
+        });
+        back_to_menu = findViewById(R.id.to_menu);
+        back_to_menu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(context, AdminTime.class));
             }
         });
 

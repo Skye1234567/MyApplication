@@ -25,6 +25,7 @@ public class ManDatabase extends Observable {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 arrayList.add(dataSnapshot.getValue(Manager.class));
+
                 setChanged();
                 notifyObservers(arrayList);
 

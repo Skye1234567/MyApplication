@@ -21,6 +21,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import Project.Objects.Economics.Schedule;
+import Project.Objects.Handlers.AdminTime;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -47,32 +48,13 @@ public class Set_Parameters_Schedule extends AppCompatActivity {
             context.startActivity(intent);
 
         }
-        final View dialogView = View.inflate(context, R.layout.datetimeres, null);
-        final AlertDialog alertDialog = new AlertDialog.Builder(context).create();
-
-        dialogView.findViewById(R.id.settime).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                DatePicker datePicker = (DatePicker) dialogView.findViewById(R.id.date_picker);
-                TimePicker timePicker = (TimePicker) dialogView.findViewById(R.id.time_picker);
-
-                Calendar calendar = new GregorianCalendar(datePicker.getYear(),
-                        datePicker.getMonth(),
-                        datePicker.getDayOfMonth(),
-                        timePicker.getCurrentHour(),
-                        timePicker.getCurrentMinute());
-
-                time = calendar.getTimeInMillis();
-                alertDialog.dismiss();
-            }});
-        alertDialog.setView(dialogView);
-        alertDialog.show();
+        time=System.currentTimeMillis();
         spinnerreport = findViewById(R.id.reporttime);
         spinnerinvest=findViewById(R.id.investtime);
 
 
         ArrayAdapter arrayAdapter = new ArrayAdapter(this, R.layout.spinner_item);
+        arrayAdapter.add("1");
         arrayAdapter.add("2");
         arrayAdapter.add("3");
         arrayAdapter.add("5");
@@ -112,6 +94,9 @@ public class Set_Parameters_Schedule extends AppCompatActivity {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                AdminTime AT = new AdminTime(report_length, invest_length, System.currentTimeMillis()+(report_length+invest_length)*12, true);
+                new Thread(AT).start();
                 FirebaseDatabase.getInstance().getReference("Time").setValue(
                         new Schedule(time, invest_length,report_length)).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override

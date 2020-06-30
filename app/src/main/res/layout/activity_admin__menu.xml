@@ -10,6 +10,8 @@
     <LinearLayout
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         android:gravity="center"
         android:orientation="vertical"
         android:layout_width="wrap_content"
@@ -31,6 +33,8 @@
             android:text="Edit Parameters"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
+
+
 
 </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

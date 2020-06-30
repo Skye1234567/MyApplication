@@ -11,14 +11,15 @@ import com.example.myapplication.R;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.util.Observable;
+import java.util.Observer;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import Project.Activities.Player.MainActivity;
 import Project.Objects.Adapters.SectionsPageAdapter;
-import Project.Objects.Personel.Manager;
+import Project.Objects.Database.ALLOWDatabase;
 import Project.Objects.Models.One_Man_Model;
-import Project.Objects.Handlers.RoundHandler;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager.widget.ViewPager;
@@ -29,8 +30,7 @@ public class Manager_Home_Page extends AppCompatActivity {
     private static final String TAG="Manager_home_page";
     private Context context;
     private ViewPager viewPager;
-    private Timer timer;
-
+    private ALLOWDatabase allowDatabase;
 
 
     private SectionsPageAdapter mSectionsPageAdapter;
@@ -41,20 +41,16 @@ public class Manager_Home_Page extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manager_home);
         context=this;
-        timer = new Timer();
-        TimerTask timerTask = new TimerTask() {
-           @Override
-           public void run() {
-               Intent intent = new Intent(context, MarketPlaceForMan.class);
-               startActivity(intent);
-
-
-
-           }
-       };
-        timer.schedule(timerTask, 120000);
-
-        One_Man_Model MM = new ViewModelProvider(this).get(One_Man_Model.class);
+        allowDatabase = new ALLOWDatabase();
+        allowDatabase.addObserver(new Observer() {
+            @Override
+            public void update(Observable o, Object arg) {
+                if ((boolean)arg) {
+                    startActivity(new Intent(context, MarketPlaceForMan.class));
+                }
+            }
+        });
+        allowDatabase.addListener();
 
 
         mSectionsPageAdapter = new SectionsPageAdapter(getSupportFragmentManager());
@@ -87,7 +83,7 @@ public class Manager_Home_Page extends AppCompatActivity {
                 Intent intent = new Intent(context, MainActivity.class);
                 FirebaseAuth.getInstance().signOut();
                 context.startActivity(intent);
-                timer.cancel();
+
                 finish();
 
 
@@ -105,7 +101,7 @@ public class Manager_Home_Page extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        timer.cancel();
+
     }
     @Override
     public void onBackPressed() {

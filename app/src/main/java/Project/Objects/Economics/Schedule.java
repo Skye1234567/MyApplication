@@ -42,4 +42,14 @@ public class Schedule implements Serializable {
     public void setReport(long report) {
         this.report = report;
     }
+
+    public Integer getCurrentRound(){
+       Integer currentRound = 0;
+       long now  = System.currentTimeMillis();
+       while(start+(invest+report)*currentRound<now){
+           currentRound+=1;
+       }
+
+       return currentRound;
+    }
 }

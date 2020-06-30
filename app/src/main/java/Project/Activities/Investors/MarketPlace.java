@@ -1,11 +1,11 @@
 package Project.Activities.Investors;
 
+import Project.Activities.Managers.Manager_Home_Page;
 import Project.Activities.Player.MainActivity;
+import Project.Objects.Database.ALLOWDatabase;
 import Project.Objects.Personel.Investor;
 import Project.Objects.Models.Man_Model;
 import Project.Objects.Models.Pricing_Model;
-
-import Project.Objects.Handlers.RoundHandler;
 
 import Project.Objects.Adapters.SectionsPageAdapter;
 import Project.Objects.Models.Share_Model;
@@ -28,6 +28,9 @@ import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.Observable;
+import java.util.Observer;
+
 
 public class MarketPlace extends AppCompatActivity {
     private static final String TAG="Marketplace";
@@ -35,8 +38,9 @@ public class MarketPlace extends AppCompatActivity {
     private ViewPager viewPager;
     private SectionsPageAdapter adapter;
     private  String id;
-    private RoundHandler RH;
-    private Intent future_intent;
+    private ALLOWDatabase allowDatabase;
+
+
 
 
     @Override
@@ -44,11 +48,20 @@ public class MarketPlace extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_market_place);
         context=this;
+        allowDatabase = new ALLOWDatabase();
+        allowDatabase.addObserver(new Observer() {
+            @Override
+            public void update(Observable o, Object arg) {
+                if (!(boolean)arg) {
+                    startActivity(new Intent(context,Investor_Round_Intro.class));
+                }
+            }
+        });
+        allowDatabase.addListener();
+
         Investor i = (Investor)getIntent().getSerializableExtra("investor");
        id = i.getID();
-       future_intent = new Intent(this, Investor_Round_Intro.class);
-       RH = new RoundHandler(context, future_intent);
-       new Thread(RH).start();
+
         Share_Model SM= new ViewModelProvider(this).get(Share_Model.class);
         SM.setId(id);
         Vest_Model VM =  new ViewModelProvider(this).get(Vest_Model.class);
@@ -92,7 +105,7 @@ public class MarketPlace extends AppCompatActivity {
                 Intent intent = new Intent(context, MainActivity.class);
                 FirebaseAuth.getInstance().signOut();
                 context.startActivity(intent);
-                RH.destroy_round();
+
                 finish();
                 return true;
             case R.id.reset:
@@ -109,13 +122,13 @@ public class MarketPlace extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        RH.destroy_round();
+
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        RH.destroy_round();
+
     }
     @Override
     public void onBackPressed() {
