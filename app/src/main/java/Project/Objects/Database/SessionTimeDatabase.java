@@ -26,8 +26,9 @@ public class SessionTimeDatabase extends Observable {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 schedule = dataSnapshot.getValue(Schedule.class);
+                if (schedule!=null){
                 setChanged();
-                notifyObservers(schedule);
+                notifyObservers(schedule);}
             }
 
             @Override

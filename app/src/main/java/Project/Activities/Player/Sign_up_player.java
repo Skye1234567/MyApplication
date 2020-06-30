@@ -23,6 +23,8 @@
 
  import Project.Activities.Investors.MarketPlace;
  import Project.Activities.Managers.Manager_Home_Page;
+ import Project.Business_Logic.Manager_Logic;
+ import Project.Business_Logic.New_Game;
  import Project.Objects.Personel.Investor;
  import Project.Objects.Personel.Manager;
  import Project.Objects.Personel.Player;
@@ -201,6 +203,9 @@ private void get_investors(){
              context.startActivity(intent);}
          else {
              player.setType("I");
+            New_Game NG = new New_Game(player.getID());
+            new Thread(NG).start();
+
              Investor investor = new Investor(player.getID());
              FirebaseDatabase.getInstance().getReference("Investors").child(player.getID()).setValue(investor);
              Intent intent = new Intent(context, MarketPlace.class);

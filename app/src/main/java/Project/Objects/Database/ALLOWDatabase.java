@@ -2,34 +2,32 @@ package Project.Objects.Database;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.Observable;
 
-import Project.Objects.Economics.Session;
 import androidx.annotation.NonNull;
 
-public class SessionDatabase extends Observable {
+public class ALLOWDatabase extends Observable {
+    boolean Allow;
+    DatabaseReference ref;
 
-    private Session session;
-    private int set;
+    public ALLOWDatabase() {
 
-    public SessionDatabase() {
-        session = new Session();
-        set =0;
-
+        ref = FirebaseDatabase.getInstance().getReference("ALLOW_TRADES");
     }
-    public void setParam() {
 
-        FirebaseDatabase.getInstance().getReference("markets").addListenerForSingleValueEvent(new ValueEventListener() {
+    public void addListener(){
+        ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                session = dataSnapshot.getValue(Session.class);
+                Allow = dataSnapshot.getValue(boolean.class);
 
-                if (session!=null){
                 setChanged();
-                notifyObservers(session);}
+                notifyObservers(Allow);
+
             }
 
             @Override
@@ -37,7 +35,8 @@ public class SessionDatabase extends Observable {
 
             }
         });
+
+
+
     }
-
-
 }

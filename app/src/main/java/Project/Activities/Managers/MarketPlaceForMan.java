@@ -7,22 +7,20 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
-import Project.Activities.Investors.Investor_Round_Intro;
 import Project.Activities.Player.MainActivity;
 import Project.Objects.Adapters.SectionsPageAdapter;
-import Project.Business_Logic.Accountant;
+
 import com.example.myapplication.R;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.util.Observable;
+import java.util.Observer;
+
+import Project.Objects.Database.ALLOWDatabase;
 import Project.Objects.Models.One_Man_Model;
-import Project.Objects.Personel.Investor;
 import Project.Objects.Models.Man_Model;
 import Project.Objects.Models.Pricing_Model;
-import Project.Objects.Handlers.RoundHandler;
-import Project.Objects.Models.Share_Model;
-import Project.Objects.Models.Trade_Model;
-import Project.Objects.Models.Vest_Model;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager.widget.ViewPager;
@@ -33,8 +31,9 @@ public class MarketPlaceForMan extends AppCompatActivity {
     private Context context;
     private ViewPager viewPager;
     private SectionsPageAdapter adapter;
+    private ALLOWDatabase allowDatabase;
 
-    private RoundHandler RH;
+
     private Intent future_intent;
 
 
@@ -44,10 +43,17 @@ public class MarketPlaceForMan extends AppCompatActivity {
         setContentView(R.layout.activity_market_place_for_man);
         context=this;
         String id = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        allowDatabase = new ALLOWDatabase();
+        allowDatabase.addObserver(new Observer() {
+            @Override
+            public void update(Observable o, Object arg) {
+                if (!(boolean)arg) {
+                    startActivity(new Intent(context,Manager_Home_Page.class));
+                }
+            }
+        });
+        allowDatabase.addListener();
 
-       future_intent = new Intent(this, Manager_Home_Page.class);
-       RH = new RoundHandler(context, future_intent);
-       new Thread(RH).start();
 
         Man_Model MM = new ViewModelProvider(this).get(Man_Model.class);
         Pricing_Model PM= new ViewModelProvider(this).get(Pricing_Model.class);
@@ -87,7 +93,7 @@ public class MarketPlaceForMan extends AppCompatActivity {
                 Intent intent = new Intent(context, MainActivity.class);
                 FirebaseAuth.getInstance().signOut();
                 context.startActivity(intent);
-                RH.destroy_round();
+
                 finish();
                 return true;
             case R.id.reset:
@@ -100,7 +106,7 @@ public class MarketPlaceForMan extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
-        RH.destroy_round();
+
         super.onDestroy();
     }
 }

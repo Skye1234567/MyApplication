@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.myapplication"
-    >
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    package="com.example.myapplication">
 
     <application
         android:allowBackup="true"
@@ -12,12 +10,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-        <activity android:name="Project.Activities.Admin.DownloadPage"></activity>
+        <activity android:name="Project.Activities.Managers.Wait_Page"></activity>
+        <activity android:name="Project.Activities.Admin.DownloadPage" />
         <activity android:name="Project.Activities.Admin.AdminHub" />
         <activity android:name="Project.Activities.Investors.Investor_Round_Intro" />
         <activity android:name="Project.Activities.Player.EndPage" />
-        <activity android:name="Project.Activities.Managers.Manager_Round_Intro" />
         <activity android:name="Project.Activities.Investors.View_Companies" />
         <activity android:name="Project.Activities.Investors.orderstockActivity" />
         <activity android:name="Project.Activities.Investors.editorderActivity" />
@@ -40,5 +37,7 @@
             </intent-filter>
         </activity>
     </application>
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
 </manifest>

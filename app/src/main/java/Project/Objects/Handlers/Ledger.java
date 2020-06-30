@@ -20,4 +20,28 @@ public class Ledger implements Runnable{
         ref.setValue(new_val);
 
     }
+
+    public Integer getCallback() {
+        return callback;
+    }
+
+    public void setCallback(Integer callback) {
+        this.callback = callback;
+    }
+
+    public Integer getUpdate() {
+        return update;
+    }
+
+    public void setUpdate(Integer update) {
+        this.update = update;
+    }
+
+    public DatabaseReference getRef() {
+        return ref;
+    }
+
+    public void setRef(DatabaseReference ref) {
+        this.ref = ref;
+    }
 }

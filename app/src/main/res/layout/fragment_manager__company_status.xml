@@ -54,7 +54,7 @@
             <TableRow>
 
                 <TextView
-                    android:text="Equity"
+                    android:text="Cash"
                     android:padding="13dp"
                     android:textSize="@dimen/textSizeNormal"
                     android:textColor = "@color/colorPrimaryDark"
@@ -69,6 +69,25 @@
                     android:textColorHighlight="@color/colorAccent"
                     android:gravity="center"/>
             </TableRow>
+        <TableRow>
+
+            <TextView
+                android:text="Profit"
+                android:padding="13dp"
+                android:textSize="@dimen/textSizeNormal"
+                android:textColor = "@color/colorPrimaryDark"
+                android:textColorHighlight="@color/colorAccent"
+                android:gravity="center"
+                />
+            <TextView
+                android:id="@+id/profit_info"
+
+                android:padding="13dp"
+                android:textSize="@dimen/textSizeNormal"
+                android:textColor = "@color/colorPrimaryDark"
+                android:textColorHighlight="@color/colorAccent"
+                android:gravity="center"/>
+        </TableRow>
         <TableRow>
             <TextView
                 android:text="Performance"
@@ -87,25 +106,7 @@
                 android:textColorHighlight="@color/colorAccent"
                 android:gravity="center"/>
         </TableRow>
-        <TableRow>
 
-            <TextView
-                android:text="Revenue / Expenses"
-                android:padding="13dp"
-                android:textSize="@dimen/textSizeNormal"
-                android:textColor = "@color/colorPrimaryDark"
-                android:textColorHighlight="@color/colorAccent"
-                android:gravity="center"
-                />
-            <TextView
-                android:id="@+id/profit_info"
-
-                android:padding="13dp"
-                android:textSize="@dimen/textSizeNormal"
-                android:textColor = "@color/colorPrimaryDark"
-                android:textColorHighlight="@color/colorAccent"
-                android:gravity="center"/>
-        </TableRow>
 
         <TableRow>
 

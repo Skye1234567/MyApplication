@@ -1,5 +1,7 @@
 package Project.Activities.Investors;
 
+import Project.Activities.Managers.Manager_Home_Page;
+import Project.Objects.Database.ALLOWDatabase;
 import Project.Objects.Personel.Investor;
 import Project.Objects.Adapters.ManAdapter;
 import Project.Objects.Database.ManDatabase;
@@ -37,63 +39,59 @@ public class Investor_Round_Intro extends AppCompatActivity {
     Context context;
     Investor i;
     long start_time;
-    Session session;
-    TimerTask timerTask;
     ManAdapter manAdapter;
     Schedule schedule;
     Integer round;
     ArrayList<Manager> managersArray;
     ListView listView;
-    Timer timer;
+    private ALLOWDatabase allowDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         start_time = System.currentTimeMillis();
+        allowDatabase = new ALLOWDatabase();
+        allowDatabase.addObserver(new Observer() {
+            @Override
+            public void update(Observable o, Object arg) {
+                if ((boolean)arg) {
+                    Intent intent =new Intent(context, MarketPlace.class);
+                    intent.putExtra("investor", i);
+                    startActivity(intent);
+                }
+            }
+        });
+        allowDatabase.addListener();
+
 
         setContentView(R.layout.activity_investor__round__intro);
-        String title = getIntent().getStringExtra("Title");
 
 
-        String  s =title.split(" ")[1];
-        round = valueOf(s);
+
         managersArray = new ArrayList<>();
 
         round_title = findViewById(R.id.round_title_i);
-        round_title.setText(title);
+
         manAdapter = new ManAdapter(this, managersArray);
         listView = findViewById(R.id.list_of_companies);
         listView.setAdapter(manAdapter);
+
         SessionTimeDatabase SD = new SessionTimeDatabase();
         SD.addObserver(new Observer() {
             @Override
             public void update(Observable o, Object arg) {
                 schedule=(Schedule) arg;
+                round = schedule.getCurrentRound();
+                round_title.setText("Round "+round.toString());
 
             }
         });
+        SD.setParam();
 
 
         context=this;
 
-        timerTask = new TimerTask() {
-            @Override
-            public void run() {
-                Intent intent=new Intent(context, MarketPlace.class);
-                intent.putExtra("investor", i);
-                startActivity(intent);
-                timer.cancel();
-                finish();
 
-
-            }
-        };
-
-        timer = new Timer();
-
-        if (schedule==null){
-            timer.schedule(timerTask, 60000);
-        }else timer.schedule(timerTask, schedule.getReport());
         getInvestor();
 
         ManDatabase MD = new ManDatabase();
@@ -111,7 +109,10 @@ public class Investor_Round_Intro extends AppCompatActivity {
     }
 
     public void getInvestor(){
-        String id = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        String id;
+        if (  FirebaseAuth.getInstance().getCurrentUser()!=null)
+            id =    FirebaseAuth.getInstance().getCurrentUser().getUid();
+        else return;
         FirebaseDatabase.getInstance().getReference("Investors").child(id).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

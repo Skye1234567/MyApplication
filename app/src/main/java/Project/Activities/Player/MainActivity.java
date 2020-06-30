@@ -23,7 +23,6 @@ public class MainActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
 
-        FirebaseDatabase.getInstance().getReference("Time").child("start").setValue(System.currentTimeMillis());
 
 
         setContentView(R.layout.activity_main);

@@ -82,4 +82,12 @@ public class Share implements Serializable {
 
         return this.number*this.market_price;
     }
+
+    public String getManager_id() {
+        return manager_id;
+    }
+
+    public void setManager_id(String manager_id) {
+        this.manager_id = manager_id;
+    }
 }

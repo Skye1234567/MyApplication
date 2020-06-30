@@ -20,22 +20,26 @@ public class IntegerDatabase extends Observable {
 
     }
 
-    public void updating(){
-        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+    public void updating() {
+        reference.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                s=dataSnapshot.getValue(Integer.class);
-                setChanged();
-                notifyObservers(s);
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                s = snapshot.getValue(Integer.class);
+                if (s != null) {
+                    setChanged();
+                    notifyObservers(s);
+                }
+
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
+            public void onCancelled(@NonNull DatabaseError error) {
 
             }
         });
-    }
 
+
+    }
     @Override
     public synchronized void addObserver(Observer o) {
         super.addObserver(o);

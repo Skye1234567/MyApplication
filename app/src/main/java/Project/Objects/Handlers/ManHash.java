@@ -16,12 +16,15 @@ public class ManHash {
 
     }
 
-    public String YesNOHash(int i){
+    public String YesNOHash(Integer i){
+        if (i==null) return "---";
 
         return hash.get(i);
 
     }
-    public String highLowHash(int i){
+    public String highLowHash(Integer i){
+        if (i==null) return "---";
+
         return hash2.get(i);
 
     }
