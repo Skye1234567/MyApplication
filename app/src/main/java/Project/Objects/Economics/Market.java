@@ -12,6 +12,17 @@ public class Market implements Serializable {
     private Integer num_rounds;
     private String type;
 
+    @Override
+    public String toString() {
+        return "Market{" +
+                "pi_h=" + pi_h.toString() +
+                ", pi_l=" + pi_l.toString() +
+                ", p=" + p.toString() +
+                ", num_rounds=" + num_rounds.toString() +
+                ", type='" + type + '\'' +
+                '}';
+    }
+
     public Market() {
     }
 

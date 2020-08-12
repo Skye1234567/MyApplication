@@ -113,5 +113,20 @@ public class Manager extends Player {
         return (profit!=null &&performance!=null);
     }
 
+    @Override
+    public String toString() {
+        return "Manager{" + super.toString()+
+                "salary=" + salary +
+                ", company_symbol='" + company_symbol + '\'' +
+                ", performance=" + performance +
+                ", profit=" + profit +
+                ", report_performance=" + report_performance +
+                ", report_dividend=" + report_dividend +
+                ", audit_choice=" + audit_choice +
+                ", audit_report=" + audit_report +
+                ", accept_audit=" + accept_audit +
+                ", num_shares=" + num_shares +
+                '}';
+    }
 }
 

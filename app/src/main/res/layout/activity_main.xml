@@ -42,9 +42,18 @@
         android:id="@+id/select_player"
         android:text="Player"
         app:layout_constraintTop_toBottomOf="@+id/select_admin"
+        app:layout_constraintBottom_toBottomOf="@+id/select_sign_up"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/select_sign_up"
+        android:text="New User"
+        app:layout_constraintTop_toBottomOf="@+id/select_player"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

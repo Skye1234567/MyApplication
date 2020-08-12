@@ -23,10 +23,11 @@ public class ALLOWDatabase extends Observable {
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()){
                 Allow = dataSnapshot.getValue(boolean.class);
 
                 setChanged();
-                notifyObservers(Allow);
+                notifyObservers(Allow);}
 
             }
 

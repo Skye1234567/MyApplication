@@ -17,6 +17,15 @@ public class Session implements Serializable {
         this.round_2 = bust;
     }
 
+    @Override
+    public String toString() {
+        return "Session{" +
+                "practice=" + practice +
+                ", round_1=" + round_1 +
+                ", round_2=" + round_2 +
+                '}';
+    }
+
     public Session() {
 
     }

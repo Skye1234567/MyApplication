@@ -2,6 +2,8 @@ package Project.Objects.Economics;
 
 import java.io.Serializable;
 
+import static java.lang.String.valueOf;
+
 public class Schedule implements Serializable {
 
 
@@ -12,6 +14,14 @@ public class Schedule implements Serializable {
     public Schedule() {
     }
 
+    @Override
+    public String toString() {
+        return "Schedule{" +
+                "start=" + start +
+                ", invest=" + invest +
+                ", report=" + report +
+                '}';
+    }
 
     public Schedule(long sessionstart_time, long investing_round_length, long enter_report_length) {
         this.start = sessionstart_time;

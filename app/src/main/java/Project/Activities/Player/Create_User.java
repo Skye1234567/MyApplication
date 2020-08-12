@@ -1,12 +1,13 @@
- package Project.Activities.Admin;
+package Project.Activities.Player;
+
+import Project.Activities.Admin.Admin_Menu;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,21 +21,18 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 
-public class Sign_up_admin extends AppCompatActivity {
-    Context context;
-    FirebaseAuth mAuth;
-    EditText email;
+public class Create_User extends AppCompatActivity {
     EditText password;
-
+    EditText email;
+    FirebaseAuth mAuth;
+    Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sign_up_admin);
-        context = Sign_up_admin.this;
-
-
-
+        setContentView(R.layout.activity_create__user);
+        mAuth = FirebaseAuth.getInstance();
+        context =this;
 
         Button button = findViewById(R.id.sign_in_admin_button);
         button.setOnClickListener(new View.OnClickListener() {
@@ -43,14 +41,15 @@ public class Sign_up_admin extends AppCompatActivity {
 
                 password = findViewById(R.id.admin_password);
                 email = findViewById(R.id.admin_email);
-                final String ps =password.getText().toString();
-                final String em = email.getText().toString()+ "@market.com";
-
-                if ( 0!=ps.compareTo("") && 0!=em.compareTo("")) {
+                final String ps = password.getText().toString();
+                final String em = email.getText().toString() + "@market.com";
+                if (ps == null) return;
+                if (em == null) return;
+                if (0 != ps.compareTo("") && 0 != em.compareTo("")) {
                     Activity activity = (Activity) context;
 
                     mAuth = FirebaseAuth.getInstance();
-                    mAuth.signInWithEmailAndPassword(em, ps)
+                    mAuth.createUserWithEmailAndPassword(em, ps)
                             .addOnCompleteListener(activity, new OnCompleteListener<AuthResult>() {
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
@@ -58,19 +57,19 @@ public class Sign_up_admin extends AppCompatActivity {
                                         // Sign in success, update UI with the signed-in user's information
 
                                         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                                        Intent intent = new Intent(context, Admin_Menu.class);
-                                        intent.putExtra("player_id", user);
+                                        Intent intent = new Intent(context, MainActivity.class);
+
                                         context.startActivity(intent);
 
 
                                     } else {
 
-                                        Toast.makeText(context, "Authentication failed.", Toast.LENGTH_SHORT).show();
+
+                                        Toast.makeText(context, "Sign in failed.", Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             });
-                }
-                else{
+                } else {
                     Toast.makeText(context, "Invalid entries",Toast.LENGTH_SHORT).show();
                 }
 
@@ -78,7 +77,7 @@ public class Sign_up_admin extends AppCompatActivity {
         });
 
 
+
+
     }
-
-
 }

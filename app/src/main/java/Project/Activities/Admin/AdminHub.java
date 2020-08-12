@@ -102,7 +102,7 @@ public class AdminHub extends AppCompatActivity {
         back_to_menu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(context, AdminTime.class));
+                startActivity(new Intent(context, Admin_Menu.class));
             }
         });
 
