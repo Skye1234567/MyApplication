@@ -33,14 +33,13 @@ public class Create_User extends AppCompatActivity {
         setContentView(R.layout.activity_create__user);
         mAuth = FirebaseAuth.getInstance();
         context =this;
-
-        Button button = findViewById(R.id.sign_in_admin_button);
+        Button button = findViewById(R.id.sign_in_player_button);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                password = findViewById(R.id.admin_password);
-                email = findViewById(R.id.admin_email);
+                password = findViewById(R.id.player_password);
+                email = findViewById(R.id.player_email);
                 final String ps = password.getText().toString();
                 final String em = email.getText().toString() + "@market.com";
                 if (ps == null) return;
@@ -56,17 +55,15 @@ public class Create_User extends AppCompatActivity {
                                     if (task.isSuccessful()) {
                                         // Sign in success, update UI with the signed-in user's information
 
-                                        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                                        Intent intent = new Intent(context, MainActivity.class);
-
-                                        context.startActivity(intent);
 
 
                                     } else {
 
 
-                                        Toast.makeText(context, "Sign in failed.", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(context, "Sign up failed.", Toast.LENGTH_SHORT).show();
                                     }
+                                    Intent intent = new Intent(context, MainActivity.class);
+                                    context.startActivity(intent);
                                 }
                             });
                 } else {

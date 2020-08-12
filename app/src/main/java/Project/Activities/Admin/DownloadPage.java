@@ -17,6 +17,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.example.myapplication.R;
 import com.google.firebase.database.DataSnapshot;
@@ -41,12 +42,14 @@ import java.util.HashMap;
 public class DownloadPage extends AppCompatActivity {
     ProgressBar pb;
     Context context;
+    TextView data;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_download_page);
          pb = findViewById(R.id.pb);
          context=this;
+         data = findViewById(R.id.all_data);
 
 
         FirebaseDatabase.getInstance().getReference().addListenerForSingleValueEvent(new ValueEventListener() {
@@ -69,8 +72,9 @@ public class DownloadPage extends AppCompatActivity {
                     if (d.getKey().compareTo("Time")==0){dd.setSchedule(d.getValue(Schedule.class));}
                      }
                 String sdd = dd.toString();
+                data.setText(sdd);
 
-                write_to_file(sdd);
+
 
 
 
@@ -81,45 +85,6 @@ public class DownloadPage extends AppCompatActivity {
 
             }
         });
-
-    }
-    public void write_to_file(String write){
-        pb.setMax(100);
-
-
-        //Checking the availability state of the External Storage.
-        String state = Environment.getExternalStorageState();
-        if (!Environment.MEDIA_MOUNTED.equals(state)) {
-
-            //If it isn't mounted - we can't write into it.
-            return;
-        }
-
-        //Create a new file that points to the root directory, with the given name:
-        Date date = Calendar.getInstance().getTime();
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd-hhmmss");
-        String dateString = dateFormat.format(date);
-        String filenameExternal ="MarketData"+dateString;
-
-        File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), filenameExternal);
-
-        //This point and below is responsible for the write operation
-        FileOutputStream outputStream = null;
-        try {
-            file.createNewFile();
-            //second argument of FileOutputStream constructor indicates whether
-            //to append or create new file if one exists
-            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file));
-
-           bufferedWriter.write(write);
-
-            bufferedWriter.close();
-            startActivity(new Intent(context, Admin_Menu.class));
-            pb.setVisibility(View.INVISIBLE);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
 
     }
 

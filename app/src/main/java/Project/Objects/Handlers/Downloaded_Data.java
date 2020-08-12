@@ -30,18 +30,18 @@ public class Downloaded_Data {
     @Override
     public String toString() {
         return "Downloaded_Data{" +
-                "buy=" + buy.toString() +
-                ", archive=" + archive.toString() +
-                ", sell=" + sell.toString() +
-                ", completed=" + completed.toString() +
-                ", investor_shares=" + investor_shares.toString() +
-                ", investors=" + investors.toString() +
-                ", managers=" + managers.toString() +
-                ", session=" + session.toString() +
-                ", schedule=" + schedule.toString() +
-                ", prices=" + prices.toString() +
-                '}';
-    }
+                "buy=" + buy +
+                ", archive=" + archive +
+                ", sell=" + sell +
+                ", completed=" + completed +
+                ", investor_shares=" + investor_shares+
+                ", investors=" + investors +
+                ", managers=" + managers +
+                ", session=" + session+
+                ", schedule=" + schedule+
+            ", prices=" + prices +
+            '}';
+}
 
     public HashMap<String, Trade> getBuy() {
         return buy;
