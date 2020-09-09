@@ -114,7 +114,7 @@ import com.google.firebase.database.FirebaseDatabase;
                          trade.setTimeStamp(System.currentTimeMillis());
 
                          if(bs.compareTo(sell)==0){
-                            
+
                              if (num_shares>current_selection.getNumber())
                                  Toast.makeText(context, "Invalid entry: make sure you have enough shares", Toast.LENGTH_LONG).show();
                              else{

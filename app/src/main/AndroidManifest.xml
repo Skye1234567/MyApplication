@@ -10,7 +10,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="Project.Activities.Managers.Wait_Page"></activity>
+        <activity android:name="Project.Activities.Player.Create_User"></activity>
+        <activity android:name="Project.Activities.Managers.Wait_Page" />
         <activity android:name="Project.Activities.Admin.DownloadPage" />
         <activity android:name="Project.Activities.Admin.AdminHub" />
         <activity android:name="Project.Activities.Investors.Investor_Round_Intro" />

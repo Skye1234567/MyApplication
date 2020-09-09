@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
         Button button = findViewById(R.id.select_admin);
         Button button1 = findViewById(R.id.select_player);
+        Button button2 = findViewById(R.id.select_sign_up);
         button.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
@@ -56,15 +57,20 @@ public class MainActivity extends AppCompatActivity {
                 finish();
 
 
-
-
-
-
+            }
+        });
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //put stuff for player auth
+                FirebaseAuth auth = FirebaseAuth.getInstance();
+                Intent intent = new Intent(context, Create_User.class);
+                context.startActivity(intent);
+                finish();
 
 
             }
         });
-
     }
 
 

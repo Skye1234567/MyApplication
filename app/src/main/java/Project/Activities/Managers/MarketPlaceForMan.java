@@ -40,7 +40,10 @@ public class MarketPlaceForMan extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_market_place_for_man);
         context=this;
-        String id = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        String id="";
+        try {id = FirebaseAuth.getInstance().getCurrentUser().getUid();}catch (NullPointerException e){
+
+        }
         allowDatabase = new ALLOWDatabase();
         allowDatabase.addObserver(new Observer() {
             @Override

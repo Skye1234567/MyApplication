@@ -12,6 +12,16 @@ public class Price implements Serializable {
     HashMap<String, Integer> bids;
     String company;
 
+    @Override
+    public String toString() {
+        return "Price{" +
+                "high_bid=" + high_bid.toString() +
+                ", low_ask=" + low_ask.toString() +
+                ", price=" + price.toString() +
+                ", company='" + company + '\'' +
+                '}';
+    }
+
     public String getCompany() {
         return company;
     }

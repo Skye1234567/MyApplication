@@ -7,10 +7,19 @@ import java.util.Objects;
 
 public class Player implements Serializable {
     private String ID;
-    private ArrayList<Integer> payout_history;
     private String type;
     private Integer cash;
     private Integer value;
+
+    @Override
+    public String toString() {
+        return "Player{" +
+                "ID='" + ID + '\'' +
+                ", type='" + type + '\'' +
+                ", cash=" + cash +
+                ", value=" + value +
+                '}';
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -47,7 +56,7 @@ public class Player implements Serializable {
 
     public Player(String ID) {
         this.ID = ID;
-        this.payout_history = new ArrayList<Integer>();
+
         this.cash = 40;
         this.value = 40;
     }
@@ -60,13 +69,6 @@ public class Player implements Serializable {
         this.ID = ID;
     }
 
-    public ArrayList<Integer> getPayout_history() {
-        return payout_history;
-    }
-
-    public void setPayout_history(ArrayList<Integer> payout_history) {
-        this.payout_history = payout_history;
-    }
 
 
     public String getType() {

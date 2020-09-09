@@ -25,6 +25,18 @@ public class Share implements Serializable {
     }
 
     @Override
+    public String toString() {
+        return "Share{" +
+                "market_price=" + market_price +
+                ", owner='" + owner + '\'' +
+                ", company='" + company + '\'' +
+                ", number=" + number +
+                ", manager_id='" + manager_id + '\'' +
+                ", status='" + status + '\'' +
+                '}';
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Share)) return false;

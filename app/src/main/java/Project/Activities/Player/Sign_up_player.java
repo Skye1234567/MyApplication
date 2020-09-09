@@ -65,7 +65,7 @@
 
 
 
-         Button button = findViewById(R.id.sign_in_player_button);
+         final Button button = findViewById(R.id.sign_in_player_button);
 
          button.setOnClickListener(new View.OnClickListener() {
              @Override
@@ -73,10 +73,10 @@
 
                  password = findViewById(R.id.player_password);
                  email = findViewById(R.id.player_email);
-                 String ps =password.getText().toString();
-                 String em = email.getText().toString();
-                 if (ps==null) {ps ="";}
-                 if(em==null){em="";}
+                 final String ps =password.getText().toString();
+                 final String em = email.getText().toString()+"@market.com";
+                 if (ps==null) return;
+                 if(em==null)return;
                  if ( 0!=ps.compareTo("") && 0!=em.compareTo("")) {
                      Activity activity = (Activity) context;
                      mAuth = FirebaseAuth.getInstance();
@@ -95,9 +95,6 @@
                                              @Override
                                              public void onComplete(@NonNull Task<Void> task) {
 
-//TODO: keep logged in
-                                                 //SimpleLoginHelper simpleLoginHelper = new SimpleLoginHelper(context);
-                                                 //simpleLoginHelper.KeepLoggedIn(UID);
                                                  get_PlayerType();
 
 
@@ -107,16 +104,17 @@
 
 
                                      } else {
-                                         Toast.makeText(context, "Authentication failed.", Toast.LENGTH_SHORT).show();
-                                         Intent intent = new Intent(context, Sign_up_player.class);
-                                         startActivity(intent);
-                                         finish();
+                                         Toast.makeText(context, "Sign in failed",Toast.LENGTH_SHORT).show();
+
+
+
+
                                      }
                                  }
                              });
                  }
                  else{
-                     Toast.makeText(context, "Whats up",Toast.LENGTH_SHORT).show();
+                     Toast.makeText(context, "Invalid entries",Toast.LENGTH_SHORT).show();
                  }
 
              }
@@ -189,6 +187,9 @@ private void get_investors(){
 }
 
 
+
+
+
      private void setType(Player player){
 
 
@@ -218,6 +219,5 @@ private void get_investors(){
          }
 
      }
-
 
  }

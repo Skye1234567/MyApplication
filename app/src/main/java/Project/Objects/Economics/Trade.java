@@ -17,6 +17,20 @@ public class Trade implements Serializable {
     }
 
     @Override
+    public String toString() {
+        return "Trade{" +
+                "id='" + id + '\'' +
+                ", num_shares=" + num_shares +
+                ", timeStamp=" + timeStamp +
+                ", for_sale=" + for_sale +
+                ", price_point=" + price_point +
+                ", buyer_id='" + buyer_id + '\'' +
+                ", seller_id='" + seller_id + '\'' +
+                ", company='" + company + '\'' +
+                '}';
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Trade)) return false;
