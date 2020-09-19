@@ -30,7 +30,6 @@ import Project.Business_Logic.Auditor;
 import com.example.myapplication.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.Observable;
@@ -60,6 +59,7 @@ public class CompanyReportFragment extends Fragment {
     private boolean div;
     private boolean reject;
     private Ledger ledger;
+    private SessionDatabaseReference SDR;
     @Nullable
     @Override
 
@@ -71,6 +71,8 @@ public class CompanyReportFragment extends Fragment {
         context = getContext();
         invisible=new ArrayList<>();
         manHash=new ManHash();
+        SDR= (SessionDatabaseReference)context.getApplicationContext();
+        final DatabaseReference base_ref = SDR.getGlobalVarValue();
         Audit_result_textview = view.findViewById(R.id.auditresult);
         audit_result = Audit_result_textview.getText().toString();
         Reject_Report = view.findViewById(R.id.reject);
@@ -147,7 +149,7 @@ public class CompanyReportFragment extends Fragment {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(div&&managerman!=null) new DividendManager(managerman.getCompany_symbol(), 5).payDividends();
+                if(div&&managerman!=null) new DividendManager(managerman.getCompany_symbol(), 5, base_ref ).payDividends();
                 if (auditor_report!=null&&!reject)
                     Ref.child("report_performance").setValue(auditor_report);
 

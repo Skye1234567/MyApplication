@@ -18,6 +18,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 import Project.Objects.Database.ALLOWDatabase;
+import Project.Objects.Database.SessionDatabaseReference;
 import Project.Objects.Models.One_Man_Model;
 import Project.Objects.Models.Man_Model;
 import Project.Objects.Models.Pricing_Model;
@@ -32,6 +33,7 @@ public class MarketPlaceForMan extends AppCompatActivity {
     private ViewPager viewPager;
     private SectionsPageAdapter adapter;
     private ALLOWDatabase allowDatabase;
+    private SessionDatabaseReference SDR;
 
 
 
@@ -44,7 +46,8 @@ public class MarketPlaceForMan extends AppCompatActivity {
         try {id = FirebaseAuth.getInstance().getCurrentUser().getUid();}catch (NullPointerException e){
 
         }
-        allowDatabase = new ALLOWDatabase();
+        SDR = (SessionDatabaseReference) getApplicationContext();
+        allowDatabase = new ALLOWDatabase(SDR.getGlobalVarValue());
         allowDatabase.addObserver(new Observer() {
             @Override
             public void update(Observable o, Object arg) {
@@ -57,9 +60,12 @@ public class MarketPlaceForMan extends AppCompatActivity {
 
 
         Man_Model MM = new ViewModelProvider(this).get(Man_Model.class);
+        MM.setSession_db_ref(SDR.getGlobalVarValue());
         Pricing_Model PM= new ViewModelProvider(this).get(Pricing_Model.class);
+        PM.setSession_db_ref(SDR.getGlobalVarValue());
         One_Man_Model one_man_model = new ViewModelProvider(this).get(One_Man_Model.class);
         one_man_model.set_id(id);
+        one_man_model.setSession_db_ref(SDR.getGlobalVarValue());
 
 
 

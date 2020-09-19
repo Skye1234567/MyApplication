@@ -4,6 +4,7 @@ package Project.Activities.Admin;
         import Project.Activities.Admin.Set_Parameters_Schedule;
         import Project.Activities.Admin.Sign_up_admin;
         import Project.Objects.Database.SessionDatabase;
+        import Project.Objects.Database.SessionDatabaseReference;
         import Project.Objects.Economics.Session;
         import Project.Objects.Handlers.AdminTime;
         import androidx.appcompat.app.AppCompatActivity;
@@ -29,17 +30,19 @@ public class AdminHub extends AppCompatActivity {
     private SessionDatabase SD;
     private Context context;
     private Session session;
+    private SessionDatabaseReference SDR;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         FirebaseAuth mauth = FirebaseAuth.getInstance();
         setContentView(R.layout.activity_admin_hub);
+        SDR = (SessionDatabaseReference) getApplicationContext();
         if ( mauth.getCurrentUser()==null){
             Intent intent = new Intent(context, Sign_up_admin.class);
             context.startActivity(intent);
         }
-        SD =new SessionDatabase();
+        SD =new SessionDatabase(SDR.getGlobalVarValue());
 
         SD.addObserver(new Observer() {
             @Override

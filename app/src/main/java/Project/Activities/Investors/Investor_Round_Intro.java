@@ -23,6 +23,7 @@ import com.example.myapplication.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
@@ -46,12 +47,15 @@ public class Investor_Round_Intro extends AppCompatActivity {
     ArrayList<Manager> managersArray;
     ListView listView;
     private ALLOWDatabase allowDatabase;
+    private SessionDatabaseReference SDR;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         start_time = System.currentTimeMillis();
-        allowDatabase = new ALLOWDatabase();
+        SDR =(SessionDatabaseReference) getApplicationContext();
+        DatabaseReference base_ref = SDR.getGlobalVarValue();
+        allowDatabase = new ALLOWDatabase(base_ref);
         allowDatabase.addObserver(new Observer() {
             @Override
             public void update(Observable o, Object arg) {
@@ -77,7 +81,7 @@ public class Investor_Round_Intro extends AppCompatActivity {
         listView = findViewById(R.id.list_of_companies);
         listView.setAdapter(manAdapter);
 
-        SessionTimeDatabase SD = new SessionTimeDatabase();
+        SessionTimeDatabase SD = new SessionTimeDatabase(base_ref);
         SD.addObserver(new Observer() {
             @Override
             public void update(Observable o, Object arg) {
@@ -95,7 +99,7 @@ public class Investor_Round_Intro extends AppCompatActivity {
 
         getInvestor();
 
-        ManDatabase MD = new ManDatabase();
+        ManDatabase MD = new ManDatabase(base_ref);
         MD.addObserver(new Observer() {
             @Override
             public void update(Observable o, Object arg) {

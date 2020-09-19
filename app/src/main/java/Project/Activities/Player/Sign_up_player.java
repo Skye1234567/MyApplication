@@ -18,18 +18,16 @@
  import com.google.firebase.auth.FirebaseUser;
  import com.google.firebase.database.DataSnapshot;
  import com.google.firebase.database.DatabaseError;
- import com.google.firebase.database.FirebaseDatabase;
  import com.google.firebase.database.ValueEventListener;
 
  import Project.Activities.Investors.MarketPlace;
  import Project.Activities.Managers.Manager_Home_Page;
- import Project.Business_Logic.Manager_Logic;
  import Project.Business_Logic.New_Game;
  import Project.Objects.Database.SessionDatabaseReference;
+ import Project.Objects.Handlers.StringBuilderRandom;
  import Project.Objects.Personel.Investor;
  import Project.Objects.Personel.Manager;
  import Project.Objects.Personel.Player;
- import Project.Objects.Handlers.StringBuilderRandom;
  import androidx.annotation.NonNull;
  import androidx.appcompat.app.AppCompatActivity;
 
@@ -41,6 +39,7 @@
      EditText email;
      EditText password;
      String UID;
+
      long manager_num;
      SessionDatabaseReference SDR  = (SessionDatabaseReference) getApplicationContext();
 
@@ -209,7 +208,7 @@ private void get_investors(){
              context.startActivity(intent);}
          else {
              player.setType("I");
-            New_Game NG = new New_Game(player.getID());
+            New_Game NG = new New_Game(player.getID(), SDR.getGlobalVarValue());
             new Thread(NG).start();
 
              Investor investor = new Investor(player.getID());

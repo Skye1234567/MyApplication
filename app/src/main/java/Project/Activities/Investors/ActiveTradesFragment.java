@@ -3,6 +3,7 @@ package Project.Activities.Investors;
 import android.content.Intent;
 import android.os.Bundle;
 
+import Project.Objects.Database.SessionDatabaseReference;
 import Project.Objects.Personel.Investor;
 import Project.Objects.Economics.Price;
 import Project.Objects.Models.Pricing_Model;
@@ -43,15 +44,19 @@ public class ActiveTradesFragment extends Fragment {
     ListView listViewbuy;
     ListView listViewsell;
     Investor investor;
+    private SessionDatabaseReference SDR;
     @Nullable
     @Override
 
     public View onCreateView(@NonNull final LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_active_trades,container, false);
+        SDR = (SessionDatabaseReference) getContext().getApplicationContext();
         investor = (Investor) getActivity().getIntent().getSerializableExtra("investor");
         TM = new ViewModelProvider(getActivity()).get(Trade_Model.class);
+        TM.setSession_db_ref(SDR.getGlobalVarValue());
         SM = new ViewModelProvider(getActivity()).get(Share_Model.class);
+        SM.setSession_db_ref(SDR.getGlobalVarValue());
         buytradeArray = new ArrayList<Trade>();
         selltradeArray = new ArrayList<Trade>();
         TM.setId(investor.getID());
@@ -102,7 +107,9 @@ public class ActiveTradesFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        SDR = (SessionDatabaseReference) getContext().getApplicationContext();
         TM = new ViewModelProvider(getActivity()).get(Trade_Model.class);
+        TM.setSession_db_ref(SDR.getGlobalVarValue());
         TM.getTrades().observe(getViewLifecycleOwner(), new Observer<ArrayList<ArrayList<Trade>>>() {
             @Override
             public void onChanged(ArrayList<ArrayList<Trade>> arrayLists) {
@@ -113,6 +120,8 @@ public class ActiveTradesFragment extends Fragment {
         });
 
     pricing_model = new ViewModelProvider(getActivity()).get(Pricing_Model .class);
+    pricing_model.setSession_db_ref(SDR.getGlobalVarValue());
+
         pricing_model.getPrices().observe(getViewLifecycleOwner(), new Observer<HashMap<String, Price>>() {
         @Override
         public void onChanged(HashMap<String, Price> stringPriceHashMap) {
@@ -122,6 +131,7 @@ public class ActiveTradesFragment extends Fragment {
     });
 
     SM = new ViewModelProvider(getActivity()).get(Share_Model.class);
+    SM.setSession_db_ref(SDR.getGlobalVarValue());
     SM.getShares().observe(getViewLifecycleOwner(), new Observer<ArrayList<Share>>() {
         @Override
         public void onChanged(ArrayList<Share> shares) {

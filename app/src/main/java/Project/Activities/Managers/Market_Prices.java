@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import Project.Objects.Database.SessionDatabase;
+import Project.Objects.Database.SessionDatabaseReference;
 import Project.Objects.Models.One_Man_Model;
 import Project.Objects.Personel.Manager;
 import Project.Objects.Economics.Price;
@@ -35,6 +37,7 @@ public class Market_Prices extends Fragment {
     private TextView youare;
     private String yourstring;
     private HashMap<String, Price> hm;
+    private SessionDatabaseReference SDR;
 
     @Nullable
     @Override
@@ -60,8 +63,10 @@ public class Market_Prices extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        SDR = (SessionDatabaseReference) getContext().getApplicationContext();
 
         pricing_model = new ViewModelProvider(getActivity()).get(Pricing_Model.class);
+        pricing_model.setSession_db_ref(SDR.getGlobalVarValue());
         pricing_model.getPrices().observe(getViewLifecycleOwner(), new Observer<HashMap<String, Price>>() {
             @Override
             public void onChanged(HashMap<String, Price> stringPriceHashMap) {

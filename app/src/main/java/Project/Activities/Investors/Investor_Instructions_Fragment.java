@@ -1,6 +1,8 @@
 package Project.Activities.Investors;
 
+import Project.Objects.Database.SessionDatabase;
 import Project.Objects.Database.SessionDatabaseReference;
+import Project.Objects.Economics.Session;
 import Project.Objects.Personel.Investor;
 import Project.Objects.Models.Share_Model;
 import Project.Objects.Economics.Share;
@@ -43,8 +45,7 @@ public class Investor_Instructions_Fragment extends Fragment {
     Vest_Model VM;
     ArrayList<Share> investor_shares;
     TextView cash;
-
-
+    SessionDatabaseReference SDR;
     Share_Model share_model;
 
 
@@ -54,21 +55,24 @@ public class Investor_Instructions_Fragment extends Fragment {
     {
        View view = inflater.inflate(R.layout.activity_investor__instructions, container, false);
        context = getContext();
-        share_model = new ViewModelProvider(getActivity()).get(Share_Model.class);
-
+       SDR = (SessionDatabaseReference) context.getApplicationContext();
+       share_model = new ViewModelProvider(getActivity()).get(Share_Model.class);
+       share_model.setSession_db_ref(SDR.getGlobalVarValue());
        VM = new ViewModelProvider(getActivity()).get(Vest_Model.class);
+       VM.setSession_db_ref(SDR.getGlobalVarValue());
        cash = view.findViewById(R.id.cashmoneydata);
 
 
         tableLayout=view.findViewById(R.id.company_shares_table_investor_instructions);
         Investor investor = (Investor) Objects.requireNonNull(getActivity().getIntent().getExtras()).getSerializable("investor");
         in_id = investor.getID();
-        new Thread(new Value_Assessor(in_id)).start();
+        new Thread(new Value_Assessor(in_id, SDR.getGlobalVarValue())).start();
 
 
         investor_shares = new ArrayList<>();
         share_model .setId(in_id);
         pricing_model =new ViewModelProvider(getActivity()).get(Pricing_Model.class);
+        pricing_model.setSession_db_ref(SDR.getGlobalVarValue());
         shareAdapter =new ShareAdapter(context,investor_shares);
         tableLayout.setAdapter(shareAdapter);
         if (in_id ==null){
@@ -86,7 +90,9 @@ public class Investor_Instructions_Fragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        SDR = (SessionDatabaseReference) getContext().getApplicationContext();
         pricing_model = new ViewModelProvider(getActivity()).get(Pricing_Model.class);
+        pricing_model.setSession_db_ref(SDR.getGlobalVarValue());
          pricing_model.getPrices().observe(getViewLifecycleOwner(), new Observer<HashMap<String, Price>>() {
             @Override
             public void onChanged(HashMap<String, Price> stringPriceHashMap) {
@@ -105,6 +111,7 @@ public class Investor_Instructions_Fragment extends Fragment {
             }
         });
         share_model = new ViewModelProvider(getActivity()).get(Share_Model.class);
+        share_model.setSession_db_ref(SDR.getGlobalVarValue());
         share_model.getShares().observe(getViewLifecycleOwner(), new Observer<ArrayList<Share>>() {
             @Override
             public void onChanged(ArrayList<Share> shares) {
@@ -113,6 +120,7 @@ public class Investor_Instructions_Fragment extends Fragment {
             }
         });
         VM = new ViewModelProvider(getActivity()).get(Vest_Model.class);
+        VM.setSession_db_ref(SDR.getGlobalVarValue());
         VM.getMan().observe(getViewLifecycleOwner(), new Observer<Investor>() {
             @Override
             public void onChanged(Investor investor) {

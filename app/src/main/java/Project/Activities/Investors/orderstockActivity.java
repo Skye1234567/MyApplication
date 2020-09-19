@@ -41,7 +41,7 @@ import com.google.firebase.database.FirebaseDatabase;
      private Context context;
      private Investor investor;
      private Price p;
-
+     private SessionDatabaseReference SDR;
 
 
 
@@ -50,6 +50,7 @@ import com.google.firebase.database.FirebaseDatabase;
         super.onCreate(savedInstanceState);
         context=this;
         setContentView(R.layout.activityorderstock);
+        SDR =(SessionDatabaseReference) getApplicationContext();
         Intent intent1 = getIntent();
         Cpany= intent1.getStringExtra("symbol");
          investor = (Investor) intent1.getSerializableExtra("user");
@@ -153,7 +154,7 @@ import com.google.firebase.database.FirebaseDatabase;
                          db.child("Shares").child(user_id).child(Cpany).setValue(current_selection);
                          db.child("Investors").child(user_id).setValue(investor);
                          db.child("Prices").child(Cpany).setValue(p);
-                         Trade_Manager trade_manager = new Trade_Manager(trade,looking_for, p.getPrice());
+                         Trade_Manager trade_manager = new Trade_Manager(trade,looking_for, p.getPrice(), SDR.getGlobalVarValue());
                          trade_manager.search_for_trade();
 
 

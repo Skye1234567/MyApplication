@@ -1,42 +1,32 @@
 package Project.Activities.Managers;
 
-import Project.Objects.Database.SessionDatabase;
-import Project.Objects.Database.SessionDatabaseReference;
-import Project.Objects.Database.SessionTimeDatabase;
-import Project.Objects.Economics.Schedule;
-import Project.Objects.Economics.Session;
-import Project.Objects.Handlers.ManHash;
-import Project.Objects.Personel.Manager;
-import Project.Objects.Economics.Market;
-import Project.Objects.Models.One_Man_Model;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import Project.Business_Logic.Accountant;
-import Project.Business_Logic.Manager_Logic;
 import com.example.myapplication.R;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.Observable;
 
-import static com.google.firebase.auth.FirebaseAuth.getInstance;
+import Project.Business_Logic.Accountant;
+import Project.Objects.Database.SessionDatabase;
+import Project.Objects.Database.SessionDatabaseReference;
+import Project.Objects.Database.SessionTimeDatabase;
+import Project.Objects.Economics.Market;
+import Project.Objects.Economics.Session;
+import Project.Objects.Handlers.ManHash;
+import Project.Objects.Models.One_Man_Model;
+import Project.Objects.Personel.Manager;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 public class Company_status_fragment extends Fragment {
     One_Man_Model man_model;
@@ -54,6 +44,7 @@ public class Company_status_fragment extends Fragment {
     Integer current_round;
     SessionTimeDatabase STD;
     DatabaseReference REF;
+    SessionDatabaseReference SDR;
 
 
     @Override
@@ -61,7 +52,7 @@ public class Company_status_fragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_manager__company_status,container, false);
         context = getContext();
         round_num = view.findViewById(R.id.manager_welcome);
-
+        SDR = (SessionDatabaseReference) context.getApplicationContext();
         profit = view.findViewById(R.id.profit_info);
         assets = view.findViewById(R.id.assets_info);
         performance = view.findViewById(R.id.performance_info);
@@ -69,11 +60,10 @@ public class Company_status_fragment extends Fragment {
         dividend = view.findViewById(R.id.dividend_info);
         String id  = FirebaseAuth.getInstance().getCurrentUser().getUid();
         SessionDatabaseReference SDR  = (SessionDatabaseReference) context.getApplicationContext();
-
-
+        DatabaseReference base_ref = SDR.getGlobalVarValue();
         REF=SDR.getGlobalVarValue().child("Managers").child(id);
         accountant = new Accountant(REF);
-        STD = new SessionTimeDatabase();
+        STD = new SessionTimeDatabase(base_ref);
         STD.addObserver(new java.util.Observer() {
             @Override
             public void update(Observable o, Object arg) {
@@ -93,7 +83,7 @@ public class Company_status_fragment extends Fragment {
 
 
 
-        SessionDatabase SD =  new SessionDatabase();
+        SessionDatabase SD =  new SessionDatabase(base_ref);
         SD.addObserver(new java.util.Observer() {
             @Override
             public void update(Observable o, Object arg) {

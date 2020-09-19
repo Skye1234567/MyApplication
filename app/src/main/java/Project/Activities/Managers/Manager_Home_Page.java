@@ -19,6 +19,7 @@ import Project.Activities.Player.GameMenu;
 import Project.Objects.Adapters.SectionsPageAdapter;
 import Project.Objects.Database.ALLOWDatabase;
 
+import Project.Objects.Database.SessionDatabaseReference;
 import androidx.appcompat.app.AppCompatActivity;
 
 import androidx.viewpager.widget.ViewPager;
@@ -29,6 +30,7 @@ public class Manager_Home_Page extends AppCompatActivity {
     private static final String TAG="Manager_home_page";
     private Context context;
     private ViewPager viewPager;
+    private SessionDatabaseReference SDR;
     private ALLOWDatabase allowDatabase;
 
 
@@ -40,7 +42,8 @@ public class Manager_Home_Page extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manager_home);
         context=this;
-        allowDatabase = new ALLOWDatabase();
+        SDR = (SessionDatabaseReference) getApplicationContext();
+        allowDatabase = new ALLOWDatabase(SDR.getGlobalVarValue());
         allowDatabase.addObserver(new Observer() {
             @Override
             public void update(Observable o, Object arg) {

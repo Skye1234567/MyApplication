@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import Project.Objects.Adapters.ManAdapter;
+import Project.Objects.Database.SessionDatabaseReference;
 import Project.Objects.Models.Man_Model;
 import Project.Objects.Personel.Manager;
 import Project.Objects.Economics.Price;
@@ -37,7 +38,7 @@ public class View_Companies_Manager extends Fragment {
     private TextView yourSymbol;
     private String yourstring;
     private String ID;
-
+    private SessionDatabaseReference SDR;
 
 
     private HashMap<String, Price> hm;
@@ -48,7 +49,9 @@ public class View_Companies_Manager extends Fragment {
 
 
         View view = inflater.inflate(R.layout.activity_view__companies_man,container, false);
+        SDR = (SessionDatabaseReference) getContext().getApplicationContext();
         mm = new ViewModelProvider(getActivity()).get(Man_Model.class);
+        mm.setSession_db_ref(SDR.getGlobalVarValue());
         ID = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         mm.update_manager();
@@ -71,8 +74,10 @@ public class View_Companies_Manager extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        SDR = (SessionDatabaseReference) getContext().getApplicationContext();
 
         pricing_model = new ViewModelProvider(getActivity()).get(Pricing_Model.class);
+        pricing_model.setSession_db_ref(SDR.getGlobalVarValue());
         pricing_model.getPrices().observe(getViewLifecycleOwner(), new Observer<HashMap<String, Price>>() {
             @Override
             public void onChanged(HashMap<String, Price> stringPriceHashMap) {
@@ -87,6 +92,7 @@ public class View_Companies_Manager extends Fragment {
 
 
         mm = new ViewModelProvider(getActivity()).get(Man_Model.class);
+        mm.setSession_db_ref(SDR.getGlobalVarValue());
         mm.getMan().observe(getViewLifecycleOwner(), new Observer<HashMap<String, Manager>>() {
             @Override
             public void onChanged(HashMap<String, Manager> stringManagerHashMap) {

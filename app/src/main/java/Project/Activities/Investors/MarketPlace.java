@@ -2,6 +2,7 @@ package Project.Activities.Investors;
 
 import Project.Activities.Player.GameMenu;
 import Project.Objects.Database.ALLOWDatabase;
+import Project.Objects.Database.SessionDatabaseReference;
 import Project.Objects.Personel.Investor;
 import Project.Objects.Models.Man_Model;
 import Project.Objects.Models.Pricing_Model;
@@ -36,6 +37,7 @@ public class MarketPlace extends AppCompatActivity {
     private SectionsPageAdapter adapter;
     private  String id;
     private ALLOWDatabase allowDatabase;
+    private SessionDatabaseReference SDR;
 
 
 
@@ -45,7 +47,8 @@ public class MarketPlace extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_market_place);
         context=this;
-        allowDatabase = new ALLOWDatabase();
+        SDR= (SessionDatabaseReference) getApplicationContext();
+        allowDatabase = new ALLOWDatabase(SDR.getGlobalVarValue());
         allowDatabase.addObserver(new Observer() {
             @Override
             public void update(Observable o, Object arg) {
@@ -61,11 +64,16 @@ public class MarketPlace extends AppCompatActivity {
 
         Share_Model SM= new ViewModelProvider(this).get(Share_Model.class);
         SM.setId(id);
+        SM.setSession_db_ref(SDR.getGlobalVarValue());
         Vest_Model VM =  new ViewModelProvider(this).get(Vest_Model.class);
         VM.setId(id);
+        VM.setSession_db_ref(SDR.getGlobalVarValue());
         Man_Model MM = new ViewModelProvider(this).get(Man_Model.class);
+        MM.setSession_db_ref(SDR.getGlobalVarValue());
         Pricing_Model PM= new ViewModelProvider(this).get(Pricing_Model.class);
+        PM.setSession_db_ref(SDR.getGlobalVarValue());
         Trade_Model TM = new ViewModelProvider(this).get(Trade_Model.class);
+        TM.setSession_db_ref(SDR.getGlobalVarValue());
         TM.setId(id);
 
 

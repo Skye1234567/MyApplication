@@ -41,6 +41,7 @@
      private String bs;
      private Integer num_trade_shares;
      private String Cpany;
+     private SessionDatabaseReference SDR;
 
 
 
@@ -49,6 +50,7 @@
         super.onCreate(savedInstanceState);
         context=this;
         setContentView(R.layout.activityeditorder);
+        SDR= (SessionDatabaseReference) getApplicationContext();
         Intent intent1 = getIntent();
         deleter = findViewById(R.id.delete_order_button);
          num_trade_shares = intent1.getIntExtra("ShareNum", 0);
@@ -178,7 +180,7 @@
                          db.child("Investors").child(user_id).setValue(investor);
                          db.child("Trades").child(bs).child(current_trade.getId()).setValue(current_trade);
 
-                         Trade_Manager trade_manager = new Trade_Manager(current_trade,looking_for, p.getPrice());
+                         Trade_Manager trade_manager = new Trade_Manager(current_trade,looking_for, p.getPrice(), SDR.getGlobalVarValue());
                          trade_manager.search_for_trade(); }
                      catch (Exception e){
                          Log.d(TAG, e.getMessage()); }

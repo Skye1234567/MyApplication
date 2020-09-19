@@ -35,6 +35,7 @@ public class Set_Parameters_Schedule extends AppCompatActivity {
     long time;
     long report_length;
     long invest_length;
+    SessionDatabaseReference SDR;
 
 
 
@@ -43,6 +44,7 @@ public class Set_Parameters_Schedule extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_set__parameters_schedule);
         context = this;
+        SDR= (SessionDatabaseReference) getApplicationContext();
         mauth = FirebaseAuth.getInstance();
         if (mauth.getCurrentUser() == null) {
             Intent intent = new Intent(context, Sign_up_admin.class);
@@ -103,7 +105,8 @@ public class Set_Parameters_Schedule extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                AdminTime AT = new AdminTime(report_length, invest_length, System.currentTimeMillis()+(report_length+invest_length)*12, true);
+                AdminTime AT = new AdminTime(report_length, invest_length,
+                        System.currentTimeMillis()+(report_length+invest_length)*12, true, SDR.getGlobalVarValue());
                 new Thread(AT).start();
                 SessionDatabaseReference SDR  = (SessionDatabaseReference) getApplicationContext();
 
