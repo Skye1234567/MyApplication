@@ -20,6 +20,7 @@ public class One_Man_Model extends ViewModel {
     private  MutableLiveData<Manager> livedata=new MutableLiveData<>();
     private String id;
     private String symbol;
+    private DatabaseReference session_db_ref;
 
     public void setSymbol(String symbol) {
         this.symbol = symbol;
@@ -35,8 +36,13 @@ public class One_Man_Model extends ViewModel {
 
         return livedata;
     }
-    public One_Man_Model(){
-        update_manager();
+
+    public DatabaseReference getSession_db_ref() {
+        return session_db_ref;
+    }
+
+    public void setSession_db_ref(DatabaseReference session_db_ref) {
+        this.session_db_ref = session_db_ref;
     }
 
     public void setMan(Manager manager){
@@ -47,8 +53,7 @@ public class One_Man_Model extends ViewModel {
 
     public void update_manager(){
         if (id!=null){
-            DatabaseReference ref = FirebaseDatabase.getInstance()
-                    .getReference().child("Managers").child(id);
+            DatabaseReference ref = session_db_ref.child("Managers").child(id);
             ref.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -64,7 +69,7 @@ public class One_Man_Model extends ViewModel {
             });
         }
         else if (symbol!=null){
-            Query q = FirebaseDatabase.getInstance().getReference().child("Managers").orderByChild("company_symbol");
+            Query q = session_db_ref.child("Managers").orderByChild("company_symbol");
             q.equalTo(symbol).addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

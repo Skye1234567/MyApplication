@@ -1,5 +1,6 @@
 package Project.Activities.Investors;
 
+import Project.Objects.Database.SessionDatabaseReference;
 import Project.Objects.Personel.Investor;
 import Project.Objects.Models.Share_Model;
 import Project.Objects.Economics.Share;
@@ -91,7 +92,8 @@ public class Investor_Instructions_Fragment extends Fragment {
             public void onChanged(HashMap<String, Price> stringPriceHashMap) {
                 DatabaseReference ref;
                 if (in_id!=null&&stringPriceHashMap!=null ){
-                ref = FirebaseDatabase.getInstance().getReference("Shares").child(in_id);
+                    SessionDatabaseReference SDR  = (SessionDatabaseReference) context.getApplicationContext();
+                    ref = SDR.getGlobalVarValue().child("Shares").child(in_id);
                 for (String comp:stringPriceHashMap.keySet()){
                     ref.child(comp).child("market_price").setValue(stringPriceHashMap.get(comp).getPrice());
 

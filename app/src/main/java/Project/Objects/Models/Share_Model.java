@@ -18,6 +18,16 @@ import androidx.lifecycle.ViewModel;
 public class Share_Model extends ViewModel {
     private  MutableLiveData<ArrayList<Share>> livedata=new MutableLiveData<>();
     private String id;
+    private DatabaseReference session_db_ref;
+
+    public DatabaseReference getSession_db_ref() {
+        return session_db_ref;
+    }
+
+    public void setSession_db_ref(DatabaseReference session_db_ref) {
+        this.session_db_ref = session_db_ref;
+    }
+
 
     public void removeShare(Share s){
         ArrayList<Share>  a=livedata.getValue();
@@ -64,8 +74,7 @@ public class Share_Model extends ViewModel {
 
 public void update_shares(){
         if (id==null){return;}else{
-    DatabaseReference ref = FirebaseDatabase.getInstance()
-            .getReference().child("Shares").child(id);
+    DatabaseReference ref = session_db_ref.child("Shares").child(id);
     ref.addChildEventListener(new ChildEventListener() {
         @Override
         public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {

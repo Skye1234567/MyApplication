@@ -3,6 +3,7 @@ package Project.Objects.Models;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 
@@ -17,6 +18,15 @@ import androidx.lifecycle.ViewModel;
 
 public class Trade_Model extends ViewModel {
     private  MutableLiveData<ArrayList<ArrayList<Trade>>> livedata=new MutableLiveData<>();
+    DatabaseReference session_db_ref;
+
+    public DatabaseReference getSession_db_ref() {
+        return session_db_ref;
+    }
+
+    public void setSession_db_ref(DatabaseReference session_db_ref) {
+        this.session_db_ref = session_db_ref;
+    }
 
     public String getId() {
         return id;
@@ -28,6 +38,7 @@ public class Trade_Model extends ViewModel {
     }
 
     private String id;
+
 
 
     public void removeTrade(Trade t, int position ){
@@ -73,8 +84,7 @@ public class Trade_Model extends ViewModel {
 
 public void update_BUy_Trades(){
 
-    Query ref = FirebaseDatabase.getInstance()
-            .getReference().child("Trades").child("Buy").orderByChild("buyer_id").equalTo(id);
+    Query ref = session_db_ref.child("Trades").child("Buy").orderByChild("buyer_id").equalTo(id);
         ref.addChildEventListener(new ChildEventListener() {
         @Override
         public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
@@ -108,8 +118,8 @@ public void update_BUy_Trades(){
 
     public void update_sell_Trades(){
 
-        Query ref = FirebaseDatabase.getInstance()
-                .getReference().child("Trades").child("Sell").orderByChild("seller_id").equalTo(id);
+
+        Query ref = session_db_ref.child("Trades").child("Sell").orderByChild("seller_id").equalTo(id);
         ref.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {

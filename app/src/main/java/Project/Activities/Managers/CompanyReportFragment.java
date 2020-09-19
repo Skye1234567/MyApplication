@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import Project.Objects.Adapters.ManAdapter;
 import Project.Objects.Database.IntegerDatabase;
+import Project.Objects.Database.SessionDatabaseReference;
 import Project.Objects.Handlers.DividendManager;
 import Project.Objects.Handlers.Ledger;
 import Project.Objects.Handlers.ManHash;
@@ -90,14 +91,17 @@ public class CompanyReportFragment extends Fragment {
 
         String id = FirebaseAuth.getInstance().getCurrentUser().getUid();
         man_model = new ViewModelProvider(getActivity()).get(One_Man_Model.class);
-        Ref = FirebaseDatabase.getInstance().getReference("Managers").child(id);
+        SessionDatabaseReference SDR  = (SessionDatabaseReference) context.getApplicationContext();
+        Ref = SDR.getGlobalVarValue().child("Managers").child(id);
         cashDatabase = new IntegerDatabase(Ref.child("cash"));
         profitDatabase = new IntegerDatabase(Ref.child("profit"));
         aud_yes = view.findViewById(R.id.yes_audit);
         aud_no = view.findViewById(R.id.no_audit);
         submit = view.findViewById(R.id.submitreport);
         ledger= new Ledger(0, 0, Ref.child("cash"));
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Managers").
+
+        ;
+        DatabaseReference databaseReference = SDR.getGlobalVarValue().child("Managers").
                 child(id).child("cash");
         cashDatabase = new IntegerDatabase(databaseReference);
         cashDatabase.addObserver(new java.util.Observer() {

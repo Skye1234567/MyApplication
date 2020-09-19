@@ -18,8 +18,10 @@ public class DividendManager {
     private String company_symbol;
     private Integer dividend;
     private Integer cost;
+    private DatabaseReference session_db_ref;
 
-    public DividendManager(String company_symbol, Integer dividend) {
+    public DividendManager(String company_symbol, Integer dividend,DatabaseReference session_db_ref) {
+        this.session_db_ref = session_db_ref;
         this.company_symbol = company_symbol;
         this.dividend = dividend;
         this.cost =0;
@@ -29,8 +31,7 @@ public class DividendManager {
 
 
     public void payDividends(){
-        DatabaseReference q = FirebaseDatabase.getInstance()
-                .getReference("Shares");
+        DatabaseReference q =session_db_ref.child("Shares");
 
         q.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -67,7 +68,7 @@ public class DividendManager {
 
     public void  pay(String id){
 
-        final DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Investors")
+        final DatabaseReference ref = session_db_ref.child("Investors")
                 .child(id).child("cash");
 
         final IntegerDatabase ID = new IntegerDatabase( ref);
@@ -89,7 +90,7 @@ public class DividendManager {
     }
 
     public void incur_costs(String manager){
-        final DatabaseReference ref2 = FirebaseDatabase.getInstance().getReference("Managers")
+        final DatabaseReference ref2 =session_db_ref.child("Managers")
                 .child(manager).child("cash");
 
         final IntegerDatabase ID2 = new IntegerDatabase( ref2);

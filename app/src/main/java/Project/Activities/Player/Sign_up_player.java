@@ -25,6 +25,7 @@
  import Project.Activities.Managers.Manager_Home_Page;
  import Project.Business_Logic.Manager_Logic;
  import Project.Business_Logic.New_Game;
+ import Project.Objects.Database.SessionDatabaseReference;
  import Project.Objects.Personel.Investor;
  import Project.Objects.Personel.Manager;
  import Project.Objects.Personel.Player;
@@ -41,6 +42,9 @@
      EditText password;
      String UID;
      long manager_num;
+     SessionDatabaseReference SDR  = (SessionDatabaseReference) getApplicationContext();
+
+
 
 
 
@@ -90,7 +94,7 @@
                                          FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                                          UID =user.getUid();
                                          Player player = new Player(UID);
-                                         FirebaseDatabase.getInstance().getReference("player_list")
+                                         SDR.getGlobalVarValue().child("player_list")
                                                  .child(user.getUid()).setValue(player).addOnCompleteListener(new OnCompleteListener<Void>() {
                                              @Override
                                              public void onComplete(@NonNull Task<Void> task) {
@@ -125,7 +129,7 @@
 
      private void get_PlayerType() {
          final String id = mAuth.getCurrentUser().getUid();
-         FirebaseDatabase.getInstance().getReference("Managers").addListenerForSingleValueEvent(new ValueEventListener() {
+         SDR.getGlobalVarValue().child("Managers").addListenerForSingleValueEvent(new ValueEventListener() {
              @Override
              public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                  manager_num = dataSnapshot.getChildrenCount();
@@ -158,7 +162,7 @@
 private void get_investors(){
          final String id = mAuth.getCurrentUser().getUid();
 
-    FirebaseDatabase.getInstance().getReference("Investors").addListenerForSingleValueEvent(new ValueEventListener() {
+    SDR.getGlobalVarValue().child("Investors").addListenerForSingleValueEvent(new ValueEventListener() {
         @Override
         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
@@ -198,7 +202,7 @@ private void get_investors(){
              Manager m = new Manager(player.getID());
              String current_company_symbol = new StringBuilderRandom(3).buildString();
              m.setCompany_symbol(current_company_symbol);
-             FirebaseDatabase.getInstance().getReference("Managers").child(player.getID()).setValue(m);
+             SDR.getGlobalVarValue() .child("Managers").child(player.getID()).setValue(m);
              Intent intent = new Intent(context, Manager_Home_Page.class);
 
              intent.putExtra("manager", m);
@@ -209,7 +213,7 @@ private void get_investors(){
             new Thread(NG).start();
 
              Investor investor = new Investor(player.getID());
-             FirebaseDatabase.getInstance().getReference("Investors").child(player.getID()).setValue(investor);
+             SDR.getGlobalVarValue().child("Investors").child(player.getID()).setValue(investor);
              Intent intent = new Intent(context, MarketPlace.class);
 
              intent.putExtra("investor", investor);

@@ -10,7 +10,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="Project.Activities.Player.Create_User"></activity>
+        <activity android:name="Project.Activities.Player.MainActivity"></activity>
+        <activity android:name="Project.Activities.Player.Create_User" />
         <activity android:name="Project.Activities.Managers.Wait_Page" />
         <activity android:name="Project.Activities.Admin.DownloadPage" />
         <activity android:name="Project.Activities.Admin.AdminHub" />
@@ -30,7 +31,7 @@
         <activity android:name="Project.Activities.Managers.Manager_Home_Page" />
         <activity android:name="Project.Activities.Investors.Investor_Instructions_Fragment" />
         <activity android:name="Project.Activities.Player.Sign_up_player" />
-        <activity android:name="Project.Activities.Player.MainActivity">
+        <activity android:name="Project.Activities.Player.GameMenu">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

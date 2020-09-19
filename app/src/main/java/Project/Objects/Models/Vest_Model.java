@@ -21,6 +21,7 @@ public class Vest_Model extends ViewModel {
     private  MutableLiveData<Investor> livedata=new MutableLiveData<>();
     private String id;
     private ArrayList<Trade> t;
+    private DatabaseReference session_db_ref;
     public LiveData<Investor> getMan(){
        update_investor();
 
@@ -30,7 +31,15 @@ public class Vest_Model extends ViewModel {
 
     }
 
-   public void setMan(Investor investor){
+    public DatabaseReference getSession_db_ref() {
+        return session_db_ref;
+    }
+
+    public void setSession_db_ref(DatabaseReference session_db_ref) {
+        this.session_db_ref = session_db_ref;
+    }
+
+    public void setMan(Investor investor){
         livedata.setValue(investor);
         id=investor.getID();
 
@@ -42,8 +51,7 @@ public class Vest_Model extends ViewModel {
 
     public void update_investor(){
         if (id==null){return;}else{
-    DatabaseReference ref = FirebaseDatabase.getInstance()
-            .getReference().child("Investors").child(id);
+    DatabaseReference ref = session_db_ref.child("Investors").child(id);
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -54,7 +62,7 @@ public class Vest_Model extends ViewModel {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.d("can't get man for man_model", databaseError.getMessage());
+                Log.d("can't get man", databaseError.getMessage());
 
             }
         });

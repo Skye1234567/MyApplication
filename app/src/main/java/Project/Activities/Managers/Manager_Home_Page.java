@@ -15,7 +15,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 
-import Project.Activities.Player.MainActivity;
+import Project.Activities.Player.GameMenu;
 import Project.Objects.Adapters.SectionsPageAdapter;
 import Project.Objects.Database.ALLOWDatabase;
 
@@ -79,7 +79,7 @@ public class Manager_Home_Page extends AppCompatActivity {
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.logout:
-                Intent intent = new Intent(context, MainActivity.class);
+                Intent intent = new Intent(context, GameMenu.class);
                 FirebaseAuth.getInstance().signOut();
                 context.startActivity(intent);
 

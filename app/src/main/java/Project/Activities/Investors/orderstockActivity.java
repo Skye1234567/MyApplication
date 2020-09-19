@@ -1,5 +1,6 @@
  package Project.Activities.Investors;
 
+import Project.Objects.Database.SessionDatabaseReference;
 import Project.Objects.Personel.Investor;
 import Project.Objects.Economics.Price;
 import Project.Objects.Economics.Share;
@@ -103,12 +104,13 @@ import com.google.firebase.database.FirebaseDatabase;
                      //try {
                          num_shares = Integer.parseInt(quantity.getText().toString());
                          dollars =Integer.parseInt(price.getText().toString());
+                         String looking_for="";
+                        SessionDatabaseReference SDR  = (SessionDatabaseReference) getApplicationContext();
 
 
+                        DatabaseReference db = SDR.getGlobalVarValue();
 
-                     String looking_for="";
-                         FirebaseDatabase db = FirebaseDatabase.getInstance();
-                         DatabaseReference ref_shares = db.getReference("Trades").child(sell).push();
+                         DatabaseReference ref_shares = db.child("Trades").child(sell).push();
                          trade = new Trade(num_shares, dollars, Cpany);
                          trade.setId(ref_shares.getKey());
                          trade.setTimeStamp(System.currentTimeMillis());
@@ -134,7 +136,7 @@ import com.google.firebase.database.FirebaseDatabase;
                                  p.add_bid(user_id,dollars);
                                  trade.setFor_sale(false);
                                  trade.setBuyer_id(user_id);
-                                 ref_shares = db.getReference("Trades").child(buy).push();
+                                 ref_shares = db.child("Trades").child(buy).push();
                                  trade.setId(ref_shares.getKey());
                                  ref_shares.setValue(trade);
                                  Toast.makeText(context, "Buy stock clicked", Toast.LENGTH_LONG).show();
@@ -148,9 +150,9 @@ import com.google.firebase.database.FirebaseDatabase;
                          }
 
                          market_price.setText(p.getPrice().toString());
-                         db.getReference("Shares").child(user_id).child(Cpany).setValue(current_selection);
-                         db.getReference().child("Investors").child(user_id).setValue(investor);
-                         db.getReference("Prices").child(Cpany).setValue(p);
+                         db.child("Shares").child(user_id).child(Cpany).setValue(current_selection);
+                         db.child("Investors").child(user_id).setValue(investor);
+                         db.child("Prices").child(Cpany).setValue(p);
                          Trade_Manager trade_manager = new Trade_Manager(trade,looking_for, p.getPrice());
                          trade_manager.search_for_trade();
 

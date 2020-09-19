@@ -2,6 +2,7 @@ package Project.Objects.Database;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
@@ -12,9 +13,11 @@ import androidx.annotation.NonNull;
 
 public class SessionTimeDatabase extends Observable {
     private Schedule schedule;
+    private DatabaseReference session_db_ref;
 
 
-    public SessionTimeDatabase() {
+    public SessionTimeDatabase(DatabaseReference session_db_ref) {
+        this.session_db_ref = session_db_ref;
 
     }
 
@@ -22,7 +25,7 @@ public class SessionTimeDatabase extends Observable {
     public void setParam() {
 
 
-        FirebaseDatabase.getInstance().getReference("Time").addListenerForSingleValueEvent(new ValueEventListener() {
+        session_db_ref.child("Time").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 schedule = dataSnapshot.getValue(Schedule.class);

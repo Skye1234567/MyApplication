@@ -9,22 +9,23 @@ import java.util.TimerTask;
 public class AdminTime implements Runnable {
     long delay;
     long nextdelay;
-    DatabaseReference ref;
+    DatabaseReference session_db_ref;
     long end;
     TimerTask set;
 
 
 //todo make singleton?
-    public AdminTime(final long delay, final long nextdelay, final long end, final boolean ALLOW) {
+    public AdminTime(final long delay, final long nextdelay, final long end, final boolean ALLOW, final DatabaseReference db_ref) {
+        this.session_db_ref = db_ref.child("ALLOW_TRADES");
         this.delay = delay;
         this.nextdelay = nextdelay;
-        this.ref= FirebaseDatabase.getInstance().getReference("ALLOW_TRADES");
+
         this.end = end;
         set = new TimerTask() {
             @Override
             public void run() {
-                ref.setValue(ALLOW);
-                new Thread( new AdminTime(nextdelay, delay, end, !ALLOW)).start();
+                session_db_ref.setValue(ALLOW);
+                new Thread( new AdminTime(nextdelay, delay, end, !ALLOW, db_ref)).start();
             }
         };
 

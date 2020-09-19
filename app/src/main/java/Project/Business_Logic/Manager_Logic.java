@@ -5,6 +5,7 @@ import Project.Objects.Economics.Market;
 import Project.Objects.Economics.Share;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
@@ -18,13 +19,16 @@ import androidx.annotation.NonNull;
 
 public class Manager_Logic {
     private final static String TAG ="Manager_Logic";
+    private DatabaseReference session_db_ref;
 
     private String company_symbol;
     private String manager_id;
 
-    public Manager_Logic( String company_symbol, String manager_id) {
+    public Manager_Logic( String company_symbol, String manager_id, DatabaseReference session_db_ref) {
+        this.session_db_ref = session_db_ref;
         this.company_symbol = company_symbol;
         this.manager_id= manager_id;
+
 
 
     }
@@ -33,15 +37,13 @@ public class Manager_Logic {
 
     public void  allocate_shares(){
         if (company_symbol==null)return;
-
-        FirebaseDatabase db = FirebaseDatabase.getInstance();
-        Query q = db.getReference("Investors");
+        Query q = session_db_ref.child("Investors");
         q.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot d : dataSnapshot.getChildren()){
                     String investor_id = d.getKey();
-                     FirebaseDatabase.getInstance().getReference("Shares").child(investor_id).child(company_symbol).setValue(new Share(investor_id,company_symbol, manager_id ));
+                    session_db_ref.child("Shares").child(investor_id).child(company_symbol).setValue(new Share(investor_id,company_symbol, manager_id ));
                 }
             }
 

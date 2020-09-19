@@ -1,6 +1,6 @@
 package Project.Activities.Admin;
 
-import Project.Activities.Player.MainActivity;
+import Project.Activities.Player.GameMenu;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -40,7 +40,7 @@ public class Admin_Menu extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 FirebaseAuth.getInstance().signOut();
-                startActivity(new Intent(context, MainActivity.class));
+                startActivity(new Intent(context, GameMenu.class));
             }
         });
 

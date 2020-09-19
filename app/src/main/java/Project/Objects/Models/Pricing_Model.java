@@ -3,6 +3,7 @@ package Project.Objects.Models;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.HashMap;
@@ -15,10 +16,15 @@ import androidx.lifecycle.ViewModel;
 
 public class Pricing_Model extends ViewModel {
     private MutableLiveData<HashMap<String, Price>> livedata = new MutableLiveData<>();
+    private DatabaseReference session_db_ref;
 
+    public DatabaseReference getSession_db_ref() {
+        return session_db_ref;
+    }
 
-
-
+    public void setSession_db_ref(DatabaseReference session_db_ref) {
+        this.session_db_ref = session_db_ref;
+    }
 
     public MutableLiveData<HashMap<String,Price>> getPrices() {
         update_prices();
@@ -41,7 +47,7 @@ public class Pricing_Model extends ViewModel {
 
     public void update_prices(){
 
-        FirebaseDatabase.getInstance().getReference("Prices").addChildEventListener(new ChildEventListener() {
+       session_db_ref.child("Prices").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 Price p = dataSnapshot.getValue(Price.class);

@@ -1,6 +1,5 @@
 package Project.Activities.Player;
 
-import Project.Activities.Admin.Admin_Menu;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -18,7 +17,6 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 
 public class Create_User extends AppCompatActivity {
@@ -62,7 +60,7 @@ public class Create_User extends AppCompatActivity {
 
                                         Toast.makeText(context, "Sign up failed.", Toast.LENGTH_SHORT).show();
                                     }
-                                    Intent intent = new Intent(context, MainActivity.class);
+                                    Intent intent = new Intent(context, GameMenu.class);
                                     context.startActivity(intent);
                                 }
                             });

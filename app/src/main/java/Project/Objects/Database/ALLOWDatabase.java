@@ -12,15 +12,14 @@ import androidx.annotation.NonNull;
 
 public class ALLOWDatabase extends Observable {
     boolean Allow;
-    DatabaseReference ref;
+    DatabaseReference session_db_ref;
 
-    public ALLOWDatabase() {
-
-        ref = FirebaseDatabase.getInstance().getReference("ALLOW_TRADES");
+    public ALLOWDatabase(DatabaseReference session_db_ref) {
+        this.session_db_ref = session_db_ref.child("ALLOW_TRADES");
     }
 
     public void addListener(){
-        ref.addValueEventListener(new ValueEventListener() {
+        session_db_ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()){

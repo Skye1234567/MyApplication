@@ -2,6 +2,7 @@ package Project.Activities.Investors;
 
 import Project.Activities.Managers.Manager_Home_Page;
 import Project.Objects.Database.ALLOWDatabase;
+import Project.Objects.Database.SessionDatabaseReference;
 import Project.Objects.Personel.Investor;
 import Project.Objects.Adapters.ManAdapter;
 import Project.Objects.Database.ManDatabase;
@@ -113,7 +114,10 @@ public class Investor_Round_Intro extends AppCompatActivity {
         if (  FirebaseAuth.getInstance().getCurrentUser()!=null)
             id =    FirebaseAuth.getInstance().getCurrentUser().getUid();
         else return;
-        FirebaseDatabase.getInstance().getReference("Investors").child(id).addListenerForSingleValueEvent(new ValueEventListener() {
+        SessionDatabaseReference SDR  = (SessionDatabaseReference) getApplicationContext();
+
+
+        SDR.getGlobalVarValue().child("Investors").child(id).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                  i =dataSnapshot.getValue(Investor.class);

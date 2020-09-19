@@ -1,5 +1,6 @@
 package Project.Activities.Admin;
 
+import Project.Objects.Database.SessionDatabaseReference;
 import Project.Objects.Economics.Market;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,6 +18,7 @@ import com.example.myapplication.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class Set_Parameters extends AppCompatActivity {
@@ -27,7 +29,6 @@ public class Set_Parameters extends AppCompatActivity {
     EditText pi_l;
     EditText rounds;
     Button submit_round_1;
-    FirebaseDatabase db;
     String child;
     Market market;
 
@@ -69,8 +70,11 @@ public class Set_Parameters extends AppCompatActivity {
             if (!(fp==null || fpi_h==null || fpi_l==null || num_round==null)) {
                 Market round_1 = new Market(fpi_h,fpi_l,fp, num_round);
                 round_1.setType("BOOM");
-                db = FirebaseDatabase.getInstance();
-                db.getReference("markets").child(child).setValue(round_1).addOnCompleteListener(new OnCompleteListener<Void>() {
+                SessionDatabaseReference SDR  = (SessionDatabaseReference) getApplicationContext();
+
+
+
+                SDR.getGlobalVarValue().child("markets").child(child).setValue(round_1).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         Intent intent = new Intent(context, AdminHub.class);

@@ -2,42 +2,48 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/login_page"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="Project.Activities.Player.GameMenu"
-    android:layout_margin="@dimen/textSizeNormal"
-    >
-
-    <Button
-        android:layout_width="wrap_content"
+    tools:context="Project.Activities.Player.MainActivity">
+    <TextView
+        android:id="@+id/toptext"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/select_admin"
-        android:text="Admin"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/sess_num_enter"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        android:text="Please enter the session number provided:"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="@dimen/textSizeNormal"
+
         />
 
-    <Button
-        android:layout_width="wrap_content"
+
+
+    <EditText
+        android:id="@+id/sess_num_enter"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/select_player"
-        android:text="Player"
-        app:layout_constraintTop_toBottomOf="@+id/select_admin"
-        app:layout_constraintBottom_toBottomOf="@+id/select_sign_up"
+        app:layout_constraintTop_toTopOf="@+id/toptext"
+        app:layout_constraintBottom_toTopOf="@id/verify_sess_button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         />
     <Button
+        android:id="@+id/verify_sess_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/select_sign_up"
-        android:text="New User"
-        app:layout_constraintTop_toBottomOf="@+id/select_player"
+        app:layout_constraintTop_toBottomOf="@+id/sess_num_enter"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        android:text="VERIFY"
+
         />
+
+
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

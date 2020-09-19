@@ -20,6 +20,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
+import Project.Objects.Database.SessionDatabaseReference;
 import Project.Objects.Economics.Schedule;
 import Project.Objects.Handlers.AdminTime;
 import androidx.annotation.NonNull;
@@ -104,7 +105,10 @@ public class Set_Parameters_Schedule extends AppCompatActivity {
 
                 AdminTime AT = new AdminTime(report_length, invest_length, System.currentTimeMillis()+(report_length+invest_length)*12, true);
                 new Thread(AT).start();
-                FirebaseDatabase.getInstance().getReference("Time").setValue(
+                SessionDatabaseReference SDR  = (SessionDatabaseReference) getApplicationContext();
+
+
+                SDR.getGlobalVarValue().child("Time").setValue(
                         new Schedule(time, invest_length,report_length)).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {

@@ -1,80 +1,65 @@
 package Project.Activities.Player;
 
+import Project.Objects.Database.SessionDatabaseReference;
+import Project.Objects.Database.StringChildDatabase;
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.Context;
 import android.content.Intent;
-
-import Project.Activities.Admin.Sign_up_admin;
-import Project.Activities.Player.Sign_up_player;
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.myapplication.R;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.Observable;
+import java.util.Observer;
+
 public class MainActivity extends AppCompatActivity {
-    Context context;
+    private EditText session_num;
+    private Context context;
+    private String session_id;
+    private Button verify;
+    SessionDatabaseReference SDR;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_session__validation);
+        session_num = findViewById(R.id.sess_num_enter);
+        SDR= ((SessionDatabaseReference) getApplicationContext());
+        verify = findViewById(R.id.verify_sess_button);
 
-
-
-        setContentView(R.layout.activity_main);
         context = this;
-
-
-
-
-
-
-        Button button = findViewById(R.id.select_admin);
-        Button button1 = findViewById(R.id.select_player);
-        Button button2 = findViewById(R.id.select_sign_up);
-        button.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View v) {
-
-               //put admin auth stuff
-               Intent intent = new Intent(context, Sign_up_admin.class);
-               context.startActivity(intent);
-               finish();
-               }});
-
-
-        button1.setOnClickListener(new View.OnClickListener() {
+        verify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //put stuff for player auth
-                FirebaseAuth auth = FirebaseAuth.getInstance();
-                Intent intent = new Intent(context, Sign_up_player.class);
-                context.startActivity(intent);
-                finish();
+                session_id = session_num.getText().toString();
+                StringChildDatabase SCD = new StringChildDatabase(FirebaseDatabase.getInstance().getReference(),session_id);
+                SCD.addObserver(new Observer() {
+                    @Override
+                    public void update(Observable o, Object arg) {
+                        if ((boolean) arg) {
+                            Intent intent = new Intent(context, GameMenu.class);
+                            SDR.setGlobalVarValue(session_id);
+                            startActivity(intent);
+                        }
+                        else{
+                            Toast.makeText(context, "Session Not Recognized", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
 
 
             }
-        });
-        button2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //put stuff for player auth
-                FirebaseAuth auth = FirebaseAuth.getInstance();
-                Intent intent = new Intent(context, Create_User.class);
-                context.startActivity(intent);
-                finish();
 
 
-            }
         });
+
     }
-
-
 }
-
-
-

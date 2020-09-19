@@ -3,6 +3,7 @@ package Project.Objects.Database;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
@@ -14,14 +15,16 @@ import androidx.annotation.Nullable;
 
 public class ManDatabase extends Observable {
     private ArrayList<Manager> arrayList;
+    private DatabaseReference session_db_ref;
 
-    public ManDatabase() {
+    public ManDatabase(DatabaseReference session_db_ref) {
+        this.session_db_ref = session_db_ref;
         arrayList = new ArrayList<>();
     }
 
     public void listenForChanges(){
 
-        FirebaseDatabase.getInstance().getReference("Managers").addChildEventListener(new ChildEventListener() {
+       session_db_ref.child("Managers").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 arrayList.add(dataSnapshot.getValue(Manager.class));

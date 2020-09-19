@@ -1,8 +1,6 @@
 package Project.Activities.Investors;
 
-import Project.Activities.Managers.Manager_Home_Page;
-import Project.Activities.Player.MainActivity;
-import Project.Business_Logic.New_Game;
+import Project.Activities.Player.GameMenu;
 import Project.Objects.Database.ALLOWDatabase;
 import Project.Objects.Personel.Investor;
 import Project.Objects.Models.Man_Model;
@@ -23,11 +21,9 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
-import Project.Business_Logic.Accountant;
 import com.example.myapplication.R;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Observable;
 import java.util.Observer;
@@ -88,7 +84,7 @@ public class MarketPlace extends AppCompatActivity {
         adapter = new SectionsPageAdapter(getSupportFragmentManager());
         adapter.addFragment(new View_Companies(), "Company Reports");
         adapter.addFragment(new Investor_Instructions_Fragment(), "Your  Stocks");
-        adapter.addFragment(new ActiveTradesFragment(), "Active Trades");
+        adapter.addFragment(new ActiveTradesFragment(), "Active Orders");
         viewPager.setAdapter(adapter);
     }
 
@@ -103,7 +99,7 @@ public class MarketPlace extends AppCompatActivity {
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.logout:
-                Intent intent = new Intent(context, MainActivity.class);
+                Intent intent = new Intent(context, GameMenu.class);
                 FirebaseAuth.getInstance().signOut();
                 context.startActivity(intent);
 

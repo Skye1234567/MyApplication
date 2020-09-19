@@ -22,16 +22,18 @@ public class Value_Assessor implements Runnable {
     private DatabaseReference ref_cash;
     private Query ref_trades_buyer;
     private Trade complete;
+    private DatabaseReference session_db_ref;
 
 
-    public Value_Assessor(@NonNull String investor_id) {
+    public Value_Assessor(@NonNull String investor_id, DatabaseReference session_db_ref) {
+        this.session_db_ref = session_db_ref;
 
 
-        FirebaseDatabase db = FirebaseDatabase.getInstance();
-        ref_share_num = db.getReference("Shares").child(investor_id);
+        DatabaseReference db = session_db_ref;
+        ref_share_num = db.child("Shares").child(investor_id);
 
-        ref_cash = db.getReference("Investors");
-        ref_trades_buyer = db.getReference("Trades").child("Completed").orderByChild("buyer_id").equalTo(investor_id);
+        ref_cash = db.child("Investors");
+        ref_trades_buyer = db.child("Trades").child("Completed").orderByChild("buyer_id").equalTo(investor_id);
 
 
     }
@@ -43,8 +45,8 @@ public class Value_Assessor implements Runnable {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot d : dataSnapshot.getChildren()) {
                     complete = d.getValue(Trade.class);
-                    FirebaseDatabase.getInstance().getReference("Trades").child("Completed").child(complete.getId()).setValue(null);
-                    FirebaseDatabase.getInstance().getReference("Trades").child("Archive").child(complete.getId()).setValue(complete);
+                   session_db_ref.child("Trades").child("Completed").child(complete.getId()).setValue(null);
+                   session_db_ref.child("Trades").child("Archive").child(complete.getId()).setValue(complete);
 
                     update_buyer_shares();
                     update_seller_cash();

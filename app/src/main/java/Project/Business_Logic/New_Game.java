@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
@@ -16,10 +17,14 @@ import Project.Objects.Personel.Manager;
 import androidx.annotation.NonNull;
 
 public class New_Game implements Runnable {
-    String id;
+    private String id;
+    private DatabaseReference session_db_ref;
 
 
-    public New_Game(String investorID) {
+
+
+    public New_Game(String investorID,DatabaseReference session_db_ref) {
+        this.session_db_ref = session_db_ref;
         this.id = investorID;
     }
 
@@ -31,9 +36,7 @@ public class New_Game implements Runnable {
 
     public void  allocate_shares(){
 
-
-        FirebaseDatabase db = FirebaseDatabase.getInstance();
-        Query q = db.getReference("Managers");
+        Query q = session_db_ref.child("Managers");
         q.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -41,7 +44,7 @@ public class New_Game implements Runnable {
                     String manager_id = d.getKey();
                     Manager m = d.getValue(Manager.class);
                     String company_symbol = m.getCompany_symbol();
-                    FirebaseDatabase.getInstance().getReference("Shares").child(id).child(company_symbol).setValue(new Share(id,company_symbol, manager_id ));
+                   session_db_ref.child("Shares").child(id).child(company_symbol).setValue(new Share(id,company_symbol, manager_id ));
                 }
             }
 

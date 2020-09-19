@@ -1,6 +1,7 @@
 package Project.Activities.Managers;
 
 import Project.Objects.Database.SessionDatabase;
+import Project.Objects.Database.SessionDatabaseReference;
 import Project.Objects.Database.SessionTimeDatabase;
 import Project.Objects.Economics.Schedule;
 import Project.Objects.Economics.Session;
@@ -67,7 +68,10 @@ public class Company_status_fragment extends Fragment {
         audit = view.findViewById(R.id.audit_info);
         dividend = view.findViewById(R.id.dividend_info);
         String id  = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        REF = FirebaseDatabase.getInstance().getReference("Managers").child(id);
+        SessionDatabaseReference SDR  = (SessionDatabaseReference) context.getApplicationContext();
+
+
+        REF=SDR.getGlobalVarValue().child("Managers").child(id);
         accountant = new Accountant(REF);
         STD = new SessionTimeDatabase();
         STD.addObserver(new java.util.Observer() {

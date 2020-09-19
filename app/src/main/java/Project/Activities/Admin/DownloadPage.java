@@ -1,5 +1,6 @@
 package Project.Activities.Admin;
 
+import Project.Objects.Database.SessionDatabaseReference;
 import Project.Objects.Economics.Price;
 import Project.Objects.Economics.Schedule;
 import Project.Objects.Economics.Session;
@@ -50,9 +51,10 @@ public class DownloadPage extends AppCompatActivity {
          pb = findViewById(R.id.pb);
          context=this;
          data = findViewById(R.id.all_data);
+        SessionDatabaseReference SDR  = (SessionDatabaseReference) getApplicationContext();
 
 
-        FirebaseDatabase.getInstance().getReference().addListenerForSingleValueEvent(new ValueEventListener() {
+        SDR.getGlobalVarValue().addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Downloaded_Data dd = new Downloaded_Data();

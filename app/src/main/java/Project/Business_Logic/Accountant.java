@@ -11,6 +11,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 import Project.Objects.Database.IntegerDatabase;
+import Project.Objects.Database.SessionDatabaseReference;
 import Project.Objects.Handlers.Ledger;
 import androidx.annotation.NonNull;
 // leon walras
@@ -79,7 +80,7 @@ public void generate_round_data(Float percent_chance_profit_h, Float percent_cha
 //TODO reset investor can be done with newgame
 
 public void reset_investor(final String investor_id){
-    DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+    DatabaseReference ref = reference.getParent().getParent();
     ref.child("Investors").child(investor_id).child("cash").setValue(100);
     ref.child("Investors").child(investor_id).child("value").setValue(100);
     ref.child("Shares").child(investor_id).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -104,8 +105,8 @@ public void reset_investor(final String investor_id){
 public void reset_shares(String investor_id){
 
         for (String s : aL){
-        FirebaseDatabase.getInstance().getReference("Shares").child(investor_id).child(s).child("number").setValue(10);
-        FirebaseDatabase.getInstance().getReference("Shares").child(investor_id).child(s).child("market_price").setValue(0);
+        reference.getParent().getParent().child("Shares").child(investor_id).child(s).child("number").setValue(10);
+        reference.getParent().getParent().child("Shares").child(investor_id).child(s).child("market_price").setValue(0);
 
 }}
 

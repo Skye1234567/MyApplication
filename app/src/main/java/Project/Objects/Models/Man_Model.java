@@ -18,6 +18,7 @@ import androidx.lifecycle.ViewModel;
 public class Man_Model extends ViewModel {
     private  MutableLiveData<HashMap<String, Manager>> livedata=new MutableLiveData<>();
    private HashMap<String, Manager> a;
+   private DatabaseReference session_db_ref;
 
     public LiveData<HashMap<String, Manager>> getMan(){
         update_manager();
@@ -25,11 +26,16 @@ public class Man_Model extends ViewModel {
 
         return livedata;
     }
-    public Man_Model(){
-        update_manager();
+
+    public DatabaseReference getSession_db_ref() {
+        return session_db_ref;
     }
 
-   public void setMan(HashMap<String, Manager> manager){
+    public void setSession_db_ref(DatabaseReference session_db_ref) {
+        this.session_db_ref = session_db_ref;
+    }
+
+    public void setMan(HashMap<String, Manager> manager){
         livedata.setValue(manager);
 
 
@@ -39,8 +45,7 @@ public void update_manager(){
         if (livedata.getValue()==null) livedata.setValue(new HashMap<String, Manager>());
         a = livedata.getValue();
 
-    DatabaseReference ref = FirebaseDatabase.getInstance()
-            .getReference().child("Managers");
+    DatabaseReference ref = session_db_ref.child("Managers");
     ref.addChildEventListener(new ChildEventListener() {
         @Override
         public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {

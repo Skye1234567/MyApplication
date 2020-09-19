@@ -7,7 +7,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
-import Project.Activities.Player.MainActivity;
+import Project.Activities.Player.GameMenu;
 import Project.Objects.Adapters.SectionsPageAdapter;
 
 import com.example.myapplication.R;
@@ -91,7 +91,7 @@ public class MarketPlaceForMan extends AppCompatActivity {
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.logout:
-                Intent intent = new Intent(context, MainActivity.class);
+                Intent intent = new Intent(context, GameMenu.class);
                 FirebaseAuth.getInstance().signOut();
                 context.startActivity(intent);
 

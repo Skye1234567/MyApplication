@@ -11,8 +11,10 @@
  import android.widget.Toast;
 
  import com.example.myapplication.R;
+ import com.google.firebase.database.DatabaseReference;
  import com.google.firebase.database.FirebaseDatabase;
 
+ import Project.Objects.Database.SessionDatabaseReference;
  import Project.Objects.Personel.Investor;
  import Project.Objects.Economics.Price;
  import Project.Objects.Economics.Trade;
@@ -49,7 +51,7 @@
         setContentView(R.layout.activityeditorder);
         Intent intent1 = getIntent();
         deleter = findViewById(R.id.delete_order_button);
-        num_trade_shares = intent1.getIntExtra("ShareNum", 0);
+         num_trade_shares = intent1.getIntExtra("ShareNum", 0);
 
          investor = (Investor) intent1.getSerializableExtra("investor");
          current_trade = (Trade) intent1.getSerializableExtra("trade");
@@ -75,24 +77,28 @@
          deleter.setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View v) {
-                 FirebaseDatabase db = FirebaseDatabase.getInstance();
+                 SessionDatabaseReference SDR  = (SessionDatabaseReference) getApplicationContext();
+
+
+                 DatabaseReference db = SDR.getGlobalVarValue();
+
                 if (bs.compareTo(buy)==0) {
 
                     Integer new_cash = investor.getCash()+ current_trade.getPrice_point()* current_trade.getNum_shares();
                    investor.setCash(new_cash);
 
-                    db.getReference("Prices").child(Cpany).child("bids").child(user_id).setValue(null);
+                    db.child("Prices").child(Cpany).child("bids").child(user_id).setValue(null);
 
                 }else {
-                    db.getReference("Prices").child(Cpany).child("asks").child(user_id).setValue(null);
+                    db.child("Prices").child(Cpany).child("asks").child(user_id).setValue(null);
 
-                    db.getReference("Shares").child(investor.getID()).child(current_trade.getCompany()).child("number").setValue(num_trade_shares+ current_trade.getNum_shares());
+                    db.child("Shares").child(investor.getID()).child(current_trade.getCompany()).child("number").setValue(num_trade_shares+ current_trade.getNum_shares());
 
                 }
 
-                 db.getReference("Shares").child(user_id).child(Cpany).child("status").setValue(null);
-                 db.getReference("Trades").child(bs).child(current_trade.getId()).setValue(null);
-                 db.getReference().child("Investors").child(user_id).setValue(investor);
+                 db.child("Shares").child(user_id).child(Cpany).child("status").setValue(null);
+                 db.child("Trades").child(bs).child(current_trade.getId()).setValue(null);
+                 db.child("Investors").child(user_id).setValue(investor);
 
                  Intent intent = new Intent(context, MarketPlace.class);
                  intent.putExtra("investor", investor);
@@ -121,7 +127,10 @@
 
 
                          String looking_for="";
-                         FirebaseDatabase db = FirebaseDatabase.getInstance();
+                         SessionDatabaseReference SDR  = (SessionDatabaseReference) getApplicationContext();
+
+
+                         DatabaseReference db = SDR.getGlobalVarValue();
 
 
                          Integer old_num_share =num_trade_shares+current_trade.getNum_shares();
@@ -136,12 +145,13 @@
                                  Toast.makeText(context, "Invalid entry: make sure you have enough shares", Toast.LENGTH_LONG).show();
                              else{
                                 p.add_ask(user_id,dollars);
-                                 db.getReference("Prices").child(Cpany).child("asks").child(user_id).setValue(dollars);
+                                 db.child("Prices").child(Cpany).child("asks").child(user_id).setValue(dollars);
                                  current_trade.setNum_shares(num_shares);
                                  current_trade.setPrice_point(dollars);
                                  current_trade.setTimeStamp(System.currentTimeMillis());
 
-                                FirebaseDatabase.getInstance().getReference("Shares")
+
+                                 SDR.getGlobalVarValue().child("Shares")
                                         .child(current_trade.getSeller_id()).child(current_trade.getCompany())
                                         .child("number").setValue(old_num_share-num_shares);
                                  looking_for = buy;}
@@ -154,7 +164,7 @@
                              }
                              else {
                                  p.add_bid(user_id,dollars);
-                                 db.getReference("Prices").child(Cpany).child("bids").child(user_id).setValue(dollars);
+                                 db.child("Prices").child(Cpany).child("bids").child(user_id).setValue(dollars);
                                  current_trade.setPrice_point(dollars);
                                  current_trade.setNum_shares(num_shares);
                                  Toast.makeText(context, "Buy stock clicked", Toast.LENGTH_LONG).show();
@@ -165,8 +175,8 @@
 
 
                          current_bid.setText(p.getPrice().toString());
-                         db.getReference().child("Investors").child(user_id).setValue(investor);
-                         db.getReference("Trades").child(bs).child(current_trade.getId()).setValue(current_trade);
+                         db.child("Investors").child(user_id).setValue(investor);
+                         db.child("Trades").child(bs).child(current_trade.getId()).setValue(current_trade);
 
                          Trade_Manager trade_manager = new Trade_Manager(current_trade,looking_for, p.getPrice());
                          trade_manager.search_for_trade(); }
