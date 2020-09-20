@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="@dimen/textSizeNormal"
-    tools:context="Project.Activities.Admin.Enter_Num_Players">
+    tools:context="project.Activities.Admin.Enter_Num_Players">
 
     <TextView
         app:layout_constraintEnd_toEndOf="parent"

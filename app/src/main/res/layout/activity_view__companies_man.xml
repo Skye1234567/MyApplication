@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="Project.Activities.Managers.View_Companies_Manager">
+    tools:context="project.Activities.Managers.View_Companies_Manager">
 
 
         <LinearLayout
