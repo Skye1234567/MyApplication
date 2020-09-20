@@ -11,37 +11,37 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:name="project.Objects.Database.SessionDatabaseReference"
+        android:name="project.objects.database.SessionDatabaseReference"
 
         >
-        <activity android:name="project.Activities.Player.MainActivity">
+        <activity android:name="project.activities.player.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="project.Activities.Player.Create_User" />
-        <activity android:name="project.Activities.Managers.Wait_Page" />
-        <activity android:name="project.Activities.Admin.DownloadPage" />
-        <activity android:name="project.Activities.Admin.AdminHub" />
-        <activity android:name="project.Activities.Investors.Investor_Round_Intro" />
-        <activity android:name="project.Activities.Player.EndPage" />
-        <activity android:name="project.Activities.Investors.View_Companies" />
-        <activity android:name="project.Activities.Investors.orderstockActivity" />
-        <activity android:name="project.Activities.Investors.editorderActivity" />
-        <activity android:name="project.Activities.Admin.Enter_Num_Players" />
-        <activity android:name="project.Activities.Player.Relevant_terminology" />
-        <activity android:name="project.Activities.Admin.Admin_Menu" />
-        <activity android:name="project.Activities.Admin.Sign_up_admin" />
-        <activity android:name="project.Activities.Admin.Set_Parameters" />
-        <activity android:name="project.Activities.Admin.Set_Parameters_Schedule" />
-        <activity android:name="project.Activities.Investors.MarketPlace" />
-        <activity android:name="project.Activities.Managers.MarketPlaceForMan" />
-        <activity android:name="project.Activities.Managers.Manager_Home_Page" />
-        <activity android:name="project.Activities.Investors.Investor_Instructions_Fragment" />
-        <activity android:name="project.Activities.Player.Sign_up_player" />
-        <activity android:name="project.Activities.Player.GameMenu"/>
+        <activity android:name="project.activities.player.Create_User" />
+        <activity android:name="project.activities.managers.Wait_Page" />
+        <activity android:name="project.activities.admin.DownloadPage" />
+        <activity android:name="project.activities.admin.AdminHub" />
+        <activity android:name="project.activities.investors.Investor_Round_Intro" />
+        <activity android:name="project.activities.player.EndPage" />
+        <activity android:name="project.activities.investors.View_Companies" />
+        <activity android:name="project.activities.investors.orderstockActivity" />
+        <activity android:name="project.activities.investors.editorderActivity" />
+        <activity android:name="project.activities.admin.Enter_Num_Players" />
+        <activity android:name="project.activities.player.Relevant_terminology" />
+        <activity android:name="project.activities.admin.Admin_Menu" />
+        <activity android:name="project.activities.admin.Sign_up_admin" />
+        <activity android:name="project.activities.admin.Set_Parameters" />
+        <activity android:name="project.activities.admin.Set_Parameters_Schedule" />
+        <activity android:name="project.activities.investors.MarketPlace" />
+        <activity android:name="project.activities.managers.MarketPlaceForMan" />
+        <activity android:name="project.activities.managers.Manager_Home_Page" />
+        <activity android:name="project.activities.investors.Investor_Instructions_Fragment" />
+        <activity android:name="project.activities.player.Sign_up_player" />
+        <activity android:name="project.activities.player.GameMenu"/>
 
 
     </application>
@@ -49,6 +49,8 @@
 
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERACT_ACROSS_USERS_FULL"
+        tools:ignore="ProtectedPermissions" />
 
 
 </manifest>

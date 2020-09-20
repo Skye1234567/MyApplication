@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="project.Activities.Admin.Admin_Menu"
+    tools:context="project.activities.admin.Admin_Menu"
     android:layout_margin="@dimen/textSizeNormal">
     <LinearLayout
         app:layout_constraintStart_toStartOf="parent"

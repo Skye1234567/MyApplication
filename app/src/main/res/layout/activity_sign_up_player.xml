@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="project.Activities.Admin.Sign_up_admin"
+    tools:context="project.activities.admin.Sign_up_admin"
     android:layout_margin="@dimen/textSizeNormal">
 
         <LinearLayout
