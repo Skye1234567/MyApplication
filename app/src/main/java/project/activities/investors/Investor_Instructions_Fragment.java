@@ -61,7 +61,7 @@ public class Investor_Instructions_Fragment extends Fragment {
 
 
         tableLayout=view.findViewById(R.id.company_shares_table_investor_instructions);
-        Investor investor = (Investor) Objects.requireNonNull(getActivity().getIntent().getExtras()).getSerializable("investor");
+        Investor investor = (Investor) requireActivity().getIntent().getExtras().getSerializable("investor");
         in_id = investor.getID();
         new Thread(new Value_Assessor(in_id, SDR.getGlobalVarValue())).start();
 

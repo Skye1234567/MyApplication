@@ -72,7 +72,7 @@ public class Share_Model extends ViewModel {
    }
 
 public void update_shares(){
-        if (id==null){return;}else{
+        if (id==null || session_db_ref ==null){return;}else{
     DatabaseReference ref = session_db_ref.child("Shares").child(id);
     ref.addChildEventListener(new ChildEventListener() {
         @Override

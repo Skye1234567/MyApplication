@@ -16,7 +16,7 @@ public class Admin_Menu extends AppCompatActivity {
 
     Button logout;
     Button download;
-    Button toHUB;
+    Button toSessList;
     Context context;
 
 
@@ -28,11 +28,11 @@ public class Admin_Menu extends AppCompatActivity {
         setContentView(R.layout.activity_admin__menu);
         logout = findViewById(R.id.logoutadmin);
         download = findViewById(R.id.downloaddatatadmin);
-        toHUB = findViewById(R.id.editparametersadmin);
-        toHUB.setOnClickListener(new View.OnClickListener() {
+        toSessList = findViewById(R.id.editparametersadmin);
+        toSessList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(context, AdminHub.class));
+                startActivity(new Intent(context, AdminSessionEdit.class));
                 finish();
             }
         });

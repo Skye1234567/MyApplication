@@ -34,6 +34,7 @@ public class AdminHub extends AppCompatActivity {
         FirebaseAuth mauth = FirebaseAuth.getInstance();
         setContentView(R.layout.activity_admin_hub);
         SDR = (SessionDatabaseReference) getApplication();
+
         if ( mauth.getCurrentUser()==null){
             Intent intent = new Intent(context, Sign_up_admin.class);
             context.startActivity(intent);

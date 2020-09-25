@@ -1,18 +1,42 @@
 package project.objects.economics;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 public class Session implements Serializable {
+    private String id;
 
     private Market practice;
     private Market round_1;
     private Market round_2;
 
-    public Session(Market practice, Market boom, Market bust) {
+    public Session(Market practice, Market boom, Market bust, String id) {
 
         this.practice = practice;
         this.round_1 = boom;
         this.round_2 = bust;
+        this.id = id;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Session)) return false;
+        Session session = (Session) o;
+        return getId().equals(session.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId());
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     @Override

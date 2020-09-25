@@ -13,13 +13,11 @@ import androidx.annotation.NonNull;
 public class SessionDatabase extends Observable {
 
     private Session session;
-    private int set;
     private DatabaseReference session_db_ref;
 
     public SessionDatabase(DatabaseReference session_db_ref) {
         this.session_db_ref = session_db_ref;
-        session = new Session();
-        set =0;
+        this.session = new Session();
 
     }
     public void setParam() {
