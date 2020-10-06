@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="project.activities.admin.Admin_Remote">
+
+    <TextView
+        android:id="@+id/title_admin_remote"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/open_markets_admin"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:text="SET MODE"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="@dimen/textSizeTitle"
+        android:padding="@dimen/textSizeTitle"/>
+    <Button
+        android:text="Practice"
+
+        android:id="@+id/select_practice_admin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toStartOf="@id/close_markets_admin"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/title_admin_remote"
+        app:layout_constraintBottom_toTopOf="@id/open_markets_admin"
+
+        />
+
+    <Button
+
+    android:text="Mode 1"
+    android:id="@+id/select_mode1_admin"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:layout_constraintStart_toEndOf="@id/select_practice_admin"
+    app:layout_constraintEnd_toStartOf="@id/select_mode2_admin"
+    app:layout_constraintBottom_toTopOf="@id/close_markets_admin"
+    app:layout_constraintTop_toBottomOf="@id/title_admin_remote"
+    />
+    <Button
+
+        android:text="Mode 2"
+        android:id="@+id/select_mode2_admin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/select_mode1_admin"
+        app:layout_constraintBottom_toTopOf="@id/close_markets_admin"
+        app:layout_constraintTop_toBottomOf="@id/title_admin_remote"
+        />
+
+
+    <Button
+
+        android:text="OPEN MARKETS"
+        android:id="@+id/open_markets_admin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toStartOf="@id/close_markets_admin"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/back_from_admin_remote"
+        app:layout_constraintTop_toBottomOf="@id/select_practice_admin"
+
+        />
+    <Button
+
+        android:text="CLOSE MARKETS"
+        android:id="@+id/close_markets_admin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/open_markets_admin"
+        app:layout_constraintBottom_toTopOf="@id/back_from_admin_remote"
+        app:layout_constraintTop_toBottomOf="@id/select_mode2_admin"
+        />
+    <Button
+
+        android:text="BACK"
+        android:id="@+id/back_from_admin_remote"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/close_markets_admin"
+        />
+</androidx.constraintlayout.widget.ConstraintLayout>

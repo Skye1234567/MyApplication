@@ -79,6 +79,16 @@
             android:text="Back to Menu"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="@dimen/textSizeNormal"/>
+
+        <Button
+            android:padding="@dimen/textSizeNormal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/to_remote"
+            android:text="To Remote"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/textSizeNormal"/>
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

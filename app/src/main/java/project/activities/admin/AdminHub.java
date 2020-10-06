@@ -23,6 +23,7 @@ public class AdminHub extends AppCompatActivity {
     private Button EditRound2;
     private Button EditSchedule;
     private  Button back_to_menu;
+    private Button go_to_remote;
     private SessionDatabase SD;
     private Context context;
     private Session session;
@@ -31,6 +32,7 @@ public class AdminHub extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         FirebaseAuth mauth = FirebaseAuth.getInstance();
         setContentView(R.layout.activity_admin_hub);
         SDR = (SessionDatabaseReference) getApplication();
@@ -56,7 +58,7 @@ public class AdminHub extends AppCompatActivity {
         EditRound2 = findViewById(R.id.setround_2hub);
         EditRound1 = findViewById(R.id.setround_1hub);
         EditPractice = findViewById(R.id.setpracticehub);
-
+        go_to_remote = findViewById(R.id.to_remote);
 
         EditPractice.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -104,6 +106,14 @@ public class AdminHub extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(context, Admin_Menu.class));
+            }
+        });
+        go_to_remote.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent  = new Intent(context, Admin_Remote.class);
+                startActivity(intent);
+
             }
         });
 

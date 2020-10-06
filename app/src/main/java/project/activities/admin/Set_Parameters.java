@@ -20,20 +20,24 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class Set_Parameters extends AppCompatActivity {
-    Context context;
-    FirebaseAuth mauth;
-    EditText p;
-    EditText pi_h;
-    EditText pi_l;
-    EditText rounds;
-    Button submit_round_1;
-    String child;
-    Market market;
+    private Context context;
+    private FirebaseAuth mauth;
+    private EditText p;
+    private EditText pi_h;
+    private EditText pi_l;
+    private EditText rounds;
+    private Button submit_round_1;
+    private String child;
+    private Market market;
+    private SessionDatabaseReference SDR;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        SDR = (SessionDatabaseReference) getApplication();
+        SDR.getGlobalVarValue();
         setContentView(R.layout.activity_set__parameters);
         context= this;
         child =getIntent().getStringExtra("child");
