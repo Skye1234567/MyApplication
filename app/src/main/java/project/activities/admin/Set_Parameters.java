@@ -43,10 +43,7 @@ public class Set_Parameters extends AppCompatActivity {
         child =getIntent().getStringExtra("child");
         market = (Market) getIntent().getSerializableExtra("market");
         mauth = FirebaseAuth.getInstance();
-        if ( mauth.getCurrentUser()==null){
-            Intent intent = new Intent(context, Sign_up_admin.class);
-            context.startActivity(intent);
-        }
+
         ((TextView) findViewById(R.id.Titleeditparam)).setText(child);
 
         p = findViewById(R.id.prob_ofhigh);

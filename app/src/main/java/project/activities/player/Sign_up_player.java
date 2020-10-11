@@ -41,9 +41,7 @@
      String UID;
 
      long manager_num;
-     SessionDatabaseReference SDR  = (SessionDatabaseReference) getApplication();
-
-
+     SessionDatabaseReference SDR ;
 
 
 
@@ -51,6 +49,9 @@
      protected void onCreate(Bundle savedInstanceState) {
 
          super.onCreate(savedInstanceState);
+         SDR =   (SessionDatabaseReference) getApplication();
+
+
          setContentView(R.layout.activity_sign_up_player);
          password = findViewById(R.id.player_password);
          email = findViewById(R.id.player_email);

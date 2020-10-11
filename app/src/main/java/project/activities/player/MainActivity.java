@@ -1,6 +1,8 @@
 package project.activities.player;
 
 
+import project.activities.admin.AdminHub;
+import project.activities.admin.Admin_Menu;
 import project.objects.database.SessionDatabaseReference;
 import project.objects.database.StringChildDatabase;
 import androidx.appcompat.app.AppCompatActivity;
@@ -46,7 +48,12 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void update(Observable o, Object arg) {
                         if ((boolean) arg) {
+
                             Intent intent = new Intent(context, GameMenu.class);
+                            //TODO: NO HARDCODE admin_session id
+                            if (session_id.compareTo("admin_session")==0){
+                                intent = new Intent(context, Admin_Menu.class);
+                            }
                             SDR.setGlobalVarValue(session_id);
                             startActivity(intent);
                         }

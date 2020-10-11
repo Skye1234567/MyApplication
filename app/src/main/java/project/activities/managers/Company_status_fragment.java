@@ -126,6 +126,7 @@ public class Company_status_fragment extends Fragment {
         public void onActivityCreated (@Nullable Bundle savedInstanceState){
             super.onActivityCreated(savedInstanceState);
             man_model = new ViewModelProvider(getActivity()).get(One_Man_Model.class);
+            man_model.setSession_db_ref(SDR.getGlobalVarValue());
             man_model.getMan().observe(getViewLifecycleOwner(), new Observer<Manager>() {
                 @Override
                 public void onChanged(Manager manager) {

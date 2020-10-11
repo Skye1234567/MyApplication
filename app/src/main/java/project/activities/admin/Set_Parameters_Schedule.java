@@ -39,11 +39,7 @@ public class Set_Parameters_Schedule extends AppCompatActivity {
         context = this;
         SDR= (SessionDatabaseReference) getApplication();
         mauth = FirebaseAuth.getInstance();
-        if (mauth.getCurrentUser() == null) {
-            Intent intent = new Intent(context, Sign_up_admin.class);
-            context.startActivity(intent);
 
-        }
         Button start = findViewById(R.id.start_now);
         start.setOnClickListener(new View.OnClickListener() {
             @Override

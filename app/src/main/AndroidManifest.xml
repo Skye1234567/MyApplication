@@ -33,7 +33,6 @@
         <activity android:name="project.activities.admin.Enter_Num_Players" />
         <activity android:name="project.activities.player.Relevant_terminology" />
         <activity android:name="project.activities.admin.Admin_Menu" />
-        <activity android:name="project.activities.admin.Sign_up_admin" />
         <activity android:name="project.activities.admin.Set_Parameters" />
         <activity android:name="project.activities.admin.Set_Parameters_Schedule" />
         <activity android:name="project.activities.investors.MarketPlace" />

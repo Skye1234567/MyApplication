@@ -27,7 +27,7 @@ public class New_Session extends AppCompatActivity {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (new_id.getText()!=null){
+                if (new_id.getText()!=null & new_id.getText().toString().compareTo(" ")!=0){
                 String new_sess = new_id.getText().toString();
                 FirebaseDatabase.getInstance().getReference().child(new_sess).setValue(
                         true

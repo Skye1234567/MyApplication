@@ -27,7 +27,7 @@ public class Admin_Menu extends AppCompatActivity {
         context=this;
         setContentView(R.layout.activity_admin__menu);
         logout = findViewById(R.id.logoutadmin);
-        download = findViewById(R.id.downloaddatatadmin);
+       //TODO: MAKE DOWNLOAD BUTTON MAYBE
         toSessList = findViewById(R.id.editparametersadmin);
         toSessList.setOnClickListener(new View.OnClickListener() {
             @Override

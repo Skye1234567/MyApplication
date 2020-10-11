@@ -37,10 +37,6 @@ public class AdminHub extends AppCompatActivity {
         setContentView(R.layout.activity_admin_hub);
         SDR = (SessionDatabaseReference) getApplication();
 
-        if ( mauth.getCurrentUser()==null){
-            Intent intent = new Intent(context, Sign_up_admin.class);
-            context.startActivity(intent);
-        }
         SD =new SessionDatabase(SDR.getGlobalVarValue());
         //TODO edit session or create new session
 
