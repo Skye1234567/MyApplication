@@ -10,11 +10,39 @@ import java.util.Observable;
 import androidx.annotation.NonNull;
 
 public class ROUNDDatabase extends Observable {
-    String round;
+    Integer round;
     DatabaseReference session_db_ref;
 
     public ROUNDDatabase(DatabaseReference session_db_ref) {
         this.session_db_ref = session_db_ref.child("ROUND");
+    }
+
+    public void increase_round(){
+        session_db_ref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()){
+                    round = dataSnapshot.getValue(Integer.class);
+                    round+=1;
+                    session_db_ref.setValue(round);
+
+
+                }
+                else{
+                    session_db_ref.setValue(1);
+
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
+
     }
 
     public void addListener(){
@@ -22,10 +50,12 @@ public class ROUNDDatabase extends Observable {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()){
-                round = dataSnapshot.getValue(String.class);
+                round = dataSnapshot.getValue(Integer.class);
 
                 setChanged();
-                notifyObservers(round);}
+                notifyObservers(round);
+
+                }
 
             }
 

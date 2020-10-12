@@ -1,13 +1,13 @@
 package project.activities.investors;
 
 import project.objects.database.ALLOWDatabase;
+import project.objects.database.ROUNDDatabase;
 import project.objects.database.SessionDatabaseReference;
 import project.objects.personel.Investor;
 import project.objects.adapters.ManAdapter;
 import project.objects.database.ManDatabase;
 import project.objects.personel.Manager;
 import project.objects.economics.Schedule;
-import project.objects.database.SessionTimeDatabase;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -76,17 +76,16 @@ public class Investor_Round_Intro extends AppCompatActivity {
         listView = findViewById(R.id.list_of_companies);
         listView.setAdapter(manAdapter);
 
-        SessionTimeDatabase SD = new SessionTimeDatabase(base_ref);
+        ROUNDDatabase SD = new ROUNDDatabase(base_ref);
         SD.addObserver(new Observer() {
             @Override
             public void update(Observable o, Object arg) {
-                schedule=(Schedule) arg;
-                round = schedule.getCurrentRound();
+                round = (Integer) arg;
                 round_title.setText("Round "+round.toString());
 
             }
         });
-        SD.setParam();
+        SD.addListener();
 
 
         context=this;

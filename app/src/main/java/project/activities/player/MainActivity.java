@@ -49,10 +49,13 @@ public class MainActivity extends AppCompatActivity {
                     public void update(Observable o, Object arg) {
                         if ((boolean) arg) {
 
-                            Intent intent = new Intent(context, GameMenu.class);
+                            Intent intent ;
                             //TODO: NO HARDCODE admin_session id
                             if (session_id.compareTo("admin_session")==0){
                                 intent = new Intent(context, Admin_Menu.class);
+                            }
+                            else{
+                                intent = new Intent(context, GameMenu.class);
                             }
                             SDR.setGlobalVarValue(session_id);
                             startActivity(intent);

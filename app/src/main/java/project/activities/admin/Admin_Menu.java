@@ -2,6 +2,7 @@ package project.activities.admin;
 
 import project.activities.player.GameMenu;
 import androidx.appcompat.app.AppCompatActivity;
+import project.activities.player.MainActivity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -40,17 +41,10 @@ public class Admin_Menu extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 FirebaseAuth.getInstance().signOut();
-                startActivity(new Intent(context, GameMenu.class));
+                startActivity(new Intent(context, MainActivity.class));
             }
         });
 
-        download.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(context, DownloadPage.class));
-
-            }
-        });
 
     }
     @Override

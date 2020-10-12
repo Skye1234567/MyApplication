@@ -14,9 +14,9 @@ import com.google.firebase.database.DatabaseReference;
 import java.util.Observable;
 
 import project.business_logic.Accountant;
+import project.objects.database.ROUNDDatabase;
 import project.objects.database.SessionDatabase;
 import project.objects.database.SessionDatabaseReference;
-import project.objects.database.SessionTimeDatabase;
 import project.objects.economics.Market;
 import project.objects.economics.Session;
 import project.objects.handlers.ManHash;
@@ -42,7 +42,7 @@ public class Company_status_fragment extends Fragment {
     Accountant accountant;
     Manager managerstat;
     Integer current_round;
-    SessionTimeDatabase STD;
+    ROUNDDatabase roundDatabase;
     DatabaseReference REF;
     SessionDatabaseReference SDR;
 
@@ -63,21 +63,16 @@ public class Company_status_fragment extends Fragment {
         DatabaseReference base_ref = SDR.getGlobalVarValue();
         REF=SDR.getGlobalVarValue().child("Managers").child(id);
         accountant = new Accountant(REF);
-        STD = new SessionTimeDatabase(base_ref);
-        STD.addObserver(new java.util.Observer() {
+        roundDatabase = new ROUNDDatabase(base_ref);
+        roundDatabase.addObserver(new java.util.Observer() {
             @Override
             public void update(Observable o, Object arg) {
-               current_round= STD.getCurrentRound();
+               current_round= (Integer) arg;
                update_Manager_status();
 
             }
         });
-        STD.setParam();
-        //TODO shift to onemanobvserer
-      //  Manager_Logic mLogic = new Manager_Logic( managerstat.getCompany_symbol(), managerstat.getID());
-        //mLogic.allocate_shares();
-
-
+        roundDatabase.addListener();
         man_model = new ViewModelProvider(getActivity()).get(One_Man_Model.class);
         man_model.set_id(id);
 

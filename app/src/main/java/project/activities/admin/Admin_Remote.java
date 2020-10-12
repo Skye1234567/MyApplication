@@ -1,6 +1,7 @@
 package project.activities.admin;
 
 import androidx.appcompat.app.AppCompatActivity;
+import project.objects.database.ROUNDDatabase;
 import project.objects.database.SessionDatabaseReference;
 
 import android.content.Context;
@@ -17,7 +18,7 @@ public class Admin_Remote extends AppCompatActivity {
     private Button close_market;
     private Button back;
     private Context context;
-
+    private ROUNDDatabase RD;
     private SessionDatabaseReference SDR;
 
     @Override
@@ -28,6 +29,7 @@ public class Admin_Remote extends AppCompatActivity {
         close_market = findViewById(R.id.close_markets_admin);
         back = findViewById(R.id.back_from_admin_remote);
         context = this;
+
         open_market.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -44,6 +46,9 @@ public class Admin_Remote extends AppCompatActivity {
                 SDR = (SessionDatabaseReference) getApplication();
                 DatabaseReference sess_id = SDR.getGlobalVarValue();
                 sess_id.child("ALLOW_TRADES").setValue(false);
+                RD= new ROUNDDatabase(sess_id);
+                RD.increase_round();
+
 
 
             }
