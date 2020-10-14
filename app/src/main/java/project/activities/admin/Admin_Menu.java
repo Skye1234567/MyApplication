@@ -15,10 +15,12 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class Admin_Menu extends AppCompatActivity {
 
-    Button logout;
-    Button download;
-    Button toSessList;
-    Context context;
+    private Button logout;
+    private Button download;
+    private Button toSessList;
+    private Context context;
+
+
 
 
 
