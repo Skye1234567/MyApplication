@@ -34,7 +34,7 @@ public class GameMenu extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //put stuff for player auth
-                FirebaseAuth auth = FirebaseAuth.getInstance();
+
                 Intent intent = new Intent(context, Sign_up_player.class);
                 context.startActivity(intent);
                 finish();
@@ -46,7 +46,7 @@ public class GameMenu extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //put stuff for player auth
-                FirebaseAuth auth = FirebaseAuth.getInstance();
+
                 Intent intent = new Intent(context, Create_User.class);
                 context.startActivity(intent);
                 finish();

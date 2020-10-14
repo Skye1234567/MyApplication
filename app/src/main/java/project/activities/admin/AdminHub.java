@@ -1,5 +1,6 @@
 package project.activities.admin;
 
+        import project.objects.database.ROUNDDatabase;
         import project.objects.database.SessionDatabase;
         import project.objects.database.SessionDatabaseReference;
         import project.objects.economics.Session;
@@ -12,34 +13,60 @@ package project.activities.admin;
         import android.widget.Button;
 
         import com.example.myapplication.R;
-        import com.google.firebase.auth.FirebaseAuth;
+        import com.google.firebase.database.DatabaseReference;
 
         import java.util.Observable;
         import java.util.Observer;
 
 public class AdminHub extends AppCompatActivity {
-    private Button EditPractice;
-    private Button EditRound1;
-    private Button EditRound2;
-    private Button EditSchedule;
-    private Button toAdminMarket;
-    private  Button back_to_menu;
-    private Button go_to_remote;
-    private SessionDatabase SD;
-    private Context context;
-    private Session session;
-    private SessionDatabaseReference SDR;
 
+    private SessionDatabaseReference SDR;
+    private Context context;
+    private ROUNDDatabase RD;
+
+    private Session session;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        FirebaseAuth mauth = FirebaseAuth.getInstance();
         setContentView(R.layout.activity_admin_hub);
+        Button EditPractice;
+        Button EditRound1;
+        Button EditRound2;
+        Button back_to_menu;
+        Button open_market;
+        Button close_market;
+        Button viewMarkets;
+
+        open_market = findViewById(R.id.open_markets_admin);
+        close_market = findViewById(R.id.close_markets_admin);
+        context = this;
+
+        open_market.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SDR = (SessionDatabaseReference) getApplication();
+                DatabaseReference sess_id = SDR.getGlobalVarValue();
+                sess_id.child("ALLOW_TRADES").setValue(true);
+
+
+            }
+        });
+        close_market.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SDR = (SessionDatabaseReference) getApplication();
+                DatabaseReference sess_id = SDR.getGlobalVarValue();
+                sess_id.child("ALLOW_TRADES").setValue(false);
+                RD= new ROUNDDatabase(sess_id);
+                RD.increase_round();
+
+
+
+            }
+        });
         SDR = (SessionDatabaseReference) getApplication();
 
-        SD =new SessionDatabase(SDR.getGlobalVarValue());
-        //TODO edit session or create new session
+        SessionDatabase SD = new SessionDatabase(SDR.getGlobalVarValue());
 
         SD.addObserver(new Observer() {
             @Override
@@ -51,11 +78,9 @@ public class AdminHub extends AppCompatActivity {
         SD.setParam();
 
         context =this;
-        EditSchedule = findViewById(R.id.setschedhub);
         EditRound2 = findViewById(R.id.setround_2hub);
         EditRound1 = findViewById(R.id.setround_1hub);
         EditPractice = findViewById(R.id.setpracticehub);
-        go_to_remote = findViewById(R.id.to_remote);
 
         EditPractice.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,15 +114,7 @@ public class AdminHub extends AppCompatActivity {
             }
         });
 
-        EditSchedule.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent =  new Intent(context, Set_Parameters_Schedule.class);
 
-                startActivity(intent);
-
-            }
-        });
         back_to_menu = findViewById(R.id.to_menu);
         back_to_menu.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -105,16 +122,21 @@ public class AdminHub extends AppCompatActivity {
                 startActivity(new Intent(context, Admin_Menu.class));
             }
         });
-        go_to_remote.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent  = new Intent(context, Admin_Remote.class);
-                startActivity(intent);
+        viewMarkets = findViewById(R.id.adminmarket);
+       viewMarkets.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               Intent intent = new Intent(context, MarketPlaceForAdmin.class);
+               startActivity(intent);
+           }
+       });
 
-            }
-        });
 
+    }
 
-
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(context, AdminSessionEdit.class);
+        startActivity(intent);
     }
 }
