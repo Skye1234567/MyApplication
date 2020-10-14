@@ -1,4 +1,4 @@
-package project.activities.managers;
+package project.activities.admin;
 
 import android.content.Context;
 import android.content.Intent;
@@ -7,9 +7,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
-import project.activities.player.GameMenu;
-import project.objects.adapters.SectionsPageAdapter;
-
 import com.example.myapplication.R;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
@@ -17,22 +14,26 @@ import com.google.firebase.auth.FirebaseAuth;
 import java.util.Observable;
 import java.util.Observer;
 
-import project.objects.database.ALLOWDatabase;
-import project.objects.database.SessionDatabaseReference;
-import project.objects.models.One_Man_Model;
-import project.objects.models.Man_Model;
-import project.objects.models.Pricing_Model;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager.widget.ViewPager;
+import project.activities.managers.Manager_Home_Page;
+import project.activities.managers.Market_Prices;
+import project.activities.managers.View_Companies_Manager;
+import project.activities.player.GameMenu;
+import project.objects.adapters.SectionsPageAdapter;
+import project.objects.database.ALLOWDatabase;
+import project.objects.database.SessionDatabaseReference;
+import project.objects.models.Man_Model;
+import project.objects.models.One_Man_Model;
+import project.objects.models.Pricing_Model;
 
 
-public class MarketPlaceForMan extends AppCompatActivity {
+public class MarketPlaceForAdmin extends AppCompatActivity {
     private static final String TAG="Marketplace";
     private Context context;
     private ViewPager viewPager;
     private SectionsPageAdapter adapter;
-    private ALLOWDatabase allowDatabase;
     private SessionDatabaseReference SDR;
 
 
@@ -40,34 +41,14 @@ public class MarketPlaceForMan extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_market_place_for_man);
+        setContentView(R.layout.activity_market_place_for_admin);
         context=this;
-        String id="";
-        try {id = FirebaseAuth.getInstance().getCurrentUser().getUid();}catch (NullPointerException e){
-
-        }
         SDR = (SessionDatabaseReference) getApplication();
-        allowDatabase = new ALLOWDatabase(SDR.getGlobalVarValue());
-        allowDatabase.addObserver(new Observer() {
-            @Override
-            public void update(Observable o, Object arg) {
-                if (!(boolean)arg) {
-                    startActivity(new Intent(context,Manager_Home_Page.class));
-                }
-            }
-        });
-        allowDatabase.addListener();
-
 
         Man_Model MM = new ViewModelProvider(this).get(Man_Model.class);
         MM.setSession_db_ref(SDR.getGlobalVarValue());
         Pricing_Model PM= new ViewModelProvider(this).get(Pricing_Model.class);
         PM.setSession_db_ref(SDR.getGlobalVarValue());
-        One_Man_Model one_man_model = new ViewModelProvider(this).get(One_Man_Model.class);
-        one_man_model.set_id(id);
-        one_man_model.setSession_db_ref(SDR.getGlobalVarValue());
-
-
 
         viewPager = findViewById(R.id.marketplace_container);
         setUpViewPager(viewPager);
@@ -81,8 +62,8 @@ public class MarketPlaceForMan extends AppCompatActivity {
 
     private void setUpViewPager(ViewPager viewPager){
         adapter = new SectionsPageAdapter(getSupportFragmentManager());
-        adapter.addFragment(new View_Companies_Manager(), "Company Reports");
-        adapter.addFragment(new Market_Prices(), "Stocks");
+        adapter.addFragment(new View_Companies_Admin(), "Company Reports");
+        adapter.addFragment(new Market_Prices_Admin(), "Stocks");
         viewPager.setAdapter(adapter);
     }
 
@@ -97,7 +78,7 @@ public class MarketPlaceForMan extends AppCompatActivity {
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.logout:
-                Intent intent = new Intent(context, GameMenu.class);
+                Intent intent = new Intent(context, AdminHub.class);
                 FirebaseAuth.getInstance().signOut();
                 context.startActivity(intent);
 

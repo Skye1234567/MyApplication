@@ -22,6 +22,7 @@ public class AdminHub extends AppCompatActivity {
     private Button EditRound1;
     private Button EditRound2;
     private Button EditSchedule;
+    private Button toAdminMarket;
     private  Button back_to_menu;
     private Button go_to_remote;
     private SessionDatabase SD;

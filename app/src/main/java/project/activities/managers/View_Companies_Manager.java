@@ -69,10 +69,9 @@ public class View_Companies_Manager extends Fragment {
 
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         SDR = (SessionDatabaseReference) getActivity().getApplication();
-
         pricing_model = new ViewModelProvider(getActivity()).get(Pricing_Model.class);
         pricing_model.setSession_db_ref(SDR.getGlobalVarValue());
         pricing_model.getPrices().observe(getViewLifecycleOwner(), new Observer<HashMap<String, Price>>() {

@@ -60,8 +60,8 @@ public class Market_Prices extends Fragment {
 
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         SDR = (SessionDatabaseReference) getActivity().getApplication();
 
         pricing_model = new ViewModelProvider(getActivity()).get(Pricing_Model.class);
