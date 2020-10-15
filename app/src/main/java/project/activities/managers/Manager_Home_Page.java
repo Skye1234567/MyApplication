@@ -15,7 +15,9 @@ import java.util.Observable;
 import java.util.Observer;
 
 
+import androidx.activity.OnBackPressedCallback;
 import project.activities.player.GameMenu;
+import project.activities.player.MainActivity;
 import project.objects.adapters.SectionsPageAdapter;
 import project.objects.database.ALLOWDatabase;
 
@@ -43,6 +45,17 @@ public class Manager_Home_Page extends AppCompatActivity {
         setContentView(R.layout.activity_manager_home);
         context=this;
         SDR = (SessionDatabaseReference) getApplication();
+
+        OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
+            @Override
+            public void handleOnBackPressed() {
+                // Handle the back button event
+            }
+        };
+        getOnBackPressedDispatcher().addCallback(this, callback);
+
+
+
         allowDatabase = new ALLOWDatabase(SDR.getGlobalVarValue());
         allowDatabase.addObserver(new Observer() {
             @Override
@@ -101,9 +114,5 @@ public class Manager_Home_Page extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
 
-    }
-    @Override
-    public void onBackPressed() {
-        // Do Here what ever you want do on back press;
     }
 }

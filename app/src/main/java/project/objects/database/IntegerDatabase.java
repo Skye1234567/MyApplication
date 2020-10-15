@@ -15,12 +15,14 @@ public class IntegerDatabase extends Observable {
     private DatabaseReference reference;
 
     public IntegerDatabase(DatabaseReference reference) {
+        if(reference!=null)
        this.reference = reference;
 
 
     }
 
     public void updating() {
+        if( reference!=null){
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -37,6 +39,7 @@ public class IntegerDatabase extends Observable {
 
             }
         });
+        }
 
 
     }

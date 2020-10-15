@@ -22,6 +22,7 @@
             </intent-filter>
         </activity>
         <activity android:name="project.activities.player.Create_User" />
+        <activity android:name="project.activities.admin.MarketPlaceForAdmin"/>
         <activity android:name="project.activities.managers.Wait_Page" />
         <activity android:name="project.activities.admin.DownloadPage" />
         <activity android:name="project.activities.admin.AdminHub" />
@@ -34,7 +35,6 @@
         <activity android:name="project.activities.player.Relevant_terminology" />
         <activity android:name="project.activities.admin.Admin_Menu" />
         <activity android:name="project.activities.admin.Set_Parameters" />
-        <activity android:name="project.activities.admin.Set_Parameters_Schedule" />
         <activity android:name="project.activities.investors.MarketPlace" />
         <activity android:name="project.activities.managers.MarketPlaceForMan" />
         <activity android:name="project.activities.managers.Manager_Home_Page" />

@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import androidx.viewpager.widget.ViewPager;
 import project.activities.player.GameMenu;
 import project.objects.adapters.SectionsPageAdapter;
 
@@ -24,8 +25,6 @@ import project.objects.models.Man_Model;
 import project.objects.models.Pricing_Model;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.viewpager.widget.ViewPager;
-
 
 public class MarketPlaceForMan extends AppCompatActivity {
     private static final String TAG="Marketplace";

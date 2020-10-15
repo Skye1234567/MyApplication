@@ -1,5 +1,7 @@
 package project.activities.admin;
 
+import androidx.activity.OnBackPressedCallback;
+import project.activities.player.MainActivity;
 import project.objects.database.SessionDatabaseReference;
 import project.objects.economics.Market;
 import androidx.annotation.NonNull;
@@ -8,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,6 +21,7 @@ import com.example.myapplication.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.gson.internal.$Gson$Preconditions;
 
 public class Set_Parameters extends AppCompatActivity {
     private Context context;
@@ -36,22 +40,91 @@ public class Set_Parameters extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        SDR = (SessionDatabaseReference) getApplication();
-        SDR.getGlobalVarValue();
         setContentView(R.layout.activity_set__parameters);
+
         context= this;
+        SDR = (SessionDatabaseReference) getApplication();
+        if (SDR.getGlobalVarValue()==null){
+            Intent intent = new Intent(context, MainActivity.class);
+            startActivity(intent);
+        }
+
+        OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
+            @Override
+            public void handleOnBackPressed() {
+                // Handle the back button event
+                Intent intent =new Intent(context, AdminSessionEdit.class);
+                startActivity(intent);
+            }
+        };
+        getOnBackPressedDispatcher().addCallback(this, callback);
+
         child =getIntent().getStringExtra("child");
         market = (Market) getIntent().getSerializableExtra("market");
         mauth = FirebaseAuth.getInstance();
 
         ((TextView) findViewById(R.id.Titleeditparam)).setText(child);
-
+        //Labelling the edit texts to match each parameter
         p = findViewById(R.id.prob_ofhigh);
-    pi_h = findViewById(R.id.prob_outcome_high);
-    pi_l = findViewById(R.id.prob_outcome_low);
-    rounds = findViewById(R.id.num_rounds);
-    submit_round_1 = findViewById(R.id.button_submit_round_1);
-    if(market!=null){
+        pi_h = findViewById(R.id.prob_outcome_high);
+        pi_l = findViewById(R.id.prob_outcome_low);
+        rounds = findViewById(R.id.num_rounds);
+        submit_round_1 = findViewById(R.id.button_submit_round_1);
+
+
+        //Override the enter key for each edit text
+        p.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (event.getAction() == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER ){ return true;
+                }
+
+
+                    return false;
+            }
+        });
+        pi_h.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (event.getAction() == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
+
+
+
+
+                return true;
+            }
+                return false;
+   }
+        });
+        pi_l.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (event.getAction() == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER ){
+
+
+
+
+                    return true;
+                }
+
+                return false;
+            }
+        });
+
+        rounds.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (event.getAction() == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER ){
+
+                    submit_round_1.performClick();
+                    return true;
+                }
+
+                return false;
+            }
+        });
+
+        if(market!=null){
         p.setText(market.getP().toString());
         pi_h.setText(market.getPi_h().toString());
         pi_l.setText(market.getPi_l().toString());
@@ -68,7 +141,7 @@ public class Set_Parameters extends AppCompatActivity {
 
             if (!(fp==null || fpi_h==null || fpi_l==null || num_round==null)) {
                 Market round_1 = new Market(fpi_h,fpi_l,fp, num_round);
-                round_1.setType("BOOM");
+
                 SessionDatabaseReference SDR  = (SessionDatabaseReference) getApplication();
 
 

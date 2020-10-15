@@ -17,13 +17,13 @@ public class ManDatabase extends Observable {
     private DatabaseReference session_db_ref;
 
     public ManDatabase(DatabaseReference session_db_ref) {
+        if(session_db_ref!=null)
         this.session_db_ref = session_db_ref;
         arrayList = new ArrayList<>();
     }
 
-    public void listenForChanges(){
-
-       session_db_ref.child("Managers").addChildEventListener(new ChildEventListener() {
+    public void listenForChanges(){if(session_db_ref!=null) {
+        session_db_ref.child("Managers").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 arrayList.add(dataSnapshot.getValue(Manager.class));
@@ -62,7 +62,7 @@ public class ManDatabase extends Observable {
             }
         });
 
-
+    }
     }
     public void remove(Manager m){
         for (Manager manager :arrayList){

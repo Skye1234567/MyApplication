@@ -1,5 +1,6 @@
 package project.activities.investors;
 
+import project.activities.player.MainActivity;
 import project.objects.database.SessionDatabaseReference;
 import project.objects.personel.Investor;
 import project.objects.models.Share_Model;
@@ -12,6 +13,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import android.view.LayoutInflater;
@@ -58,6 +60,12 @@ public class Investor_Instructions_Fragment extends Fragment {
        VM = new ViewModelProvider(getActivity()).get(Vest_Model.class);
        VM.setSession_db_ref(SDR.getGlobalVarValue());
        cash = view.findViewById(R.id.cashmoneydata);
+       context=getContext();
+        if (SDR.getGlobalVarValue()==null){
+            Intent intent = new Intent(context, MainActivity.class);
+            startActivity(intent);
+        }
+
 
 
         tableLayout=view.findViewById(R.id.company_shares_table_investor_instructions);
@@ -88,6 +96,8 @@ public class Investor_Instructions_Fragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         SDR = (SessionDatabaseReference) getActivity().getApplication();
+
+
         pricing_model = new ViewModelProvider(getActivity()).get(Pricing_Model.class);
         pricing_model.setSession_db_ref(SDR.getGlobalVarValue());
          pricing_model.getPrices().observe(getViewLifecycleOwner(), new Observer<HashMap<String, Price>>() {

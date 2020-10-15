@@ -1,5 +1,6 @@
 package project.activities.admin;
 
+import project.activities.player.MainActivity;
 import project.objects.database.SessionDatabaseReference;
 import project.objects.economics.Price;
 import project.objects.economics.Schedule;
@@ -13,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -35,7 +37,7 @@ public class DownloadPage extends AppCompatActivity {
          pb = findViewById(R.id.pb);
          context=this;
          data = findViewById(R.id.all_data);
-        SessionDatabaseReference SDR  = (SessionDatabaseReference) getApplication();
+        SessionDatabaseReference SDR = (SessionDatabaseReference) getApplication();
 
 
         SDR.getGlobalVarValue().addListenerForSingleValueEvent(new ValueEventListener() {

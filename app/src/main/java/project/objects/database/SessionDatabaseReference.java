@@ -7,10 +7,11 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class SessionDatabaseReference extends Application {
 
-        private String mGlobalVarValue="wank";
+        private String mGlobalVarValue;
 
         public DatabaseReference getGlobalVarValue() {
-            return FirebaseDatabase.getInstance().getReference(mGlobalVarValue);
+            if (mGlobalVarValue!=null) return FirebaseDatabase.getInstance().getReference(mGlobalVarValue);
+            else return null;
         }
 
         public void setGlobalVarValue(String str) {

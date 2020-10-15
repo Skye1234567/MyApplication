@@ -16,12 +16,13 @@ public class SessionDatabase extends Observable {
     private DatabaseReference session_db_ref;
 
     public SessionDatabase(DatabaseReference session_db_ref) {
+        if(session_db_ref!=null)
         this.session_db_ref = session_db_ref;
         this.session = new Session();
 
     }
     public void setParam() {
-
+        if(session_db_ref!=null){
         session_db_ref.child("markets").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -36,7 +37,7 @@ public class SessionDatabase extends Observable {
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
-        });
+        });}
     }
 
 

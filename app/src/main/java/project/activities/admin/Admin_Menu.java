@@ -1,5 +1,6 @@
 package project.activities.admin;
 
+import androidx.activity.OnBackPressedCallback;
 import project.activities.player.GameMenu;
 import androidx.appcompat.app.AppCompatActivity;
 import project.activities.player.MainActivity;
@@ -46,11 +47,21 @@ public class Admin_Menu extends AppCompatActivity {
                 startActivity(new Intent(context, MainActivity.class));
             }
         });
+        //disable the back button
+        OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
+            @Override
+            public void handleOnBackPressed() {
+                // Handle the back button event
+                Intent intent =new Intent(context, MainActivity.class);
+                startActivity(intent);
+            }
+        };
+        getOnBackPressedDispatcher().addCallback(this, callback);
+
+
+
 
 
     }
-    @Override
-    public void onBackPressed() {
-        // Do Here what ever you want do on back press;
-    }
+
 }

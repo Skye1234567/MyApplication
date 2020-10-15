@@ -1,6 +1,9 @@
 package project.activities.investors;
 
+import androidx.activity.OnBackPressedCallback;
+import androidx.viewpager.widget.ViewPager;
 import project.activities.player.GameMenu;
+import project.activities.player.MainActivity;
 import project.objects.database.ALLOWDatabase;
 import project.objects.database.SessionDatabaseReference;
 import project.objects.personel.Investor;
@@ -13,7 +16,7 @@ import project.objects.models.Trade_Model;
 import project.objects.models.Vest_Model;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.viewpager.widget.ViewPager;
+
 
 import android.content.Context;
 import android.content.Intent;
@@ -47,7 +50,22 @@ public class MarketPlace extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_market_place);
         context=this;
+        OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
+            @Override
+            public void handleOnBackPressed() {
+                // Handle the back button event
+            }
+        };
+        getOnBackPressedDispatcher().addCallback(this, callback);
+
+
+
         SDR= (SessionDatabaseReference) getApplication();
+        if (SDR.getGlobalVarValue()==null){
+            Intent intent = new Intent(context, MainActivity.class);
+            startActivity(intent);
+        }
+
         allowDatabase = new ALLOWDatabase(SDR.getGlobalVarValue());
         allowDatabase.addObserver(new Observer() {
             @Override
@@ -130,8 +148,5 @@ public class MarketPlace extends AppCompatActivity {
         super.onStop();
 
     }
-    @Override
-    public void onBackPressed() {
-        // Do Here what ever you want do on back press;
-    }
+
 }

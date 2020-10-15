@@ -1,5 +1,6 @@
  package project.activities.investors;
 
+import project.activities.player.MainActivity;
 import project.objects.database.SessionDatabaseReference;
 import project.objects.personel.Investor;
 import project.objects.economics.Price;
@@ -50,6 +51,11 @@ import com.google.firebase.database.DatabaseReference;
         context=this;
         setContentView(R.layout.activityorderstock);
         SDR =(SessionDatabaseReference) getApplication();
+
+         if (SDR.getGlobalVarValue()==null){
+             Intent intent = new Intent(context, MainActivity.class);
+             startActivity(intent);
+         }
         Intent intent1 = getIntent();
         Cpany= intent1.getStringExtra("symbol");
          investor = (Investor) intent1.getSerializableExtra("user");

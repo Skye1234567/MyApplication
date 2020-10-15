@@ -32,9 +32,7 @@ public class View_Companies_Admin extends Fragment {
 
     private ManAdapter manAdapter;
     private ListView listView;
-    private TextView yourSymbol;
-    private String yourstring;
-    private String ID;
+
     private SessionDatabaseReference SDR;
 
 
@@ -45,11 +43,10 @@ public class View_Companies_Admin extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
 
-        View view = inflater.inflate(R.layout.activity_view__companies_man,container, false);
+        View view = inflater.inflate(R.layout.activity_view__companies_admin,container, false);
         SDR = (SessionDatabaseReference) getActivity().getApplication();
         mm = new ViewModelProvider(getActivity()).get(Man_Model.class);
         mm.setSession_db_ref(SDR.getGlobalVarValue());
-        ID = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         mm.update_manager();
 
@@ -57,11 +54,6 @@ public class View_Companies_Admin extends Fragment {
         manAdapter = new ManAdapter(getContext(), new ArrayList<Manager>());
         listView = view.findViewById(R.id.list_of_companies);
         listView.setAdapter(manAdapter);
-        yourSymbol = view.findViewById(R.id.youare);
-        yourstring = yourSymbol.getText().toString();
-
-
-
 
 
         return view;
@@ -95,11 +87,7 @@ public class View_Companies_Admin extends Fragment {
             public void onChanged(HashMap<String, Manager> stringManagerHashMap) {
                 manAdapter.clear();
                 manAdapter.addAll(stringManagerHashMap.values());
-                Manager manager = new Manager(ID);
-                for (Manager m: stringManagerHashMap.values()){
-                    if (m.equals(manager)) yourSymbol.setText(yourstring+" "+ m.getCompany_symbol());
 
-                    }
                 }
         });
 

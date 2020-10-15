@@ -1,6 +1,7 @@
 package project.activities.player;
 
 
+import androidx.activity.OnBackPressedCallback;
 import project.activities.admin.AdminHub;
 import project.activities.admin.Admin_Menu;
 import project.objects.database.SessionDatabaseReference;
@@ -10,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -35,10 +37,33 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_session__validation);
         session_num = findViewById(R.id.sess_num_enter);
+        OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
+            @Override
+            public void handleOnBackPressed() {
+                // Handle the back button event
+            }
+        };
+        getOnBackPressedDispatcher().addCallback(this, callback);
         SDR= ((SessionDatabaseReference) getApplication());
         verify = findViewById(R.id.verify_sess_button);
 
+
         context = this;
+        session_num.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
+                        (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                    verify.performClick();
+
+
+                    return true;
+                }
+
+
+                return false;
+            }
+        });
         verify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

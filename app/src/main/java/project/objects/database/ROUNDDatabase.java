@@ -14,38 +14,40 @@ public class ROUNDDatabase extends Observable {
     DatabaseReference session_db_ref;
 
     public ROUNDDatabase(DatabaseReference session_db_ref) {
+        if(session_db_ref!=null)
         this.session_db_ref = session_db_ref.child("ROUND");
     }
 
     public void increase_round(){
-        session_db_ref.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()){
-                    round = dataSnapshot.getValue(Integer.class);
-                    round+=1;
-                    session_db_ref.setValue(round);
+        if(session_db_ref!=null) {
+            session_db_ref.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.exists()) {
+                        round = dataSnapshot.getValue(Integer.class);
+                        round += 1;
+                        session_db_ref.setValue(round);
 
+
+                    } else {
+                        session_db_ref.setValue(1);
+
+                    }
 
                 }
-                else{
-                    session_db_ref.setValue(1);
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
 
                 }
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
+            });
 
 
-
+        }
     }
 
     public void addListener(){
+        if(session_db_ref!=null){
         session_db_ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -63,7 +65,7 @@ public class ROUNDDatabase extends Observable {
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
-        });
+        });}
 
 
 

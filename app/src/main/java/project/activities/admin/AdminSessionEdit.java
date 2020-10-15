@@ -1,5 +1,6 @@
 package project.activities.admin;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -35,6 +36,18 @@ public class AdminSessionEdit extends AppCompatActivity {
         SDR = (SessionDatabaseReference) getApplication();
 
         setContentView(R.layout.activity_admin_session_edit);
+        //override the back button
+        OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
+            @Override
+            public void handleOnBackPressed() {
+                // Handle the back button event
+                Intent intent = new Intent(context, Admin_Menu.class);
+                startActivity(intent);
+            }
+        };
+        getOnBackPressedDispatcher().addCallback(this, callback);
+
+
         SIM = new ViewModelProvider(this).get(SessionID_Model.class);
         SIM.getSessions().observe(this, new Observer<ArrayList<String>>() {
                     @Override
@@ -44,7 +57,6 @@ public class AdminSessionEdit extends AppCompatActivity {
                     }
                 });
         edit = (Button) findViewById(R.id.create_new_sess);
-        SDR.setGlobalVarValue("adminhub222");
 
 
         arrayAdapter =

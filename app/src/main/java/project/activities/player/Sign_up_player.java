@@ -5,6 +5,7 @@
  import android.content.Intent;
  import android.os.Bundle;
  import android.util.Log;
+ import android.view.KeyEvent;
  import android.view.View;
  import android.widget.Button;
  import android.widget.EditText;
@@ -20,6 +21,7 @@
  import com.google.firebase.database.DatabaseError;
  import com.google.firebase.database.ValueEventListener;
 
+ import androidx.activity.OnBackPressedCallback;
  import project.activities.investors.MarketPlace;
  import project.activities.managers.Manager_Home_Page;
  import project.business_logic.New_Game;
@@ -50,12 +52,68 @@
 
          super.onCreate(savedInstanceState);
          SDR =   (SessionDatabaseReference) getApplication();
+         context =this;
+         if (SDR.getGlobalVarValue()==null){
+             Intent intent = new Intent(context, MainActivity.class);
+             startActivity(intent);
+         }
 
 
          setContentView(R.layout.activity_sign_up_player);
+         OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
+             @Override
+             public void handleOnBackPressed() {
+                 // Handle the back button event
+             }
+         };
+         getOnBackPressedDispatcher().addCallback(this, callback);
+
+
+
+
+
+
+         final Button button = findViewById(R.id.sign_in_player_button);
+         Button back = findViewById(R.id.back_button);
+         back.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View v) {
+                 Intent intent = new Intent(context, GameMenu.class);
+                 startActivity(intent);
+             }
+         });
+
+
          password = findViewById(R.id.player_password);
          email = findViewById(R.id.player_email);
-         context = Sign_up_player.this;
+
+         email.setOnKeyListener(new View.OnKeyListener() {
+             public boolean onKey(View v, int keyCode, KeyEvent event) {
+                 // If the event is a key-down event on the "enter" button
+                 if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
+                         (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                     email.clearFocus();
+                     password.selectAll();
+
+                     return true;
+                 }
+                 return false;
+             }
+         });
+         password.setOnKeyListener(new View.OnKeyListener() {
+             @Override
+             public boolean onKey(View v, int keyCode, KeyEvent event) {
+                 if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
+                         (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                     button.performClick();
+
+
+                     return true;
+                 }
+                 return false;
+             }
+         });
+
          mAuth = FirebaseAuth.getInstance();
 
          if (mAuth.getCurrentUser()!=null){
@@ -65,11 +123,6 @@
              get_PlayerType();
             }else{
 
-
-
-
-
-         final Button button = findViewById(R.id.sign_in_player_button);
 
          button.setOnClickListener(new View.OnClickListener() {
              @Override
@@ -224,4 +277,10 @@ private void get_investors(){
 
      }
 
+
+
+
+
  }
+
+

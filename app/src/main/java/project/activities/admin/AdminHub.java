@@ -1,5 +1,7 @@
 package project.activities.admin;
 
+        import androidx.activity.OnBackPressedCallback;
+        import project.activities.player.MainActivity;
         import project.objects.database.ROUNDDatabase;
         import project.objects.database.SessionDatabase;
         import project.objects.database.SessionDatabaseReference;
@@ -40,11 +42,17 @@ public class AdminHub extends AppCompatActivity {
         open_market = findViewById(R.id.open_markets_admin);
         close_market = findViewById(R.id.close_markets_admin);
         context = this;
+        SDR = (SessionDatabaseReference) getApplication();
+        if (SDR.getGlobalVarValue()==null){
+            Intent intent = new Intent(context, MainActivity.class);
+            startActivity(intent);
+        }
+
 
         open_market.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SDR = (SessionDatabaseReference) getApplication();
+
                 DatabaseReference sess_id = SDR.getGlobalVarValue();
                 sess_id.child("ALLOW_TRADES").setValue(true);
 
@@ -130,13 +138,20 @@ public class AdminHub extends AppCompatActivity {
                startActivity(intent);
            }
        });
+        OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
+            @Override
+            public void handleOnBackPressed() {
+                // Handle the back button event
+                Intent intent = new Intent(context, AdminSessionEdit.class);
+                startActivity(intent);
+            }
+        };
+        getOnBackPressedDispatcher().addCallback(this, callback);
+
+
+
 
 
     }
 
-    @Override
-    public void onBackPressed() {
-        Intent intent = new Intent(context, AdminSessionEdit.class);
-        startActivity(intent);
-    }
 }

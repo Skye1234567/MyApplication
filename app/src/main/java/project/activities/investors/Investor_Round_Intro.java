@@ -1,5 +1,6 @@
 package project.activities.investors;
 
+import project.activities.player.MainActivity;
 import project.objects.database.ALLOWDatabase;
 import project.objects.database.ROUNDDatabase;
 import project.objects.database.SessionDatabaseReference;
@@ -49,6 +50,11 @@ public class Investor_Round_Intro extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         start_time = System.currentTimeMillis();
         SDR =(SessionDatabaseReference) getApplication();
+        context=this;
+        if (SDR.getGlobalVarValue()==null){
+            Intent intent = new Intent(context, MainActivity.class);
+            startActivity(intent);
+        }
         DatabaseReference base_ref = SDR.getGlobalVarValue();
         allowDatabase = new ALLOWDatabase(base_ref);
         allowDatabase.addObserver(new Observer() {
@@ -88,7 +94,8 @@ public class Investor_Round_Intro extends AppCompatActivity {
         SD.addListener();
 
 
-        context=this;
+
+
 
 
         getInvestor();

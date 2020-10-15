@@ -16,6 +16,7 @@ public class StringChildDatabase extends Observable {
     private String sess;
 
     public StringChildDatabase(DatabaseReference reference, String sess) {
+        if(reference!=null)
        this.reference = reference;
        this.sess = sess;
 
@@ -24,7 +25,8 @@ public class StringChildDatabase extends Observable {
     }
 
     public void updating() {
-        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+        if(reference!=null){
+            reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot d: snapshot.getChildren()){
@@ -39,12 +41,7 @@ public class StringChildDatabase extends Observable {
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-        });
-
-
-
-
-
+        });}
 
 
     }

@@ -13,6 +13,7 @@
  import com.example.myapplication.R;
  import com.google.firebase.database.DatabaseReference;
 
+ import project.activities.player.MainActivity;
  import project.objects.database.SessionDatabaseReference;
  import project.objects.personel.Investor;
  import project.objects.economics.Price;
@@ -50,7 +51,13 @@
         context=this;
         setContentView(R.layout.activityeditorder);
         SDR= (SessionDatabaseReference) getApplication();
-        Intent intent1 = getIntent();
+
+         if (SDR.getGlobalVarValue()==null){
+             Intent intent = new Intent(context, MainActivity.class);
+             startActivity(intent);
+         }
+
+         Intent intent1 = getIntent();
         deleter = findViewById(R.id.delete_order_button);
          num_trade_shares = intent1.getIntExtra("ShareNum", 0);
 

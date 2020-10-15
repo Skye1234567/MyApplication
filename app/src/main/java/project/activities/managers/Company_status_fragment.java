@@ -1,6 +1,7 @@
 package project.activities.managers;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,7 @@ import com.google.firebase.database.DatabaseReference;
 
 import java.util.Observable;
 
+import project.activities.player.MainActivity;
 import project.business_logic.Accountant;
 import project.objects.database.ROUNDDatabase;
 import project.objects.database.SessionDatabase;
@@ -53,6 +55,11 @@ public class Company_status_fragment extends Fragment {
         context = getContext();
         round_num = view.findViewById(R.id.manager_welcome);
         SDR = (SessionDatabaseReference) getActivity().getApplication();
+
+        if (SDR.getGlobalVarValue()==null){
+            Intent intent = new Intent(context, MainActivity.class);
+            startActivity(intent);
+        }
         profit = view.findViewById(R.id.profit_info);
         assets = view.findViewById(R.id.assets_info);
         performance = view.findViewById(R.id.performance_info);

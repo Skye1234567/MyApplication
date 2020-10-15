@@ -12,13 +12,16 @@ import androidx.annotation.NonNull;
 public class ALLOWDatabase extends Observable {
     boolean Allow;
     DatabaseReference session_db_ref;
-    ROUNDDatabase RD;
+
 
     public ALLOWDatabase(DatabaseReference session_db_ref) {
+        if(session_db_ref!=null)
         this.session_db_ref = session_db_ref.child("ALLOW_TRADES");
+
     }
 
     public void addListener(){
+        if (session_db_ref!=null){
         session_db_ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -37,6 +40,6 @@ public class ALLOWDatabase extends Observable {
         });
 
 
-
+        }
     }
 }

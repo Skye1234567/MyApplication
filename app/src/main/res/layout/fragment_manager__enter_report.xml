@@ -46,7 +46,6 @@
     android:id="@+id/no_audit"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginTop="4dp"
     android:text="NO"
      />
 
@@ -82,7 +81,6 @@
         android:id="@+id/no_dividend"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
         android:text="NO"
          />
   </LinearLayout>
