@@ -13,8 +13,13 @@
  import com.example.myapplication.R;
  import com.google.firebase.database.DatabaseReference;
 
+ import java.util.Observable;
+ import java.util.Observer;
+
  import androidx.appcompat.app.AppCompatActivity;
  import project.activities.player.MainActivity;
+ import project.objects.database.InvestorDatabase;
+ import project.objects.database.PriceDatabase;
  import project.objects.database.SessionDatabaseReference;
  import project.objects.economics.Price;
  import project.objects.economics.Trade;
@@ -28,7 +33,7 @@
      private Button edit_stock;
      private EditText quantity;
      private EditText price;
-     private TextView current_bid;
+     private TextView market_price;
      private TextView quantity_owned;
      private String user_id;
 
@@ -42,6 +47,11 @@
      private Integer num_trade_shares;
      private String Cpany;
      private SessionDatabaseReference SDR;
+     private PriceDatabase PD;
+     private InvestorDatabase investorDatabase;
+
+     private TextView low_ask;
+     private TextView high_bid;
 
 
 
@@ -66,9 +76,11 @@
 
           p = (Price)intent1.getSerializableExtra("price");
          user_id = investor.getID();
-         current_bid =findViewById(R.id.current_bid);
+         market_price =findViewById(R.id.current_bid);
          quantity_owned= findViewById(R.id.quantity_owned);
          quantity = findViewById(R.id.enter_number_of_stocks);
+         high_bid = findViewById(R.id.high_bid);
+         low_ask = findViewById(R.id.low_bid);
          price =findViewById(R.id.money_sign);
          quantity.setText(current_trade.getNum_shares().toString());
          price.setText(current_trade.getPrice_point().toString());
@@ -78,10 +90,29 @@
 
 
 
-         try{
-         quantity_owned.setText(current_trade.getNum_shares().toString());
-         current_bid.setText(p.getPrice().toString());}
-         catch (NullPointerException e){}
+         PD = new PriceDatabase(SDR.getGlobalVarValue().child("Prices").child(Cpany));
+         investorDatabase = new InvestorDatabase(SDR.getGlobalVarValue().child("Investors").child(investor.getID()));
+         PD.addObserver(new Observer() {
+             @Override
+             public void update(Observable o, Object arg) {
+                 p=(Price) arg;
+                 market_price.setText(p.getPrice().toString());
+                 if (p.getHigh_bid()!=null)
+                     high_bid.setText(p.getHigh_bid().toString());
+                 if (p.getLow_ask()!=null);
+                 low_ask.setText(p.getLow_ask().toString());
+             }
+         });
+         PD.updating();
+
+         investorDatabase.addObserver(new Observer() {
+             @Override
+             public void update(Observable o, Object arg) {
+                 investor = (Investor) arg;
+             }
+         });
+
+
          deleter.setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View v) {
@@ -182,7 +213,7 @@
 
 
 
-                         current_bid.setText(p.getPrice().toString());
+                         market_price.setText(p.getPrice().toString());
                          db.child("Investors").child(user_id).setValue(investor);
                          db.child("Trades").child(bs).child(current_trade.getId()).setValue(current_trade);
 
