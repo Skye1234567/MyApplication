@@ -38,7 +38,8 @@ public class AdminHub extends AppCompatActivity {
         Button open_market;
         Button close_market;
         Button viewMarkets;
-
+        Button constants_edit;
+        constants_edit = findViewById(R.id.edit_constants);
         open_market = findViewById(R.id.open_markets_admin);
         close_market = findViewById(R.id.close_markets_admin);
         context = this;
@@ -119,6 +120,14 @@ public class AdminHub extends AppCompatActivity {
                 if (session!=null)intent.putExtra("market", session.getRound_2());
                 startActivity(intent);
 
+            }
+        });
+        constants_edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, Edit_Experiment_Constants.class);
+                if (session!=null)intent.putExtra("session", session);
+                startActivity(intent);
             }
         });
 

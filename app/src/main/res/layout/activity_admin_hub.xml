@@ -56,6 +56,16 @@
 
         </LinearLayout>
 
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/textSizeNormal"
+            android:id="@+id/edit_constants"
+            android:text="Constants"
+            android:textSize="@dimen/textSizeNormal"
+            android:textColor="@color/colorPrimaryDark"
+            />
+
 
 
 

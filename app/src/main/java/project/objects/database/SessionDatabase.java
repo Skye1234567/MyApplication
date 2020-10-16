@@ -40,5 +40,4 @@ public class SessionDatabase extends Observable {
         });}
     }
 
-
 }

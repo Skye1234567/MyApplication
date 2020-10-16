@@ -53,7 +53,7 @@ public class Set_Parameters extends AppCompatActivity {
             @Override
             public void handleOnBackPressed() {
                 // Handle the back button event
-                Intent intent =new Intent(context, AdminSessionEdit.class);
+                Intent intent =new Intent(context, AdminHub.class);
                 startActivity(intent);
             }
         };
