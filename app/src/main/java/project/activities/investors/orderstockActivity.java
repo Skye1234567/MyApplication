@@ -39,8 +39,7 @@
      private EditText quantity;
      private EditText price;
      private TextView market_price;
-     private TextView low_ask;
-     private TextView high_bid;
+
      private TextView quantity_owned;
      private String user_id;
      private String bs="Buy";
@@ -52,9 +51,10 @@
      private Price p;
      private SessionDatabaseReference SDR;
      private PriceDatabase PD;
-     private Ledger ledger;
      private InvestorDatabase investorDatabase;
      private ShareDatabase ShD;
+     private TextView low_ask;
+     private TextView high_bid;
 
 
 
@@ -77,6 +77,10 @@
          user_id = investor.getID();
          market_price =findViewById(R.id.current_bid);
          spinner = findViewById(R.id.spinner_buy_sell);
+         low_ask = findViewById(R.id.low_bid);
+         high_bid = findViewById(R.id.high_bid);
+
+
          ArrayAdapter arrayAdapter = new ArrayAdapter(this, R.layout.spinner_item);
          arrayAdapter.add("Buy");
          arrayAdapter.add("Sell");
@@ -93,6 +97,10 @@
             public void update(Observable o, Object arg) {
                 p=(Price) arg;
                 market_price.setText(p.getPrice().toString());
+                if (p.getHigh_bid()!=null)
+                high_bid.setText(p.getHigh_bid().toString());
+                if (p.getLow_ask()!=null);
+                low_ask.setText(p.getLow_ask().toString());
             }
         });
         PD.updating();
