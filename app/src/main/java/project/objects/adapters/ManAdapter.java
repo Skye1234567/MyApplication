@@ -11,9 +11,9 @@ import com.example.myapplication.R;
 
 import java.util.List;
 
+import androidx.annotation.NonNull;
 import project.objects.handlers.ManHash;
 import project.objects.personel.Manager;
-import androidx.annotation.NonNull;
 
 public class ManAdapter extends ArrayAdapter<Manager> {
     ManHash manHash;

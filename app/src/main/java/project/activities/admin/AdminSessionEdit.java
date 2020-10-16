@@ -1,12 +1,5 @@
 package project.activities.admin;
 
-import androidx.activity.OnBackPressedCallback;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
-import project.objects.database.SessionDatabaseReference;
-import project.objects.models.SessionID_Model;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,10 +10,15 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import com.example.myapplication.R;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
+
+import androidx.activity.OnBackPressedCallback;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import project.objects.database.SessionDatabaseReference;
+import project.objects.models.SessionID_Model;
 
 public class AdminSessionEdit extends AppCompatActivity {
     private SessionID_Model SIM;
@@ -56,7 +54,7 @@ public class AdminSessionEdit extends AppCompatActivity {
 
                     }
                 });
-        edit = (Button) findViewById(R.id.create_new_sess);
+        edit = findViewById(R.id.create_new_sess);
 
 
         arrayAdapter =

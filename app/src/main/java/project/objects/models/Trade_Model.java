@@ -8,12 +8,12 @@ import com.google.firebase.database.Query;
 
 import java.util.ArrayList;
 
-import project.objects.economics.Trade;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
+import project.objects.economics.Trade;
 
 public class Trade_Model extends ViewModel {
     private  MutableLiveData<ArrayList<ArrayList<Trade>>> livedata=new MutableLiveData<>();

@@ -1,10 +1,5 @@
 package project.activities.admin;
 
-import androidx.activity.OnBackPressedCallback;
-import project.activities.player.GameMenu;
-import androidx.appcompat.app.AppCompatActivity;
-import project.activities.player.MainActivity;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,6 +8,10 @@ import android.widget.Button;
 
 import com.example.myapplication.R;
 import com.google.firebase.auth.FirebaseAuth;
+
+import androidx.activity.OnBackPressedCallback;
+import androidx.appcompat.app.AppCompatActivity;
+import project.activities.player.MainActivity;
 
 public class Admin_Menu extends AppCompatActivity {
 

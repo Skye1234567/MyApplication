@@ -8,12 +8,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
-import project.objects.personel.Manager;
 import androidx.annotation.NonNull;
-
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
+import project.objects.personel.Manager;
 
 public class One_Man_Model extends ViewModel {
     private  MutableLiveData<Manager> livedata=new MutableLiveData<>();

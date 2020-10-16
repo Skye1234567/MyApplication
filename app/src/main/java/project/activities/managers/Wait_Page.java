@@ -1,10 +1,5 @@
 package project.activities.managers;
 
-import project.activities.player.GameMenu;
-import project.objects.database.ALLOWDatabase;
-import project.objects.database.SessionDatabaseReference;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,6 +12,11 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.Observable;
 import java.util.Observer;
+
+import androidx.appcompat.app.AppCompatActivity;
+import project.activities.player.GameMenu;
+import project.objects.database.ALLOWDatabase;
+import project.objects.database.SessionDatabaseReference;
 
 public class Wait_Page extends AppCompatActivity {
     ALLOWDatabase allowDatabase;

@@ -22,6 +22,8 @@
  import com.google.firebase.database.ValueEventListener;
 
  import androidx.activity.OnBackPressedCallback;
+ import androidx.annotation.NonNull;
+ import androidx.appcompat.app.AppCompatActivity;
  import project.activities.investors.MarketPlace;
  import project.activities.managers.Manager_Home_Page;
  import project.business_logic.New_Game;
@@ -30,8 +32,6 @@
  import project.objects.personel.Investor;
  import project.objects.personel.Manager;
  import project.objects.personel.Player;
- import androidx.annotation.NonNull;
- import androidx.appcompat.app.AppCompatActivity;
 
 
  public class Sign_up_player extends AppCompatActivity {

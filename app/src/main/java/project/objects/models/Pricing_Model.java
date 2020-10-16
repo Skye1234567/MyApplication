@@ -7,11 +7,11 @@ import com.google.firebase.database.DatabaseReference;
 
 import java.util.HashMap;
 
-import project.objects.economics.Price;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
+import project.objects.economics.Price;
 
 public class Pricing_Model extends ViewModel {
     private MutableLiveData<HashMap<String, Price>> livedata = new MutableLiveData<>();

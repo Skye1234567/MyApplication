@@ -1,22 +1,5 @@
 package project.activities.investors;
 
-import project.objects.database.SessionDatabaseReference;
-import project.objects.personel.Investor;
-import project.objects.adapters.ManAdapter;
-import project.objects.models.Man_Model;
-import project.objects.personel.Manager;
-import project.objects.economics.Price;
-import project.objects.models.Pricing_Model;
-import project.objects.economics.Share;
-import project.objects.models.Share_Model;
-import project.objects.economics.Trade;
-import project.objects.models.Trade_Model;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -29,6 +12,23 @@ import com.example.myapplication.R;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import project.objects.adapters.ManAdapter;
+import project.objects.database.SessionDatabaseReference;
+import project.objects.economics.Price;
+import project.objects.economics.Share;
+import project.objects.economics.Trade;
+import project.objects.models.Man_Model;
+import project.objects.models.Pricing_Model;
+import project.objects.models.Share_Model;
+import project.objects.models.Trade_Model;
+import project.objects.personel.Investor;
+import project.objects.personel.Manager;
 
 public class View_Companies extends Fragment {
     private Man_Model mm;

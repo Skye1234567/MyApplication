@@ -3,23 +3,6 @@ package project.activities.managers;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-
-
-import project.objects.database.IntegerDatabase;
-import project.objects.database.SessionDatabase;
-import project.objects.database.SessionDatabaseReference;
-import project.objects.economics.Session;
-import project.objects.handlers.DividendManager;
-import project.objects.handlers.Ledger;
-import project.objects.handlers.ManHash;
-import project.objects.personel.Manager;
-import project.objects.models.One_Man_Model;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,13 +10,28 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import project.business_logic.Auditor;
 import com.example.myapplication.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 
 import java.util.ArrayList;
 import java.util.Observable;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import project.business_logic.Auditor;
+import project.objects.database.IntegerDatabase;
+import project.objects.database.SessionDatabase;
+import project.objects.database.SessionDatabaseReference;
+import project.objects.economics.Session;
+import project.objects.handlers.DividendManager;
+import project.objects.handlers.Ledger;
+import project.objects.handlers.ManHash;
+import project.objects.models.One_Man_Model;
+import project.objects.personel.Manager;
 
 
 public class CompanyReportFragment extends Fragment {
@@ -125,7 +123,6 @@ public class CompanyReportFragment extends Fragment {
         submit.setClickable(false);
         ledger= new Ledger(0, 0, Ref.child("cash"));
 
-        ;
         DatabaseReference databaseReference = SDR.getGlobalVarValue().child("Managers").
                 child(id).child("cash");
         cashDatabase = new IntegerDatabase(databaseReference);

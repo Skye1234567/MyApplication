@@ -13,13 +13,13 @@
  import com.example.myapplication.R;
  import com.google.firebase.database.DatabaseReference;
 
+ import androidx.appcompat.app.AppCompatActivity;
  import project.activities.player.MainActivity;
  import project.objects.database.SessionDatabaseReference;
- import project.objects.personel.Investor;
  import project.objects.economics.Price;
  import project.objects.economics.Trade;
  import project.objects.handlers.Trade_Manager;
- import androidx.appcompat.app.AppCompatActivity;
+ import project.objects.personel.Investor;
 
  public class editorderActivity extends AppCompatActivity {
      private final static  String TAG = "Order Stock Fragment";

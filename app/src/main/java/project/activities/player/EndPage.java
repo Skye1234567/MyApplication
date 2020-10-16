@@ -1,10 +1,10 @@
 package project.activities.player;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 
 import com.example.myapplication.R;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class EndPage extends AppCompatActivity {
 

@@ -2,22 +2,6 @@ package project.activities.investors;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import project.objects.database.SessionDatabaseReference;
-import project.objects.personel.Investor;
-import project.objects.economics.Price;
-import project.objects.models.Pricing_Model;
-import project.objects.economics.Share;
-import project.objects.models.Share_Model;
-import project.objects.economics.Trade;
-import project.objects.adapters.TradeAdapter;
-import project.objects.models.Trade_Model;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,6 +12,21 @@ import com.example.myapplication.R;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import project.objects.adapters.TradeAdapter;
+import project.objects.database.SessionDatabaseReference;
+import project.objects.economics.Price;
+import project.objects.economics.Share;
+import project.objects.economics.Trade;
+import project.objects.models.Pricing_Model;
+import project.objects.models.Share_Model;
+import project.objects.models.Trade_Model;
+import project.objects.personel.Investor;
 
 
 public class ActiveTradesFragment extends Fragment {

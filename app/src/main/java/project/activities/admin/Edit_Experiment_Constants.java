@@ -1,14 +1,5 @@
 package project.activities.admin;
 
-import androidx.activity.OnBackPressedCallback;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import project.activities.player.MainActivity;
-import project.objects.database.SessionDatabase;
-import project.objects.database.SessionDatabaseReference;
-import project.objects.economics.Market;
-import project.objects.economics.Session;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,11 +10,13 @@ import android.widget.EditText;
 import com.example.myapplication.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.database.DatabaseReference;
 
-import java.util.ArrayList;
-import java.util.Observable;
-import java.util.Observer;
+import androidx.activity.OnBackPressedCallback;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import project.activities.player.MainActivity;
+import project.objects.database.SessionDatabaseReference;
+import project.objects.economics.Session;
 
 public class Edit_Experiment_Constants extends AppCompatActivity {
     private Context context;

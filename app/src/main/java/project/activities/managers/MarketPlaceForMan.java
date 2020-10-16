@@ -7,11 +7,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
-import androidx.viewpager.widget.ViewPager;
-import project.activities.player.GameMenu;
-import project.activities.player.MainActivity;
-import project.objects.adapters.SectionsPageAdapter;
-
 import com.example.myapplication.R;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
@@ -19,13 +14,17 @@ import com.google.firebase.auth.FirebaseAuth;
 import java.util.Observable;
 import java.util.Observer;
 
-import project.objects.database.ALLOWDatabase;
-import project.objects.database.SessionDatabaseReference;
-import project.objects.models.One_Man_Model;
-import project.objects.models.Man_Model;
-import project.objects.models.Pricing_Model;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.viewpager.widget.ViewPager;
+import project.activities.player.GameMenu;
+import project.activities.player.MainActivity;
+import project.objects.adapters.SectionsPageAdapter;
+import project.objects.database.ALLOWDatabase;
+import project.objects.database.SessionDatabaseReference;
+import project.objects.models.Man_Model;
+import project.objects.models.One_Man_Model;
+import project.objects.models.Pricing_Model;
 
 public class MarketPlaceForMan extends AppCompatActivity {
     private static final String TAG="Marketplace";

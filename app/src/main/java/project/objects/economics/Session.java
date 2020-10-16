@@ -96,9 +96,7 @@ public class Session implements Serializable {
 
     }
     public boolean constants_set(){
-        if (starting_sum!=null&&audit_cost!=null&&big_payoff!=null&&small_payoff!=null&&dividend!=null)return true;
-        else
-        return false;
+        return starting_sum != null && audit_cost != null && big_payoff != null && small_payoff != null && dividend != null;
     }
 
     public Session(String id, Integer starting_sum, Integer audit_cost, Integer big_payoff, Integer small_payoff, Integer dividend, Market practice, Market round_1, Market round_2) {

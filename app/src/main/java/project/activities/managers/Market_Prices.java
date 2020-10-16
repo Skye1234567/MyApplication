@@ -14,18 +14,17 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import project.objects.database.SessionDatabaseReference;
-import project.objects.models.One_Man_Model;
-import project.objects.personel.Manager;
-import project.objects.economics.Price;
-import project.objects.adapters.PriceAdapter;
-import project.objects.models.Pricing_Model;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import project.objects.adapters.PriceAdapter;
+import project.objects.database.SessionDatabaseReference;
+import project.objects.economics.Price;
+import project.objects.models.One_Man_Model;
+import project.objects.models.Pricing_Model;
+import project.objects.personel.Manager;
 
 public class Market_Prices extends Fragment {
 

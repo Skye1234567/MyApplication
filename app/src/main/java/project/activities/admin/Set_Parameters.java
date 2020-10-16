@@ -1,12 +1,5 @@
 package project.activities.admin;
 
-import androidx.activity.OnBackPressedCallback;
-import project.activities.player.MainActivity;
-import project.objects.database.SessionDatabaseReference;
-import project.objects.economics.Market;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,7 +14,13 @@ import com.example.myapplication.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.gson.internal.$Gson$Preconditions;
+
+import androidx.activity.OnBackPressedCallback;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import project.activities.player.MainActivity;
+import project.objects.database.SessionDatabaseReference;
+import project.objects.economics.Market;
 
 public class Set_Parameters extends AppCompatActivity {
     private Context context;
@@ -76,38 +75,19 @@ public class Set_Parameters extends AppCompatActivity {
         p.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if (event.getAction() == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER ){ return true;
-                }
-
-
-                    return false;
+                return event.getAction() == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER;
             }
         });
         pi_h.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if (event.getAction() == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
-
-
-
-
-                return true;
+                return event.getAction() == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER;
             }
-                return false;
-   }
         });
         pi_l.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if (event.getAction() == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER ){
-
-
-
-
-                    return true;
-                }
-
-                return false;
+                return event.getAction() == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER;
             }
         });
 

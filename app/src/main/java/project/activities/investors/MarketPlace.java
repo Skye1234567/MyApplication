@@ -1,23 +1,5 @@
 package project.activities.investors;
 
-import androidx.activity.OnBackPressedCallback;
-import androidx.viewpager.widget.ViewPager;
-import project.activities.player.GameMenu;
-import project.activities.player.MainActivity;
-import project.objects.database.ALLOWDatabase;
-import project.objects.database.SessionDatabaseReference;
-import project.objects.personel.Investor;
-import project.objects.models.Man_Model;
-import project.objects.models.Pricing_Model;
-
-import project.objects.adapters.SectionsPageAdapter;
-import project.objects.models.Share_Model;
-import project.objects.models.Trade_Model;
-import project.objects.models.Vest_Model;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
-
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -31,6 +13,22 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.Observable;
 import java.util.Observer;
+
+import androidx.activity.OnBackPressedCallback;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.viewpager.widget.ViewPager;
+import project.activities.player.GameMenu;
+import project.activities.player.MainActivity;
+import project.objects.adapters.SectionsPageAdapter;
+import project.objects.database.ALLOWDatabase;
+import project.objects.database.SessionDatabaseReference;
+import project.objects.models.Man_Model;
+import project.objects.models.Pricing_Model;
+import project.objects.models.Share_Model;
+import project.objects.models.Trade_Model;
+import project.objects.models.Vest_Model;
+import project.objects.personel.Investor;
 
 
 public class MarketPlace extends AppCompatActivity {

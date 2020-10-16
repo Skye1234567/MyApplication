@@ -56,8 +56,7 @@ public class Player implements Serializable {
 
     public Player(String ID) {
         this.ID = ID;
-        this.cash=0;
-        this.value=0;
+
 
     }
 

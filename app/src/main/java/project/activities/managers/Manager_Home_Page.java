@@ -14,19 +14,13 @@ import com.google.firebase.auth.FirebaseAuth;
 import java.util.Observable;
 import java.util.Observer;
 
-
 import androidx.activity.OnBackPressedCallback;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
 import project.activities.player.GameMenu;
-import project.activities.player.MainActivity;
 import project.objects.adapters.SectionsPageAdapter;
 import project.objects.database.ALLOWDatabase;
-
 import project.objects.database.SessionDatabaseReference;
-import androidx.appcompat.app.AppCompatActivity;
-
-import androidx.viewpager.widget.ViewPager;
-
-import static java.lang.Math.abs;
 
 public class Manager_Home_Page extends AppCompatActivity {
     private static final String TAG="Manager_home_page";

@@ -7,8 +7,8 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.Observable;
 
-import project.objects.economics.Session;
 import androidx.annotation.NonNull;
+import project.objects.economics.Session;
 
 public class SessionDatabase extends Observable {
 

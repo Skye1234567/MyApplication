@@ -5,13 +5,13 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+
 import java.util.Observable;
 import java.util.Observer;
 
-
+import androidx.annotation.NonNull;
 import project.objects.database.IntegerDatabase;
 import project.objects.economics.Trade;
-import androidx.annotation.NonNull;
 
 public class Value_Assessor implements Runnable {
 

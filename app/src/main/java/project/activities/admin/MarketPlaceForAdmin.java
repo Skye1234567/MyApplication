@@ -11,21 +11,12 @@ import com.example.myapplication.R;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 
-import java.util.Observable;
-import java.util.Observer;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager.widget.ViewPager;
-import project.activities.managers.Manager_Home_Page;
-import project.activities.managers.Market_Prices;
-import project.activities.managers.View_Companies_Manager;
-import project.activities.player.GameMenu;
 import project.objects.adapters.SectionsPageAdapter;
-import project.objects.database.ALLOWDatabase;
 import project.objects.database.SessionDatabaseReference;
 import project.objects.models.Man_Model;
-import project.objects.models.One_Man_Model;
 import project.objects.models.Pricing_Model;
 
 

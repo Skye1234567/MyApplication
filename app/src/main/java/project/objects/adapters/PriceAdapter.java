@@ -12,9 +12,9 @@ import com.example.myapplication.R;
 import java.util.List;
 import java.util.Map;
 
-import project.objects.economics.Price;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import project.objects.economics.Price;
 
 public class PriceAdapter extends ArrayAdapter<Map.Entry<String, Price>>{
 

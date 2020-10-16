@@ -13,17 +13,17 @@ import com.google.firebase.auth.FirebaseAuth;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import project.objects.adapters.ManAdapter;
-import project.objects.database.SessionDatabaseReference;
-import project.objects.models.Man_Model;
-import project.objects.personel.Manager;
-import project.objects.economics.Price;
-import project.objects.models.Pricing_Model;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import project.objects.adapters.ManAdapter;
+import project.objects.database.SessionDatabaseReference;
+import project.objects.economics.Price;
+import project.objects.models.Man_Model;
+import project.objects.models.Pricing_Model;
+import project.objects.personel.Manager;
 
 public class View_Companies_Manager extends Fragment {
     private Man_Model mm;

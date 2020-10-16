@@ -7,12 +7,12 @@ import com.google.firebase.database.DatabaseReference;
 
 import java.util.HashMap;
 
-import project.objects.personel.Manager;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
+import project.objects.personel.Manager;
 
 public class Man_Model extends ViewModel {
     private  MutableLiveData<HashMap<String, Manager>> livedata=new MutableLiveData<>();

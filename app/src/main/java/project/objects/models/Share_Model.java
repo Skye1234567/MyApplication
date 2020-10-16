@@ -7,12 +7,12 @@ import com.google.firebase.database.DatabaseReference;
 
 import java.util.ArrayList;
 
-import project.objects.economics.Share;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
+import project.objects.economics.Share;
 
 public class Share_Model extends ViewModel {
     private  MutableLiveData<ArrayList<Share>> livedata=new MutableLiveData<>();

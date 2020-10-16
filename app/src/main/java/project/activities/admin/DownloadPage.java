@@ -1,20 +1,6 @@
 package project.activities.admin;
 
-import project.activities.player.MainActivity;
-import project.objects.database.SessionDatabaseReference;
-import project.objects.economics.Price;
-import project.objects.economics.Schedule;
-import project.objects.economics.Session;
-import project.objects.economics.Share;
-import project.objects.economics.Trade;
-import project.objects.handlers.Downloaded_Data;
-import project.objects.personel.Investor;
-import project.objects.personel.Manager;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -25,6 +11,18 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import project.objects.database.SessionDatabaseReference;
+import project.objects.economics.Price;
+import project.objects.economics.Schedule;
+import project.objects.economics.Session;
+import project.objects.economics.Share;
+import project.objects.economics.Trade;
+import project.objects.handlers.Downloaded_Data;
+import project.objects.personel.Investor;
+import project.objects.personel.Manager;
 
 public class DownloadPage extends AppCompatActivity {
     ProgressBar pb;

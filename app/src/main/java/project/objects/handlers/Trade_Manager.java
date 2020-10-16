@@ -8,8 +8,8 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-import project.objects.economics.Trade;
 import androidx.annotation.NonNull;
+import project.objects.economics.Trade;
 
 public class Trade_Manager {
 

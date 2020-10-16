@@ -7,14 +7,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.Observable;
-import java.util.Observer;
-
-import project.objects.database.SessionDatabase;
-import project.objects.economics.Session;
+import androidx.annotation.NonNull;
 import project.objects.economics.Share;
 import project.objects.personel.Manager;
-import androidx.annotation.NonNull;
 
 public class New_Game implements Runnable {
     //set the cash and allocate the shares

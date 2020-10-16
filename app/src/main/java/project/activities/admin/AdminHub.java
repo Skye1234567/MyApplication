@@ -1,24 +1,24 @@
 package project.activities.admin;
 
-        import androidx.activity.OnBackPressedCallback;
-        import project.activities.player.MainActivity;
-        import project.objects.database.ROUNDDatabase;
-        import project.objects.database.SessionDatabase;
-        import project.objects.database.SessionDatabaseReference;
-        import project.objects.economics.Session;
-        import androidx.appcompat.app.AppCompatActivity;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
-        import android.content.Context;
-        import android.content.Intent;
-        import android.os.Bundle;
-        import android.view.View;
-        import android.widget.Button;
+import com.example.myapplication.R;
+import com.google.firebase.database.DatabaseReference;
 
-        import com.example.myapplication.R;
-        import com.google.firebase.database.DatabaseReference;
+import java.util.Observable;
+import java.util.Observer;
 
-        import java.util.Observable;
-        import java.util.Observer;
+import androidx.activity.OnBackPressedCallback;
+import androidx.appcompat.app.AppCompatActivity;
+import project.activities.player.MainActivity;
+import project.objects.database.ROUNDDatabase;
+import project.objects.database.SessionDatabase;
+import project.objects.database.SessionDatabaseReference;
+import project.objects.economics.Session;
 
 public class AdminHub extends AppCompatActivity {
 

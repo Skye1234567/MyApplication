@@ -2,8 +2,6 @@ package project.objects.economics;
 
 import java.io.Serializable;
 
-import static java.lang.String.valueOf;
-
 public class Schedule implements Serializable {
 
 

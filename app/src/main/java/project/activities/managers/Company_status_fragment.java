@@ -14,6 +14,11 @@ import com.google.firebase.database.DatabaseReference;
 
 import java.util.Observable;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import project.activities.player.MainActivity;
 import project.business_logic.Accountant;
 import project.objects.database.ROUNDDatabase;
@@ -24,11 +29,6 @@ import project.objects.economics.Session;
 import project.objects.handlers.ManHash;
 import project.objects.models.One_Man_Model;
 import project.objects.personel.Manager;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 
 public class Company_status_fragment extends Fragment {
     One_Man_Model man_model;

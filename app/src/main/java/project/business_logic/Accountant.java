@@ -9,11 +9,10 @@ import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
+import androidx.annotation.NonNull;
 import project.objects.database.IntegerDatabase;
-import project.objects.database.SessionDatabase;
 import project.objects.economics.Session;
 import project.objects.handlers.Ledger;
-import androidx.annotation.NonNull;
 // leon walras
 
 

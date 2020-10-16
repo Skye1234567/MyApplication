@@ -1,7 +1,5 @@
 package project.activities.admin;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +10,8 @@ import android.widget.EditText;
 
 import com.example.myapplication.R;
 import com.google.firebase.database.FirebaseDatabase;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class New_Session extends AppCompatActivity {
     private EditText new_id;

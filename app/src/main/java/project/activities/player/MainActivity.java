@@ -1,15 +1,6 @@
 package project.activities.player;
 
 
-import androidx.activity.OnBackPressedCallback;
-import project.activities.admin.AdminHub;
-import project.activities.admin.Admin_Menu;
-import project.objects.database.SessionDatabase;
-import project.objects.database.SessionDatabaseReference;
-import project.objects.database.StringChildDatabase;
-import androidx.appcompat.app.AppCompatActivity;
-import project.objects.economics.Session;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -24,6 +15,12 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Observable;
 import java.util.Observer;
+
+import androidx.activity.OnBackPressedCallback;
+import androidx.appcompat.app.AppCompatActivity;
+import project.activities.admin.Admin_Menu;
+import project.objects.database.SessionDatabaseReference;
+import project.objects.database.StringChildDatabase;
 
 public class MainActivity extends AppCompatActivity {
     private EditText session_num;

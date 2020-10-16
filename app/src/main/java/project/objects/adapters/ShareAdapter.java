@@ -11,8 +11,8 @@ import com.example.myapplication.R;
 
 import java.util.List;
 
-import project.objects.economics.Share;
 import androidx.annotation.NonNull;
+import project.objects.economics.Share;
 
 public class ShareAdapter extends ArrayAdapter<Share> {
     public ShareAdapter(@NonNull Context context,  @NonNull List<Share> objects) {

@@ -11,8 +11,8 @@ import com.example.myapplication.R;
 
 import java.util.List;
 
-import project.objects.economics.Trade;
 import androidx.annotation.NonNull;
+import project.objects.economics.Trade;
 
 public class TradeAdapter extends ArrayAdapter<Trade> {
     public TradeAdapter(@NonNull Context context, @NonNull List<Trade> objects) {

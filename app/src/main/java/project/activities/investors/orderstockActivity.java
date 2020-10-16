@@ -1,28 +1,35 @@
  package project.activities.investors;
 
-import project.activities.player.MainActivity;
-import project.objects.database.SessionDatabaseReference;
-import project.objects.personel.Investor;
-import project.objects.economics.Price;
-import project.objects.economics.Share;
-import project.objects.economics.Trade;
-import project.objects.handlers.Trade_Manager;
-import androidx.appcompat.app.AppCompatActivity;
+ import android.content.Context;
+ import android.content.Intent;
+ import android.os.Bundle;
+ import android.view.View;
+ import android.widget.AdapterView;
+ import android.widget.ArrayAdapter;
+ import android.widget.Button;
+ import android.widget.EditText;
+ import android.widget.Spinner;
+ import android.widget.TextView;
+ import android.widget.Toast;
 
-import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Spinner;
-import android.widget.TextView;
-import android.widget.Toast;
+ import com.example.myapplication.R;
+ import com.google.firebase.database.DatabaseReference;
 
-import com.example.myapplication.R;
-import com.google.firebase.database.DatabaseReference;
+ import java.util.Observable;
+ import java.util.Observer;
+
+ import androidx.appcompat.app.AppCompatActivity;
+ import project.activities.player.MainActivity;
+ import project.objects.database.InvestorDatabase;
+ import project.objects.database.PriceDatabase;
+ import project.objects.database.SessionDatabaseReference;
+ import project.objects.database.ShareDatabase;
+ import project.objects.economics.Price;
+ import project.objects.economics.Share;
+ import project.objects.economics.Trade;
+ import project.objects.handlers.Ledger;
+ import project.objects.handlers.Trade_Manager;
+ import project.objects.personel.Investor;
 
  public class orderstockActivity extends AppCompatActivity {
      private final static  String TAG = "Order Stock Fragment";
@@ -32,6 +39,8 @@ import com.google.firebase.database.DatabaseReference;
      private EditText quantity;
      private EditText price;
      private TextView market_price;
+     private TextView low_ask;
+     private TextView high_bid;
      private TextView quantity_owned;
      private String user_id;
      private String bs="Buy";
@@ -42,11 +51,16 @@ import com.google.firebase.database.DatabaseReference;
      private Investor investor;
      private Price p;
      private SessionDatabaseReference SDR;
+     private PriceDatabase PD;
+     private Ledger ledger;
+     private InvestorDatabase investorDatabase;
+     private ShareDatabase ShD;
 
 
 
      @Override
     protected void onCreate(Bundle savedInstanceState) {
+         //all you need to pass in the intent is the company symbol and the investor id
         super.onCreate(savedInstanceState);
         context=this;
         setContentView(R.layout.activityorderstock);
@@ -57,10 +71,9 @@ import com.google.firebase.database.DatabaseReference;
              startActivity(intent);
          }
         Intent intent1 = getIntent();
-        Cpany= intent1.getStringExtra("symbol");
+         Cpany= intent1.getStringExtra("symbol");
          investor = (Investor) intent1.getSerializableExtra("user");
          current_selection = (Share) intent1.getSerializableExtra("share");
-          p = (Price)intent1.getSerializableExtra("price");
          user_id = investor.getID();
          market_price =findViewById(R.id.current_bid);
          spinner = findViewById(R.id.spinner_buy_sell);
@@ -71,10 +84,38 @@ import com.google.firebase.database.DatabaseReference;
          quantity_owned= findViewById(R.id.quantity_owned);
          quantity = findViewById(R.id.enter_number_of_stocks);
          price =findViewById(R.id.money_sign);
-         try{
-         quantity_owned.setText(current_selection.getNumber().toString());
-         market_price.setText(current_selection.getMarket_price().toString());}
-         catch (NullPointerException e){Toast.makeText(context,"HELP", Toast.LENGTH_LONG).show();}
+         p = (Price)intent1.getSerializableExtra("price");
+         PD = new PriceDatabase(SDR.getGlobalVarValue().child("Prices").child(Cpany));
+         ShD = new ShareDatabase(SDR.getGlobalVarValue().child("Shares").child(investor.getID()).child(Cpany));
+         investorDatabase = new InvestorDatabase(SDR.getGlobalVarValue().child("Investors").child(investor.getID()));
+         PD.addObserver(new Observer() {
+            @Override
+            public void update(Observable o, Object arg) {
+                p=(Price) arg;
+                market_price.setText(p.getPrice().toString());
+            }
+        });
+        PD.updating();
+        ShD.addObserver(new Observer() {
+            @Override
+            public void update(Observable o, Object arg) {
+                current_selection = (Share) arg;
+                if (current_selection.getNumber()!=null)
+                quantity_owned.setText(current_selection.getNumber().toString());
+
+
+
+            }
+        });
+        ShD.updating();
+        investorDatabase.addObserver(new Observer() {
+            @Override
+            public void update(Observable o, Object arg) {
+                investor = (Investor) arg;
+            }
+        });
+
+
          spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
              @Override
              public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -111,7 +152,6 @@ import com.google.firebase.database.DatabaseReference;
                          num_shares = Integer.parseInt(quantity.getText().toString());
                          dollars =Integer.parseInt(price.getText().toString());
                          String looking_for="";
-                        SessionDatabaseReference SDR  = (SessionDatabaseReference) getApplication();
 
 
                         DatabaseReference db = SDR.getGlobalVarValue();
@@ -155,7 +195,6 @@ import com.google.firebase.database.DatabaseReference;
 
                          }
 
-                         market_price.setText(p.getPrice().toString());
                          db.child("Shares").child(user_id).child(Cpany).setValue(current_selection);
                          db.child("Investors").child(user_id).setValue(investor);
                          db.child("Prices").child(Cpany).setValue(p);

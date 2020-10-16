@@ -9,12 +9,12 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-import project.objects.economics.Trade;
-import project.objects.personel.Investor;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
+import project.objects.economics.Trade;
+import project.objects.personel.Investor;
 
 public class Vest_Model extends ViewModel {
     private  MutableLiveData<Investor> livedata=new MutableLiveData<>();

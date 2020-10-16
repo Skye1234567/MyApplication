@@ -1,17 +1,5 @@
 package project.activities.investors;
 
-import project.activities.player.MainActivity;
-import project.objects.database.ALLOWDatabase;
-import project.objects.database.ROUNDDatabase;
-import project.objects.database.SessionDatabaseReference;
-import project.objects.personel.Investor;
-import project.objects.adapters.ManAdapter;
-import project.objects.database.ManDatabase;
-import project.objects.personel.Manager;
-import project.objects.economics.Schedule;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -29,7 +17,17 @@ import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
-import static java.lang.Integer.valueOf;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import project.activities.player.MainActivity;
+import project.objects.adapters.ManAdapter;
+import project.objects.database.ALLOWDatabase;
+import project.objects.database.ManDatabase;
+import project.objects.database.ROUNDDatabase;
+import project.objects.database.SessionDatabaseReference;
+import project.objects.economics.Schedule;
+import project.objects.personel.Investor;
+import project.objects.personel.Manager;
 
 public class Investor_Round_Intro extends AppCompatActivity {
 
