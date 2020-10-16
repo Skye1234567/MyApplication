@@ -3,6 +3,8 @@ package project.objects.handlers;
 import com.google.firebase.database.DatabaseReference;
 
 public class Ledger implements Runnable{
+    //a simple runnable class to operate in the backround! It retrieves a number
+    // from the database and saves it with the update (adds)
     private Integer callback;
    private Integer update;
    private DatabaseReference ref;

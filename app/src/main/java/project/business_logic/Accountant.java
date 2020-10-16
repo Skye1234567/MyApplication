@@ -10,6 +10,8 @@ import java.util.Observable;
 import java.util.Observer;
 
 import project.objects.database.IntegerDatabase;
+import project.objects.database.SessionDatabase;
+import project.objects.economics.Session;
 import project.objects.handlers.Ledger;
 import androidx.annotation.NonNull;
 // leon walras
@@ -18,6 +20,7 @@ import androidx.annotation.NonNull;
 
 public class Accountant {
     private Integer performance;
+    private Session session;
     private Integer revenue;
     private ArrayList<String> aL;
     private DatabaseReference reference;
@@ -26,9 +29,10 @@ public class Accountant {
 
 
 
-    public Accountant(DatabaseReference ref) {
+    public Accountant(DatabaseReference ref, Session session) {
         this.reference=ref;
-        revenue = 10;
+        this.session = session;
+        revenue = session.getSmall_payoff();
         aL = new ArrayList();
         IntData = new IntegerDatabase(reference.child("cash"));
         IntData.addObserver(new Observer() {
@@ -67,7 +71,7 @@ public class Accountant {
 public void generate_round_data(Float percent_chance_profit_h, Float percent_chance_profit_l) {
     Double val = Math.random();
     if ((performance == 1 && val < percent_chance_profit_h) || (performance == 0 && val < percent_chance_profit_l)) {
-        revenue = 50;
+        revenue = session.getBig_payoff();
     }
     reference.child("profit").setValue(revenue);
     cash.setUpdate(revenue);
@@ -76,6 +80,8 @@ public void generate_round_data(Float percent_chance_profit_h, Float percent_cha
 
 }
 //TODO reset investor can be done with newgame
+//the following functions are meant to "reset" all the investor data for a new game.
+// It will be important for testing purposes and well as after the practice rounds are finished
 
 public void reset_investor(final String investor_id){
     DatabaseReference ref = reference.getParent().getParent();

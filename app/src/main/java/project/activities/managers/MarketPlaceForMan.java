@@ -9,6 +9,7 @@ import android.view.MenuItem;
 
 import androidx.viewpager.widget.ViewPager;
 import project.activities.player.GameMenu;
+import project.activities.player.MainActivity;
 import project.objects.adapters.SectionsPageAdapter;
 
 import com.example.myapplication.R;
@@ -43,6 +44,7 @@ public class MarketPlaceForMan extends AppCompatActivity {
         context=this;
         String id="";
         try {id = FirebaseAuth.getInstance().getCurrentUser().getUid();}catch (NullPointerException e){
+            startActivity(new Intent(context, MainActivity.class));
 
         }
         SDR = (SessionDatabaseReference) getApplication();

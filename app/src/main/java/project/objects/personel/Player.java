@@ -5,6 +5,7 @@ import java.util.Objects;
 
 
 public class Player implements Serializable {
+    //Superclass for the player: contains the cash and value with with the rewards are calculated
     private String ID;
     private String type;
     private Integer cash;
@@ -55,9 +56,9 @@ public class Player implements Serializable {
 
     public Player(String ID) {
         this.ID = ID;
+        this.cash=0;
+        this.value=0;
 
-        this.cash = 40;
-        this.value = 40;
     }
 
     public String getID() {

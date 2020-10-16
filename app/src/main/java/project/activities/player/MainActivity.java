@@ -4,9 +4,11 @@ package project.activities.player;
 import androidx.activity.OnBackPressedCallback;
 import project.activities.admin.AdminHub;
 import project.activities.admin.Admin_Menu;
+import project.objects.database.SessionDatabase;
 import project.objects.database.SessionDatabaseReference;
 import project.objects.database.StringChildDatabase;
 import androidx.appcompat.app.AppCompatActivity;
+import project.objects.economics.Session;
 
 import android.content.Context;
 import android.content.Intent;
@@ -48,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
         verify = findViewById(R.id.verify_sess_button);
 
 
+
         context = this;
         session_num.setOnKeyListener(new View.OnKeyListener() {
             @Override
@@ -80,7 +83,9 @@ public class MainActivity extends AppCompatActivity {
                                 intent = new Intent(context, Admin_Menu.class);
                             }
                             else{
+
                                 intent = new Intent(context, GameMenu.class);
+
                             }
                             SDR.setGlobalVarValue(session_id);
                             startActivity(intent);

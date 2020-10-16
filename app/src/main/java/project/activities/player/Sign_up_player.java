@@ -57,8 +57,6 @@
              Intent intent = new Intent(context, MainActivity.class);
              startActivity(intent);
          }
-
-
          setContentView(R.layout.activity_sign_up_player);
          OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
              @Override
@@ -144,20 +142,37 @@
                                      if (task.isSuccessful()) {
                                          // Sign in success, update UI with the signed-in user's information
 
-                                         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                                         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                                          UID =user.getUid();
-                                         Player player = new Player(UID);
-                                         SDR.getGlobalVarValue().child("player_list")
-                                                 .child(user.getUid()).setValue(player).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                             @Override
-                                             public void onComplete(@NonNull Task<Void> task) {
+                                         SDR.getGlobalVarValue().child("markets").child("starting_sum").addListenerForSingleValueEvent(
+                                                 new ValueEventListener() {
+                                                     @Override
+                                                     public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                         if (snapshot!=null){
+                                                             Player player = new Player(UID);
+                                                             player.setCash( snapshot.getValue(Integer.class));
+                                                             SDR.getGlobalVarValue().child("player_list")
+                                                                     .child(user.getUid()).setValue(player).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                                 @Override
+                                                                 public void onComplete(@NonNull Task<Void> task) {
 
-                                                 get_PlayerType();
+                                                                     get_PlayerType();
 
 
 
-                                             }
-                                         });
+                                                                 }
+                                                             });
+                                                         }
+
+                                                     }
+
+                                                     @Override
+                                                     public void onCancelled(@NonNull DatabaseError error) {
+
+                                                     }
+                                                 }
+                                         );
+
 
 
                                      } else {
@@ -255,6 +270,7 @@ private void get_investors(){
              Manager m = new Manager(player.getID());
              String current_company_symbol = new StringBuilderRandom(3).buildString();
              m.setCompany_symbol(current_company_symbol);
+
              SDR.getGlobalVarValue() .child("Managers").child(player.getID()).setValue(m);
              Intent intent = new Intent(context, Manager_Home_Page.class);
 
@@ -262,10 +278,11 @@ private void get_investors(){
              context.startActivity(intent);}
          else {
              player.setType("I");
-            New_Game NG = new New_Game(player.getID(), SDR.getGlobalVarValue());
+            New_Game NG = new New_Game(player.getID(),SDR.getGlobalVarValue());
             new Thread(NG).start();
 
              Investor investor = new Investor(player.getID());
+
              SDR.getGlobalVarValue().child("Investors").child(player.getID()).setValue(investor);
              Intent intent = new Intent(context, MarketPlace.class);
 

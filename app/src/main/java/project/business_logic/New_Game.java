@@ -7,11 +7,17 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Observable;
+import java.util.Observer;
+
+import project.objects.database.SessionDatabase;
+import project.objects.economics.Session;
 import project.objects.economics.Share;
 import project.objects.personel.Manager;
 import androidx.annotation.NonNull;
 
 public class New_Game implements Runnable {
+    //set the cash and allocate the shares
     private String id;
     private DatabaseReference session_db_ref;
 
@@ -26,7 +32,25 @@ public class New_Game implements Runnable {
     @Override
     public void run() {
         allocate_shares();
+        set_cash();
 
+
+    }
+
+    private void set_cash() {
+        session_db_ref.child("markets").child("starting_sum").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()){
+                    session_db_ref.child("Investors").child(id).child("cash")
+                            .setValue(snapshot.getValue(Integer.class));}
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     public void  allocate_shares(){

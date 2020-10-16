@@ -6,7 +6,9 @@ import android.os.Bundle;
 
 
 import project.objects.database.IntegerDatabase;
+import project.objects.database.SessionDatabase;
 import project.objects.database.SessionDatabaseReference;
+import project.objects.economics.Session;
 import project.objects.handlers.DividendManager;
 import project.objects.handlers.Ledger;
 import project.objects.handlers.ManHash;
@@ -59,6 +61,7 @@ public class CompanyReportFragment extends Fragment {
     private boolean reject;
     private Ledger ledger;
     private SessionDatabaseReference SDR;
+    private Session session;
     @Nullable
     @Override
 
@@ -89,6 +92,24 @@ public class CompanyReportFragment extends Fragment {
 
             }
         });
+        SessionDatabase SD = new SessionDatabase(SDR.getGlobalVarValue());
+        SD.addObserver(new java.util.Observer() {
+            @Override
+            public void update(Observable o, Object arg) {
+                session=(Session)arg;
+                if (session!=null){
+                    if (session.isValid()){
+                aud_yes.setClickable(true);
+                aud_no.setClickable(true);
+                div_no.setClickable(true);
+                div_yes.setClickable(true);
+                submit.setClickable(true);
+                }}
+                else session=new Session();
+
+            }
+        });
+        SD.setParam();
 
         String id = FirebaseAuth.getInstance().getCurrentUser().getUid();
         man_model = new ViewModelProvider(getActivity()).get(One_Man_Model.class);
@@ -97,8 +118,11 @@ public class CompanyReportFragment extends Fragment {
         cashDatabase = new IntegerDatabase(Ref.child("cash"));
         profitDatabase = new IntegerDatabase(Ref.child("profit"));
         aud_yes = view.findViewById(R.id.yes_audit);
+        aud_yes.setClickable(false);
         aud_no = view.findViewById(R.id.no_audit);
+        aud_no.setClickable(false);
         submit = view.findViewById(R.id.submitreport);
+        submit.setClickable(false);
         ledger= new Ledger(0, 0, Ref.child("cash"));
 
         ;
@@ -137,7 +161,7 @@ public class CompanyReportFragment extends Fragment {
                Audit_result_textview.setText(audit_result+" "+manHash.highLowHash(auditor_report));
                aud_no.setVisibility(View.INVISIBLE);
                invisible.add(aud_no);
-               ledger.setUpdate(-10);
+               ledger.setUpdate(session.getAudit_cost());
                new Thread(ledger).start();
 
 
@@ -148,7 +172,7 @@ public class CompanyReportFragment extends Fragment {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(div&&managerman!=null) new DividendManager(managerman.getCompany_symbol(), 5, base_ref ).payDividends();
+                if(div&&managerman!=null) new DividendManager(managerman.getCompany_symbol(), session.getDividend(), base_ref ).payDividends();
                 if (auditor_report!=null&&!reject)
                     Ref.child("report_performance").setValue(auditor_report);
 
@@ -158,7 +182,9 @@ public class CompanyReportFragment extends Fragment {
             }
         });
         div_no = view.findViewById(R.id.no_dividend);
+        div_no.setClickable(false);
         div_yes =view.findViewById(R.id.yes_dividend);
+        div_yes.setClickable(false);
         div_no.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

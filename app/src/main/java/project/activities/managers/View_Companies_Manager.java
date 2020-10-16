@@ -49,7 +49,8 @@ public class View_Companies_Manager extends Fragment {
         SDR = (SessionDatabaseReference) getActivity().getApplication();
         mm = new ViewModelProvider(getActivity()).get(Man_Model.class);
         mm.setSession_db_ref(SDR.getGlobalVarValue());
-        ID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+            ID = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         mm.update_manager();
 

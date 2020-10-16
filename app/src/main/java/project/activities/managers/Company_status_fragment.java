@@ -69,7 +69,7 @@ public class Company_status_fragment extends Fragment {
         SessionDatabaseReference SDR  = (SessionDatabaseReference) getActivity().getApplication();
         DatabaseReference base_ref = SDR.getGlobalVarValue();
         REF=SDR.getGlobalVarValue().child("Managers").child(id);
-        accountant = new Accountant(REF);
+
         roundDatabase = new ROUNDDatabase(base_ref);
         roundDatabase.addObserver(new java.util.Observer() {
             @Override
@@ -106,6 +106,7 @@ public class Company_status_fragment extends Fragment {
             Market m = session.round_to_market(current_round);
             if( m==null)  m=session.getPractice();
             if (m!=null) {
+                accountant = new Accountant(REF,session);
                 accountant.generate_company_data(m.getP());
                 accountant.generate_round_data(m.getPi_h(), m.getPi_l());
             }

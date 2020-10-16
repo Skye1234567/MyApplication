@@ -33,7 +33,7 @@ public class Trade_Model extends ViewModel {
 
     public void setId(String id) {
         this.id = id;
-        update_trade();
+
     }
 
     private String id;
