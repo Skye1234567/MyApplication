@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="project.activities.admin.Edit_Experiment_Constants">
+    <LinearLayout
+
+        android:id="@+id/set_round_1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Set Session
+            Constants"
+            android:padding="@dimen/textSizeNormal"
+            android:textAllCaps="true"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize= "@dimen/textSizeTitle"
+            />
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:text="Enter participant cash allowance:"
+            android:padding="@dimen/textSizeNormal"
+            android:textAllCaps="true"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize= "@dimen/textSizeNormal"
+
+            />
+        <EditText
+            android:inputType="number"
+            android:id="@+id/enter_starting_sum"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:padding="3dip"
+            android:textAllCaps="true"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize= "@dimen/textSizeNormal"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:padding="@dimen/textSizeNormal"
+            android:textAllCaps="true"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize= "@dimen/textSizeNormal"
+            android:text="Enter dividend amount:"
+            />
+        <EditText
+            android:inputType="number"
+            android:id="@+id/enter_dividend_amount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:padding="3dip"
+            android:textAllCaps="true"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize= "@dimen/textSizeNormal"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:padding="@dimen/textSizeNormal"
+            android:textAllCaps="true"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize= "@dimen/textSizeNormal"
+            android:text="Enter the cost to audit:"
+            />
+        <EditText
+            android:inputType="number"
+            android:id="@+id/enter_audit_cost"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:padding="3dip"
+            android:textAllCaps="true"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize= "@dimen/textSizeNormal"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:padding="@dimen/textSizeNormal"
+            android:textAllCaps="true"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize= "@dimen/textSizeNormal"
+            android:text="Enter high profit"
+            />
+        <EditText
+            android:inputType="number"
+            android:id="@+id/enter_high_profit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:padding="3dip"
+            android:textAllCaps="true"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize= "@dimen/textSizeNormal"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:padding="@dimen/textSizeNormal"
+            android:textAllCaps="true"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize= "@dimen/textSizeNormal"
+            android:text="Enter low profit:"
+            />
+        <EditText
+            android:inputType="number"
+            android:id="@+id/enter_low_profit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:padding="3dip"
+            android:textAllCaps="true"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize= "@dimen/textSizeNormal"/>
+
+    </LinearLayout>
+    <Button
+        android:id="@+id/submit_constants_session"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/submit"
+        android:textSize="@dimen/textSizeNormal"
+        android:textColor="@color/colorPrimaryDark"
+        android:textAllCaps="true"
+
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

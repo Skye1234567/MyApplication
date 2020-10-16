@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="Project.Activities.Investors.MarketPlace"
+    tools:context="project.activities.investors.MarketPlace"
     android:layout_margin="@dimen/textSizeNormal"
     >
 

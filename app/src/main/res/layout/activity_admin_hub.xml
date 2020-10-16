@@ -4,7 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="Project.Activities.Admin.AdminHub">
+    tools:context="project.activities.admin.AdminHub">
+
+
+
 
     <LinearLayout
         android:gravity="center"
@@ -18,10 +21,8 @@
             android:text="Edit Parameters"
             android:textSize="@dimen/textSizeTitle"
             android:textColor="@color/colorPrimaryDark"/>
-
         <LinearLayout
             android:layout_width="wrap_content"
-            android:padding="@dimen/textSizeNormal"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <Button
@@ -43,21 +44,6 @@
                 android:textColor="@color/colorPrimaryDark"
                 />
 
-        </LinearLayout>
-        <LinearLayout
-            android:padding="@dimen/textSizeNormal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <Button
-                android:padding="@dimen/textSizeNormal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/setschedhub"
-                android:text="Schedule"
-                android:textSize="@dimen/textSizeNormal"
-                android:textColor="@color/colorPrimaryDark"
-                />
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -70,6 +56,70 @@
 
         </LinearLayout>
 
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/textSizeNormal"
+            android:id="@+id/edit_constants"
+            android:text="Constants"
+            android:textSize="@dimen/textSizeNormal"
+            android:textColor="@color/colorPrimaryDark"
+            />
+
+
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Market Control"
+            android:textSize="@dimen/textSizeTitle"
+            android:textColor="@color/colorPrimaryDark"
+            />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+
+                android:text="OPEN MARKETS"
+                android:id="@+id/open_markets_admin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimaryDark"
+
+
+                />
+            <Button
+
+                android:text="CLOSE MARKETS"
+                android:id="@+id/close_markets_admin"
+                android:textColor="@color/colorPrimaryDark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimaryDark"
+            android:text="Navigation"
+            android:textSize="@dimen/textSizeTitle"
+            />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/adminmarket"
+            android:text="View Market"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/textSizeNormal"/>
+
 
         <Button
             android:padding="@dimen/textSizeNormal"
@@ -79,6 +129,9 @@
             android:text="Back to Menu"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="@dimen/textSizeNormal"/>
+
+
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="Project.Activities.Investors.View_Companies">
+    tools:context="project.activities.investors.View_Companies">
 
 
         <LinearLayout
@@ -13,60 +13,63 @@
             app:layout_constraintTop_toTopOf="parent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="@dimen/tab_bar_gap">
+            android:paddingTop="@dimen/tab_bar_gap"
+            android:gravity="center">
 
 
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Reports"
                 android:textSize="@dimen/textSizeTitle"
                 android:textColor="@color/colorPrimaryDark"
                 />
-            <TableLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-                <TableRow>
-                    <TextView
 
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Company"
-                        android:padding="@dimen/textSizeNormal"
-                        android:textSize="@dimen/textSizeNormal"
-                        android:textColor="@color/colorPrimaryDark"/>
-                    <TextView
+               <LinearLayout
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:orientation="horizontal">
+                   <TextView
 
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Type"
-                        android:padding="@dimen/textSizeNormal"
-                        android:textSize="@dimen/textSizeNormal"
-                        android:textColor="@color/colorPrimaryDark"/>
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:text="Company"
+                       android:padding="@dimen/textSizeNormal"
+                       android:textSize="@dimen/textSizeNormal"
+                       android:textColor="@color/colorPrimaryDark"/>
+                   <TextView
 
-                    <TextView
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:text="Type"
+                       android:padding="@dimen/textSizeNormal"
+                       android:textSize="@dimen/textSizeNormal"
+                       android:textColor="@color/colorPrimaryDark"/>
 
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Audit"
-                        android:padding="@dimen/textSizeNormal"
-                        android:textSize="@dimen/textSizeNormal"
-                        android:textColor="@color/colorPrimaryDark"/>
+                   <TextView
 
-                    <TextView
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:text="Audit"
+                       android:padding="@dimen/textSizeNormal"
+                       android:textSize="@dimen/textSizeNormal"
+                       android:textColor="@color/colorPrimaryDark"/>
 
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Dividend"
-                        android:padding="@dimen/textSizeNormal"
-                        android:textSize="@dimen/textSizeNormal"
-                        android:textColor="@color/colorPrimaryDark"/>
+                   <TextView
+
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:text="Dividend"
+                       android:padding="@dimen/textSizeNormal"
+                       android:textSize="@dimen/textSizeNormal"
+                       android:textColor="@color/colorPrimaryDark"/>
 
 
 
-                </TableRow>
-            </TableLayout>
+               </LinearLayout>
+
+
 
             <ListView
                 android:id="@+id/list_of_companies"

@@ -4,39 +4,43 @@
     package="com.example.myapplication">
 
     <application
+        android:name="project.objects.database.SessionDatabaseReference"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="Project.Activities.Player.Create_User"></activity>
-        <activity android:name="Project.Activities.Managers.Wait_Page" />
-        <activity android:name="Project.Activities.Admin.DownloadPage" />
-        <activity android:name="Project.Activities.Admin.AdminHub" />
-        <activity android:name="Project.Activities.Investors.Investor_Round_Intro" />
-        <activity android:name="Project.Activities.Player.EndPage" />
-        <activity android:name="Project.Activities.Investors.View_Companies" />
-        <activity android:name="Project.Activities.Investors.orderstockActivity" />
-        <activity android:name="Project.Activities.Investors.editorderActivity" />
-        <activity android:name="Project.Activities.Admin.Enter_Num_Players" />
-        <activity android:name="Project.Activities.Player.Relevant_terminology" />
-        <activity android:name="Project.Activities.Admin.Admin_Menu" />
-        <activity android:name="Project.Activities.Admin.Sign_up_admin" />
-        <activity android:name="Project.Activities.Admin.Set_Parameters" />
-        <activity android:name="Project.Activities.Admin.Set_Parameters_Schedule" />
-        <activity android:name="Project.Activities.Investors.MarketPlace" />
-        <activity android:name="Project.Activities.Managers.MarketPlaceForMan" />
-        <activity android:name="Project.Activities.Managers.Manager_Home_Page" />
-        <activity android:name="Project.Activities.Investors.Investor_Instructions_Fragment" />
-        <activity android:name="Project.Activities.Player.Sign_up_player" />
-        <activity android:name="Project.Activities.Player.MainActivity">
+        <activity android:name="project.activities.admin.Edit_Experiment_Constants"></activity>
+        <activity android:name="project.activities.admin.New_Session" />
+        <activity android:name="project.activities.admin.AdminSessionEdit" />
+        <activity android:name="project.activities.player.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="project.activities.player.Create_User" />
+        <activity android:name="project.activities.admin.MarketPlaceForAdmin" />
+        <activity android:name="project.activities.managers.Wait_Page" />
+        <activity android:name="project.activities.admin.DownloadPage" />
+        <activity android:name="project.activities.admin.AdminHub" />
+        <activity android:name="project.activities.investors.Investor_Round_Intro" />
+        <activity android:name="project.activities.player.EndPage" />
+        <activity android:name="project.activities.investors.View_Companies" />
+        <activity android:name="project.activities.investors.orderstockActivity" />
+        <activity android:name="project.activities.investors.editorderActivity" />
+        <activity android:name="project.activities.admin.Enter_Num_Players" />
+        <activity android:name="project.activities.player.Relevant_terminology" />
+        <activity android:name="project.activities.admin.Admin_Menu" />
+        <activity android:name="project.activities.admin.Set_Parameters" />
+        <activity android:name="project.activities.investors.MarketPlace" />
+        <activity android:name="project.activities.managers.MarketPlaceForMan" />
+        <activity android:name="project.activities.managers.Manager_Home_Page" />
+        <activity android:name="project.activities.investors.Investor_Instructions_Fragment" />
+        <activity android:name="project.activities.player.Sign_up_player" />
+        <activity android:name="project.activities.player.GameMenu" />
     </application>
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />

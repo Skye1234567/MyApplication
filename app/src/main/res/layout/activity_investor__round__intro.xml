@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="Project.Activities.Investors.Investor_Round_Intro">
+    tools:context="project.activities.investors.Investor_Round_Intro">
 
     <TextView
         app:layout_constraintStart_toStartOf="parent"

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="Project.Activities.Admin.Sign_up_admin"
+    tools:context="project.activities.player.Sign_up_player"
     android:layout_margin="@dimen/textSizeNormal">
 
         <LinearLayout
@@ -28,7 +28,6 @@
 
             <EditText
                 android:id="@+id/player_email"
-                android:inputType="textPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 />
@@ -59,8 +58,28 @@
                 android:text="Sign In"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="right"
-                android:padding="3dip"
+                android:gravity="center"
+                android:textAllCaps="true"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize= "@dimen/textSizeNormal"
+                android:visibility="visible"
+                >
+
+            </Button>
+
+
+            <Button
+
+                android:id="@+id/back_button"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:text="Back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+
                 android:textAllCaps="true"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize= "@dimen/textSizeNormal"

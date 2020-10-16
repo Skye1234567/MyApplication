@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingTop="@dimen/tightpadding"
-    tools:context="Project.Activities.Managers.CompanyReportFragment"
+    tools:context="project.activities.managers.CompanyReportFragment"
     android:layout_margin="@dimen/tightpadding"
     >
 
@@ -46,7 +46,6 @@
     android:id="@+id/no_audit"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginTop="4dp"
     android:text="NO"
      />
 
@@ -82,7 +81,6 @@
         android:id="@+id/no_dividend"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
         android:text="NO"
          />
   </LinearLayout>
